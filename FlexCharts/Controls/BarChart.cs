@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using FlexCharts.Animation;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Primatives;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
@@ -176,7 +177,7 @@ namespace FlexCharts.Controls
 		#region Constructors
 		static BarChart()
 		{
-			TitleContentProperty.OverrideMetadata(typeof(BarChart), new FrameworkPropertyMetadata("Stacked Bar Chart"));
+			TitleProperty.OverrideMetadata(typeof(BarChart), new FrameworkPropertyMetadata("Stacked Bar Chart"));
 		}
 		public BarChart()
 		{

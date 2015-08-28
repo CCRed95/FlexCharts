@@ -24,7 +24,7 @@ namespace FlexCharts.Controls
 	public abstract class AbstractFlexChart : ContentControl
 	{
 		#region Dependency Properties
-		public static readonly DependencyProperty TitleContentProperty = DP.Register(
+		public static readonly DependencyProperty TitleProperty = DP.Register(
 			new Meta<AbstractFlexChart, string>("Abstract Flex Chart"));
 
 		public static readonly DependencyProperty FallbackMaterialSetProperty = DP.Register(
@@ -40,8 +40,8 @@ namespace FlexCharts.Controls
 		[Category("Charting")]
 		public string TitleContent
 		{
-			get { return (string)GetValue(TitleContentProperty); }
-			set { SetValue(TitleContentProperty, value); }
+			get { return (string)GetValue(TitleProperty); }
+			set { SetValue(TitleProperty, value); }
 		}
 		[Category("Charting")]
 		public MaterialSet FallbackMaterialSet
@@ -93,7 +93,7 @@ namespace FlexCharts.Controls
 
 			BindingOperations.SetBinding(_main, MarginProperty, new Binding("Padding") { Source = this });
 
-			BindingOperations.SetBinding(_titleLabel, ContentProperty, new Binding("TitleContent") { Source = this });
+			BindingOperations.SetBinding(_titleLabel, ContentProperty, new Binding("Title") { Source = this });
 			BindingOperations.SetBinding(_titleLabel, FontFamilyProperty, new Binding("FontFamily") { Source = this });
 			BindingOperations.SetBinding(_titleLabel, FontStyleProperty, new Binding("FontStyle") { Source = this });
 			BindingOperations.SetBinding(_titleLabel, FontWeightProperty, new Binding("FontWeight") { Source = this });
@@ -109,10 +109,10 @@ namespace FlexCharts.Controls
 			new Meta<AbstractFlexChart<T>, T>(default(T), DataChangedCallback, DataCoerceCallback));
 
 		public static readonly DependencyProperty DataFilterProperty = DP.Register(
-			new Meta<AbstractFlexChart, AbstractDataFilter<T>>(new EmptyDataFilter<T>()) { Flags = FXR });
+			new Meta<AbstractFlexChart<T>, AbstractDataFilter<T>>(new EmptyDataFilter<T>()) { Flags = FXR });
 
 		public static readonly DependencyProperty DataSorterProperty = DP.Register(
-			new Meta<AbstractFlexChart, AbstractDataSorter<T>>(new EmptyDataSorter<T>()) { Flags = FXR });
+			new Meta<AbstractFlexChart<T>, AbstractDataSorter<T>>(new EmptyDataSorter<T>()) { Flags = FXR });
 
 
 		private static T DataCoerceCallback(AbstractFlexChart<T> i, T v)

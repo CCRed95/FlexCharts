@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Primatives;
 using FlexCharts.Data.Filtering;
 using FlexCharts.Data.Sorting;
@@ -68,7 +69,6 @@ namespace FlexCharts.Controls
 			get { return (double) GetValue(DotStrokeThicknessProperty); }
 			set { SetValue(DotStrokeThicknessProperty, value); }
 		}
-
 		#endregion
 
 		#region			LineContract
@@ -207,37 +207,42 @@ namespace FlexCharts.Controls
 		public static readonly DependencyProperty XAxisForegroundProperty = DP.Add(XAxisPrimative.XAxisForegroundProperty,
 			new Meta<ParetoChart, AbstractMaterialDescriptor> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
 
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof (FontFamilyConverter))]
 		public FontFamily XAxisFontFamily
 		{
 			get { return (FontFamily) GetValue(XAxisFontFamilyProperty); }
 			set { SetValue(XAxisFontFamilyProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof (FontStyleConverter))]
 		public FontStyle XAxisFontStyle
 		{
 			get { return (FontStyle) GetValue(XAxisFontStyleProperty); }
 			set { SetValue(XAxisFontStyleProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof (FontWeightConverter))]
 		public FontWeight XAxisFontWeight
 		{
 			get { return (FontWeight) GetValue(XAxisFontWeightProperty); }
 			set { SetValue(XAxisFontWeightProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof (FontStretchConverter))]
 		public FontStretch XAxisFontStretch
 		{
 			get { return (FontStretch) GetValue(XAxisFontStretchProperty); }
 			set { SetValue(XAxisFontStretchProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof (FontSizeConverter))]
 		public double XAxisFontSize
 		{
 			get { return (double) GetValue(XAxisFontSizeProperty); }
 			set { SetValue(XAxisFontSizeProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
 		public AbstractMaterialDescriptor XAxisForeground
 		{
 			get { return (AbstractMaterialDescriptor) GetValue(XAxisForegroundProperty); }
@@ -269,7 +274,7 @@ namespace FlexCharts.Controls
 		{
 			//DataFilterProperty.OverrideMetadata(typeof (ParetoChart), new FrameworkPropertyMetadata(LiteralDataFilter.DialKCategoryFilter));
 			DataSorterProperty.OverrideMetadata(typeof (ParetoChart), new FrameworkPropertyMetadata(new DescendingDataSorter()));
-			TitleContentProperty.OverrideMetadata(typeof (ParetoChart), new FrameworkPropertyMetadata("Pareto Chart"));
+			TitleProperty.OverrideMetadata(typeof (ParetoChart), new FrameworkPropertyMetadata("Pareto Chart"));
 		}
 
 		public ParetoChart()

@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Primatives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
@@ -188,7 +189,7 @@ namespace FlexCharts.Controls
 		#region Constructors
 		static RingChart()
 		{
-			TitleContentProperty.OverrideMetadata(typeof(RingChart), new FrameworkPropertyMetadata("Ring Chart"));
+			TitleProperty.OverrideMetadata(typeof(RingChart), new FrameworkPropertyMetadata("Ring Chart"));
 		}
 		public RingChart()
 		{

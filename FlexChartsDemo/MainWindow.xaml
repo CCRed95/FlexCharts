@@ -5,12 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fc="http://www.flexcharts.com/schemas/core"
         mc:Ignorable="d"
+				TextOptions.TextFormattingMode="Ideal"
+				TextOptions.TextRenderingMode="Aliased"
         Title="MainWindow" Height="350" Width="525">
 	<Window.Resources>
-		<Style x:Key="dark" TargetType="fc:AbstractFlexChart">
+		<Style x:Key="dark" TargetType="fc:AbstractFlexChart" BasedOn="{StaticResource Text22p}">
 			<Setter Property="Background" Value="{StaticResource mtGrey900}"/>
-			<Setter Property="SegmentForeground" Value="P500"/>
-			<Setter Property="fc:XAxisPrimative.XAxisFontSize" Value="24"/>
+			<Setter Property="SegmentForeground" Value="P600"/>
+			<Setter Property="Foreground" Value="{StaticResource mtGrey200}"/>
+			<Setter Property="FontWeight" Value="Light"/>
+			<Setter Property="fc:SegmentPrimative.SegmentSpaceBackground" Value="->White000,0.03"/>
+			<Setter Property="fc:SegmentPrimative.SegmentWidthPercentage" Value=".7"/>
+			<Setter Property="fc:XAxisPrimative.XAxisForeground" Value="P400"/>
+			<Setter Property="fc:XAxisPrimative.XAxisFontSize" Value="12pt"/>
+			<Setter Property="fc:XAxisPrimative.XAxisFontStyle" Value="Italic"/>
+			<Setter Property="fc:XAxisPrimative.XAxisFontWeight" Value="Light"/>
+			<Setter Property="fc:DotPrimative.DotStroke" Value="->Grey400"/>
+			<Setter Property="fc:DotPrimative.DotFill" Value="P500"/>
+			<Setter Property="fc:DotPrimative.DotRadius" Value="6"/>
+			<Setter Property="fc:LinePrimative.LineStroke" Value="P400"/>
+			<Setter Property="fc:LinePrimative.LineStrokeThickness" Value="2"/>
+			
 		</Style>
 	</Window.Resources>
 	<Grid>

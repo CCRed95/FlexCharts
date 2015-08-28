@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using FlexCharts.Animation;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Primatives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Sorting;
@@ -256,7 +257,7 @@ namespace FlexCharts.Controls
 		{
 			DataSorterProperty.OverrideMetadata(typeof (NestedArcChart),
 				new FrameworkPropertyMetadata(new AscendingDataSorter()));
-			TitleContentProperty.OverrideMetadata(typeof(NestedArcChart), new FrameworkPropertyMetadata("Nested Arc Chart"));
+			TitleProperty.OverrideMetadata(typeof(NestedArcChart), new FrameworkPropertyMetadata("Nested Arc Chart"));
 		}
 		public NestedArcChart()
 		{

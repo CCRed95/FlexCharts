@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Primatives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Extensions;
@@ -148,7 +149,7 @@ namespace FlexCharts.Controls
 		#region Constructors
 		static RingGauge()
 		{
-			TitleContentProperty.OverrideMetadata(typeof(RingGauge), new FrameworkPropertyMetadata("Ring Gauge"));
+			TitleProperty.OverrideMetadata(typeof(RingGauge), new FrameworkPropertyMetadata("Ring Gauge"));
 		}
 		public RingGauge()
 		{

@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Primatives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
@@ -218,7 +219,7 @@ namespace FlexCharts.Controls
 		#region Constructors
 		static PieChart()
 		{
-			TitleContentProperty.OverrideMetadata(typeof(PieChart), new FrameworkPropertyMetadata("Pie Chart"));
+			TitleProperty.OverrideMetadata(typeof(PieChart), new FrameworkPropertyMetadata("Pie Chart"));
 		}
 
 		public PieChart()
