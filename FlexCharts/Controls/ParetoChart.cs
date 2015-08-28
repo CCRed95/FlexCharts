@@ -29,67 +29,67 @@ namespace FlexCharts.Controls
 {
 	public class ParetoChart : AbstractFlexChart<CategoricalDataPointDoubleList>,
 		IDotContract, ILineContract, IBarTotalContract, ISegmentContract
-		// TODO should be valuecontract instead of bartotalcontract?
+	// TODO should be valuecontract instead of bartotalcontract?
 	{
 		#region Dependency Properties
 		#region			DotContract
 		public static readonly DependencyProperty DotRadiusProperty = DP.Add(DotPrimative.DotRadiusProperty,
-			new Meta<ParetoChart, double> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty DotFillProperty = DP.Add(DotPrimative.DotFillProperty,
-			new Meta<ParetoChart, AbstractMaterialDescriptor> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty DotStrokeProperty = DP.Add(DotPrimative.DotStrokeProperty,
-			new Meta<ParetoChart, AbstractMaterialDescriptor> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty DotStrokeThicknessProperty = DP.Add(DotPrimative.DotStrokeThicknessProperty,
-			new Meta<ParetoChart, double> {Flags = INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, double> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
 		public double DotRadius
 		{
-			get { return (double) GetValue(DotRadiusProperty); }
+			get { return (double)GetValue(DotRadiusProperty); }
 			set { SetValue(DotRadiusProperty, value); }
 		}
 		[Category("Charting")]
 		public AbstractMaterialDescriptor DotFill
 		{
-			get { return (AbstractMaterialDescriptor) GetValue(DotFillProperty); }
+			get { return (AbstractMaterialDescriptor)GetValue(DotFillProperty); }
 			set { SetValue(DotFillProperty, value); }
 		}
 		[Category("Charting")]
 		public AbstractMaterialDescriptor DotStroke
 		{
-			get { return (AbstractMaterialDescriptor) GetValue(DotStrokeProperty); }
+			get { return (AbstractMaterialDescriptor)GetValue(DotStrokeProperty); }
 			set { SetValue(DotStrokeProperty, value); }
 		}
 		[Category("Charting")]
 		public double DotStrokeThickness
 		{
-			get { return (double) GetValue(DotStrokeThicknessProperty); }
+			get { return (double)GetValue(DotStrokeThicknessProperty); }
 			set { SetValue(DotStrokeThicknessProperty, value); }
 		}
 		#endregion
 
 		#region			LineContract
 		public static readonly DependencyProperty LineStrokeProperty = DP.Add(LinePrimative.LineStrokeProperty,
-			new Meta<ParetoChart, AbstractMaterialDescriptor> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty LineStrokeThicknessProperty =
 			DP.Add(LinePrimative.LineStrokeThicknessProperty,
-				new Meta<ParetoChart, double> {Flags = INH}, DPExtOptions.ForceManualInherit);
+				new Meta<ParetoChart, double> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 
 		[Category("Charting")]
 		public AbstractMaterialDescriptor LineStroke
 		{
-			get { return (AbstractMaterialDescriptor) GetValue(LineStrokeProperty); }
+			get { return (AbstractMaterialDescriptor)GetValue(LineStrokeProperty); }
 			set { SetValue(LineStrokeProperty, value); }
 		}
 		[Category("Charting")]
 		public double LineStrokeThickness
 		{
-			get { return (double) GetValue(LineStrokeThicknessProperty); }
+			get { return (double)GetValue(LineStrokeThicknessProperty); }
 			set { SetValue(LineStrokeThicknessProperty, value); }
 		}
 
@@ -98,68 +98,68 @@ namespace FlexCharts.Controls
 		#region			BarTotalContract
 		public static readonly DependencyProperty BarTotalFontFamilyProperty =
 			DP.Add(BarTotalPrimative.BarTotalFontFamilyProperty,
-				new Meta<ParetoChart, FontFamily> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+				new Meta<ParetoChart, FontFamily> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontStyleProperty =
 			DP.Add(BarTotalPrimative.BarTotalFontStyleProperty,
-				new Meta<ParetoChart, FontStyle> {Flags = INH}, DPExtOptions.ForceManualInherit);
+				new Meta<ParetoChart, FontStyle> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontWeightProperty =
 			DP.Add(BarTotalPrimative.BarTotalFontWeightProperty,
-				new Meta<ParetoChart, FontWeight> {Flags = INH}, DPExtOptions.ForceManualInherit);
+				new Meta<ParetoChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontStretchProperty =
 			DP.Add(BarTotalPrimative.BarTotalFontStretchProperty,
-				new Meta<ParetoChart, FontStretch> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+				new Meta<ParetoChart, FontStretch> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontSizeProperty = DP.Add(
 			BarTotalPrimative.BarTotalFontSizeProperty,
-			new Meta<ParetoChart, double> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalForegroundProperty =
 			DP.Add(BarTotalPrimative.BarTotalForegroundProperty,
-				new Meta<ParetoChart, AbstractMaterialDescriptor> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+				new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontFamilyConverter))]
+		[TypeConverter(typeof(FontFamilyConverter))]
 		public FontFamily BarTotalFontFamily
 		{
-			get { return (FontFamily) GetValue(BarTotalFontFamilyProperty); }
+			get { return (FontFamily)GetValue(BarTotalFontFamilyProperty); }
 			set { SetValue(BarTotalFontFamilyProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontStyleConverter))]
+		[TypeConverter(typeof(FontStyleConverter))]
 		public FontStyle BarTotalFontStyle
 		{
-			get { return (FontStyle) GetValue(BarTotalFontStyleProperty); }
+			get { return (FontStyle)GetValue(BarTotalFontStyleProperty); }
 			set { SetValue(BarTotalFontStyleProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontWeightConverter))]
+		[TypeConverter(typeof(FontWeightConverter))]
 		public FontWeight BarTotalFontWeight
 		{
-			get { return (FontWeight) GetValue(BarTotalFontWeightProperty); }
+			get { return (FontWeight)GetValue(BarTotalFontWeightProperty); }
 			set { SetValue(BarTotalFontWeightProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontStretchConverter))]
+		[TypeConverter(typeof(FontStretchConverter))]
 		public FontStretch BarTotalFontStretch
 		{
-			get { return (FontStretch) GetValue(BarTotalFontStretchProperty); }
+			get { return (FontStretch)GetValue(BarTotalFontStretchProperty); }
 			set { SetValue(BarTotalFontStretchProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontSizeConverter))]
+		[TypeConverter(typeof(FontSizeConverter))]
 		public double BarTotalFontSize
 		{
-			get { return (double) GetValue(BarTotalFontSizeProperty); }
+			get { return (double)GetValue(BarTotalFontSizeProperty); }
 			set { SetValue(BarTotalFontSizeProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
 		public AbstractMaterialDescriptor BarTotalForeground
 		{
-			get { return (AbstractMaterialDescriptor) GetValue(BarTotalForegroundProperty); }
+			get { return (AbstractMaterialDescriptor)GetValue(BarTotalForegroundProperty); }
 			set { SetValue(BarTotalForegroundProperty, value); }
 		}
 		#endregion
@@ -167,89 +167,90 @@ namespace FlexCharts.Controls
 		#region			SegmentContract
 		public static readonly DependencyProperty SegmentSpaceBackgroundProperty =
 			DP.Add(SegmentPrimative.SegmentSpaceBackgroundProperty,
-				new Meta<ParetoChart, AbstractMaterialDescriptor> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+				new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty SegmentWidthPercentageProperty =
 			DP.Add(SegmentPrimative.SegmentWidthPercentageProperty,
-				new Meta<ParetoChart, double> {Flags = INH | FXR}, DPExtOptions.ForceManualInherit);
+				new Meta<ParetoChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 
 		[Category("Charting")]
 		public AbstractMaterialDescriptor SegmentSpaceBackground
 		{
-			get { return (AbstractMaterialDescriptor) GetValue(SegmentSpaceBackgroundProperty); }
+			get { return (AbstractMaterialDescriptor)GetValue(SegmentSpaceBackgroundProperty); }
 			set { SetValue(SegmentSpaceBackgroundProperty, value); }
 		}
 		[Category("Charting")]
 		public double SegmentWidthPercentage
 		{
-			get { return (double) GetValue(SegmentWidthPercentageProperty); }
+			get { return (double)GetValue(SegmentWidthPercentageProperty); }
 			set { SetValue(SegmentWidthPercentageProperty, value); }
 		}
 		#endregion
 
 		#region			XAxisContract
 		public static readonly DependencyProperty XAxisFontFamilyProperty = DP.Add(XAxisPrimative.XAxisFontFamilyProperty,
-			new Meta<ParetoChart, FontFamily> {Flags = INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, FontFamily> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty XAxisFontStyleProperty = DP.Add(XAxisPrimative.XAxisFontStyleProperty,
-			new Meta<ParetoChart, FontStyle> {Flags = INH | FXR}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, FontStyle> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty XAxisFontWeightProperty = DP.Add(XAxisPrimative.XAxisFontWeightProperty,
-			new Meta<ParetoChart, FontWeight> {Flags = INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty XAxisFontStretchProperty = DP.Add(XAxisPrimative.XAxisFontStretchProperty,
-			new Meta<ParetoChart, FontStretch> {Flags = INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty XAxisFontSizeProperty = DP.Add(XAxisPrimative.XAxisFontSizeProperty,
-			new Meta<ParetoChart, double> {Flags = INH | FXR}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty XAxisForegroundProperty = DP.Add(XAxisPrimative.XAxisForegroundProperty,
-			new Meta<ParetoChart, AbstractMaterialDescriptor> {Flags = FXR | INH}, DPExtOptions.ForceManualInherit);
+			new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontFamilyConverter))]
+		[TypeConverter(typeof(FontFamilyConverter))]
 		public FontFamily XAxisFontFamily
 		{
-			get { return (FontFamily) GetValue(XAxisFontFamilyProperty); }
+			get { return (FontFamily)GetValue(XAxisFontFamilyProperty); }
 			set { SetValue(XAxisFontFamilyProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontStyleConverter))]
+		[TypeConverter(typeof(FontStyleConverter))]
 		public FontStyle XAxisFontStyle
 		{
-			get { return (FontStyle) GetValue(XAxisFontStyleProperty); }
+			get { return (FontStyle)GetValue(XAxisFontStyleProperty); }
 			set { SetValue(XAxisFontStyleProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontWeightConverter))]
+		[TypeConverter(typeof(FontWeightConverter))]
 		public FontWeight XAxisFontWeight
 		{
-			get { return (FontWeight) GetValue(XAxisFontWeightProperty); }
+			get { return (FontWeight)GetValue(XAxisFontWeightProperty); }
 			set { SetValue(XAxisFontWeightProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontStretchConverter))]
+		[TypeConverter(typeof(FontStretchConverter))]
 		public FontStretch XAxisFontStretch
 		{
-			get { return (FontStretch) GetValue(XAxisFontStretchProperty); }
+			get { return (FontStretch)GetValue(XAxisFontStretchProperty); }
 			set { SetValue(XAxisFontStretchProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof (FontSizeConverter))]
+		[TypeConverter(typeof(FontSizeConverter))]
 		public double XAxisFontSize
 		{
-			get { return (double) GetValue(XAxisFontSizeProperty); }
+			get { return (double)GetValue(XAxisFontSizeProperty); }
 			set { SetValue(XAxisFontSizeProperty, value); }
 		}
 		[Bindable(true), Category("Charting")]
 		public AbstractMaterialDescriptor XAxisForeground
 		{
-			get { return (AbstractMaterialDescriptor) GetValue(XAxisForegroundProperty); }
+			get { return (AbstractMaterialDescriptor)GetValue(XAxisForegroundProperty); }
 			set { SetValue(XAxisForegroundProperty, value); }
 		}
 		#endregion
 		#endregion
+
 		#region Fields
 		internal ParetoChartVisualContext visualContext;
 
@@ -273,8 +274,8 @@ namespace FlexCharts.Controls
 		static ParetoChart()
 		{
 			//DataFilterProperty.OverrideMetadata(typeof (ParetoChart), new FrameworkPropertyMetadata(LiteralDataFilter.DialKCategoryFilter));
-			DataSorterProperty.OverrideMetadata(typeof (ParetoChart), new FrameworkPropertyMetadata(new DescendingDataSorter()));
-			TitleProperty.OverrideMetadata(typeof (ParetoChart), new FrameworkPropertyMetadata("Pareto Chart"));
+			DataSorterProperty.OverrideMetadata(typeof(ParetoChart), new FrameworkPropertyMetadata(new DescendingDataSorter()));
+			TitleProperty.OverrideMetadata(typeof(ParetoChart), new FrameworkPropertyMetadata("Pareto Chart"));
 		}
 
 		public ParetoChart()
@@ -304,15 +305,22 @@ namespace FlexCharts.Controls
 		{
 			if (visualContext == null) return;
 			animationState = AnimationState.Final;
+			//visualContext.PolyLineStartPointAnimationAspect.BeginTime = TimeSpan.FromMilliseconds(400);
 			visualContext.PolyLineStartPointAnimationAspect?.AnimateTo(animationState);
+		//	var animationOffset = 0;
 			foreach (var categoryVisual in visualContext.CategoryVisuals)
 			{
-				categoryVisual.DotMarginAnimationAspect?.AnimateTo(animationState);
-				categoryVisual.BarLabelMarginAnimationAspect?.AnimateTo(animationState);
+				//categoryVisual.ActiveBarRenderTransformScaleYAnimationAspect.BeginTime = TimeSpan.FromMilliseconds(animationOffset);
 				categoryVisual.ActiveBarRenderTransformScaleYAnimationAspect?.AnimateTo(animationState);
+				//categoryVisual.DotMarginAnimationAspect.BeginTime = TimeSpan.FromMilliseconds(400);
+				categoryVisual.DotMarginAnimationAspect?.AnimateTo(animationState);
+				//categoryVisual.BarLabelMarginAnimationAspect.BeginTime = TimeSpan.FromMilliseconds(400);
+				categoryVisual.BarLabelMarginAnimationAspect?.AnimateTo(animationState);
+			//	animationOffset += 55;
 			}
 			foreach (var lineSegmentVisual in visualContext.LineSegmentVisuals)
 			{
+				//lineSegmentVisual.PointAnimationAspect.BeginTime = TimeSpan.FromMilliseconds(400);
 				lineSegmentVisual.PointAnimationAspect?.AnimateTo(animationState);
 			}
 		}
@@ -439,11 +447,11 @@ namespace FlexCharts.Controls
 					Foreground = XAxisForeground.GetMaterial(material)
 
 				};
-				BindingOperations.SetBinding(axisLabel, FontFamilyProperty, new Binding("XAxisFontFamily") {Source = this});
-				BindingOperations.SetBinding(axisLabel, FontStyleProperty, new Binding("XAxisFontStyle") {Source = this});
-				BindingOperations.SetBinding(axisLabel, FontWeightProperty, new Binding("XAxisFontWeight") {Source = this});
-				BindingOperations.SetBinding(axisLabel, FontSizeProperty, new Binding("XAxisFontSize") {Source = this});
-				BindingOperations.SetBinding(axisLabel, FontStretchProperty, new Binding("XAxisFontStretch") {Source = this});
+				BindingOperations.SetBinding(axisLabel, FontFamilyProperty, new Binding("XAxisFontFamily") { Source = this });
+				BindingOperations.SetBinding(axisLabel, FontStyleProperty, new Binding("XAxisFontStyle") { Source = this });
+				BindingOperations.SetBinding(axisLabel, FontWeightProperty, new Binding("XAxisFontWeight") { Source = this });
+				BindingOperations.SetBinding(axisLabel, FontSizeProperty, new Binding("XAxisFontSize") { Source = this });
+				BindingOperations.SetBinding(axisLabel, FontStretchProperty, new Binding("XAxisFontStretch") { Source = this });
 				categoryVisualContext.AxisLabel = axisLabel;
 				_xAxisGrid.Children.Add(axisLabel);
 				visualContext.CategoryVisuals.Add(categoryVisualContext);
@@ -497,6 +505,8 @@ namespace FlexCharts.Controls
 					new AnimationAspect<double, Transform, DoubleAnimation>(rectangle.RenderTransform,
 						ScaleTransform.ScaleYProperty, 0, 1, animationState)
 					{
+						AccelerationRatio = AnimationParameters.AccelerationRatio,
+						DecelerationRatio = AnimationParameters.DecelerationRatio,
 						Duration = TimeSpan.FromMilliseconds(800)
 					};
 
@@ -520,16 +530,18 @@ namespace FlexCharts.Controls
 					Width = barAvailableWidth,
 					Foreground = BarTotalForeground.GetMaterial(material)
 				};
-				BindingOperations.SetBinding(barLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") {Source = this});
-				BindingOperations.SetBinding(barLabel, FontStyleProperty, new Binding("BarTotalFontStyle") {Source = this});
-				BindingOperations.SetBinding(barLabel, FontWeightProperty, new Binding("BarTotalFontWeight") {Source = this});
-				BindingOperations.SetBinding(barLabel, FontSizeProperty, new Binding("BarTotalFontSize") {Source = this});
-				BindingOperations.SetBinding(barLabel, FontStretchProperty, new Binding("BarTotalFontStretch") {Source = this});
+				BindingOperations.SetBinding(barLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
+				BindingOperations.SetBinding(barLabel, FontStyleProperty, new Binding("BarTotalFontStyle") { Source = this });
+				BindingOperations.SetBinding(barLabel, FontWeightProperty, new Binding("BarTotalFontWeight") { Source = this });
+				BindingOperations.SetBinding(barLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
+				BindingOperations.SetBinding(barLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
 
 				currentCategoryVisualContext.BarLabelMarginAnimationAspect = new AnimationAspect
 					<Thickness, Label, ThicknessAnimation>(
 					barLabel, MarginProperty, beginBarLabelMargin, actualBarLabelMargin, animationState)
 				{
+					AccelerationRatio = AnimationParameters.AccelerationRatio,
+					DecelerationRatio = AnimationParameters.DecelerationRatio,
 					Duration = TimeSpan.FromMilliseconds(800)
 				};
 
@@ -571,13 +583,15 @@ namespace FlexCharts.Controls
 					visualContext.PolyLineStartPointAnimationAspect = new AnimationAspect<Point, PathFigure, PointAnimation>(
 						pathFigure, PathFigure.StartPointProperty, baseAnimationPoint, actualNextPoint, animationState)
 					{
+						AccelerationRatio = AnimationParameters.AccelerationRatio,
+						DecelerationRatio = AnimationParameters.DecelerationRatio,
 						Duration = TimeSpan.FromMilliseconds(800),
 					};
 					isFirstPoint = false;
 				}
 				else
 				{
-					var lineSegment = new LineSegment(plottedPoint, true) {IsSmoothJoin = true};
+					var lineSegment = new LineSegment(plottedPoint, true) { IsSmoothJoin = true };
 					pathSegments.Add(lineSegment);
 
 					visualContext.LineSegmentVisuals.Add(new ParetoChartLineSegmentVisualContext
@@ -586,6 +600,8 @@ namespace FlexCharts.Controls
 							new AnimationAspect<Point, LineSegment, PointAnimation>(lineSegment, LineSegment.PointProperty,
 								baseAnimationPoint, actualNextPoint, animationState)
 							{
+								AccelerationRatio = AnimationParameters.AccelerationRatio,
+								DecelerationRatio = AnimationParameters.DecelerationRatio,
 								Duration = TimeSpan.FromMilliseconds(800)
 							}
 					});
@@ -603,12 +619,14 @@ namespace FlexCharts.Controls
 					Fill = DotFill.GetMaterial(material),
 					Stroke = DotStroke.GetMaterial(material),
 				};
-				BindingOperations.SetBinding(dot, Shape.StrokeThicknessProperty, new Binding("DotStrokeThickness") {Source = this});
+				BindingOperations.SetBinding(dot, Shape.StrokeThicknessProperty, new Binding("DotStrokeThickness") { Source = this });
 
 				currentCategoryVisualContext.DotMarginAnimationAspect =
 					new AnimationAspect<Thickness, Ellipse, ThicknessAnimation>(dot, MarginProperty,
 						beginDotMargin, actualDotMargin, animationState)
 					{
+						AccelerationRatio = AnimationParameters.AccelerationRatio,
+						DecelerationRatio = AnimationParameters.DecelerationRatio,
 						Duration = TimeSpan.FromMilliseconds(800)
 					};
 
@@ -632,7 +650,7 @@ namespace FlexCharts.Controls
 				Margin = new Thickness(DotRadius, 0, 0, xAxisHeight + DotRadius),
 				Stroke = LineStroke.GetMaterial(FallbackMaterialSet),
 			};
-			BindingOperations.SetBinding(path, Shape.StrokeThicknessProperty, new Binding("LineStrokeThickness") {Source = this});
+			BindingOperations.SetBinding(path, Shape.StrokeThicknessProperty, new Binding("LineStrokeThickness") { Source = this });
 
 			_lineVisual.Children.Add(path);
 			base.OnRender(drawingContext);

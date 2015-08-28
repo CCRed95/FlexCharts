@@ -44,7 +44,6 @@ namespace FlexCharts.Animation
 				Duration = Duration,
 				AccelerationRatio = AccelerationRatio,
 				DecelerationRatio = DecelerationRatio
-
 			};
 			animationTimeline.SetValue(reflectedFromProperty, animationState == AnimationState.Collapsed ? FinalState : CollapsedState);
 			animationTimeline.SetValue(reflectedToProperty, animationState == AnimationState.Collapsed ? CollapsedState : FinalState);
