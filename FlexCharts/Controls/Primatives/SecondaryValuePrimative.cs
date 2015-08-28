@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
@@ -12,15 +13,6 @@ using FlexCharts.MaterialDesign.Descriptors;
 namespace FlexCharts.Controls.Primatives
 {
 
-	public interface ISecondaryValueContract
-	{
-		FontFamily SecondaryValueFontFamily { get; set; }
-		FontStyle SecondaryValueFontStyle { get; set; }
-		FontWeight SecondaryValueFontWeight { get; set; }
-		FontStretch SecondaryValueFontStretch { get; set; }
-		double SecondaryValueFontSize { get; set; }
-		AbstractMaterialDescriptor SecondaryValueForeground { get; set; }
-	}
 	public class SecondaryValuePrimative : TextualPrimative, ISecondaryValueContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Caption;

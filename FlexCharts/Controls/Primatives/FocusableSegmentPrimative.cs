@@ -9,10 +9,6 @@ using FlexCharts.Helpers.DependencyHelpers;
 
 namespace FlexCharts.Controls.Primatives
 {
-	public interface IFocusableSegmentContract
-	{
-		Shape FocusedSegment { get; set; }
-	}
 	public abstract class FocusableSegmentPrimative : FlexPrimative, IFocusableSegmentContract
 	{
 		public static readonly DependencyProperty FocusedSegmentProperty =

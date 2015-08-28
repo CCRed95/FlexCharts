@@ -1,24 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
 namespace FlexCharts.Controls.Primatives
 {
-	public interface IStateSegmentContract
-	{
-		AbstractMaterialDescriptor ActiveFill { get; set; }
-		int ActiveStrokeThickness { get; set; }
-		AbstractMaterialDescriptor ActiveStroke { get; set; }
-		AbstractMaterialDescriptor InactiveFill { get; set; }
-		int InactiveStrokeThickness { get; set; }
-		AbstractMaterialDescriptor InactiveStroke { get; set; }
-	}
+	//TODO are stroke thickness properties double?
 	public abstract class StateSegmentPrimative : FlexPrimative, IStateSegmentContract
 	{
 		public static readonly DependencyProperty ActiveFillProperty =

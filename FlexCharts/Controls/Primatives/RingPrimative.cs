@@ -4,14 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 
 namespace FlexCharts.Controls.Primatives
 {
-	public interface IRingContract
-	{
-		double RingWidth { get; set; }
-	}
 	public abstract class RingPrimative : FlexPrimative, IRingContract
 	{
 		//TODO ringWidthPercentage

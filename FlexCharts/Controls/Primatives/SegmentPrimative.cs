@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
 namespace FlexCharts.Controls.Primatives
 {
-
-	public interface ISegmentContract
-	{
-		AbstractMaterialDescriptor SegmentSpaceBackground { get; set; }
-		double SegmentWidthPercentage { get; set; }
-	}
 	public abstract class SegmentPrimative : FlexPrimative, ISegmentContract
 	{
 		public static readonly DependencyProperty SegmentSpaceBackgroundProperty =

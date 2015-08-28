@@ -1,13 +1,9 @@
 ﻿using System.Windows;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 
 namespace FlexCharts.Controls.Primatives
 {
-	public interface IPolarLabelingContract
-	{
-		double HorizontalLabelPositionSkew { get; set; }
-		double OuterLabelPositionScale { get; set; }
-	}
 	public abstract class PolarLabelingPrimative : FlexPrimative, IPolarLabelingContract
 	{
 		public static readonly DependencyProperty HorizontalLabelPositionSkewProperty =

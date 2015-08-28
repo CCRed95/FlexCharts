@@ -5,21 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
 namespace FlexCharts.Controls.Primatives
 {
-	public interface IBarTotalContract
-	{
-		FontFamily BarTotalFontFamily { get; set; }
-		FontStyle BarTotalFontStyle { get; set; }
-		FontWeight BarTotalFontWeight { get; set; }
-		FontStretch BarTotalFontStretch { get; set; }
-		double BarTotalFontSize { get; set; }
-		AbstractMaterialDescriptor BarTotalForeground { get; set; }
-	}
 	public abstract class BarTotalPrimative : TextualPrimative, IBarTotalContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Body1;

@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 
 namespace FlexCharts.Controls.Primatives
 {
-	public interface ICircularContract
-	{
-		double CircleScale { get; set; }
-		double AngleOffset { get; set; }
-	}
+	
 	public class CircularPrimative : FlexPrimative, ICircularContract
 	{
 		public static readonly DependencyProperty CircleScaleProperty =

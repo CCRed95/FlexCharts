@@ -160,10 +160,6 @@ namespace FlexCharts.Controls
 		#endregion
 		#endregion
 
-		#region Properties
-		//public override IMaterialProvider MaterialProvider { get; set; } = GradientMaterialProvider.MaterialHLbB;
-		#endregion
-
 		#region Fields
 		//protected readonly Grid _categoryLabels = new Grid();
 		protected readonly Grid _highlightGrid = new Grid();

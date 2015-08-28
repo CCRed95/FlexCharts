@@ -1,20 +1,13 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
 namespace FlexCharts.Controls.Primatives
 {
-	public interface IValueContract
-	{
-		FontFamily ValueFontFamily { get; set; }
-		FontStyle ValueFontStyle { get; set; }
-		FontWeight ValueFontWeight { get; set; }
-		FontStretch ValueFontStretch { get; set; }
-		double ValueFontSize { get; set; }
-		AbstractMaterialDescriptor ValueForeground { get; set; }
-	}
+	
 	public abstract class ValuePrimative : TextualPrimative, IValueContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Caption;

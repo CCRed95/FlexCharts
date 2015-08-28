@@ -4,17 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
 namespace FlexCharts.Controls.Primatives
 {
-	public interface ILineContract
-	{
-		AbstractMaterialDescriptor LineStroke { get; set; }
-		double LineStrokeThickness { get; set; }
-	}
 	public abstract class LinePrimative : FlexPrimative, ILineContract
 	{
 		public static readonly DependencyProperty LineStrokeProperty =

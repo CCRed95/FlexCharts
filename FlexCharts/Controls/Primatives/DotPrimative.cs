@@ -10,13 +10,7 @@ using FlexCharts.MaterialDesign.Descriptors;
 
 namespace FlexCharts.Controls.Primatives
 {
-	public interface IDotContract
-	{
-		double DotRadius { get; set; }
-		AbstractMaterialDescriptor DotFill { get; set; }
-		AbstractMaterialDescriptor DotStroke { get; set; }
-		double DotStrokeThickness { get; set; }
-	}
+	
 	public abstract class DotPrimative : FlexPrimative, IDotContract
 	{
 		public static readonly DependencyProperty DotRadiusProperty =

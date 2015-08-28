@@ -23,8 +23,19 @@ namespace FlexCharts.Controls
 	// TODO implement IAnimationreveal|collapseaspect here ( as abstract methods with no implementations? )
 	public abstract class AbstractFlexChart : ContentControl
 	{
+		#region Dependency Properties
 		public static readonly DependencyProperty TitleContentProperty = DP.Register(
 			new Meta<AbstractFlexChart, string>("Abstract Flex Chart"));
+
+		public static readonly DependencyProperty FallbackMaterialSetProperty = DP.Register(
+			new Meta<AbstractFlexChart, MaterialSet>(MaterialPalette.Sets.GreyBrushSet));
+
+		public static readonly DependencyProperty MaterialProviderProperty = DP.Register(
+			new Meta<AbstractFlexChart, IMaterialProvider>(SequentialMaterialProvider.RainbowPaletteOrder) { Flags = FXR });
+
+		public static readonly DependencyProperty SegmentForegroundProperty = DP.Register(
+			new Meta<AbstractFlexChart, AbstractMaterialDescriptor>(new LuminosityMaterialDescriptor(Luminosity.P500)));
+
 
 		[Category("Charting")]
 		public string TitleContent
@@ -32,31 +43,25 @@ namespace FlexCharts.Controls
 			get { return (string)GetValue(TitleContentProperty); }
 			set { SetValue(TitleContentProperty, value); }
 		}
-
-		public static readonly DependencyProperty FallbackMaterialSetProperty = DP.Register(
-			new Meta<AbstractFlexChart, MaterialSet>(MaterialPalette.Sets.LightBlueBrushSet));
+		[Category("Charting")]
 		public MaterialSet FallbackMaterialSet
 		{
-			get { return (MaterialSet) GetValue(FallbackMaterialSetProperty); }
+			get { return (MaterialSet)GetValue(FallbackMaterialSetProperty); }
 			set { SetValue(FallbackMaterialSetProperty, value); }
 		}
-
-		public static readonly DependencyProperty MaterialProviderProperty = DP.Register(
-			new Meta<AbstractFlexChart, IMaterialProvider>(SequentialMaterialProvider.RainbowPaletteOrder) {Flags = FXR});
+		[Category("Charting")]
 		public IMaterialProvider MaterialProvider
 		{
-			get { return (IMaterialProvider) GetValue(MaterialProviderProperty); }
+			get { return (IMaterialProvider)GetValue(MaterialProviderProperty); }
 			set { SetValue(MaterialProviderProperty, value); }
 		}
-
-
-		public static readonly DependencyProperty SegmentForegroundProperty = DP.Register(
-			new Meta<AbstractFlexChart, AbstractMaterialDescriptor>(new LuminosityMaterialDescriptor(Luminosity.P500)));
+		[Category("Charting")]
 		public AbstractMaterialDescriptor SegmentForeground
 		{
-			get { return (AbstractMaterialDescriptor) GetValue(SegmentForegroundProperty); }
+			get { return (AbstractMaterialDescriptor)GetValue(SegmentForegroundProperty); }
 			set { SetValue(SegmentForegroundProperty, value); }
 		}
+		#endregion
 
 		#region Fields
 		protected const FrameworkPropertyMetadataOptions FXR = FrameworkPropertyMetadataOptions.AffectsRender;
@@ -79,7 +84,8 @@ namespace FlexCharts.Controls
 
 		protected AbstractFlexChart()
 		{
-		Content = _content;
+			Content = _content;
+			BindingOperations.SetBinding(_content, BackgroundProperty, new Binding("Background") { Source = this });
 			_content.Children.Add(_titleLabel);
 			_content.Children.Add(_main);
 			_titleLabel.DockTop();
@@ -99,9 +105,15 @@ namespace FlexCharts.Controls
 		where T : new()
 	{
 		#region Dependency Properties
-		#region			DataAspect<T>
 		public static readonly DependencyProperty DataProperty = DP.Register(
 			new Meta<AbstractFlexChart<T>, T>(default(T), DataChangedCallback, DataCoerceCallback));
+
+		public static readonly DependencyProperty DataFilterProperty = DP.Register(
+			new Meta<AbstractFlexChart, AbstractDataFilter<T>>(new EmptyDataFilter<T>()) { Flags = FXR });
+
+		public static readonly DependencyProperty DataSorterProperty = DP.Register(
+			new Meta<AbstractFlexChart, AbstractDataSorter<T>>(new EmptyDataSorter<T>()) { Flags = FXR });
+
 
 		private static T DataCoerceCallback(AbstractFlexChart<T> i, T v)
 		{
@@ -123,26 +135,21 @@ namespace FlexCharts.Controls
 			get { return (T)GetValue(DataProperty); }
 			set { SetValue(DataProperty, value); }
 		}
-		#endregion
-
-		public static readonly DependencyProperty DataFilterProperty = DP.Register(
-			new Meta<AbstractFlexChart, AbstractDataFilter<T>>(new EmptyDataFilter<T>()) {Flags = FXR});
+		[Category("Charting")]
 		public AbstractDataFilter<T> DataFilter
 		{
-			get { return (AbstractDataFilter<T>) GetValue(DataFilterProperty); }
+			get { return (AbstractDataFilter<T>)GetValue(DataFilterProperty); }
 			set { SetValue(DataFilterProperty, value); }
 		}
-
-		public static readonly DependencyProperty DataSorterProperty = DP.Register(
-			new Meta<AbstractFlexChart, AbstractDataSorter<T>>(new EmptyDataSorter<T>()) {Flags = FXR});
+		[Category("Charting")]
 		public AbstractDataSorter<T> DataSorter
 		{
-			get { return (AbstractDataSorter<T>) GetValue(DataSorterProperty); }
+			get { return (AbstractDataSorter<T>)GetValue(DataSorterProperty); }
 			set { SetValue(DataSorterProperty, value); }
 		}
 
 		#region			TitleAspect
-		
+
 		//TODO assign to aspect
 		//public static readonly DependencyProperty SegmentStrokeProperty = DP.Register(
 		//	new Meta<AbstractFlexChart<T>, Brush>(FlatUI.White));
