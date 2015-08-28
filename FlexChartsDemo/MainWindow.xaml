@@ -3,10 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FlexChartsDemo"
+        xmlns:fc="http://www.flexcharts.com/schemas/core"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+	<Window.Resources>
+		<Style x:Key="dark" TargetType="fc:AbstractFlexChart">
+			<Setter Property="Background" Value="{StaticResource mtGrey900}"/>
+			<Setter Property="SegmentForeground" Value="P500"/>
+			<Setter Property="fc:XAxisPrimative.XAxisFontSize" Value="24"/>
+		</Style>
+	</Window.Resources>
+	<Grid>
+		<fc:ParetoChart Style="{StaticResource dark}">
+			<fc:ParetoChart.Data>
+				<fc:CategoricalDataPointDoubleList>
+					<fc:CategoricalDataPointDouble CategoryName="A" Value="31"/>
+					<fc:CategoricalDataPointDouble CategoryName="B" Value="3"/>
+					<fc:CategoricalDataPointDouble CategoryName="C" Value="1"/>
+					<fc:CategoricalDataPointDouble CategoryName="D" Value="2"/>
+					<fc:CategoricalDataPointDouble CategoryName="E" Value="1"/>
+					<fc:CategoricalDataPointDouble CategoryName="F" Value="3"/>
+					<fc:CategoricalDataPointDouble CategoryName="G" Value="5"/>
+					<fc:CategoricalDataPointDouble CategoryName="H" Value="4"/>
+					<fc:CategoricalDataPointDouble CategoryName="I" Value="15"/>
+					<fc:CategoricalDataPointDouble CategoryName="J" Value="1"/>
+					<fc:CategoricalDataPointDouble CategoryName="K" Value="3"/>
+					<fc:CategoricalDataPointDouble CategoryName="L" Value="3"/>
+					<fc:CategoricalDataPointDouble CategoryName="M" Value="2"/>
+					<fc:CategoricalDataPointDouble CategoryName="N" Value="2"/>
+					<fc:CategoricalDataPointDouble CategoryName="O" Value="3"/>
+					<fc:CategoricalDataPointDouble CategoryName="P" Value="5"/>
+					<fc:CategoricalDataPointDouble CategoryName="Q" Value="7"/>
+					<fc:CategoricalDataPointDouble CategoryName="R" Value="5"/>
+				</fc:CategoricalDataPointDoubleList>
+			</fc:ParetoChart.Data>
+		</fc:ParetoChart>
+	</Grid>
 </Window>

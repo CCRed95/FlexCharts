@@ -28,3 +28,4 @@ namespace FlexCharts.Collections
 			return Comparer.Default.Compare(a, b);
 		}
 	}
+}

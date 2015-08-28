@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
+using FlexCharts.Extensions;
 using System.Windows;
 using FlexCharts.Require;
 
@@ -115,9 +115,9 @@ namespace FlexCharts.Helpers.DependencyHelpers
 		internal static string GetPropertyName(string autoFieldName)
 		{
 			if (autoFieldName == null)
-				throw new Exception(FSR.DP.AutoCallerNameNotAssigned());
+				throw new Exception("FSR.DP.AutoCallerNameNotAssigned()");
 			if (!autoFieldName.EndsWith("Property"))
-				throw new Exception(FSR.DP.AutoCallerNameNotValid(autoFieldName));
+				throw new Exception("FSR.DP.AutoCallerNameNotValid(autoFieldName)");
 			return autoFieldName.Replace("Property", string.Empty);
 		}
 

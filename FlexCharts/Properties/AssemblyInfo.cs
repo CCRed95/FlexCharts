@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Windows.Markup;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -34,3 +35,17 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls")]
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls.Primatives")]
+
+
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data")]
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data.Filtering")]
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data.Sorting")]
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data.Structures")]
+
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.MaterialDesign")]
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.MaterialDesign.Descriptors")]
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.MaterialDesign.Providers")]

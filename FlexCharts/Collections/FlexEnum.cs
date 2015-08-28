@@ -86,7 +86,7 @@ namespace FlexCharts.Collections
 		public static E FromName<E>(string value) where E : FlexEnum =>
 			Enumerate<E>().FirstOrDefault(i => i.autoFieldName.Equals(value));
 
-		public int CompareTo(object obj) => Compare(autoFieldName, ((FlexEnum)obj).autoFieldName, StringComparison.Ordinal);
+		public int CompareTo(object obj) => string.Compare(autoFieldName, ((FlexEnum)obj).autoFieldName, StringComparison.Ordinal);
 
 		public static bool operator >(FlexEnum left, FlexEnum right)
 		{

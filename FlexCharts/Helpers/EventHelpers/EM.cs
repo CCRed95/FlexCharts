@@ -21,9 +21,9 @@ namespace FlexCharts.Helpers.EventHelpers
 		internal static string GetEventName(string autoFieldName)
 		{
 			if (autoFieldName == null)
-				throw new Exception(FSR.DP.AutoCallerNameNotAssigned());
+				throw new Exception("FSR.DP.AutoCallerNameNotAssigned()");
 			if (!autoFieldName.EndsWith("Event"))
-				throw new Exception(FSR.DP.AutoCallerNameNotValid(autoFieldName));
+				throw new Exception("FSR.DP.AutoCallerNameNotValid(autoFieldName)");
 			return autoFieldName.Replace("Event", string.Empty);
 		}
 	}

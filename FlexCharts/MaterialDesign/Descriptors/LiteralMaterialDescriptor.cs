@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace FlexCharts.MaterialDesign.Descriptors
 {
 	public class LiteralMaterialDescriptor : AbstractMaterialDescriptor
@@ -18,4 +13,5 @@ namespace FlexCharts.MaterialDesign.Descriptors
 			Opacity = opacity;
 		}
 	}
+	public class fag { }
 }

@@ -22,7 +22,7 @@ namespace FlexCharts.Helpers.DependencyHelpers
 			}
 			catch (Exception GENEX)
 			{
-				throw new InvalidCastException(FSR.Conversion.CannotDirectCast(e.OldValue, typeof(PT)), GENEX);
+				throw new InvalidCastException("FSR.Conversion.CannotDirectCast(e.OldValue, typeof(PT)), GENEX");
 			}
 			try
 			{
@@ -30,7 +30,7 @@ namespace FlexCharts.Helpers.DependencyHelpers
 			}
 			catch (Exception GENEX)
 			{
-				throw new InvalidCastException(FSR.Conversion.CannotDirectCast(e.NewValue, typeof(PT)), GENEX);
+				throw new InvalidCastException("FSR.Conversion.CannotDirectCast(e.NewValue, typeof(PT)), GENEX");
 			}
 		}
 	}
