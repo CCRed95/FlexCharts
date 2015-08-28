@@ -229,7 +229,7 @@ namespace FlexCharts.Controls
 
 		#region			FocusableSegmentContract
 		public static readonly DependencyProperty FocusedSegmentProperty = DP.Add(FocusableSegmentPrimative.FocusedSegmentProperty,
-			new Meta<RingChart, Shape>(null, FocusedSegmentChanged) { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<RingChart, Shape>(null, FocusedSegmentChanged) { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
 		public Shape FocusedSegment
@@ -240,14 +240,14 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			RingContract
-		public static readonly DependencyProperty RingWidthProperty = DP.Add(RingPrimative.RingWidthProperty,
+		public static readonly DependencyProperty RingWidthPercentageProperty = DP.Add(RingPrimative.RingWidthPercentageProperty,
 			new Meta<RingChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
-		public double RingWidth
+		public double RingWidthPercentage
 		{
-			get { return (double)GetValue(RingWidthProperty); }
-			set { SetValue(RingWidthProperty, value); }
+			get { return (double)GetValue(RingWidthPercentageProperty); }
+			set { SetValue(RingWidthPercentageProperty, value); }
 		}
 		#endregion
 
@@ -313,7 +313,7 @@ namespace FlexCharts.Controls
 			BindingOperations.SetBinding(_focusedSegmentValueLabel, FontStyleProperty, new Binding("SecondaryValueFontStyle") { Source = this });
 			BindingOperations.SetBinding(_focusedSegmentValueLabel, FontWeightProperty, new Binding("SecondaryValueFontWeight") { Source = this });
 			BindingOperations.SetBinding(_focusedSegmentValueLabel, FontSizeProperty, new Binding("SecondaryValueFontSize") { Source = this });
-			//BindingOperations.SetBinding(_focusedSegmentValueLabel, ForegroundProperty, new Binding("ValueForeground") { Source = this });
+			BindingOperations.SetBinding(_focusedSegmentValueLabel, FontStretchProperty, new Binding("SecondaryValueFontStretch") { Source = this });
 
 			_focusedSegmentValueLabel.DataContext = this;
 			_focusedSegmentValueLabel.SetBinding(ContentProperty, new Binding("FocusedSegment.DataPoint.Value"));
@@ -349,7 +349,7 @@ namespace FlexCharts.Controls
 			};
 			ringSpinTimer.Tick += (s, e) =>
 			{
-				s.RequireType<DispatcherTimer>().Stop();
+				ringSpinTimer.Stop();
 				animateAngularOffset();
 			};
 			ringSpinTimer.Start();
@@ -419,19 +419,20 @@ namespace FlexCharts.Controls
 
 			var total = Data.SumValue();
 			var angleTrace = 0d;
-
+			var actualRingWidth = radius * RingWidthPercentage; 
 			foreach (var d in Data)
 			{
 				var materialSet = MaterialProvider.ProvideNext(context);
 				var degrees = (d.Value / total) * 360;
-				var activePath = new ArcPath(degrees, angleTrace, RingWidth, CircleScale, radius, _segments.RenderSize, d)
+				
+				var activePath = new ArcPath(degrees, angleTrace, actualRingWidth, CircleScale, radius, _segments.RenderSize, d)
 				{
 					Fill = SegmentForeground.GetMaterial(materialSet),
 					MouseOverFill = materialSet.GetMaterial(Luminosity.P700),
 					DataContext = this
 				};
 				activePath.Click += segmentClicked;
-				_segments.Children.Add(activePath);
+				_segments.Children.Add(activePath); 
 				d.RenderedVisual = activePath;
 				angleTrace += degrees;
 			}
@@ -443,7 +444,7 @@ namespace FlexCharts.Controls
 			var diameter = _segments.RenderSize.Smallest() * CircleScale;
 
 			var outerLabelRadius = (diameter / 2) * OuterLabelPositionScale;
-			var overlayedLabelRadius = (diameter / 2) - (RingWidth / 2);
+			var overlayedLabelRadius = (diameter / 2) - (actualRingWidth / 2);
 
 			var targetAngularOffset = FocusedSegment.RequireType<ArcPath>().CalculateAngularOffset();
 			MaterialProvider.Reset(context);
@@ -461,7 +462,6 @@ namespace FlexCharts.Controls
 				BindingOperations.SetBinding(categoryNameLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
 				categoryNameLabel.Foreground = BarTotalForeground.GetMaterial(materialSet);
 				_categoryLabels.Children.Add(categoryNameLabel);
-
 
 				var valueLabel = positionLabel(d, overlayedLabelRadius, targetAngularOffset);
 

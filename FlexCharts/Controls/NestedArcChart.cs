@@ -238,6 +238,7 @@ namespace FlexCharts.Controls
 		protected readonly Grid _segments = new Grid
 		{
 			RenderTransformOrigin = new Point(.5, .5),
+			ClipToBounds = true
 		};
 		protected readonly Grid _categoryLabels = new Grid();
 		protected readonly Grid _inactiveSegments = new Grid

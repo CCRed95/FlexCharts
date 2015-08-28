@@ -7,13 +7,14 @@
         mc:Ignorable="d"
 				TextOptions.TextFormattingMode="Ideal"
 				TextOptions.TextRenderingMode="Aliased"
-        Title="MainWindow" Height="800" Width="1300">
+        Title="MainWindow" Height="800" Width="1800">
   <Window.Resources>
     <Style x:Key="darkbase" TargetType="fc:AbstractFlexChart" BasedOn="{StaticResource Text22p}">
       <Setter Property="Padding" Value="15"/>
       <Setter Property="SegmentForeground" Value="P600"/>
       <Setter Property="Foreground" Value="{StaticResource mtGrey200}"/>
       <Setter Property="FontWeight" Value="Light"/>
+			<Setter Property="MaterialProvider" Value="{x:Static fc:GradientMaterialProvider.CoolColors}"/>
     </Style>
     <Style x:Key="darkpareto" TargetType="fc:AbstractFlexChart" BasedOn="{StaticResource darkbase}">
 
@@ -28,7 +29,7 @@
       <Setter Property="fc:DotPrimative.DotStroke" Value="->Grey400"/>
       <Setter Property="fc:DotPrimative.DotStrokeThickness" Value="2"/>
       <Setter Property="fc:DotPrimative.DotFill" Value="P500"/>
-      <Setter Property="fc:DotPrimative.DotRadius" Value="6"/>
+      <Setter Property="fc:DotPrimative.DotRadius" Value="5"/>
       <Setter Property="fc:LinePrimative.LineStroke" Value="P400"/>
       <Setter Property="fc:LinePrimative.LineStrokeThickness" Value="2"/>
       <Setter Property="fc:BarTotalPrimative.BarTotalFontSize" Value="10pt"/>
@@ -45,11 +46,12 @@
       <Setter Property="fc:ValuePrimative.ValueFontWeight" Value="Light"/>
       <Setter Property="fc:SecondaryValuePrimative.SecondaryValueForeground" Value="P100"/>
       <Setter Property="fc:SecondaryValuePrimative.SecondaryValueFontSize" Value="32pt"/>
-      <Setter Property="fc:RingPrimative.RingWidth" Value="30"/>
+      <Setter Property="fc:RingPrimative.RingWidthPercentage" Value=".3"/>
+			<Setter Property="fc:PolarLabelingPrimative.OuterLabelPositionScale" Value="1.2"/>
 
     </Style>
     <Style x:Key="darkpie" TargetType="fc:AbstractFlexChart" BasedOn="{StaticResource darkbase}">
-      <Setter Property="fc:BarTotalPrimative.BarTotalForeground" Value="P500"/>
+      <Setter Property="fc:BarTotalPrimative.BarTotalForeground" Value="P600"/>
       <Setter Property="fc:BarTotalPrimative.BarTotalFontSize" Value="14pt"/>
       <Setter Property="fc:ValuePrimative.ValueForeground" Value="->White000"/>
       <Setter Property="fc:ValuePrimative.ValueFontSize" Value="11pt"/>
@@ -64,7 +66,16 @@
       <Setter Property="fc:BarTotalPrimative.BarTotalForeground" Value="P300"/>
       <Setter Property="fc:BarTotalPrimative.BarTotalFontSize" Value="11pt"/>
       <Setter Property="fc:SegmentPrimative.SegmentSpaceBackground" Value="->White000,.05"/>
+			<Setter Property="MaterialProvider" Value="{x:Static fc:SequentialMaterialProvider.CoolColors}"/>
     </Style>
+    <Style x:Key="darknestedarc" TargetType="fc:NestedArcChart" BasedOn="{StaticResource darkbase}">
+			<Setter Property="SecondaryValueForeground" Value="->Grey500"/>
+			<Setter Property="ValueForeground" Value="P400"/>
+		</Style>
+		<Style x:Key="darkhorizontalbarchart" TargetType="fc:HorizontalBarChart" BasedOn="{StaticResource darkbase}">
+			
+		</Style>
+					 
   </Window.Resources>
 
   <Grid Background="{StaticResource mtGrey900}">
@@ -72,6 +83,10 @@
       <RowDefinition/>
       <RowDefinition/>
     </Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="400"/>
+      </Grid.ColumnDefinitions>
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition/>
@@ -99,6 +114,29 @@
           <fc:CategoricalDouble CategoryName="R" Value="5"/>
         </fc:ParetoChart.Data>
       </fc:ParetoChart>
+
+      <!--<fc:LineGraph Style="{StaticResource darkpareto}" Grid.Column="1">
+        <fc:LineGraph.Data>
+          <fc:CategoricalDouble CategoryName="A" Value="31"/>
+          <fc:CategoricalDouble CategoryName="B" Value="3"/>
+          <fc:CategoricalDouble CategoryName="C" Value="1"/>
+          <fc:CategoricalDouble CategoryName="D" Value="2"/>
+          <fc:CategoricalDouble CategoryName="E" Value="1"/>
+          <fc:CategoricalDouble CategoryName="F" Value="3"/>
+          <fc:CategoricalDouble CategoryName="G" Value="5"/>
+          <fc:CategoricalDouble CategoryName="H" Value="4"/>
+          <fc:CategoricalDouble CategoryName="I" Value="15"/>
+          <fc:CategoricalDouble CategoryName="J" Value="1"/>
+          <fc:CategoricalDouble CategoryName="K" Value="3"/>
+          <fc:CategoricalDouble CategoryName="L" Value="3"/>
+          <fc:CategoricalDouble CategoryName="M" Value="2"/>
+          <fc:CategoricalDouble CategoryName="N" Value="2"/>
+          <fc:CategoricalDouble CategoryName="O" Value="3"/>
+          <fc:CategoricalDouble CategoryName="P" Value="5"/>
+          <fc:CategoricalDouble CategoryName="Q" Value="7"/>
+          <fc:CategoricalDouble CategoryName="R" Value="5"/>
+        </fc:LineGraph.Data>
+			</fc:LineGraph>-->
       <fc:StackedBarChart Style="{StaticResource darkstackedbar}" Grid.Column="1">
         <fc:StackedBarChart.Data>
           <fc:CategoricalDoubleSeries CategoryName="A">
@@ -123,12 +161,12 @@
           </fc:CategoricalDoubleSeries>
           <fc:CategoricalDoubleSeries CategoryName="C">
             <fc:CategoricalDoubleSeries.Value>
-              <fc:CategoricalDouble CategoryName="Sub1" Value="35"/>
-              <fc:CategoricalDouble CategoryName="Sub2" Value="21"/>
-              <fc:CategoricalDouble CategoryName="Sub3" Value="12"/>
-              <fc:CategoricalDouble CategoryName="Sub4" Value="8"/>
-              <fc:CategoricalDouble CategoryName="Sub5" Value="5"/>
-              <fc:CategoricalDouble CategoryName="Sub6" Value="3"/>
+              <fc:CategoricalDouble CategoryName="Sub1" Value="21"/>
+              <fc:CategoricalDouble CategoryName="Sub2" Value="14"/>
+              <fc:CategoricalDouble CategoryName="Sub3" Value="8"/>
+              <fc:CategoricalDouble CategoryName="Sub4" Value="5"/>
+              <fc:CategoricalDouble CategoryName="Sub5" Value="8"/>
+              <fc:CategoricalDouble CategoryName="Sub6" Value="2"/>
             </fc:CategoricalDoubleSeries.Value>
           </fc:CategoricalDoubleSeries>
           <fc:CategoricalDoubleSeries CategoryName="D">
@@ -230,7 +268,7 @@
 				<ColumnDefinition Width="1.7*"/>
         <ColumnDefinition/>
       </Grid.ColumnDefinitions>
-      <fc:RingChart RingWidth="30" Style="{StaticResource darkring}">
+      <fc:RingChart Style="{StaticResource darkring}">
         <fc:RingChart.Data>
           <fc:CategoricalDouble CategoryName="A" Value="8"/>
           <fc:CategoricalDouble CategoryName="B" Value="4"/>
@@ -242,7 +280,7 @@
           <fc:CategoricalDouble CategoryName="H" Value="4"/>
         </fc:RingChart.Data>
       </fc:RingChart>
-			<fc:NestedArcChart Style="{StaticResource darkpareto}" Grid.Column="1">
+      <fc:NestedArcChart Style="{StaticResource darknestedarc}" Grid.Column="1">
         <fc:NestedArcChart.Data>
           <fc:CategoricalDouble CategoryName="A" Value="31"/>
           <fc:CategoricalDouble CategoryName="B" Value="34"/>
@@ -270,5 +308,32 @@
       </fc:PieChart>
       
     </Grid>
+    <Grid Column="2" Grid.RowSpan="2">
+			<fc:HorizontalBarChart Grid.Column="1" Style="{StaticResource darkhorizontalbarchart}">
+        <fc:HorizontalBarChart.Data>
+          <fc:CategoricalDouble CategoryName="A" Value="31"/>
+          <fc:CategoricalDouble CategoryName="B" Value="34"/>
+          <fc:CategoricalDouble CategoryName="C" Value="27"/>
+          <fc:CategoricalDouble CategoryName="D" Value="24"/>
+          <fc:CategoricalDouble CategoryName="E" Value="21"/>
+          <fc:CategoricalDouble CategoryName="F" Value="18"/>
+          <fc:CategoricalDouble CategoryName="R" Value="15"/>
+          <fc:CategoricalDouble CategoryName="E" Value="13"/>
+          <fc:CategoricalDouble CategoryName="F" Value="9"/>
+          <fc:CategoricalDouble CategoryName="R" Value="7"/>
+					<fc:CategoricalDouble CategoryName="A" Value="31"/>
+          <fc:CategoricalDouble CategoryName="B" Value="34"/>
+          <fc:CategoricalDouble CategoryName="C" Value="27"/>
+          <fc:CategoricalDouble CategoryName="D" Value="24"/>
+          <fc:CategoricalDouble CategoryName="E" Value="21"/>
+          <fc:CategoricalDouble CategoryName="F" Value="18"/>
+          <fc:CategoricalDouble CategoryName="R" Value="15"/>
+          <fc:CategoricalDouble CategoryName="E" Value="13"/>
+          <fc:CategoricalDouble CategoryName="F" Value="9"/>
+          <fc:CategoricalDouble CategoryName="R" Value="7"/>
+        </fc:HorizontalBarChart.Data>
+      </fc:HorizontalBarChart>
+		</Grid>
+					
   </Grid>
 </Window>

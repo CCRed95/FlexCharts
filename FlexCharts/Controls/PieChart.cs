@@ -165,7 +165,7 @@ namespace FlexCharts.Controls
 
 		#region			SegmentFocusableContract
 		public static readonly DependencyProperty FocusedSegmentProperty = DP.Add(FocusableSegmentPrimative.FocusedSegmentProperty,
-			new Meta<PieChart, Shape>(null, FocusedSegmentChanged) { Flags = FXR });
+			new Meta<PieChart, Shape>(null, FocusedSegmentChanged) { Flags = INH });
 
 		[Category("Charting")]
 		public Shape FocusedSegment

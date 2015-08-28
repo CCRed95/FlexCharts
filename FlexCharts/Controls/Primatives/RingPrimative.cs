@@ -12,16 +12,16 @@ namespace FlexCharts.Controls.Primatives
 	public abstract class RingPrimative : FlexPrimative, IRingContract
 	{
 		//TODO ringWidthPercentage
-		public static readonly DependencyProperty RingWidthProperty =
-			DP.Attach<double>(typeof (RingPrimative), new FrameworkPropertyMetadata(40.0));
+		public static readonly DependencyProperty RingWidthPercentageProperty =
+			DP.Attach<double>(typeof (RingPrimative), new FrameworkPropertyMetadata(.3));
 
-		public static double GetRingWidth(DependencyObject i) => i.Get<double>(RingWidthProperty);
-		public static void SetRingWidth(DependencyObject i, double v) => i.Set(RingWidthProperty, v);
+		public static double GetRingWidthPercentage(DependencyObject i) => i.Get<double>(RingWidthPercentageProperty);
+		public static void SetRingWidthPercentage(DependencyObject i, double v) => i.Set(RingWidthPercentageProperty, v);
 
-		public double RingWidth
+		public double RingWidthPercentage
 		{
-			get { return (double) GetValue(RingWidthProperty); }
-			set { SetValue(RingWidthProperty, value); }
+			get { return (double) GetValue(RingWidthPercentageProperty); }
+			set { SetValue(RingWidthPercentageProperty, value); }
 		}
 	}
 }

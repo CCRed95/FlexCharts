@@ -66,6 +66,9 @@
     <Compile Include="Controls\Contracts\IStateSegmentContract.cs" />
     <Compile Include="Controls\Contracts\IValueContract.cs" />
     <Compile Include="Controls\Contracts\IXAxisContract.cs" />
+    <Compile Include="Controls\Contracts\IYAxisContract.cs" />
+    <Compile Include="Controls\HorizontalBarChart.cs" />
+    <Compile Include="Controls\LineGraph.cs" />
     <Compile Include="Controls\NestedArcChart.cs" />
     <Compile Include="Controls\ParetoChart.cs" />
     <Compile Include="Controls\PieChart.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="Controls\Primatives\TextualPrimative.cs" />
     <Compile Include="Controls\Primatives\ValuePrimative.cs" />
     <Compile Include="Controls\Primatives\XAxisPrimative.cs" />
+    <Compile Include="Controls\Primatives\YAxisPrimative.cs" />
     <Compile Include="Controls\RingChart.cs" />
     <Compile Include="Controls\RingGauge.cs" />
     <Compile Include="Controls\StackedBarChart.cs" />
@@ -116,6 +120,7 @@
     <Compile Include="Extensions\RenderingExtensions.cs" />
     <Compile Include="Extensions\StyleExtensions.cs" />
     <Compile Include="GenerationContext\AbstractVisualContext.cs" />
+    <Compile Include="GenerationContext\LineGraphVisualContext.cs" />
     <Compile Include="GenerationContext\NestedArcCategoryVisualContext.cs" />
     <Compile Include="GenerationContext\ParetoChartCategoryVisualContext.cs" />
     <Compile Include="Helpers\DependencyHelpers\Callbacks.cs" />
