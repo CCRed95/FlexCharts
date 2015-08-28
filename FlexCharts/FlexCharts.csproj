@@ -67,6 +67,7 @@
     <Compile Include="Controls\Contracts\IValueContract.cs" />
     <Compile Include="Controls\Contracts\IXAxisContract.cs" />
     <Compile Include="Controls\Contracts\IYAxisContract.cs" />
+    <Compile Include="Controls\HeatMap.cs" />
     <Compile Include="Controls\HorizontalBarChart.cs" />
     <Compile Include="Controls\LineGraph.cs" />
     <Compile Include="Controls\NestedArcChart.cs" />
