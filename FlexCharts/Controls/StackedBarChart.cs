@@ -25,10 +25,10 @@ using FlexCharts.Require;
 
 namespace FlexCharts.Controls
 {
-	public class StackedBarChart : AbstractFlexChart<CategoricalDataPointDoubleListList>,
+	public class StackedBarChart : AbstractFlexChart<CategoricalDoubleSeriesSeries>,
 		ISegmentContract, IBarTotalContract, IXAxisContract
 	{
-		#region Dependency Properties
+	#region Dependency Properties
 		#region			BarTotalContract
 		public static readonly DependencyProperty BarTotalFontFamilyProperty = DP.Add(BarTotalPrimative.BarTotalFontFamilyProperty,
 			new Meta<StackedBarChart, FontFamily> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
@@ -46,7 +46,8 @@ namespace FlexCharts.Controls
 			new Meta<StackedBarChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalForegroundProperty = DP.Add(BarTotalPrimative.BarTotalForegroundProperty,
-			new Meta<StackedBarChart, AbstractMaterialDescriptor> { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<StackedBarChart, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
+
 
 		[Category("Charting")]
 		public FontFamily BarTotalFontFamily
@@ -125,7 +126,7 @@ namespace FlexCharts.Controls
 			new Meta<StackedBarChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty XAxisForegroundProperty = DP.Add(XAxisPrimative.XAxisForegroundProperty,
-			new Meta<StackedBarChart, AbstractMaterialDescriptor> { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<StackedBarChart, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
 		public FontFamily XAxisFontFamily
@@ -240,7 +241,7 @@ namespace FlexCharts.Controls
 				base.OnRender(drawingContext);
 				return;
 			}
-			var total = Data.MaxSubcategoryTotal();
+			var total = Data.MaxSubsetSum();
 
 			var context = new ProviderContext(Data.Count);
 			var barAvailableWidth = _bars.RenderSize.Width / Data.Count;
@@ -261,7 +262,7 @@ namespace FlexCharts.Controls
 					VerticalAlignment = VerticalAlignment.Bottom,
 					Width = barAvailableWidth,
 					Margin = new Thickness(barAvailableWidth * xtrace, 0, 0, 0),
-					Foreground = MaterialPalette.White000, //BarTotalForeground.GetMaterial(MaterialPalette.Sets.GreyBrushSet),
+					Foreground = XAxisForeground.GetMaterial(FallbackMaterialSet),
 					DataContext = this
 				};
 				BindingOperations.SetBinding(axisLabel, FontFamilyProperty, new Binding("XAxisFontFamily") { Source = this });
@@ -285,10 +286,10 @@ namespace FlexCharts.Controls
 					Height = backHeight,
 					VerticalAlignment = VerticalAlignment.Bottom,
 					HorizontalAlignment = HorizontalAlignment.Left,
-					Margin = new Thickness(horizontalTrace + barLeftSpacing, 0, 0, xAxisHeight)
+					Margin = new Thickness(horizontalTrace + barLeftSpacing, 0, 0, xAxisHeight),
+					Fill = SegmentSpaceBackground.GetMaterial(FallbackMaterialSet)
 				};
-				backRectangle.MouseEnter += (s, e) => barMouseEnter(d);
-				BindingOperations.SetBinding(backRectangle, Shape.FillProperty, new Binding("SegmentSpaceBackground") { Source = this });
+				//backRectangle.MouseEnter += (s, e) => barMouseEnter(d);
 				//backRectangle.Fill = SegmentSpaceBackground.GetMaterial() TODO remove above. make this work
 				_bars.Children.Add(backRectangle);
 
@@ -306,12 +307,13 @@ namespace FlexCharts.Controls
 						Fill = SegmentForeground.GetMaterial(materialSet),
 						VerticalAlignment = VerticalAlignment.Bottom,
 						HorizontalAlignment = HorizontalAlignment.Left,
-						Margin = new Thickness(horizontalTrace + barLeftSpacing, 0, 0, xAxisHeight)
+						Margin = new Thickness(horizontalTrace + barLeftSpacing, 0, 0, xAxisHeight),
+						RenderTransform = new ScaleTransform(1, (IsLoaded ? 1 : 0), .5, 1),
+						RenderTransformOrigin = new Point(.5, 1)
 					};
-					rectangle.MouseEnter += (s, e) => barMouseEnter(d);
-					rectangle.MouseLeave += (s, e) => barMouseLeave(s, e, d, sd);
-					rectangle.RenderTransform = new ScaleTransform(1, (IsLoaded ? 1 : 0), .5, 1); //TODO get rid of all isloaded conditional sets
-					rectangle.RenderTransformOrigin = new Point(.5, 1);
+					//rectangle.MouseEnter += (s, e) => barMouseEnter(d);
+					//rectangle.MouseLeave += (s, e) => barMouseLeave(s, e, d, sd);
+					//TODO get rid of all isloaded conditional sets
 
 					sd.RenderedVisual = rectangle;
 					pathBuffer.Add(rectangle);
@@ -324,14 +326,14 @@ namespace FlexCharts.Controls
 				}
 				var barLabel = new Label
 				{
-					Content = d.Value.CategoryTotal(),
+					Content = d.Value.SumValue(),
 					IsHitTestVisible = false,
 					HorizontalContentAlignment = HorizontalAlignment.Center,
 					VerticalContentAlignment = VerticalAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Left,
 					VerticalAlignment = VerticalAlignment.Bottom,
 					Width = barAvailableWidth,
-					Foreground = BarTotalForeground.GetMaterial(MaterialPalette.Sets.GreenBrushSet),
+					Foreground = BarTotalForeground.GetMaterial(FallbackMaterialSet),
 					Margin = new Thickness(horizontalTrace, 0, 0, xAxisHeight + verticalTrace),
 				};
 				BindingOperations.SetBinding(barLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
@@ -347,46 +349,46 @@ namespace FlexCharts.Controls
 			base.OnRender(drawingContext);
 		}
 
-		private void barMouseEnter(CategoricalDataPointCategoricalDataPointDoubleList barinfo)
-		{
-			_highlightGrid.Children.Clear();
-			var pathBuffer = barinfo.RenderedVisual.RequireType<List<Shape>>();
-			var largestRectangle = pathBuffer.Last();
-			var sdd = new Path()
-			{
-				Data = largestRectangle.RenderedGeometry,
-				Stroke = Brushes.White,
-				StrokeThickness = 2,
-				VerticalAlignment = largestRectangle.VerticalAlignment,
-				HorizontalAlignment = largestRectangle.HorizontalAlignment,
-				Margin = largestRectangle.Margin
-			};
+		//private void barMouseEnter(CategoricalDoubleSeriesSeries barinfo)
+		//{
+		//	_highlightGrid.Children.Clear();
+		//	var pathBuffer = barinfo.RenderedVisual.RequireType<List<Shape>>();
+		//	var largestRectangle = pathBuffer.Last();
+		//	var sdd = new Path()
+		//	{
+		//		Data = largestRectangle.RenderedGeometry,
+		//		Stroke = Brushes.White,
+		//		StrokeThickness = 2,
+		//		VerticalAlignment = largestRectangle.VerticalAlignment,
+		//		HorizontalAlignment = largestRectangle.HorizontalAlignment,
+		//		Margin = largestRectangle.Margin
+		//	};
 
-			var tt = new ToolTipPath
-			{
-				IsHitTestVisible = false,
-				Height = 100,
-				Width = 180,
-				Fill = new SolidColorBrush(Color.FromRgb(255, 255, 255)) { Opacity = .7 },
-				ArrowDirection = ToolTipDirection.Left,
-				HorizontalAlignment = HorizontalAlignment.Left,
-				VerticalAlignment = VerticalAlignment.Bottom,
-				Margin = new Thickness(largestRectangle.Margin.Left + largestRectangle.Width + 10, 0, 0, largestRectangle.Height / 2)
-			};
-			BindingOperations.SetBinding(_highlightGrid, VisibilityProperty, new Binding("IsMouseOver") { Source = this, Converter = new BooleanToVisibilityConverter() });
-			if (tt.Margin.Left + tt.Width > _highlightGrid.ActualWidth)
-			{
-				tt.ArrowDirection = ToolTipDirection.Right;
-				tt.Margin = new Thickness(largestRectangle.Margin.Left - 10 - tt.Width, 0, 0, tt.Margin.Bottom);
-			}
+		//	var tt = new ToolTipPath
+		//	{
+		//		IsHitTestVisible = false,
+		//		Height = 100,
+		//		Width = 180,
+		//		Fill = new SolidColorBrush(Color.FromRgb(255, 255, 255)) { Opacity = .7 },
+		//		ArrowDirection = ToolTipDirection.Left,
+		//		HorizontalAlignment = HorizontalAlignment.Left,
+		//		VerticalAlignment = VerticalAlignment.Bottom,
+		//		Margin = new Thickness(largestRectangle.Margin.Left + largestRectangle.Width + 10, 0, 0, largestRectangle.Height / 2)
+		//	};
+		//	BindingOperations.SetBinding(_highlightGrid, VisibilityProperty, new Binding("IsMouseOver") { Source = this, Converter = new BooleanToVisibilityConverter() });
+		//	if (tt.Margin.Left + tt.Width > _highlightGrid.ActualWidth)
+		//	{
+		//		tt.ArrowDirection = ToolTipDirection.Right;
+		//		tt.Margin = new Thickness(largestRectangle.Margin.Left - 10 - tt.Width, 0, 0, tt.Margin.Bottom);
+		//	}
 
-			_highlightGrid.Children.Add(sdd);
-			_highlightGrid.Children.Add(tt);
-		}
-		private void barMouseLeave(object s, MouseEventArgs e, CategoricalDataPointCategoricalDataPointDoubleList barinfo, CategoricalDataPointDouble subbarinfo)
-		{
-			//subbarinfo.RenderedVisual.ShouldBeType<Rectangle>().Fill = Brushes.White;
-		}
+		//	_highlightGrid.Children.Add(sdd);
+		//	_highlightGrid.Children.Add(tt);
+		//}
+		//private void barMouseLeave(object s, MouseEventArgs e, CategoricalDoubleSeriesSeries barinfo, CategoricalDouble subbarinfo)
+		//{
+		//	//subbarinfo.RenderedVisual.ShouldBeType<Rectangle>().Fill = Brushes.White;
+		//}
 		protected override void OnMouseDown(MouseButtonEventArgs e)
 		{
 			base.OnMouseDown(e);
@@ -439,7 +441,7 @@ namespace FlexCharts.Controls
 		}
 
 
-		private Grid createFloatingBox(CategoricalDataPointList barData, Brush border)
+		private Grid createFloatingBox(CategoricalDoubleSeries barData, Brush border)
 		{
 			var parentContainer = new Grid()
 			{

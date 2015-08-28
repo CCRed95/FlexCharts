@@ -69,10 +69,7 @@ namespace FlexCharts.Controls
 		protected const FrameworkPropertyMetadataOptions FXA = FrameworkPropertyMetadataOptions.AffectsArrange;
 		protected const FrameworkPropertyMetadataOptions INH = FrameworkPropertyMetadataOptions.Inherits;
 
-		protected readonly DockPanel _content = new DockPanel
-		{
-			Background = Brushes.Transparent
-		};
+		protected readonly DockPanel _content = new DockPanel();
 		protected readonly Grid _main = new Grid();
 
 		protected readonly Label _titleLabel = new Label()
@@ -85,12 +82,12 @@ namespace FlexCharts.Controls
 		protected AbstractFlexChart()
 		{
 			Content = _content;
-			BindingOperations.SetBinding(_content, BackgroundProperty, new Binding("Background") { Source = this });
 			_content.Children.Add(_titleLabel);
 			_content.Children.Add(_main);
 			_titleLabel.DockTop();
 			_main.DockBottom();
 
+			BindingOperations.SetBinding(_content, BackgroundProperty, new Binding("Background") { Source = this });
 			BindingOperations.SetBinding(_main, MarginProperty, new Binding("Padding") { Source = this });
 
 			BindingOperations.SetBinding(_titleLabel, ContentProperty, new Binding("Title") { Source = this });
@@ -101,7 +98,7 @@ namespace FlexCharts.Controls
 			BindingOperations.SetBinding(_titleLabel, ForegroundProperty, new Binding("Foreground") { Source = this });
 		}
 	}
-	public abstract class AbstractFlexChart<T> : AbstractFlexChart//, IDataAspect<T>
+	public abstract class AbstractFlexChart<T> : AbstractFlexChart
 		where T : new()
 	{
 		#region Dependency Properties
@@ -113,21 +110,6 @@ namespace FlexCharts.Controls
 
 		public static readonly DependencyProperty DataSorterProperty = DP.Register(
 			new Meta<AbstractFlexChart<T>, AbstractDataSorter<T>>(new EmptyDataSorter<T>()) { Flags = FXR });
-
-
-		private static T DataCoerceCallback(AbstractFlexChart<T> i, T v)
-		{
-			var s = i.DataSorter.Sort(v);
-			return i.DataFilter.Filter(s);
-		}
-		private static void DataChangedCallback(AbstractFlexChart<T> i, DPChangedEventArgs<T> e)
-		{
-			i.OnDataChanged(e);
-		}
-		public virtual void OnDataChanged(DPChangedEventArgs<T> e)
-		{
-
-		}
 
 		[Category("Charting")]
 		public T Data
@@ -147,29 +129,22 @@ namespace FlexCharts.Controls
 			get { return (AbstractDataSorter<T>)GetValue(DataSorterProperty); }
 			set { SetValue(DataSorterProperty, value); }
 		}
-
-		#region			TitleAspect
-
-		//TODO assign to aspect
-		//public static readonly DependencyProperty SegmentStrokeProperty = DP.Register(
-		//	new Meta<AbstractFlexChart<T>, Brush>(FlatUI.White));
-
-		//public static readonly DependencyProperty SegmentStrokeThicknessProperty = DP.Register(
-		//	new Meta<AbstractFlexChart<T>, int>(2));
-
-		//[Category("Charting")]
-		//public Brush SegmentStroke
-		//{
-		//	get { return (Brush)GetValue(SegmentStrokeProperty); }
-		//	set { SetValue(SegmentStrokeProperty, value); }
-		//}
-		//[Category("Charting")]
-		//public int SegmentStrokeThickness
-		//{
-		//	get { return (int)GetValue(SegmentStrokeThicknessProperty); }
-		//	set { SetValue(SegmentStrokeThicknessProperty, value); }
-		//}
 		#endregion
+
+		#region Dependency Property Callbacks
+		private static T DataCoerceCallback(AbstractFlexChart<T> i, T v)
+		{
+			var s = i.DataSorter.Sort(v);
+			return i.DataFilter.Filter(s);
+		}
+		private static void DataChangedCallback(AbstractFlexChart<T> i, DPChangedEventArgs<T> e)
+		{
+			i.OnDataChanged(e);
+		}
+		public virtual void OnDataChanged(DPChangedEventArgs<T> e)
+		{
+
+		}
 		#endregion
 
 		#region Routed Events
@@ -188,29 +163,6 @@ namespace FlexCharts.Controls
 			RaiseEvent(new RoutedEventArgs(SegmentClickedEvent, this));
 		}
 		#endregion
-		//private static object CoerceValueCallback(DependencyObject O, object BaseValue)
-		//{
-		//	var data = BaseValue.RequireType<T>();
-		//	var sorter = new DescendingDataSorter();
-		//	return sorter.Sort(data);
-		//}
-
-		#region Properties
-
-		//public virtual AbstractDataFilter<T> DataFilter { get; set; } = new EmptyDataFilter<T>();
-
-		//public abstract IMaterialProvider MaterialProvider { get; set; }
-
-		//public virtual AbstractDataSorter<T> DataSorter { get; set; } = new EmptyDataSorter<T>();
-		//public IMaterialProvider MaterialProvider
-		//{
-		//	get { return (IMaterialProvider) GetValue(MaterialProviderProperty); }
-		//	set { SetValue(MaterialProviderProperty, value); }
-		//}
-
-		#endregion
-
-
 
 		#region Constructors
 		protected AbstractFlexChart()
@@ -218,10 +170,13 @@ namespace FlexCharts.Controls
 			Data = new T();
 		}
 		#endregion
-		public void ApplyTargetedTypeface<TP>(FlexTypeface typeface) where TP : TextualPrimative
+
+		protected override void OnRender(DrawingContext drawingContext)
 		{
-			var type = typeof(TP);
-			throw new NotImplementedException();
+			if (!IsLoaded)
+				Data = DataFilter.Filter(DataSorter.Sort(Data));
+			
+			base.OnRender(drawingContext);
 		}
 	}
 }

@@ -26,8 +26,8 @@ using FlexCharts.Require;
 
 namespace FlexCharts.Controls
 {
-	public class PieChart : AbstractFlexChart<CategoricalDataPointDoubleList>, 
-		IValueContract, IFocusableSegmentContract, IPolarLabelingContract//, IStateSegmentContract
+	public class PieChart : AbstractFlexChart<DoubleSeries>, 
+		IValueContract, IFocusableSegmentContract, IPolarLabelingContract, IBarTotalContract//, IStateSegmentContract
 	{
 		#region Dependency Properties
 		#region			CircularContract
@@ -46,6 +46,63 @@ namespace FlexCharts.Controls
 		{
 			get { return (double)GetValue(AngleOffsetProperty); }
 			set { SetValue(AngleOffsetProperty, value); }
+		}
+		#endregion
+
+		#region			BarTotalContract
+		public static readonly DependencyProperty BarTotalFontFamilyProperty = DP.Add(BarTotalPrimative.BarTotalFontFamilyProperty,
+			new Meta<PieChart, FontFamily> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
+
+		public static readonly DependencyProperty BarTotalFontStyleProperty = DP.Add(BarTotalPrimative.BarTotalFontStyleProperty,
+			new Meta<PieChart, FontStyle> { Flags = INH }, DPExtOptions.ForceManualInherit);
+
+		public static readonly DependencyProperty BarTotalFontWeightProperty = DP.Add(BarTotalPrimative.BarTotalFontWeightProperty,
+			new Meta<PieChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
+
+		public static readonly DependencyProperty BarTotalFontStretchProperty = DP.Add(BarTotalPrimative.BarTotalFontStretchProperty,
+			new Meta<PieChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
+
+		public static readonly DependencyProperty BarTotalFontSizeProperty = DP.Add(BarTotalPrimative.BarTotalFontSizeProperty,
+			new Meta<PieChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
+
+		public static readonly DependencyProperty BarTotalForegroundProperty = DP.Add(BarTotalPrimative.BarTotalForegroundProperty,
+			new Meta<PieChart, AbstractMaterialDescriptor> { Flags = INH | FXR}, DPExtOptions.ForceManualInherit);
+
+		[Category("Charting")]
+		public FontFamily BarTotalFontFamily
+		{
+			get { return (FontFamily)GetValue(BarTotalFontFamilyProperty); }
+			set { SetValue(BarTotalFontFamilyProperty, value); }
+		}
+		[Category("Charting")]
+		public FontStyle BarTotalFontStyle
+		{
+			get { return (FontStyle)GetValue(BarTotalFontStyleProperty); }
+			set { SetValue(BarTotalFontStyleProperty, value); }
+		}
+		[Category("Charting")]
+		public FontWeight BarTotalFontWeight
+		{
+			get { return (FontWeight)GetValue(BarTotalFontWeightProperty); }
+			set { SetValue(BarTotalFontWeightProperty, value); }
+		}
+		[Category("Charting")]
+		public FontStretch BarTotalFontStretch
+		{
+			get { return (FontStretch)GetValue(BarTotalFontStretchProperty); }
+			set { SetValue(BarTotalFontStretchProperty, value); }
+		}
+		[Category("Charting")]
+		public double BarTotalFontSize
+		{
+			get { return (double)GetValue(BarTotalFontSizeProperty); }
+			set { SetValue(BarTotalFontSizeProperty, value); }
+		}
+		[Category("Charting")]
+		public AbstractMaterialDescriptor BarTotalForeground
+		{
+			get { return (AbstractMaterialDescriptor)GetValue(BarTotalForegroundProperty); }
+			set { SetValue(BarTotalForegroundProperty, value); }
 		}
 		#endregion
 
@@ -243,7 +300,7 @@ namespace FlexCharts.Controls
 		private void focusLargestDataPoint()
 		{
 			if (Data.Count < 1) return;
-			CategoricalDataPointDouble[] maxrsp = { Data[0] };
+			CategoricalDouble[] maxrsp = { Data[0] };
 			foreach (var d in Data.Where(d =>
 				d.RenderedVisual.RequireType<ArcPath>().ArcAngle > maxrsp[0].RenderedVisual.RequireType<ArcPath>().ArcAngle))
 			{
@@ -317,13 +374,14 @@ namespace FlexCharts.Controls
 				var categoryNameLabel = positionLabel(d, outerLabelRadius, targetAngularOffset, true);
 
 				categoryNameLabel.Content = d.CategoryName;
-				BindingOperations.SetBinding(categoryNameLabel, FontFamilyProperty, new Binding("ValueFontFamily") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
+				BindingOperations.SetBinding(categoryNameLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
+				BindingOperations.SetBinding(categoryNameLabel, FontStyleProperty, new Binding("BarTotalFontStyle") { Source = this });
+				BindingOperations.SetBinding(categoryNameLabel, FontWeightProperty, new Binding("BarTotalFontWeight") { Source = this });
+				BindingOperations.SetBinding(categoryNameLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
+				BindingOperations.SetBinding(categoryNameLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
 				//BindingOperations.SetBinding(categoryNameLabel, ForegroundProperty, new Binding("ValueForeground") { Source = this });
 				//categoryNameLabel.Foreground = d.RenderedVisual.ShouldBeType<ArcPath>().Fill.ShouldBeType<SolidColorBrush>().Lighten(.25);
-				categoryNameLabel.Foreground = ValueForeground.GetMaterial(materialSet);
+				categoryNameLabel.Foreground = BarTotalForeground.GetMaterial(materialSet);
 				_categoryLabels.Children.Add(categoryNameLabel);
 
 
@@ -334,13 +392,13 @@ namespace FlexCharts.Controls
 				BindingOperations.SetBinding(valueLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
 				BindingOperations.SetBinding(valueLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
 				BindingOperations.SetBinding(valueLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
-				//BindingOperations.SetBinding(valueLabel, ForegroundProperty, new Binding("ValueForeground") { Source = this });
+				BindingOperations.SetBinding(valueLabel, FontStretchProperty, new Binding("ValueFontStretch") { Source = this });
 				valueLabel.Foreground = ValueForeground.GetMaterial(materialSet);
 				_categoryLabels.Children.Add(valueLabel);
 			}
 		}
 
-		private Label positionLabel(CategoricalDataPointDouble d, double radius, double targetAngularOffset,
+		private Label positionLabel(CategoricalDouble d, double radius, double targetAngularOffset,
 			bool horizontalPositionSkew = false)
 		{
 			var categoryLabel = new Label
@@ -380,19 +438,23 @@ namespace FlexCharts.Controls
 
 			var radius = (_segments.RenderSize.Smallest() * CircleScale) / 2;
 
-			var total = Data.ValueSum();
+			var total = Data.SumValue();
 			var angleTrace = 0d;
 
 			foreach (var d in Data)
 			{
+				var materialSet = MaterialProvider.ProvideNext(context);
+
 				var degrees = (d.Value / total) * 360;
 				//TODO PiePath
-				var activePath = new ArcPath(degrees, angleTrace, radius, CircleScale, radius, _segments.RenderSize, d);
-				var material = MaterialProvider.ProvideNext(context);
+				var activePath = new ArcPath(degrees, angleTrace, radius, CircleScale, radius, _segments.RenderSize, d)
+				{
+					Fill = SegmentForeground.GetMaterial(materialSet),
+					MouseOverFill = materialSet.GetMaterial(Luminosity.P700),
+					DataContext = this
+				};
 
-				activePath.Fill = material.GetMaterial(Luminosity.P500);
-				activePath.MouseOverFill = material.GetMaterial(Luminosity.P700);
-				activePath.DataContext = this;
+				// TODO FIX this
 				//activePath.SetBinding(Shape.StrokeProperty, new Binding("SegmentStroke"));
 				//activePath.SetBinding(Shape.StrokeThicknessProperty, new Binding("SegmentStrokeThickness"));
 				activePath.Click += segmentClicked;

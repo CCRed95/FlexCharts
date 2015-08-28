@@ -12,14 +12,14 @@ namespace FlexCharts.CustomGeometry
 	public abstract class GraphElementGeometry : DependencyObject
 	{
 		public static readonly DependencyProperty DataSourceProperty = DP.Register(
-			new Meta<GraphElementGeometry, CategoricalDataPointDouble>());
-		public CategoricalDataPointDouble DataSource
+			new Meta<GraphElementGeometry, CategoricalDouble>());
+		public CategoricalDouble DataSource
 		{
-			get { return (CategoricalDataPointDouble)GetValue(DataSourceProperty); }
+			get { return (CategoricalDouble)GetValue(DataSourceProperty); }
 			set { SetValue(DataSourceProperty, value); }
 		}
 
-		protected GraphElementGeometry(CategoricalDataPointDouble dataSource)
+		protected GraphElementGeometry(CategoricalDouble dataSource)
 		{
 			DataSource = dataSource;
 		}

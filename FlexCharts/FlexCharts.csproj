@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation\AnimationParameters.cs" />
+    <Compile Include="Collections\CollectionHelpers.cs" />
     <Compile Include="Collections\FlexEnum.cs" />
     <Compile Include="Collections\FlexInvariantComparar.cs" />
     <Compile Include="Controls\AbstractFlexChart.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="CustomGeometry\GraphElementGeometry.cs" />
     <Compile Include="CustomGeometry\RingSegmentGeometry.cs" />
     <Compile Include="CustomGeometry\ToolTipPath.cs" />
+    <Compile Include="Data\Collections\Series.cs" />
     <Compile Include="Data\Filtering\AbstractDataFilter.cs" />
     <Compile Include="Data\Filtering\EmptyDataFilter.cs" />
     <Compile Include="Data\Filtering\LiteralDataFilter.cs" />
@@ -97,12 +99,12 @@
     <Compile Include="Data\Sorting\AscendingDataSorter.cs" />
     <Compile Include="Data\Sorting\DescendingDataSorter.cs" />
     <Compile Include="Data\Sorting\EmptyDataSorter.cs" />
-    <Compile Include="Data\Structures\CategoricalDataPoint.cs" />
-    <Compile Include="Data\Structures\CategoricalDataPointCategoricalDataPointDoubleList.cs" />
-    <Compile Include="Data\Structures\CategoricalDataPointDouble.cs" />
-    <Compile Include="Data\Structures\CategoricalDataPointDoubleList.cs" />
-    <Compile Include="Data\Structures\CategoricalDataPointDoubleListList.cs" />
-    <Compile Include="Data\Structures\CategoricalDataPointList.cs" />
+    <Compile Include="Data\Structures\Categorical.cs" />
+    <Compile Include="Data\Structures\CategoricalDoubleSeriesSeries.cs" />
+    <Compile Include="Data\Structures\CategoricalDouble.cs" />
+    <Compile Include="Data\Structures\DoubleSeries.cs" />
+    <Compile Include="Data\Structures\CategoricalDoubleSeries.cs" />
+    <Compile Include="Exceptions\FSR.cs" />
     <Compile Include="Extensions\ChartingExtensions.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\CoordinateHelpers.cs" />

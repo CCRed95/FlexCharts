@@ -3,23 +3,23 @@ using FlexCharts.Data.Structures;
 
 namespace FlexCharts.Data.Filtering
 {
-	public class LiteralDataFilter : AbstractDataFilter<CategoricalDataPointDoubleList>
+	public class LiteralDataFilter : AbstractDataFilter<DoubleSeries>
 	{
 		public Dictionary<string, string> LiteralTranslationDefinitions = new Dictionary<string, string>();
 
-		public override CategoricalDataPointDoubleList Filter(CategoricalDataPointDoubleList dataSet)
+		public override DoubleSeries Filter(DoubleSeries dataSet)
 		{
-			var d = new CategoricalDataPointDoubleList();
+			var d = new DoubleSeries();
 			foreach (var dataPoint in dataSet)
 			{
 				if (LiteralTranslationDefinitions.ContainsKey(dataPoint.CategoryName))
 				{
 					var category = LiteralTranslationDefinitions[dataPoint.CategoryName];
-					d.Add(new CategoricalDataPointDouble(category, dataPoint.Value));
+					d.Add(new CategoricalDouble(category, dataPoint.Value));
 				}
 				else
 				{
-					d.Add(new CategoricalDataPointDouble(dataPoint.CategoryName, dataPoint.Value));
+					d.Add(new CategoricalDouble(dataPoint.CategoryName, dataPoint.Value));
 				}
 			}
 			return d;

@@ -27,7 +27,7 @@ using FlexCharts.Require;
 
 namespace FlexCharts.Controls
 {
-	public class ParetoChart : AbstractFlexChart<CategoricalDataPointDoubleList>,
+	public class ParetoChart : AbstractFlexChart<DoubleSeries>,
 		IDotContract, ILineContract, IBarTotalContract, ISegmentContract
 	// TODO should be valuecontract instead of bartotalcontract?
 	{
@@ -258,7 +258,7 @@ namespace FlexCharts.Controls
 
 		protected readonly Grid _barLabels = new Grid();
 		protected readonly Grid _lineVisual = new Grid();
-		protected readonly Grid _highlightGrid = new Grid();
+		//protected readonly Grid _highlightGrid = new Grid();
 		protected readonly Grid _xAxisGrid = new Grid()
 		{
 			VerticalAlignment = VerticalAlignment.Bottom
@@ -284,8 +284,9 @@ namespace FlexCharts.Controls
 			_main.Children.Add(_xAxisGrid);
 			_main.Children.Add(_barLabels);
 			_main.Children.Add(_lineVisual);
-			_main.Children.Add(_highlightGrid);
+			//_main.Children.Add(_highlightGrid);
 			Loaded += onLoad;
+			
 		}
 
 		#endregion
@@ -298,6 +299,7 @@ namespace FlexCharts.Controls
 			{
 				BeginRevealAnimation();
 			}
+			
 		}
 
 		//TODO null checks on all visualContext methods
@@ -307,7 +309,7 @@ namespace FlexCharts.Controls
 			animationState = AnimationState.Final;
 			//visualContext.PolyLineStartPointAnimationAspect.BeginTime = TimeSpan.FromMilliseconds(400);
 			visualContext.PolyLineStartPointAnimationAspect?.AnimateTo(animationState);
-		//	var animationOffset = 0;
+			//	var animationOffset = 0;
 			foreach (var categoryVisual in visualContext.CategoryVisuals)
 			{
 				//categoryVisual.ActiveBarRenderTransformScaleYAnimationAspect.BeginTime = TimeSpan.FromMilliseconds(animationOffset);
@@ -316,7 +318,7 @@ namespace FlexCharts.Controls
 				categoryVisual.DotMarginAnimationAspect?.AnimateTo(animationState);
 				//categoryVisual.BarLabelMarginAnimationAspect.BeginTime = TimeSpan.FromMilliseconds(400);
 				categoryVisual.BarLabelMarginAnimationAspect?.AnimateTo(animationState);
-			//	animationOffset += 55;
+				//	animationOffset += 55;
 			}
 			foreach (var lineSegmentVisual in visualContext.LineSegmentVisuals)
 			{
@@ -345,7 +347,7 @@ namespace FlexCharts.Controls
 
 		// TODO find a better way to ensure render() call corresponds with animation and bar rendering states, defaults, etc.
 		// TODO if bars are shoinwg -> first collapse, then render pass, then reveal animation
-		public override void OnDataChanged(DPChangedEventArgs<CategoricalDataPointDoubleList> e)
+		public override void OnDataChanged(DPChangedEventArgs<DoubleSeries> e)
 		{
 			var oldValueValid = IsValidGraphData(e.OldValue);
 			var newValueValid = IsValidGraphData(e.NewValue);
@@ -392,7 +394,7 @@ namespace FlexCharts.Controls
 
 		protected static bool IsValidGraphData(object dataPointList)
 		{
-			var data = dataPointList as CategoricalDataPointDoubleList;
+			var data = dataPointList as DoubleSeries;
 			return data?.Count > 1;
 		}
 
@@ -402,7 +404,6 @@ namespace FlexCharts.Controls
 
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-
 			if (Data.Count < 1)
 			{
 				base.OnRender(drawingContext);
@@ -414,9 +415,9 @@ namespace FlexCharts.Controls
 			_barLabels.Children.Clear();
 			_lineVisual.Children.Clear();
 			_xAxisGrid.Children.Clear();
-			_highlightGrid.Children.Clear();
+			//_highlightGrid.Children.Clear();
 
-			var max = Data.ValueMax();
+			var max = Data.MaxValue();
 
 			var context = new ProviderContext(Data.Count);
 			var barAvailableWidth = (_bars.RenderSize.Width) / Data.Count;
@@ -551,7 +552,7 @@ namespace FlexCharts.Controls
 				horizontalTrace += barAvailableWidth;
 				trace++;
 			}
-			var total = Data.ValueSum();
+			var total = Data.SumValue();
 			var availableLineGraphSize = new Size(_bars.ActualWidth - (DotRadius * 2),
 				_bars.ActualHeight - (DotRadius * 2) - xAxisHeight);
 			var startX = (barAvailableWidth / 2) - DotRadius;

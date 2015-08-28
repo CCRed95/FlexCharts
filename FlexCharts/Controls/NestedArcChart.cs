@@ -26,7 +26,7 @@ using FlexCharts.MaterialDesign.Providers;
 
 namespace FlexCharts.Controls
 {
-	public class NestedArcChart : AbstractFlexChart<CategoricalDataPointDoubleList>,
+	public class NestedArcChart : AbstractFlexChart<DoubleSeries>,
 		ICircularContract, IValueContract, ISecondaryValueContract, ISegmentContract
 	{
 		#region Dependency Properties
@@ -66,7 +66,7 @@ namespace FlexCharts.Controls
 			new Meta<NestedArcChart, double>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty ValueForegroundProperty = DP.Add(ValuePrimative.ValueForegroundProperty,
-			new Meta<NestedArcChart, AbstractMaterialDescriptor>{ Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<NestedArcChart, AbstractMaterialDescriptor>{ Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 
 		[Category("Charting")]
@@ -124,7 +124,7 @@ namespace FlexCharts.Controls
 			new Meta<NestedArcChart, double>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty SecondaryValueForegroundProperty = DP.Add(SecondaryValuePrimative.SecondaryValueForegroundProperty,
-			new Meta<NestedArcChart, AbstractMaterialDescriptor>{ Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<NestedArcChart, AbstractMaterialDescriptor>{ Flags = INH | FXR}, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
 		public FontFamily SecondaryValueFontFamily
@@ -231,12 +231,6 @@ namespace FlexCharts.Controls
 			get { return (double)GetValue(LeftArcLabelSpacingProperty); }
 			set { SetValue(LeftArcLabelSpacingProperty, value); }
 		}
-		#endregion
-
-		#region Properties
-		//public override IMaterialProvider MaterialProvider { get; set; } = SequentialMaterialProvider.RainbowPaletteOrder;
-
-		//public override AbstractDataSorter<CategoricalDataPointDoubleList> DataSorter { get; set; } = new AscendingDataSorter();
 		#endregion
 
 		#region Fields
@@ -381,8 +375,8 @@ namespace FlexCharts.Controls
 				base.OnRender(drawingContext);
 				return;
 			}
-			
-			var max = Data.ValueMax();
+
+			var max = Data.MaxValue();
 			var trace = 0;
 			foreach (var d in Data)
 			{

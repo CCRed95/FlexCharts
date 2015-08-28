@@ -17,7 +17,7 @@ namespace FlexCharts.GenerationContext
 	//TODO can these be grouped by function as 'aspects'?
 	internal class NestedArcCategoryVisualContext
 	{
-		internal CategoricalDataPointDouble CategoryDataPoint { get; set; }
+		internal CategoricalDouble CategoryDataPoint { get; set; }
 
 		internal MaterialSet CategoryMaterialSet { get; set; }
 

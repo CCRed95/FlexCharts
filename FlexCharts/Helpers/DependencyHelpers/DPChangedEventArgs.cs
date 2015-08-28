@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using FlexCharts.Exceptions;
 
 namespace FlexCharts.Helpers.DependencyHelpers
 {
@@ -22,7 +23,7 @@ namespace FlexCharts.Helpers.DependencyHelpers
 			}
 			catch (Exception GENEX)
 			{
-				throw new InvalidCastException("FSR.Conversion.CannotDirectCast(e.OldValue, typeof(PT)), GENEX");
+				throw new InvalidCastException(FSR.Conversion.CannotDirectCast(e.OldValue, typeof(PT)), GENEX);
 			}
 			try
 			{
@@ -30,7 +31,7 @@ namespace FlexCharts.Helpers.DependencyHelpers
 			}
 			catch (Exception GENEX)
 			{
-				throw new InvalidCastException("FSR.Conversion.CannotDirectCast(e.NewValue, typeof(PT)), GENEX");
+				throw new InvalidCastException(FSR.Conversion.CannotDirectCast(e.NewValue, typeof(PT)), GENEX);
 			}
 		}
 	}

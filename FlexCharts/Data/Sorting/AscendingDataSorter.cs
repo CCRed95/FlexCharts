@@ -7,12 +7,12 @@ using FlexCharts.Data.Structures;
 
 namespace FlexCharts.Data.Sorting
 {
-public class AscendingDataSorter : AbstractDataSorter<CategoricalDataPointDoubleList>
+public class AscendingDataSorter : AbstractDataSorter<DoubleSeries>
 	{
-		public override CategoricalDataPointDoubleList Sort(CategoricalDataPointDoubleList dataSet)
+		public override DoubleSeries Sort(DoubleSeries dataSet)
 		{
 			var s = dataSet.OrderBy(x => x.Value);
-			var sorted = new CategoricalDataPointDoubleList();
+			var sorted = new DoubleSeries();
 			foreach (var i in s)
 			{
 				sorted.Add(i);

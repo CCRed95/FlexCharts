@@ -28,7 +28,7 @@ namespace FlexCharts.GenerationContext
 	// TODO MultiPropertyAnimationAspect -> animation for multiple properties on one IAnimatable with custom scheduling / storyboarding
 	internal class ParetoChartCategoryVisualContext
 	{
-		internal CategoricalDataPointDouble CategoryDataPoint { get; set; }
+		internal CategoricalDouble CategoryDataPoint { get; set; }
 		// TODO remobe this, replace with seperate collection
 		//internal AnimationAspect<Point, PointAnimation> LineSegmentPointAnimationAspect { get; set; }
 

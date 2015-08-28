@@ -21,7 +21,7 @@ using FlexCharts.MaterialDesign.Providers;
 
 namespace FlexCharts.Controls
 {
-	public class BarChart : AbstractFlexChart<CategoricalDataPointDoubleList>, ISegmentContract, IBarTotalContract, IXAxisContract
+	public class BarChart : AbstractFlexChart<DoubleSeries>, ISegmentContract, IBarTotalContract, IXAxisContract
 	{
 		#region Dependency Properties
 		#region			BarTotalContract
@@ -231,7 +231,7 @@ namespace FlexCharts.Controls
 				base.OnRender(drawingContext);
 				return;
 			}
-			var total = Data.ValueMax();
+			var total = Data.MaxValue();
 
 			var context = new ProviderContext(Data.Count);
 			var barAvailableWidth = _bars.RenderSize.Width / Data.Count;

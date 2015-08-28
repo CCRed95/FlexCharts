@@ -49,7 +49,7 @@ namespace FlexCharts.CustomGeometry
 
 		#region Constructors
 		public RingSegmentGeometry(double arcAngle, double polarOffset, Size renderSize, 
-			double ringWidth, CategoricalDataPointDouble dataSource) : base(dataSource)
+			double ringWidth, CategoricalDouble dataSource) : base(dataSource)
 		{
 			ArcAngle = arcAngle;
 			PolarOffset = polarOffset;

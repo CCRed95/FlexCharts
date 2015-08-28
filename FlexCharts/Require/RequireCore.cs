@@ -11,14 +11,6 @@ namespace FlexCharts.Require
 		    throw new Exception("RequireType<T>");
       return (T) @object;
     }
-
-    public static object RequireType(this object @object, Type expectedType)
-    {
-	    if (!expectedType.IsInstanceOfType(@object))
-		    throw new Exception("RequireType");
-	    return @object;
-    }
-
     public static T RequireImplement<T>(this object @object)
     {
       if (!@object.GetType().IsInstanceOfType(typeof(T)))
