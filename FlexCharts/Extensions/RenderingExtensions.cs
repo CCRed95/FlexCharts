@@ -23,7 +23,7 @@ namespace FlexCharts.Extensions
 		}
 		public static Size EstimateTextRenderSize(FontFamily fontFamily, double fontSize, Thickness padding, string content = "Fq")
 		{
-			var formattedText = new FormattedText("Fq", CultureInfo.GetCultureInfo("en-us"),
+			var formattedText = new FormattedText(content, CultureInfo.GetCultureInfo("en-us"),
 						FlowDirection.LeftToRight, new Typeface(fontFamily.ToString()), fontSize, MaterialPalette.Black000);
 			return new Size(formattedText.Width + padding.Left + padding.Right, formattedText.Height + padding.Top + padding.Bottom);
 		}

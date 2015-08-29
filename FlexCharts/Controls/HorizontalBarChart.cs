@@ -235,6 +235,10 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Overrided Methods
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="drawingContext"></param>
 		protected override void OnRender(DrawingContext drawingContext)
 		{
 			visualContext = new HorizontalBarChartVisualContext();
@@ -250,10 +254,17 @@ namespace FlexCharts.Controls
 				base.OnRender(drawingContext);
 				return;
 			}
+
 			var total = Data.MaxValue();
 
 			var context = new ProviderContext(Data.Count);
 			MaterialProvider.Reset(context);
+
+			var maxYAxisTextLength = Data.Select(d => RenderingExtensions.EstimateLabelRenderSize(
+				YAxisFontFamily, YAxisFontSize, d.CategoryName))
+				.Select(renderSize => renderSize.Width).Concat(new[] {0.0}).Max();
+
+			_YAxisGrid.Width = maxYAxisTextLength;
 
 			var maxValueTextLength = Data.Select(d => RenderingExtensions.EstimateLabelRenderSize(
 				BarTotalFontFamily, BarTotalFontSize, d.Value.ToString(CultureInfo.InvariantCulture)))
@@ -321,7 +332,7 @@ namespace FlexCharts.Controls
 					VerticalContentAlignment = VerticalAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Left,
 					VerticalAlignment = VerticalAlignment.Top,
-					Width = maxValueTextLength,
+					Width = maxYAxisTextLength,
 					Foreground = YAxisForeground.GetMaterial(materialSet),
 					Margin = new Thickness(0, 0, 0, 0),
 				};

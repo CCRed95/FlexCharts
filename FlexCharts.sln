@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexCharts", "FlexCharts\Fl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexChartsDemo", "FlexChartsDemo\FlexChartsDemo.csproj", "{520951ED-720A-44E9-8253-E5C63625032B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexReports", "FlexReports\FlexReports.csproj", "{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{520951ED-720A-44E9-8253-E5C63625032B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{520951ED-720A-44E9-8253-E5C63625032B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{520951ED-720A-44E9-8253-E5C63625032B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
