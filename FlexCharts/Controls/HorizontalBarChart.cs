@@ -15,6 +15,7 @@ using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
+using FlexCharts.GenerationContext;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.MaterialDesign.Providers;
@@ -43,37 +44,42 @@ namespace FlexCharts.Controls
 		public static readonly DependencyProperty BarTotalForegroundProperty = DP.Add(BarTotalPrimitive.BarTotalForegroundProperty,
 			new Meta<HorizontalBarChart, AbstractMaterialDescriptor> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontFamilyConverter))]
 		public FontFamily BarTotalFontFamily
 		{
 			get { return (FontFamily)GetValue(BarTotalFontFamilyProperty); }
 			set { SetValue(BarTotalFontFamilyProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontStyleConverter))]
 		public FontStyle BarTotalFontStyle
 		{
 			get { return (FontStyle)GetValue(BarTotalFontStyleProperty); }
 			set { SetValue(BarTotalFontStyleProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontWeightConverter))]
 		public FontWeight BarTotalFontWeight
 		{
 			get { return (FontWeight)GetValue(BarTotalFontWeightProperty); }
 			set { SetValue(BarTotalFontWeightProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontStretchConverter))]
 		public FontStretch BarTotalFontStretch
 		{
 			get { return (FontStretch)GetValue(BarTotalFontStretchProperty); }
 			set { SetValue(BarTotalFontStretchProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontSizeConverter))]
 		public double BarTotalFontSize
 		{
 			get { return (double)GetValue(BarTotalFontSizeProperty); }
 			set { SetValue(BarTotalFontSizeProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
 		public AbstractMaterialDescriptor BarTotalForeground
 		{
 			get { return (AbstractMaterialDescriptor)GetValue(BarTotalForegroundProperty); }
@@ -122,37 +128,42 @@ namespace FlexCharts.Controls
 		public static readonly DependencyProperty YAxisForegroundProperty = DP.Add(YAxisPrimitive.YAxisForegroundProperty,
 			new Meta<HorizontalBarChart, AbstractMaterialDescriptor> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontFamilyConverter))]
 		public FontFamily YAxisFontFamily
 		{
 			get { return (FontFamily)GetValue(YAxisFontFamilyProperty); }
 			set { SetValue(YAxisFontFamilyProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontStyleConverter))]
 		public FontStyle YAxisFontStyle
 		{
 			get { return (FontStyle)GetValue(YAxisFontStyleProperty); }
 			set { SetValue(YAxisFontStyleProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontWeightConverter))]
 		public FontWeight YAxisFontWeight
 		{
 			get { return (FontWeight)GetValue(YAxisFontWeightProperty); }
 			set { SetValue(YAxisFontWeightProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontStretchConverter))]
 		public FontStretch YAxisFontStretch
 		{
 			get { return (FontStretch)GetValue(YAxisFontStretchProperty); }
 			set { SetValue(YAxisFontStretchProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
+		[TypeConverter(typeof(FontSizeConverter))]
 		public double YAxisFontSize
 		{
 			get { return (double)GetValue(YAxisFontSizeProperty); }
 			set { SetValue(YAxisFontSizeProperty, value); }
 		}
-		[Category("Charting")]
+		[Bindable(true), Category("Charting")]
 		public AbstractMaterialDescriptor YAxisForeground
 		{
 			get { return (AbstractMaterialDescriptor)GetValue(YAxisForegroundProperty); }
@@ -162,6 +173,8 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Fields
+		private HorizontalBarChartVisualContext visualContext = new HorizontalBarChartVisualContext();
+
 		protected readonly DockPanel _mainDock = new DockPanel();
 
 		protected readonly UniformGrid _YAxisGrid = new UniformGrid();
@@ -224,6 +237,8 @@ namespace FlexCharts.Controls
 		#region Overrided Methods
 		protected override void OnRender(DrawingContext drawingContext)
 		{
+			visualContext = new HorizontalBarChartVisualContext();
+
 			_bars.Rows = Data.Count;
 			_YAxisGrid.Rows = Data.Count;
 
@@ -250,9 +265,12 @@ namespace FlexCharts.Controls
 			var actualBarHeight = totalAvailableVerticalSpace * SegmentWidthPercentage;
 			foreach (var d in Data)
 			{
+				var barContext = new HorizontalBarChartSegmentVisualContext();
 				var barWidth = d.Value.Map(0, total, 0, totalAvailableHorizontalSpace);
 				var materialSet = MaterialProvider.ProvideNext(context);
+
 				var barGrid = new Grid();
+
 				var bar = new Rectangle
 				{
 					Fill = SegmentForeground.GetMaterial(materialSet),
@@ -261,6 +279,8 @@ namespace FlexCharts.Controls
 					HorizontalAlignment = HorizontalAlignment.Left
 				};
 				barGrid.Children.Add(bar);
+				barContext.ActiveBar = bar;
+
 				var barSpaceBackground = new Rectangle
 				{
 					Fill = SegmentSpaceBackground.GetMaterial(materialSet),
@@ -269,6 +289,8 @@ namespace FlexCharts.Controls
 					HorizontalAlignment = HorizontalAlignment.Left
 				};
 				barGrid.Children.Add(barSpaceBackground);
+				barContext.InactiveBar = barSpaceBackground;
+
 				var barLabel = new Label
 				{
 					Content = d.Value,
@@ -276,7 +298,7 @@ namespace FlexCharts.Controls
 					HorizontalContentAlignment = HorizontalAlignment.Center,
 					VerticalContentAlignment = VerticalAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Left,
-					VerticalAlignment = VerticalAlignment.Bottom,
+					VerticalAlignment = VerticalAlignment.Top,
 					Width = maxValueTextLength,
 					Foreground = BarTotalForeground.GetMaterial(materialSet),
 					Margin = new Thickness(barWidth, 0, 0, 0),
@@ -287,6 +309,8 @@ namespace FlexCharts.Controls
 				BindingOperations.SetBinding(barLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
 				BindingOperations.SetBinding(barLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
 				barGrid.Children.Add(barLabel);
+				barContext.BarLabel = barLabel;
+
 				_bars.Children.Add(barGrid);
 
 				var yaxisLabel = new Label
@@ -296,17 +320,19 @@ namespace FlexCharts.Controls
 					HorizontalContentAlignment = HorizontalAlignment.Center,
 					VerticalContentAlignment = VerticalAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Left,
-					VerticalAlignment = VerticalAlignment.Bottom,
+					VerticalAlignment = VerticalAlignment.Top,
 					Width = maxValueTextLength,
 					Foreground = YAxisForeground.GetMaterial(materialSet),
 					Margin = new Thickness(0, 0, 0, 0),
 				};
-				BindingOperations.SetBinding(yaxisLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
-				BindingOperations.SetBinding(yaxisLabel, FontStyleProperty, new Binding("BarTotalFontStyle") { Source = this });
-				BindingOperations.SetBinding(yaxisLabel, FontWeightProperty, new Binding("BarTotalFontWeight") { Source = this });
-				BindingOperations.SetBinding(yaxisLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
-				BindingOperations.SetBinding(yaxisLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
+				BindingOperations.SetBinding(yaxisLabel, FontFamilyProperty, new Binding("YAxisFontFamily") { Source = this });
+				BindingOperations.SetBinding(yaxisLabel, FontStyleProperty, new Binding("YAxisFontStyle") { Source = this });
+				BindingOperations.SetBinding(yaxisLabel, FontWeightProperty, new Binding("YAxisFontWeight") { Source = this });
+				BindingOperations.SetBinding(yaxisLabel, FontSizeProperty, new Binding("YAxisFontSize") { Source = this });
+				BindingOperations.SetBinding(yaxisLabel, FontStretchProperty, new Binding("YAxisFontStretch") { Source = this });
 				_YAxisGrid.Children.Add(yaxisLabel);
+
+				visualContext.BarVisuals.Add(barContext);
 			}
 		}
 		#endregion

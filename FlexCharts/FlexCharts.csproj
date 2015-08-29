@@ -121,6 +121,7 @@
     <Compile Include="Extensions\RenderingExtensions.cs" />
     <Compile Include="Extensions\StyleExtensions.cs" />
     <Compile Include="GenerationContext\AbstractVisualContext.cs" />
+    <Compile Include="GenerationContext\HorizontalBarChartVisualContext.cs" />
     <Compile Include="GenerationContext\LineGraphVisualContext.cs" />
     <Compile Include="GenerationContext\NestedArcCategoryVisualContext.cs" />
     <Compile Include="GenerationContext\ParetoChartCategoryVisualContext.cs" />
