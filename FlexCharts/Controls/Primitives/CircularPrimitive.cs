@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
 	
-	public class CircularPrimative : FlexPrimative, ICircularContract
+	public class CircularPrimitive : FlexPrimitive, ICircularContract
 	{
 		public static readonly DependencyProperty CircleScaleProperty =
-			DP.Attach<double>(typeof (CircularPrimative), new FrameworkPropertyMetadata(0.8));
+			DP.Attach<double>(typeof (CircularPrimitive), new FrameworkPropertyMetadata(0.8));
 
 		public static readonly DependencyProperty AngleOffsetProperty =
-			DP.Attach<double>(typeof (CircularPrimative), new FrameworkPropertyMetadata(0.0));
+			DP.Attach<double>(typeof (CircularPrimitive), new FrameworkPropertyMetadata(0.0));
 		
 
 		public static double GetCircleScale(DependencyObject i) => i.Get<double>(CircleScaleProperty);

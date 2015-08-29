@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using FlexCharts.Controls.Primatives;
 using FlexCharts.Data.Filtering;
 using FlexCharts.Data.Sorting;
 using FlexCharts.Extensions;

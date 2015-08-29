@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
-using FlexCharts.Controls.Primatives;
+using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Filtering;
 using FlexCharts.Data.Sorting;
 using FlexCharts.Data.Structures;
@@ -33,16 +33,16 @@ namespace FlexCharts.Controls
 	{
 		#region Dependency Properties
 		#region			DotContract
-		public static readonly DependencyProperty DotRadiusProperty = DP.Add(DotPrimative.DotRadiusProperty,
+		public static readonly DependencyProperty DotRadiusProperty = DP.Add(DotPrimitive.DotRadiusProperty,
 			new Meta<ParetoChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty DotFillProperty = DP.Add(DotPrimative.DotFillProperty,
+		public static readonly DependencyProperty DotFillProperty = DP.Add(DotPrimitive.DotFillProperty,
 			new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty DotStrokeProperty = DP.Add(DotPrimative.DotStrokeProperty,
+		public static readonly DependencyProperty DotStrokeProperty = DP.Add(DotPrimitive.DotStrokeProperty,
 			new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty DotStrokeThicknessProperty = DP.Add(DotPrimative.DotStrokeThicknessProperty,
+		public static readonly DependencyProperty DotStrokeThicknessProperty = DP.Add(DotPrimitive.DotStrokeThicknessProperty,
 			new Meta<ParetoChart, double> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
@@ -72,11 +72,11 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			LineContract
-		public static readonly DependencyProperty LineStrokeProperty = DP.Add(LinePrimative.LineStrokeProperty,
+		public static readonly DependencyProperty LineStrokeProperty = DP.Add(LinePrimitive.LineStrokeProperty,
 			new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty LineStrokeThicknessProperty =
-			DP.Add(LinePrimative.LineStrokeThicknessProperty,
+			DP.Add(LinePrimitive.LineStrokeThicknessProperty,
 				new Meta<ParetoChart, double> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 
@@ -97,27 +97,27 @@ namespace FlexCharts.Controls
 
 		#region			BarTotalContract
 		public static readonly DependencyProperty BarTotalFontFamilyProperty =
-			DP.Add(BarTotalPrimative.BarTotalFontFamilyProperty,
+			DP.Add(BarTotalPrimitive.BarTotalFontFamilyProperty,
 				new Meta<ParetoChart, FontFamily> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontStyleProperty =
-			DP.Add(BarTotalPrimative.BarTotalFontStyleProperty,
+			DP.Add(BarTotalPrimitive.BarTotalFontStyleProperty,
 				new Meta<ParetoChart, FontStyle> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontWeightProperty =
-			DP.Add(BarTotalPrimative.BarTotalFontWeightProperty,
+			DP.Add(BarTotalPrimitive.BarTotalFontWeightProperty,
 				new Meta<ParetoChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontStretchProperty =
-			DP.Add(BarTotalPrimative.BarTotalFontStretchProperty,
+			DP.Add(BarTotalPrimitive.BarTotalFontStretchProperty,
 				new Meta<ParetoChart, FontStretch> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontSizeProperty = DP.Add(
-			BarTotalPrimative.BarTotalFontSizeProperty,
+			BarTotalPrimitive.BarTotalFontSizeProperty,
 			new Meta<ParetoChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalForegroundProperty =
-			DP.Add(BarTotalPrimative.BarTotalForegroundProperty,
+			DP.Add(BarTotalPrimitive.BarTotalForegroundProperty,
 				new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 
@@ -166,11 +166,11 @@ namespace FlexCharts.Controls
 
 		#region			SegmentContract
 		public static readonly DependencyProperty SegmentSpaceBackgroundProperty =
-			DP.Add(SegmentPrimative.SegmentSpaceBackgroundProperty,
+			DP.Add(SegmentPrimitive.SegmentSpaceBackgroundProperty,
 				new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty SegmentWidthPercentageProperty =
-			DP.Add(SegmentPrimative.SegmentWidthPercentageProperty,
+			DP.Add(SegmentPrimitive.SegmentWidthPercentageProperty,
 				new Meta<ParetoChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 
@@ -189,22 +189,22 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			XAxisContract
-		public static readonly DependencyProperty XAxisFontFamilyProperty = DP.Add(XAxisPrimative.XAxisFontFamilyProperty,
+		public static readonly DependencyProperty XAxisFontFamilyProperty = DP.Add(XAxisPrimitive.XAxisFontFamilyProperty,
 			new Meta<ParetoChart, FontFamily> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisFontStyleProperty = DP.Add(XAxisPrimative.XAxisFontStyleProperty,
+		public static readonly DependencyProperty XAxisFontStyleProperty = DP.Add(XAxisPrimitive.XAxisFontStyleProperty,
 			new Meta<ParetoChart, FontStyle> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisFontWeightProperty = DP.Add(XAxisPrimative.XAxisFontWeightProperty,
+		public static readonly DependencyProperty XAxisFontWeightProperty = DP.Add(XAxisPrimitive.XAxisFontWeightProperty,
 			new Meta<ParetoChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisFontStretchProperty = DP.Add(XAxisPrimative.XAxisFontStretchProperty,
+		public static readonly DependencyProperty XAxisFontStretchProperty = DP.Add(XAxisPrimitive.XAxisFontStretchProperty,
 			new Meta<ParetoChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisFontSizeProperty = DP.Add(XAxisPrimative.XAxisFontSizeProperty,
+		public static readonly DependencyProperty XAxisFontSizeProperty = DP.Add(XAxisPrimitive.XAxisFontSizeProperty,
 			new Meta<ParetoChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisForegroundProperty = DP.Add(XAxisPrimative.XAxisForegroundProperty,
+		public static readonly DependencyProperty XAxisForegroundProperty = DP.Add(XAxisPrimitive.XAxisForegroundProperty,
 			new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		[Bindable(true), Category("Charting")]

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using FlexCharts.Controls.Contracts;
@@ -11,29 +6,29 @@ using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
-	public abstract class XAxisPrimative : TextualPrimative, IXAxisContract
+	public abstract class XAxisPrimitive : TextualPrimitive, IXAxisContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Body1;
 
 		public static readonly DependencyProperty XAxisFontFamilyProperty =
-			DP.Attach<FontFamily>(typeof(XAxisPrimative), new FrameworkPropertyMetadata(typeface.FontFamily));
+			DP.Attach<FontFamily>(typeof(XAxisPrimitive), new FrameworkPropertyMetadata(typeface.FontFamily));
 
 		public static readonly DependencyProperty XAxisFontStyleProperty =
-			DP.Attach<FontStyle>(typeof(XAxisPrimative), new FrameworkPropertyMetadata(typeface.Style));
+			DP.Attach<FontStyle>(typeof(XAxisPrimitive), new FrameworkPropertyMetadata(typeface.Style));
 
 		public static readonly DependencyProperty XAxisFontWeightProperty =
-			DP.Attach<FontWeight>(typeof(XAxisPrimative), new FrameworkPropertyMetadata(typeface.Weight));
+			DP.Attach<FontWeight>(typeof(XAxisPrimitive), new FrameworkPropertyMetadata(typeface.Weight));
 
 		public static readonly DependencyProperty XAxisFontStretchProperty =
-			DP.Attach<FontStretch>(typeof(XAxisPrimative), new FrameworkPropertyMetadata(typeface.Stretch));
+			DP.Attach<FontStretch>(typeof(XAxisPrimitive), new FrameworkPropertyMetadata(typeface.Stretch));
 
 		public static readonly DependencyProperty XAxisFontSizeProperty =
-			DP.Attach<double>(typeof(XAxisPrimative), new FrameworkPropertyMetadata(typeface.Size));
+			DP.Attach<double>(typeof(XAxisPrimitive), new FrameworkPropertyMetadata(typeface.Size));
 
 		public static readonly DependencyProperty XAxisForegroundProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof(XAxisPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P500Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof(XAxisPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P500Descriptor));
 
 		[TypeConverter(typeof(FontFamilyConverter))]
 		public static FontFamily GetXAxisFontFamily(DependencyObject i) => i.Get<FontFamily>(XAxisFontFamilyProperty);

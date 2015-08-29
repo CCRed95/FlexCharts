@@ -2,15 +2,15 @@
 using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
-	public abstract class PolarLabelingPrimative : FlexPrimative, IPolarLabelingContract
+	public abstract class PolarLabelingPrimitive : FlexPrimitive, IPolarLabelingContract
 	{
 		public static readonly DependencyProperty HorizontalLabelPositionSkewProperty =
-			DP.Attach<double>(typeof (PolarLabelingPrimative), new FrameworkPropertyMetadata(15.0));
+			DP.Attach<double>(typeof (PolarLabelingPrimitive), new FrameworkPropertyMetadata(15.0));
 
 		public static readonly DependencyProperty OuterLabelPositionScaleProperty =
-			DP.Attach<double>(typeof (PolarLabelingPrimative), new FrameworkPropertyMetadata(1.2));
+			DP.Attach<double>(typeof (PolarLabelingPrimitive), new FrameworkPropertyMetadata(1.2));
 
 
 		public static double GetHorizontalLabelPositionSkew(DependencyObject i) => i.Get<double>(HorizontalLabelPositionSkewProperty);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using FlexCharts.Controls.Contracts;
@@ -11,29 +6,29 @@ using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
-	public abstract class BarTotalPrimative : TextualPrimative, IBarTotalContract
+	public abstract class BarTotalPrimitive : TextualPrimitive, IBarTotalContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Body1;
 
 		public static readonly DependencyProperty BarTotalFontFamilyProperty =
-			DP.Attach<FontFamily>(typeof(BarTotalPrimative), new FrameworkPropertyMetadata(typeface.FontFamily));
+			DP.Attach<FontFamily>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.FontFamily));
 
 		public static readonly DependencyProperty BarTotalFontStyleProperty =
-			DP.Attach<FontStyle>(typeof(BarTotalPrimative), new FrameworkPropertyMetadata(typeface.Style));
+			DP.Attach<FontStyle>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.Style));
 
 		public static readonly DependencyProperty BarTotalFontWeightProperty =
-			DP.Attach<FontWeight>(typeof(BarTotalPrimative), new FrameworkPropertyMetadata(typeface.Weight));
+			DP.Attach<FontWeight>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.Weight));
 
 		public static readonly DependencyProperty BarTotalFontStretchProperty =
-			DP.Attach<FontStretch>(typeof(BarTotalPrimative), new FrameworkPropertyMetadata(typeface.Stretch));
+			DP.Attach<FontStretch>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.Stretch));
 
 		public static readonly DependencyProperty BarTotalFontSizeProperty =
-			DP.Attach<double>(typeof(BarTotalPrimative), new FrameworkPropertyMetadata(typeface.Size));
+			DP.Attach<double>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.Size));
 
 		public static readonly DependencyProperty BarTotalForegroundProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof(BarTotalPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P400Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P400Descriptor));
 
 		[TypeConverter(typeof(FontFamilyConverter))]
 		public static FontFamily GetBarTotalFontFamily(DependencyObject i) => i.Get<FontFamily>(BarTotalFontFamilyProperty);

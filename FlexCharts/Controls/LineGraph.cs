@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
-using FlexCharts.Controls.Primatives;
+using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Sorting;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
@@ -29,16 +29,16 @@ namespace FlexCharts.Controls
 	{
 		#region Dependency Properties
 		#region			DotContract
-		public static readonly DependencyProperty DotRadiusProperty = DP.Add(DotPrimative.DotRadiusProperty,
+		public static readonly DependencyProperty DotRadiusProperty = DP.Add(DotPrimitive.DotRadiusProperty,
 			new Meta<LineGraph, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty DotFillProperty = DP.Add(DotPrimative.DotFillProperty,
+		public static readonly DependencyProperty DotFillProperty = DP.Add(DotPrimitive.DotFillProperty,
 			new Meta<LineGraph, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty DotStrokeProperty = DP.Add(DotPrimative.DotStrokeProperty,
+		public static readonly DependencyProperty DotStrokeProperty = DP.Add(DotPrimitive.DotStrokeProperty,
 			new Meta<LineGraph, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty DotStrokeThicknessProperty = DP.Add(DotPrimative.DotStrokeThicknessProperty,
+		public static readonly DependencyProperty DotStrokeThicknessProperty = DP.Add(DotPrimitive.DotStrokeThicknessProperty,
 			new Meta<LineGraph, double> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
@@ -68,11 +68,11 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			LineContract
-		public static readonly DependencyProperty LineStrokeProperty = DP.Add(LinePrimative.LineStrokeProperty,
+		public static readonly DependencyProperty LineStrokeProperty = DP.Add(LinePrimitive.LineStrokeProperty,
 			new Meta<LineGraph, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty LineStrokeThicknessProperty =
-			DP.Add(LinePrimative.LineStrokeThicknessProperty,
+			DP.Add(LinePrimitive.LineStrokeThicknessProperty,
 				new Meta<LineGraph, double> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 

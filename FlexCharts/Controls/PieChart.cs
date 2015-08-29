@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
-using FlexCharts.Controls.Primatives;
+using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
@@ -31,10 +31,10 @@ namespace FlexCharts.Controls
 	{
 		#region Dependency Properties
 		#region			CircularContract
-		public static readonly DependencyProperty CircleScaleProperty = DP.Add(CircularPrimative.CircleScaleProperty,
+		public static readonly DependencyProperty CircleScaleProperty = DP.Add(CircularPrimitive.CircleScaleProperty,
 			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty AngleOffsetProperty = DP.Add(CircularPrimative.AngleOffsetProperty,
+		public static readonly DependencyProperty AngleOffsetProperty = DP.Add(CircularPrimitive.AngleOffsetProperty,
 			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public double CircleScale
@@ -50,22 +50,22 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			BarTotalContract
-		public static readonly DependencyProperty BarTotalFontFamilyProperty = DP.Add(BarTotalPrimative.BarTotalFontFamilyProperty,
+		public static readonly DependencyProperty BarTotalFontFamilyProperty = DP.Add(BarTotalPrimitive.BarTotalFontFamilyProperty,
 			new Meta<PieChart, FontFamily> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalFontStyleProperty = DP.Add(BarTotalPrimative.BarTotalFontStyleProperty,
+		public static readonly DependencyProperty BarTotalFontStyleProperty = DP.Add(BarTotalPrimitive.BarTotalFontStyleProperty,
 			new Meta<PieChart, FontStyle> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalFontWeightProperty = DP.Add(BarTotalPrimative.BarTotalFontWeightProperty,
+		public static readonly DependencyProperty BarTotalFontWeightProperty = DP.Add(BarTotalPrimitive.BarTotalFontWeightProperty,
 			new Meta<PieChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalFontStretchProperty = DP.Add(BarTotalPrimative.BarTotalFontStretchProperty,
+		public static readonly DependencyProperty BarTotalFontStretchProperty = DP.Add(BarTotalPrimitive.BarTotalFontStretchProperty,
 			new Meta<PieChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalFontSizeProperty = DP.Add(BarTotalPrimative.BarTotalFontSizeProperty,
+		public static readonly DependencyProperty BarTotalFontSizeProperty = DP.Add(BarTotalPrimitive.BarTotalFontSizeProperty,
 			new Meta<PieChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalForegroundProperty = DP.Add(BarTotalPrimative.BarTotalForegroundProperty,
+		public static readonly DependencyProperty BarTotalForegroundProperty = DP.Add(BarTotalPrimitive.BarTotalForegroundProperty,
 			new Meta<PieChart, AbstractMaterialDescriptor> { Flags = INH | FXR}, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
@@ -107,22 +107,22 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			ValueContact
-		public static readonly DependencyProperty ValueFontFamilyProperty = DP.Add(ValuePrimative.ValueFontFamilyProperty,
+		public static readonly DependencyProperty ValueFontFamilyProperty = DP.Add(ValuePrimitive.ValueFontFamilyProperty,
 			new Meta<PieChart, FontFamily> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueFontStyleProperty = DP.Add(ValuePrimative.ValueFontStyleProperty,
+		public static readonly DependencyProperty ValueFontStyleProperty = DP.Add(ValuePrimitive.ValueFontStyleProperty,
 			new Meta<PieChart, FontStyle> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueFontWeightProperty = DP.Add(ValuePrimative.ValueFontWeightProperty,
+		public static readonly DependencyProperty ValueFontWeightProperty = DP.Add(ValuePrimitive.ValueFontWeightProperty,
 			new Meta<PieChart, FontWeight> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueFontStretchProperty = DP.Add(ValuePrimative.ValueFontStretchProperty,
+		public static readonly DependencyProperty ValueFontStretchProperty = DP.Add(ValuePrimitive.ValueFontStretchProperty,
 			new Meta<PieChart, FontStretch> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueFontSizeProperty = DP.Add(ValuePrimative.ValueFontSizeProperty,
+		public static readonly DependencyProperty ValueFontSizeProperty = DP.Add(ValuePrimitive.ValueFontSizeProperty,
 			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueForegroundProperty = DP.Add(ValuePrimative.ValueForegroundProperty,
+		public static readonly DependencyProperty ValueForegroundProperty = DP.Add(ValuePrimitive.ValueForegroundProperty,
 			new Meta<PieChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
@@ -164,7 +164,7 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			SegmentFocusableContract
-		public static readonly DependencyProperty FocusedSegmentProperty = DP.Add(FocusableSegmentPrimative.FocusedSegmentProperty,
+		public static readonly DependencyProperty FocusedSegmentProperty = DP.Add(FocusableSegmentPrimitive.FocusedSegmentProperty,
 			new Meta<PieChart, Shape>(null, FocusedSegmentChanged) { Flags = INH });
 
 		[Category("Charting")]
@@ -176,10 +176,10 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			PolarLabelingContract
-		public static readonly DependencyProperty HorizontalLabelPositionSkewProperty = DP.Add(PolarLabelingPrimative.HorizontalLabelPositionSkewProperty,
+		public static readonly DependencyProperty HorizontalLabelPositionSkewProperty = DP.Add(PolarLabelingPrimitive.HorizontalLabelPositionSkewProperty,
 			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty OuterLabelPositionScaleProperty = DP.Add(PolarLabelingPrimative.OuterLabelPositionScaleProperty,
+		public static readonly DependencyProperty OuterLabelPositionScaleProperty = DP.Add(PolarLabelingPrimitive.OuterLabelPositionScaleProperty,
 			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]

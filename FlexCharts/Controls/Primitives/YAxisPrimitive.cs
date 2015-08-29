@@ -6,29 +6,29 @@ using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
-	public abstract class YAxisPrimative : TextualPrimative, IYAxisContract
+	public abstract class YAxisPrimitive : TextualPrimitive, IYAxisContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Body1;
 
 		public static readonly DependencyProperty YAxisFontFamilyProperty =
-			DP.Attach<FontFamily>(typeof(YAxisPrimative), new FrameworkPropertyMetadata(typeface.FontFamily));
+			DP.Attach<FontFamily>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.FontFamily));
 
 		public static readonly DependencyProperty YAxisFontStyleProperty =
-			DP.Attach<FontStyle>(typeof(YAxisPrimative), new FrameworkPropertyMetadata(typeface.Style));
+			DP.Attach<FontStyle>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.Style));
 
 		public static readonly DependencyProperty YAxisFontWeightProperty =
-			DP.Attach<FontWeight>(typeof(YAxisPrimative), new FrameworkPropertyMetadata(typeface.Weight));
+			DP.Attach<FontWeight>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.Weight));
 
 		public static readonly DependencyProperty YAxisFontStretchProperty =
-			DP.Attach<FontStretch>(typeof(YAxisPrimative), new FrameworkPropertyMetadata(typeface.Stretch));
+			DP.Attach<FontStretch>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.Stretch));
 
 		public static readonly DependencyProperty YAxisFontSizeProperty =
-			DP.Attach<double>(typeof(YAxisPrimative), new FrameworkPropertyMetadata(typeface.Size));
+			DP.Attach<double>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.Size));
 
 		public static readonly DependencyProperty YAxisForegroundProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof(YAxisPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P500Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P500Descriptor));
 
 		[TypeConverter(typeof(FontFamilyConverter))]
 		public static FontFamily GetYAxisFontFamily(DependencyObject i) => i.Get<FontFamily>(YAxisFontFamilyProperty);

@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using FlexCharts.Controls.Contracts;
-using FlexCharts.Controls.Primatives;
+using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Extensions;
 using FlexCharts.Helpers.DependencyHelpers;
@@ -23,10 +23,10 @@ namespace FlexCharts.Controls
   {
 		#region Dependency Properties
 		#region			CircularContract
-		public static readonly DependencyProperty CircleScaleProperty = DP.Add(CircularPrimative.CircleScaleProperty,
+		public static readonly DependencyProperty CircleScaleProperty = DP.Add(CircularPrimitive.CircleScaleProperty,
 			new Meta<RingGauge, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty AngleOffsetProperty = DP.Add(CircularPrimative.AngleOffsetProperty,
+		public static readonly DependencyProperty AngleOffsetProperty = DP.Add(CircularPrimitive.AngleOffsetProperty,
 			new Meta<RingGauge, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public double CircleScale
@@ -42,22 +42,22 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			StateSegmentContract
-		public static readonly DependencyProperty ActiveFillProperty = DP.Add(StateSegmentPrimative.ActiveFillProperty,
+		public static readonly DependencyProperty ActiveFillProperty = DP.Add(StateSegmentPrimitive.ActiveFillProperty,
 			new Meta<RingGauge, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ActiveStrokeThicknessProperty = DP.Add(StateSegmentPrimative.ActiveStrokeThicknessProperty,
+		public static readonly DependencyProperty ActiveStrokeThicknessProperty = DP.Add(StateSegmentPrimitive.ActiveStrokeThicknessProperty,
 			new Meta<RingGauge, int> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ActiveStrokeProperty = DP.Add(StateSegmentPrimative.ActiveStrokeProperty,
+		public static readonly DependencyProperty ActiveStrokeProperty = DP.Add(StateSegmentPrimitive.ActiveStrokeProperty,
 			new Meta<RingGauge, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty InactiveFillProperty = DP.Add(StateSegmentPrimative.InactiveFillProperty,
+		public static readonly DependencyProperty InactiveFillProperty = DP.Add(StateSegmentPrimitive.InactiveFillProperty,
 			new Meta<RingGauge, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty InactiveStrokeThicknessProperty = DP.Add(StateSegmentPrimative.InactiveStrokeThicknessProperty,
+		public static readonly DependencyProperty InactiveStrokeThicknessProperty = DP.Add(StateSegmentPrimitive.InactiveStrokeThicknessProperty,
 			new Meta<RingGauge, int> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty InactiveStrokeProperty = DP.Add(StateSegmentPrimative.InactiveStrokeProperty,
+		public static readonly DependencyProperty InactiveStrokeProperty = DP.Add(StateSegmentPrimitive.InactiveStrokeProperty,
 			new Meta<RingGauge, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
@@ -99,10 +99,10 @@ namespace FlexCharts.Controls
 		#endregion
 		
 		#region			SegmentContract
-		public static readonly DependencyProperty SegmentSpaceBackgroundProperty = DP.Add(SegmentPrimative.SegmentSpaceBackgroundProperty,
+		public static readonly DependencyProperty SegmentSpaceBackgroundProperty = DP.Add(SegmentPrimitive.SegmentSpaceBackgroundProperty,
 			new Meta<RingGauge, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty SegmentWidthPercentageProperty = DP.Add(SegmentPrimative.SegmentWidthPercentageProperty,
+		public static readonly DependencyProperty SegmentWidthPercentageProperty = DP.Add(SegmentPrimitive.SegmentWidthPercentageProperty,
 			new Meta<RingGauge, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 

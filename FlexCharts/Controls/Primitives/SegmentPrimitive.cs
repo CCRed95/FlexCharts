@@ -4,15 +4,15 @@ using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
-	public abstract class SegmentPrimative : FlexPrimative, ISegmentContract
+	public abstract class SegmentPrimitive : FlexPrimitive, ISegmentContract
 	{
 		public static readonly DependencyProperty SegmentSpaceBackgroundProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof (SegmentPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.White000O05Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof (SegmentPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.White000O05Descriptor));
 
 		public static readonly DependencyProperty SegmentWidthPercentageProperty =
-			DP.Attach<double>(typeof (SegmentPrimative), new FrameworkPropertyMetadata(.6));
+			DP.Attach<double>(typeof (SegmentPrimitive), new FrameworkPropertyMetadata(.6));
 
 
 		public static AbstractMaterialDescriptor GetSegmentSpaceBackground(DependencyObject i) => i.Get<AbstractMaterialDescriptor>(SegmentSpaceBackgroundProperty);

@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
 	
-	public abstract class DotPrimative : FlexPrimative, IDotContract
+	public abstract class DotPrimitive : FlexPrimitive, IDotContract
 	{
 		public static readonly DependencyProperty DotRadiusProperty =
-			DP.Attach<double>(typeof (DotPrimative), new FrameworkPropertyMetadata(5.0), IsValidDotRadius);
+			DP.Attach<double>(typeof (DotPrimitive), new FrameworkPropertyMetadata(5.0), IsValidDotRadius);
 
 		public static readonly DependencyProperty DotFillProperty = 
-			DP.Attach<AbstractMaterialDescriptor>(typeof(DotPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P300Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof(DotPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P300Descriptor));
 
 		public static readonly DependencyProperty DotStrokeProperty = 
-			DP.Attach<AbstractMaterialDescriptor>(typeof(DotPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P900Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof(DotPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P900Descriptor));
 
 		public static readonly DependencyProperty DotStrokeThicknessProperty = 
-			DP.Attach<double>(typeof(DotPrimative), new FrameworkPropertyMetadata(2.0));
+			DP.Attach<double>(typeof(DotPrimitive), new FrameworkPropertyMetadata(2.0));
 
 
 		public static double GetDotRadius(DependencyObject i) => i.Get<double>(DotRadiusProperty);

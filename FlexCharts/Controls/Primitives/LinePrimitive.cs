@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using FlexCharts.Controls.Contracts;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
-	public abstract class LinePrimative : FlexPrimative, ILineContract
+	public abstract class LinePrimitive : FlexPrimitive, ILineContract
 	{
 		public static readonly DependencyProperty LineStrokeProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof (LinePrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof (LinePrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
 
 		public static readonly DependencyProperty LineStrokeThicknessProperty = 
-			DP.Attach<double>(typeof(LinePrimative), new FrameworkPropertyMetadata(2.0));
+			DP.Attach<double>(typeof(LinePrimitive), new FrameworkPropertyMetadata(2.0));
 
 
 		public static AbstractMaterialDescriptor GetLineStroke(DependencyObject i) => i.Get<AbstractMaterialDescriptor>(LineStrokeProperty);

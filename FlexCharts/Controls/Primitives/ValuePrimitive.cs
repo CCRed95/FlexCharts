@@ -6,30 +6,30 @@ using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
 	
-	public abstract class ValuePrimative : TextualPrimative, IValueContract
+	public abstract class ValuePrimitive : TextualPrimitive, IValueContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Caption;
 
 		public static readonly DependencyProperty ValueFontFamilyProperty =
-			DP.Attach<FontFamily>(typeof(ValuePrimative), new FrameworkPropertyMetadata(typeface.FontFamily));
+			DP.Attach<FontFamily>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.FontFamily));
 
 		public static readonly DependencyProperty ValueFontStyleProperty =
-			DP.Attach<FontStyle>(typeof(ValuePrimative), new FrameworkPropertyMetadata(typeface.Style));
+			DP.Attach<FontStyle>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.Style));
 
 		public static readonly DependencyProperty ValueFontWeightProperty =
-			DP.Attach<FontWeight>(typeof(ValuePrimative), new FrameworkPropertyMetadata(typeface.Weight));
+			DP.Attach<FontWeight>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.Weight));
 
 		public static readonly DependencyProperty ValueFontStretchProperty =
-			DP.Attach<FontStretch>(typeof(ValuePrimative), new FrameworkPropertyMetadata(typeface.Stretch));
+			DP.Attach<FontStretch>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.Stretch));
 
 		public static readonly DependencyProperty ValueFontSizeProperty =
-			DP.Attach<double>(typeof(ValuePrimative), new FrameworkPropertyMetadata(typeface.Size));
+			DP.Attach<double>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.Size));
 
 		public static readonly DependencyProperty ValueForegroundProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof(ValuePrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
 
 		[TypeConverter(typeof(FontFamilyConverter))]
 		public static FontFamily GetValueFontFamily(DependencyObject i) => i.Get<FontFamily>(ValueFontFamilyProperty);

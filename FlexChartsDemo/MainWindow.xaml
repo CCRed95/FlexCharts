@@ -18,54 +18,54 @@
     </Style>
     <Style x:Key="darkpareto" TargetType="fc:AbstractFlexChart" BasedOn="{StaticResource darkbase}">
 
-      <Setter Property="fc:SegmentPrimative.SegmentSpaceBackground" Value="->White000,0.03"/>
-      <Setter Property="fc:SegmentPrimative.SegmentWidthPercentage" Value=".7"/>
-      <Setter Property="fc:XAxisPrimative.XAxisForeground" Value="P400"/>
-      <Setter Property="fc:XAxisPrimative.XAxisFontSize" Value="11pt"/>
-      <Setter Property="fc:XAxisPrimative.XAxisFontStyle" Value="Italic"/>
-      <Setter Property="fc:XAxisPrimative.XAxisFontWeight" Value="Light"/>
-      <Setter Property="fc:ValuePrimative.ValueForeground" Value="P400"/>
-      <Setter Property="fc:ValuePrimative.ValueFontSize" Value="16"/>
-      <Setter Property="fc:DotPrimative.DotStroke" Value="->Grey400"/>
-      <Setter Property="fc:DotPrimative.DotStrokeThickness" Value="2"/>
-      <Setter Property="fc:DotPrimative.DotFill" Value="P500"/>
-      <Setter Property="fc:DotPrimative.DotRadius" Value="5"/>
-      <Setter Property="fc:LinePrimative.LineStroke" Value="P400"/>
-      <Setter Property="fc:LinePrimative.LineStrokeThickness" Value="2"/>
-      <Setter Property="fc:BarTotalPrimative.BarTotalFontSize" Value="10pt"/>
+      <Setter Property="fc:SegmentPrimitive.SegmentSpaceBackground" Value="->White000,0.03"/>
+      <Setter Property="fc:SegmentPrimitive.SegmentWidthPercentage" Value=".7"/>
+      <Setter Property="fc:XAxisPrimitive.XAxisForeground" Value="P400"/>
+      <Setter Property="fc:XAxisPrimitive.XAxisFontSize" Value="11pt"/>
+      <Setter Property="fc:XAxisPrimitive.XAxisFontStyle" Value="Italic"/>
+      <Setter Property="fc:XAxisPrimitive.XAxisFontWeight" Value="Light"/>
+      <Setter Property="fc:ValuePrimitive.ValueForeground" Value="P400"/>
+      <Setter Property="fc:ValuePrimitive.ValueFontSize" Value="16"/>
+      <Setter Property="fc:DotPrimitive.DotStroke" Value="->Grey400"/>
+      <Setter Property="fc:DotPrimitive.DotStrokeThickness" Value="2"/>
+      <Setter Property="fc:DotPrimitive.DotFill" Value="P500"/>
+      <Setter Property="fc:DotPrimitive.DotRadius" Value="5"/>
+      <Setter Property="fc:LinePrimitive.LineStroke" Value="P400"/>
+      <Setter Property="fc:LinePrimitive.LineStrokeThickness" Value="2"/>
+      <Setter Property="fc:BarTotalPrimitive.BarTotalFontSize" Value="10pt"/>
 
     </Style>
     <Style x:Key="darkring" TargetType="fc:AbstractFlexChart" BasedOn="{StaticResource darkbase}">
-      <Setter Property="fc:SegmentPrimative.SegmentSpaceBackground" Value="->White000,0.03"/>
-      <Setter Property="fc:SegmentPrimative.SegmentWidthPercentage" Value=".7"/>
-      <Setter Property="fc:ValuePrimative.ValueForeground" Value="->White000"/>
-      <Setter Property="fc:ValuePrimative.ValueFontSize" Value="11pt"/>
-      <Setter Property="fc:BarTotalPrimative.BarTotalForeground" Value="P500"/>
-      <Setter Property="fc:BarTotalPrimative.BarTotalFontSize" Value="14pt"/>
-      <Setter Property="fc:ValuePrimative.ValueFontStyle" Value="Italic"/>
-      <Setter Property="fc:ValuePrimative.ValueFontWeight" Value="Light"/>
-      <Setter Property="fc:SecondaryValuePrimative.SecondaryValueForeground" Value="P100"/>
-      <Setter Property="fc:SecondaryValuePrimative.SecondaryValueFontSize" Value="32pt"/>
-      <Setter Property="fc:RingPrimative.RingWidthPercentage" Value=".3"/>
-			<Setter Property="fc:PolarLabelingPrimative.OuterLabelPositionScale" Value="1.2"/>
+      <Setter Property="fc:SegmentPrimitive.SegmentSpaceBackground" Value="->White000,0.03"/>
+      <Setter Property="fc:SegmentPrimitive.SegmentWidthPercentage" Value=".7"/>
+      <Setter Property="fc:ValuePrimitive.ValueForeground" Value="->White000"/>
+      <Setter Property="fc:ValuePrimitive.ValueFontSize" Value="11pt"/>
+      <Setter Property="fc:BarTotalPrimitive.BarTotalForeground" Value="P500"/>
+      <Setter Property="fc:BarTotalPrimitive.BarTotalFontSize" Value="14pt"/>
+      <Setter Property="fc:ValuePrimitive.ValueFontStyle" Value="Italic"/>
+      <Setter Property="fc:ValuePrimitive.ValueFontWeight" Value="Light"/>
+      <Setter Property="fc:SecondaryValuePrimitive.SecondaryValueForeground" Value="P100"/>
+      <Setter Property="fc:SecondaryValuePrimitive.SecondaryValueFontSize" Value="32pt"/>
+      <Setter Property="fc:RingPrimitive.RingWidthPercentage" Value=".3"/>
+			<Setter Property="fc:PolarLabelingPrimitive.OuterLabelPositionScale" Value="1.2"/>
 
     </Style>
     <Style x:Key="darkpie" TargetType="fc:AbstractFlexChart" BasedOn="{StaticResource darkbase}">
-      <Setter Property="fc:BarTotalPrimative.BarTotalForeground" Value="P600"/>
-      <Setter Property="fc:BarTotalPrimative.BarTotalFontSize" Value="14pt"/>
-      <Setter Property="fc:ValuePrimative.ValueForeground" Value="->White000"/>
-      <Setter Property="fc:ValuePrimative.ValueFontSize" Value="11pt"/>
-      <Setter Property="fc:ValuePrimative.ValueFontStyle" Value="Italic"/>
-      <Setter Property="fc:ValuePrimative.ValueFontWeight" Value="Light"/>
+      <Setter Property="fc:BarTotalPrimitive.BarTotalForeground" Value="P600"/>
+      <Setter Property="fc:BarTotalPrimitive.BarTotalFontSize" Value="14pt"/>
+      <Setter Property="fc:ValuePrimitive.ValueForeground" Value="->White000"/>
+      <Setter Property="fc:ValuePrimitive.ValueFontSize" Value="11pt"/>
+      <Setter Property="fc:ValuePrimitive.ValueFontStyle" Value="Italic"/>
+      <Setter Property="fc:ValuePrimitive.ValueFontWeight" Value="Light"/>
     </Style>
     <Style x:Key="darkstackedbar" TargetType="fc:AbstractFlexChart" BasedOn="{StaticResource darkbase}">
-      <Setter Property="fc:XAxisPrimative.XAxisForeground" Value="P200"/>
-      <Setter Property="fc:XAxisPrimative.XAxisFontSize" Value="11pt"/>
-      <Setter Property="fc:XAxisPrimative.XAxisFontStyle" Value="Italic"/>
-      <Setter Property="fc:XAxisPrimative.XAxisFontWeight" Value="Light"/>
-      <Setter Property="fc:BarTotalPrimative.BarTotalForeground" Value="P300"/>
-      <Setter Property="fc:BarTotalPrimative.BarTotalFontSize" Value="11pt"/>
-      <Setter Property="fc:SegmentPrimative.SegmentSpaceBackground" Value="->White000,.05"/>
+      <Setter Property="fc:XAxisPrimitive.XAxisForeground" Value="P200"/>
+      <Setter Property="fc:XAxisPrimitive.XAxisFontSize" Value="11pt"/>
+      <Setter Property="fc:XAxisPrimitive.XAxisFontStyle" Value="Italic"/>
+      <Setter Property="fc:XAxisPrimitive.XAxisFontWeight" Value="Light"/>
+      <Setter Property="fc:BarTotalPrimitive.BarTotalForeground" Value="P300"/>
+      <Setter Property="fc:BarTotalPrimitive.BarTotalFontSize" Value="11pt"/>
+      <Setter Property="fc:SegmentPrimitive.SegmentSpaceBackground" Value="->White000,.05"/>
 			<Setter Property="MaterialProvider" Value="{x:Static fc:SequentialMaterialProvider.CoolColors}"/>
     </Style>
     <Style x:Key="darknestedarc" TargetType="fc:NestedArcChart" BasedOn="{StaticResource darkbase}">

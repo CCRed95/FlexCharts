@@ -12,7 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
-using FlexCharts.Controls.Primatives;
+using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Sorting;
 using FlexCharts.Data.Structures;
@@ -31,10 +31,10 @@ namespace FlexCharts.Controls
 	{
 		#region Dependency Properties
 		#region			CircularContract
-		public static readonly DependencyProperty CircleScaleProperty = DP.Add(CircularPrimative.CircleScaleProperty,
+		public static readonly DependencyProperty CircleScaleProperty = DP.Add(CircularPrimitive.CircleScaleProperty,
 			new Meta<NestedArcChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty AngleOffsetProperty = DP.Add(CircularPrimative.AngleOffsetProperty,
+		public static readonly DependencyProperty AngleOffsetProperty = DP.Add(CircularPrimitive.AngleOffsetProperty,
 			new Meta<NestedArcChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public double CircleScale
@@ -50,22 +50,22 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			ValueContract
-		public static readonly DependencyProperty ValueFontFamilyProperty = DP.Add(ValuePrimative.ValueFontFamilyProperty,
+		public static readonly DependencyProperty ValueFontFamilyProperty = DP.Add(ValuePrimitive.ValueFontFamilyProperty,
 			new Meta<NestedArcChart, FontFamily>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueFontStyleProperty = DP.Add(ValuePrimative.ValueFontStyleProperty,
+		public static readonly DependencyProperty ValueFontStyleProperty = DP.Add(ValuePrimitive.ValueFontStyleProperty,
 			new Meta<NestedArcChart, FontStyle>{ Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueFontWeightProperty = DP.Add(ValuePrimative.ValueFontWeightProperty,
+		public static readonly DependencyProperty ValueFontWeightProperty = DP.Add(ValuePrimitive.ValueFontWeightProperty,
 			new Meta<NestedArcChart, FontWeight>{ Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueFontStretchProperty = DP.Add(ValuePrimative.ValueFontStretchProperty,
+		public static readonly DependencyProperty ValueFontStretchProperty = DP.Add(ValuePrimitive.ValueFontStretchProperty,
 			new Meta<NestedArcChart, FontStretch>{ Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueFontSizeProperty = DP.Add(ValuePrimative.ValueFontSizeProperty,
+		public static readonly DependencyProperty ValueFontSizeProperty = DP.Add(ValuePrimitive.ValueFontSizeProperty,
 			new Meta<NestedArcChart, double>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty ValueForegroundProperty = DP.Add(ValuePrimative.ValueForegroundProperty,
+		public static readonly DependencyProperty ValueForegroundProperty = DP.Add(ValuePrimitive.ValueForegroundProperty,
 			new Meta<NestedArcChart, AbstractMaterialDescriptor>{ Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 
@@ -108,22 +108,22 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			SecondaryValueContract
-		public static readonly DependencyProperty SecondaryValueFontFamilyProperty = DP.Add(SecondaryValuePrimative.SecondaryValueFontFamilyProperty,
+		public static readonly DependencyProperty SecondaryValueFontFamilyProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontFamilyProperty,
 			new Meta<NestedArcChart, FontFamily>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty SecondaryValueFontStyleProperty = DP.Add(SecondaryValuePrimative.SecondaryValueFontStyleProperty,
+		public static readonly DependencyProperty SecondaryValueFontStyleProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontStyleProperty,
 			new Meta<NestedArcChart, FontStyle>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty SecondaryValueFontWeightProperty = DP.Add(SecondaryValuePrimative.SecondaryValueFontWeightProperty,
+		public static readonly DependencyProperty SecondaryValueFontWeightProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontWeightProperty,
 			new Meta<NestedArcChart, FontWeight>{ Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty SecondaryValueFontStretchProperty = DP.Add(SecondaryValuePrimative.SecondaryValueFontStretchProperty,
+		public static readonly DependencyProperty SecondaryValueFontStretchProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontStretchProperty,
 			new Meta<NestedArcChart, FontStretch>{ Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty SecondaryValueFontSizeProperty = DP.Add(SecondaryValuePrimative.SecondaryValueFontSizeProperty,
+		public static readonly DependencyProperty SecondaryValueFontSizeProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontSizeProperty,
 			new Meta<NestedArcChart, double>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty SecondaryValueForegroundProperty = DP.Add(SecondaryValuePrimative.SecondaryValueForegroundProperty,
+		public static readonly DependencyProperty SecondaryValueForegroundProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueForegroundProperty,
 			new Meta<NestedArcChart, AbstractMaterialDescriptor>{ Flags = INH | FXR}, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
@@ -165,10 +165,10 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			SegmentContract
-		public static readonly DependencyProperty SegmentSpaceBackgroundProperty = DP.Add(SegmentPrimative.SegmentSpaceBackgroundProperty,
+		public static readonly DependencyProperty SegmentSpaceBackgroundProperty = DP.Add(SegmentPrimitive.SegmentSpaceBackgroundProperty,
 			new Meta<NestedArcChart, AbstractMaterialDescriptor> {Flags = INH}, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty SegmentWidthPercentageProperty = DP.Add(SegmentPrimative.SegmentWidthPercentageProperty,
+		public static readonly DependencyProperty SegmentWidthPercentageProperty = DP.Add(SegmentPrimitive.SegmentWidthPercentageProperty,
 			new Meta<NestedArcChart, double>{ Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 

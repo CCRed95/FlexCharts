@@ -12,7 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
-using FlexCharts.Controls.Primatives;
+using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
 using FlexCharts.Helpers.DependencyHelpers;
@@ -25,22 +25,22 @@ namespace FlexCharts.Controls
 	{
 		#region Dependency Properties
 		#region			BarTotalContract
-		public static readonly DependencyProperty BarTotalFontFamilyProperty = DP.Add(BarTotalPrimative.BarTotalFontFamilyProperty,
+		public static readonly DependencyProperty BarTotalFontFamilyProperty = DP.Add(BarTotalPrimitive.BarTotalFontFamilyProperty,
 			new Meta<BarChart, FontFamily> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalFontStyleProperty = DP.Add(BarTotalPrimative.BarTotalFontStyleProperty,
+		public static readonly DependencyProperty BarTotalFontStyleProperty = DP.Add(BarTotalPrimitive.BarTotalFontStyleProperty,
 			new Meta<BarChart, FontStyle> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalFontWeightProperty = DP.Add(BarTotalPrimative.BarTotalFontWeightProperty,
+		public static readonly DependencyProperty BarTotalFontWeightProperty = DP.Add(BarTotalPrimitive.BarTotalFontWeightProperty,
 			new Meta<BarChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalFontStretchProperty = DP.Add(BarTotalPrimative.BarTotalFontStretchProperty,
+		public static readonly DependencyProperty BarTotalFontStretchProperty = DP.Add(BarTotalPrimitive.BarTotalFontStretchProperty,
 			new Meta<BarChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalFontSizeProperty = DP.Add(BarTotalPrimative.BarTotalFontSizeProperty,
+		public static readonly DependencyProperty BarTotalFontSizeProperty = DP.Add(BarTotalPrimitive.BarTotalFontSizeProperty,
 			new Meta<BarChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty BarTotalForegroundProperty = DP.Add(BarTotalPrimative.BarTotalForegroundProperty,
+		public static readonly DependencyProperty BarTotalForegroundProperty = DP.Add(BarTotalPrimitive.BarTotalForegroundProperty,
 			new Meta<BarChart, AbstractMaterialDescriptor> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
@@ -82,10 +82,10 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region SegmentContract
-		public static readonly DependencyProperty SegmentSpaceBackgroundProperty = DP.Add(SegmentPrimative.SegmentSpaceBackgroundProperty,
+		public static readonly DependencyProperty SegmentSpaceBackgroundProperty = DP.Add(SegmentPrimitive.SegmentSpaceBackgroundProperty,
 			new Meta<BarChart, AbstractMaterialDescriptor> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty SegmentWidthPercentageProperty = DP.Add(SegmentPrimative.SegmentWidthPercentageProperty,
+		public static readonly DependencyProperty SegmentWidthPercentageProperty = DP.Add(SegmentPrimitive.SegmentWidthPercentageProperty,
 			new Meta<BarChart, double> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 
@@ -104,22 +104,22 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region			XAxisContract
-		public static readonly DependencyProperty XAxisFontFamilyProperty = DP.Add(XAxisPrimative.XAxisFontFamilyProperty,
+		public static readonly DependencyProperty XAxisFontFamilyProperty = DP.Add(XAxisPrimitive.XAxisFontFamilyProperty,
 			new Meta<BarChart, FontFamily> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisFontStyleProperty = DP.Add(XAxisPrimative.XAxisFontStyleProperty,
+		public static readonly DependencyProperty XAxisFontStyleProperty = DP.Add(XAxisPrimitive.XAxisFontStyleProperty,
 			new Meta<BarChart, FontStyle> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisFontWeightProperty = DP.Add(XAxisPrimative.XAxisFontWeightProperty,
+		public static readonly DependencyProperty XAxisFontWeightProperty = DP.Add(XAxisPrimitive.XAxisFontWeightProperty,
 			new Meta<BarChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisFontStretchProperty = DP.Add(XAxisPrimative.XAxisFontStretchProperty,
+		public static readonly DependencyProperty XAxisFontStretchProperty = DP.Add(XAxisPrimitive.XAxisFontStretchProperty,
 			new Meta<BarChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisFontSizeProperty = DP.Add(XAxisPrimative.XAxisFontSizeProperty,
+		public static readonly DependencyProperty XAxisFontSizeProperty = DP.Add(XAxisPrimitive.XAxisFontSizeProperty,
 			new Meta<BarChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
-		public static readonly DependencyProperty XAxisForegroundProperty = DP.Add(XAxisPrimative.XAxisForegroundProperty,
+		public static readonly DependencyProperty XAxisForegroundProperty = DP.Add(XAxisPrimitive.XAxisForegroundProperty,
 			new Meta<BarChart, AbstractMaterialDescriptor> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]

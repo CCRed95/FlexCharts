@@ -4,28 +4,28 @@ using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
-namespace FlexCharts.Controls.Primatives
+namespace FlexCharts.Controls.Primitives
 {
 	//TODO are stroke thickness properties double?
-	public abstract class StateSegmentPrimative : FlexPrimative, IStateSegmentContract
+	public abstract class StateSegmentPrimitive : FlexPrimitive, IStateSegmentContract
 	{
 		public static readonly DependencyProperty ActiveFillProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof (StateSegmentPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof (StateSegmentPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
 
 		public static readonly DependencyProperty ActiveStrokeThicknessProperty =
-			DP.Attach<int>(typeof (StateSegmentPrimative), new FrameworkPropertyMetadata());
+			DP.Attach<int>(typeof (StateSegmentPrimitive), new FrameworkPropertyMetadata());
 
 		public static readonly DependencyProperty ActiveStrokeProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof (StateSegmentPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof (StateSegmentPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
 
 		public static readonly DependencyProperty InactiveFillProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof (StateSegmentPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof (StateSegmentPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
 
 		public static readonly DependencyProperty InactiveStrokeThicknessProperty =
-			DP.Attach<int>(typeof (StateSegmentPrimative), new FrameworkPropertyMetadata());
+			DP.Attach<int>(typeof (StateSegmentPrimitive), new FrameworkPropertyMetadata());
 
 		public static readonly DependencyProperty InactiveStrokeProperty =
-			DP.Attach<AbstractMaterialDescriptor>(typeof (StateSegmentPrimative), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
+			DP.Attach<AbstractMaterialDescriptor>(typeof (StateSegmentPrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
 
 
 
