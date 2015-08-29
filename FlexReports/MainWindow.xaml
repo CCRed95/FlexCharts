@@ -10,11 +10,65 @@
 				TextOptions.TextRenderingMode="Aliased"
         Title="TestFlexDocumentViewer" Height="600" Width="1000">
     <Window.Resources>
-        <materialControls:MaterialSetToBrushConverter x:Key="MBSTBC"/>
+        <Style x:Key="PathButton" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{StaticResource mtGrey600}" />
+            <Setter Property="Background" Value="{StaticResource mtBlue300}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="contentPresenter"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                          Margin="{TemplateBinding Padding}"
+                          RecognizesAccessKey="True" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource mtGrey400}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource BlueColorBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    <Grid>
-        <DockPanel>
-            <!-- TODO Title Bar #8 -->
+    <DockPanel Background="White">
+        <DockPanel Dock="Top" Height="50" VerticalAlignment="Top">
+            <Button DockPanel.Dock="Left" Width="60" HorizontalAlignment="Left" Style="{StaticResource PathButton}">
+                <Button.Content>
+                    <Path Data="M3,18h18v-2H3v2zm0,-5h18v-2H3v2zm0,-7v2h18V6H3z" Fill="White">
+                        <Path.RenderTransform>
+                            <ScaleTransform ScaleX="1.6" ScaleY="1.6" CenterX="15" CenterY="15"/>
+                        </Path.RenderTransform>
+                    </Path>
+                </Button.Content>
+            </Button>
+            <StackPanel Background="{StaticResource mtGrey900}"/>
+        </DockPanel>
+			<DockPanel Dock="Bottom">
+				<StackPanel Orientation="Horizontal">
+					<StackPanel Width="60" Background="{StaticResource mtGrey900}"/>	
+				</StackPanel>
+			</DockPanel>
+
+    </DockPanel>
+
+</Window>
+<!--<DockPanel>
+            -->
+<!-- TODO Title Bar #8 -->
+<!--
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Panel.ZIndex="8">
                 <Border Height="18" Background="{Binding TitleBarTheme, Converter={StaticResource MBSTBC}, 
 				ConverterParameter={x:Static materialDesign:Luminosity.P900}, FallbackValue={StaticResource mtBlue900}}"/>
@@ -31,8 +85,10 @@
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
 
                         </StackPanel>
-                        <!--<Button DockPanel.Dock="Right" Style="{StaticResource MaterialIcon}" FontSize="24pt" HorizontalAlignment="Right" 
+                        -->
+<!--<Button DockPanel.Dock="Right" Style="{StaticResource MaterialIcon}" FontSize="24pt" HorizontalAlignment="Right" 
 										HorizontalContentAlignment="Right" Content="ic_color_lens" Click="ColorPalatteClicked" Margin="0 0 10 0"/>-->
+<!--
                         <Path Style="{StaticResource drawable-close}" MouseUp="ColorPalatteClicked" HorizontalAlignment="Right" Margin="0 0 15 0">
                             <Path.LayoutTransform>
                                 <ScaleTransform ScaleX="1.7" ScaleY="1.7"/>
@@ -42,29 +98,39 @@
                 </Grid>
 
             </StackPanel>
-            <!-- TODO Main Bar #7 -->
+            -->
+<!-- TODO Main Bar #7 -->
+<!--
             <DockPanel DockPanel.Dock="Bottom" Panel.ZIndex="7">
-                <!-- TODO Main Bar #7 -->
+                -->
+<!-- TODO Main Bar #7 -->
+<!--
                 <Grid DockPanel.Dock="Left" Width="300">
-                    <!-- TODO Left Pane #6 -->
+                    -->
+<!-- TODO Left Pane #6 -->
+<!--
                     <StackPanel Orientation="Vertical" Background="#282828">
-                        <!-- TODO Recent Documents #5 -->
+                        -->
+<!-- TODO Recent Documents #5 -->
+<!--
                         <Grid Height="100" Panel.ZIndex="5" Effect="{StaticResource shadowDelta2}" ClipToBounds="True">
-                            <Image Margin="0 0 0 0"  Source="/Tests;component/Resources/MaterialDarkAnglesGray.jpg" Stretch="UniformToFill" RenderTransformOrigin="0.5 0.5">
-                                <Image.RenderTransform>
-                                    <ScaleTransform ScaleX="-1"/>
-                                </Image.RenderTransform>
-                            </Image>
+          
                             <Label Content="Recent Reports" Style="{StaticResource Text16p}" Foreground="White"
 										 VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Padding="40 0 0 20"/>
                         </Grid>
-                        <!-- TODO List of Documents #4-->
+                        -->
+<!-- TODO List of Documents #4-->
+<!--
                         <StackPanel Orientation="Vertical" Panel.ZIndex="4" Effect="{StaticResource shadowDelta1}">
-                            <!-- TODO Inner Recent Documents Panel -->
+                            -->
+<!-- TODO Inner Recent Documents Panel -->
+<!--
                             <materialControls:MaterialButtonList x:Name="recentReports"  Orientation="Vertical" Margin="0 20"/>
                         </StackPanel>
                     </StackPanel>
-                    <!-- TODO + Button #8 -->
+                    -->
+<!-- TODO + Button #8 -->
+<!--
                     <Grid VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,80,20,0" Panel.ZIndex="10">
                         <Ellipse Width="40" Height="40" Fill="{Binding TitleBarTheme, Converter={StaticResource MBSTBC}, 
 						ConverterParameter={x:Static materialDesign:Luminosity.P500}, FallbackValue={StaticResource mtBlue500}}" 
@@ -73,7 +139,9 @@
                         <Rectangle Width="20" Height="2" Fill="White"/>
                     </Grid>
                 </Grid>
-                <!-- TODO Main Bar #7 -->
+                -->
+<!-- TODO Main Bar #7 -->
+<!--
                 <DockPanel  DockPanel.Dock="Right" Background="{StaticResource mtGrey400}">
 
                     <Grid Height="30" DockPanel.Dock="Top" Background="{Binding TitleBarTheme, Converter={StaticResource MBSTBC}, 
@@ -92,6 +160,4 @@
         <materialControls:MaterialDimmer x:Name="dimmer" IsDimmed="False"/>
         <Grid x:Name="PopupSpace">
 
-        </Grid>
-    </Grid>
-</Window>
+        </Grid>-->

@@ -70,6 +70,7 @@
     <Compile Include="Controls\HeatMap.cs" />
     <Compile Include="Controls\HorizontalBarChart.cs" />
     <Compile Include="Controls\LineGraph.cs" />
+    <Compile Include="Controls\NestedArc.cs" />
     <Compile Include="Controls\NestedArcChart.cs" />
     <Compile Include="Controls\ParetoChart.cs" />
     <Compile Include="Controls\PieChart.cs" />
