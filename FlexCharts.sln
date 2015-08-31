@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexChartsDemo", "FlexChart
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexReports", "FlexReports\FlexReports.csproj", "{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexVIEW Report Viewer", "FlexVIEW Report Viewer\FlexVIEW Report Viewer.csproj", "{62802B02-9C71-49C3-9E30-26CE36DA1363}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62802B02-9C71-49C3-9E30-26CE36DA1363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62802B02-9C71-49C3-9E30-26CE36DA1363}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62802B02-9C71-49C3-9E30-26CE36DA1363}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62802B02-9C71-49C3-9E30-26CE36DA1363}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

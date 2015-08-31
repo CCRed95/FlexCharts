@@ -1,0 +1,50 @@
+﻿<materialControls:MaterialShell x:Class="FlexReports.ReportViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialControls="clr-namespace:FlexReports.MaterialControls"
+        mc:Ignorable="d"
+				Style="{StaticResource MaterialShell}"
+        Title="Report Viewer" Height="600" Width="800">
+
+  <StackPanel Background="{StaticResource mtGrey50}" Orientation="Vertical">
+    <DockPanel DockPanel.Dock="Top" Height="70" Background="{StaticResource mtIndigo600}">
+      
+			<StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+				<ToggleButton Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="20 0" 
+											HorizontalAlignment="Right" Checked="MenuExpand" Unchecked="MenuCollapse"/>
+				<Label Content="Report Viewer" Foreground="{StaticResource mtGrey50}" Style="{StaticResource _t16pSubheadMed}" 
+							 Padding="30 0"/>
+			</StackPanel>
+			
+      <DockPanel DockPanel.Dock="Right">
+        <Path Style="{StaticResource drawableSearch}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="10 0"/>
+				<TextBox Height="30" Width="200" DockPanel.Dock="Right" Style="{StaticResource MaterialDesignTextBox}" 
+								 materialControls:TextField.Hint="Search" HorizontalAlignment="Right"/>
+        
+      </DockPanel>
+
+    </DockPanel>
+    <Border Height="80" Background="{StaticResource mtIndigo600}"></Border>
+    <DockPanel>
+      <StackPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey50}" Width="0"  Orientation="Vertical">
+
+      </StackPanel>
+      <Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
+        <Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
+      </Grid>
+    </DockPanel>
+  </StackPanel>
+
+</materialControls:MaterialShell>
+<!--<DockPanel Background="White">
+    <StackPanel Name="LeftMenu" DockPanel.Dock="Left" Width="70" Orientation="Vertical" Background ="{StaticResource mtGrey900}">
+      <ToggleButton Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 7 16 0" HorizontalAlignment="Right" Checked="MenuExpand" Unchecked="MenuCollapse"/>
+		</StackPanel> 
+		<StackPanel DockPanel.Dock="Right" Background="{StaticResource mtGrey50}" Orientation="Vertical">
+        <StackPanel Height="50" Background="{StaticResource mtBlueGrey600}" Orientation="Horizontal">
+					<Label Content="Report Viewer" Foreground="{StaticResource mtGrey50}" Style="{StaticResource t13pBody2}" Padding="20 0"/>
+				</StackPanel>
+    </StackPanel>
+	</DockPanel>-->
