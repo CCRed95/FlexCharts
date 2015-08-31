@@ -160,7 +160,7 @@ namespace FlexCharts.Controls
 			_main.Children.Add(_segments);
 			_main.Children.Add(_valueLabel);
 
-			BindingOperations.SetBinding(_valueLabel, ContentProperty, new Binding("Data") { Source = this });
+			BindingOperations.SetBinding(_valueLabel, ContentControl.ContentProperty, new Binding("Data") { Source = this });
 			BindingOperations.SetBinding(_valueLabel, FontFamilyProperty, new Binding("FontFamily") { Source = this });
 			BindingOperations.SetBinding(_valueLabel, FontStyleProperty, new Binding("FontStyle") { Source = this });
 			BindingOperations.SetBinding(_valueLabel, FontWeightProperty, new Binding("FontWeight") { Source = this });

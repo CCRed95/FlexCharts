@@ -312,7 +312,7 @@ namespace FlexCharts.Controls
 			_focusedSegmentValueLabel.BindTextualPrimitive<SecondaryValuePrimitive>(this);
 
 			_focusedSegmentValueLabel.DataContext = this;
-			_focusedSegmentValueLabel.SetBinding(ContentProperty, new Binding("FocusedSegment.DataPoint.Value"));
+			_focusedSegmentValueLabel.SetBinding(ContentControl.ContentProperty, new Binding("FocusedSegment.DataPoint.Value"));
 
 			Loaded += onLoaded;
 		}

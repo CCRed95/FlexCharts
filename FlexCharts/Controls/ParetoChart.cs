@@ -28,6 +28,14 @@ using FlexCharts.Require;
 
 namespace FlexCharts.Controls
 {
+	[TemplatePart(Name = "PART_Content", Type = typeof(DockPanel))]
+	[TemplatePart(Name = "PART_Title", Type = typeof(Label))]
+	[TemplatePart(Name = "PART_Main", Type = typeof(Grid))]
+
+	[TemplatePart(Name = "PART_Bars", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_XAxis", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_BarLabels", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_Line", Type = typeof(Grid))]
 	public class ParetoChart : AbstractFlexChart<DoubleSeries>,
 		IDotContract, ILineContract, IBarTotalContract, ISegmentContract
 	// TODO should be valuecontract instead of bartotalcontract?
@@ -257,23 +265,18 @@ namespace FlexCharts.Controls
 
 		internal AnimationState animationState = AnimationState.Collapsed;
 
-		protected readonly Grid _barLabels = new Grid();
-		protected readonly Grid _lineVisual = new Grid();
+		protected Grid _barLabels;
+		protected Grid _lineVisual;
 		//protected readonly Grid _highlightGrid = new Grid();
-		protected readonly Grid _xAxisGrid = new Grid()
-		{
-			VerticalAlignment = VerticalAlignment.Bottom
-		};
-		protected readonly Grid _bars = new Grid
-		{
-			RenderTransformOrigin = new Point(.5, .5),
-		};
+		protected Grid _xAxisGrid;
+		protected Grid _bars;
 		#endregion
 
 		#region Constructors
 
 		static ParetoChart()
 		{
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(ParetoChart), new FrameworkPropertyMetadata(typeof(ParetoChart)));
 			//DataFilterProperty.OverrideMetadata(typeof (ParetoChart), new FrameworkPropertyMetadata(LiteralDataFilter.DialKCategoryFilter));
 			DataSorterProperty.OverrideMetadata(typeof(ParetoChart), new FrameworkPropertyMetadata(new DescendingDataSorter()));
 			TitleProperty.OverrideMetadata(typeof(ParetoChart), new FrameworkPropertyMetadata("Pareto Chart"));
@@ -281,15 +284,15 @@ namespace FlexCharts.Controls
 
 		public ParetoChart()
 		{
-			_main.Children.Add(_bars);
-			_main.Children.Add(_xAxisGrid);
-			_main.Children.Add(_barLabels);
-			_main.Children.Add(_lineVisual);
+			//_main.Children.Add(_bars);
+			//_main.Children.Add(_xAxisGrid);
+			//_main.Children.Add(_barLabels);
+			//_main.Children.Add(_lineVisual);
 			//_main.Children.Add(_highlightGrid);
 			Loaded += onLoad;
 			
 		}
-
+		
 		#endregion
 
 		#region Methods
@@ -402,7 +405,23 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Overrided Methods
+		public override void OnApplyTemplate()
+		{
+			base.OnApplyTemplate();
+			_content = GetTemplateChild("PART_Content") as DockPanel;
+			_titlelabel = GetTemplateChild("PART_Title") as Label;
+			_main = GetTemplateChild("PART_Main") as Grid;
 
+			_bars = GetTemplateChild("PART_Bars") as Grid;
+			_xAxisGrid = GetTemplateChild("PART_XAxis") as Grid;
+			_barLabels = GetTemplateChild("PART_BarLabels") as Grid;
+			_lineVisual = GetTemplateChild("PART_Line") as Grid;
+
+			if (_content == null || _titlelabel == null || _main == null || _bars == null || _xAxisGrid == null || _barLabels == null || _lineVisual == null)
+			{
+				throw new NullReferenceException("Template parts not available");
+			}
+		}
 		protected override void OnRender(DrawingContext drawingContext)
 		{
 			if (Data.Count < 1)

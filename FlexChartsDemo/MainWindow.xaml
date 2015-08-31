@@ -90,7 +90,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <fc:ParetoChart Style="{StaticResource darkpareto}">
+            <fc:ParetoChart >
                 <fc:ParetoChart.Data>
                     <fc:CategoricalDouble CategoryName="A" Value="31"/>
                     <fc:CategoricalDouble CategoryName="B" Value="3"/>

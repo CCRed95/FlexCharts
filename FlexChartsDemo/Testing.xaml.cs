@@ -22,6 +22,14 @@ namespace FlexChartsDemo
 		public Testing()
 		{
 			InitializeComponent();
+			Loaded += OnLoaded;
+		}
+
+		private void OnLoaded(object Sender, RoutedEventArgs Args)
+		{
+			//var ct = FindResource("ct") as ControlTemplate;
+
+			//crc.Template = ct;
 		}
 	}
 }

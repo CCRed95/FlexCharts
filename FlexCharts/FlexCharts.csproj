@@ -53,6 +53,7 @@
     <Compile Include="Collections\FlexEnum.cs" />
     <Compile Include="Collections\FlexInvariantComparar.cs" />
     <Compile Include="Controls\AbstractFlexChart.cs" />
+    <Compile Include="Controls\AbstractFlexChart{T}.cs" />
     <Compile Include="Controls\BarChart.cs" />
     <Compile Include="Controls\Contracts\IBarTotalContract.cs" />
     <Compile Include="Controls\Contracts\ICircularContract.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Controls\Contracts\IValueContract.cs" />
     <Compile Include="Controls\Contracts\IXAxisContract.cs" />
     <Compile Include="Controls\Contracts\IYAxisContract.cs" />
+    <Compile Include="Controls\Core\CustomRootControl.cs" />
     <Compile Include="Controls\HeatMap.cs" />
     <Compile Include="Controls\HorizontalBarChart.cs" />
     <Compile Include="Controls\LineGraph.cs" />
@@ -164,6 +166,12 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
