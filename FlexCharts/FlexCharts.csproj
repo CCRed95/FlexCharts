@@ -85,6 +85,8 @@
     <Compile Include="Controls\Primitives\SecondaryValuePrimitive.cs" />
     <Compile Include="Controls\Primitives\SegmentPrimitive.cs" />
     <Compile Include="Controls\Primitives\StateSegmentPrimitive.cs" />
+    <Compile Include="Controls\Primitives\TextAttributes\TextualRole.cs" />
+    <Compile Include="Controls\Primitives\TextAttributes\TextualRolePropertyAttribute.cs" />
     <Compile Include="Controls\Primitives\TextualPrimitive.cs" />
     <Compile Include="Controls\Primitives\ValuePrimitive.cs" />
     <Compile Include="Controls\Primitives\XAxisPrimitive.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="GenerationContext\LineGraphVisualContext.cs" />
     <Compile Include="GenerationContext\NestedArcCategoryVisualContext.cs" />
     <Compile Include="GenerationContext\ParetoChartCategoryVisualContext.cs" />
+    <Compile Include="Extensions\BindingExtensions.cs" />
     <Compile Include="Helpers\DependencyHelpers\Callbacks.cs" />
     <Compile Include="Helpers\DependencyHelpers\DP.cs" />
     <Compile Include="Helpers\DependencyHelpers\DPChangedEventArgs.cs" />

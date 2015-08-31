@@ -17,6 +17,7 @@ using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
+using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Layout;
 using FlexCharts.MaterialDesign;
@@ -308,12 +309,12 @@ namespace FlexCharts.Controls
 			_main.Children.Add(_segments);
 			_main.Children.Add(_focusedSegmentValueLabel);
 			_main.Children.Add(_categoryLabels);
-
-			BindingOperations.SetBinding(_focusedSegmentValueLabel, FontFamilyProperty, new Binding("SecondaryValueFontFamily") { Source = this });
-			BindingOperations.SetBinding(_focusedSegmentValueLabel, FontStyleProperty, new Binding("SecondaryValueFontStyle") { Source = this });
-			BindingOperations.SetBinding(_focusedSegmentValueLabel, FontWeightProperty, new Binding("SecondaryValueFontWeight") { Source = this });
-			BindingOperations.SetBinding(_focusedSegmentValueLabel, FontSizeProperty, new Binding("SecondaryValueFontSize") { Source = this });
-			BindingOperations.SetBinding(_focusedSegmentValueLabel, FontStretchProperty, new Binding("SecondaryValueFontStretch") { Source = this });
+			_focusedSegmentValueLabel.BindTextualPrimitive<SecondaryValuePrimitive>(this);
+			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontFamilyProperty, new Binding("SecondaryValueFontFamily") { Source = this });
+			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontStyleProperty, new Binding("SecondaryValueFontStyle") { Source = this });
+			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontWeightProperty, new Binding("SecondaryValueFontWeight") { Source = this });
+			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontSizeProperty, new Binding("SecondaryValueFontSize") { Source = this });
+			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontStretchProperty, new Binding("SecondaryValueFontStretch") { Source = this });
 
 			_focusedSegmentValueLabel.DataContext = this;
 			_focusedSegmentValueLabel.SetBinding(ContentProperty, new Binding("FocusedSegment.DataPoint.Value"));
@@ -455,22 +456,14 @@ namespace FlexCharts.Controls
 				var categoryNameLabel = positionLabel(d, outerLabelRadius, targetAngularOffset, true);
 
 				categoryNameLabel.Content = d.CategoryName;
-				BindingOperations.SetBinding(categoryNameLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontStyleProperty, new Binding("BarTotalFontStyle") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontWeightProperty, new Binding("BarTotalFontWeight") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
+				categoryNameLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
 				categoryNameLabel.Foreground = BarTotalForeground.GetMaterial(materialSet);
 				_categoryLabels.Children.Add(categoryNameLabel);
 
 				var valueLabel = positionLabel(d, overlayedLabelRadius, targetAngularOffset);
 
 				valueLabel.Content = d.Value;
-				BindingOperations.SetBinding(valueLabel, FontFamilyProperty, new Binding("ValueFontFamily") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontStretchProperty, new Binding("ValueFontStretch") { Source = this });
+				valueLabel.BindTextualPrimitive<ValuePrimitive>(this);
 				valueLabel.Foreground = ValueForeground.GetMaterial(materialSet);
 				_categoryLabels.Children.Add(valueLabel);
 			}

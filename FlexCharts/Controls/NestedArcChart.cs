@@ -18,6 +18,7 @@ using FlexCharts.Data.Sorting;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
 using FlexCharts.GenerationContext;
+using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Layout;
 using FlexCharts.MaterialDesign;
@@ -272,6 +273,8 @@ namespace FlexCharts.Controls
 		#region Methods
 		private void onLoaded(object s, RoutedEventArgs e)
 		{
+			//var testLabel = new Label();
+			
 			BeginRevealAnimation();
 		}
 		public void BeginRevealAnimation()
@@ -439,11 +442,11 @@ namespace FlexCharts.Controls
 					DataContext = this
 				};
 				currentCategoryVisualContext.CategoryLabel = categoryLabel;
-				BindingOperations.SetBinding(categoryLabel, FontFamilyProperty, new Binding("ValueFontFamily") { Source = this });
-				BindingOperations.SetBinding(categoryLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
-				BindingOperations.SetBinding(categoryLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
-				BindingOperations.SetBinding(categoryLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
-
+				//BindingOperations.SetBinding(categoryLabel, FontFamilyProperty, new Binding("ValueFontFamily") { Source = this });
+				//BindingOperations.SetBinding(categoryLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
+				//BindingOperations.SetBinding(categoryLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
+				//BindingOperations.SetBinding(categoryLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
+				categoryLabel.BindTextualPrimitive<ValuePrimitive>(this);
 				var valuePercentLabel = new Label
 				{
 					Width = ValueLabelHorizontalSpacing,
@@ -461,11 +464,11 @@ namespace FlexCharts.Controls
 					DataContext = this
 				};
 				currentCategoryVisualContext.ValuePercentLabel = valuePercentLabel;
-				BindingOperations.SetBinding(valuePercentLabel, FontFamilyProperty, new Binding("ValueFontFamily") { Source = this });
-				BindingOperations.SetBinding(valuePercentLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
-				BindingOperations.SetBinding(valuePercentLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
-				BindingOperations.SetBinding(valuePercentLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
-
+				//BindingOperations.SetBinding(valuePercentLabel, FontFamilyProperty, new Binding("ValueFontFamily") { Source = this });
+				//BindingOperations.SetBinding(valuePercentLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
+				//BindingOperations.SetBinding(valuePercentLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
+				//BindingOperations.SetBinding(valuePercentLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
+				valuePercentLabel.BindTextualPrimitive<ValuePrimitive>(this);
 				var valueLabelLeftSpace = arcLabelMarginLeft + ValueLabelHorizontalSpacing;
 				var valueLabelWidth = _main.RenderSize.Width - valueLabelLeftSpace;
 				if (valueLabelWidth < 0) valueLabelWidth = 0;
@@ -485,11 +488,11 @@ namespace FlexCharts.Controls
 					Padding = new Thickness(0),
 				};
 				currentCategoryVisualContext.ValueLabel = valueLabel;
-				BindingOperations.SetBinding(valueLabel, FontFamilyProperty, new Binding("SecondaryValueFontFamily") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontStyleProperty, new Binding("SecondaryValueFontStyle") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontWeightProperty, new Binding("SecondaryValueFontWeight") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontSizeProperty, new Binding("SecondaryValueFontSize") { Source = this });
-				//BindingOperations.SetBinding(valueLabel, ForegroundProperty, new Binding("SecondaryValueForeground") { Source = this });
+				valueLabel.BindTextualPrimitive<SecondaryValuePrimitive>(this);
+				//BindingOperations.SetBinding(valueLabel, FontFamilyProperty, new Binding("SecondaryValueFontFamily") { Source = this });
+				//BindingOperations.SetBinding(valueLabel, FontStyleProperty, new Binding("SecondaryValueFontStyle") { Source = this });
+				//BindingOperations.SetBinding(valueLabel, FontWeightProperty, new Binding("SecondaryValueFontWeight") { Source = this });
+				//BindingOperations.SetBinding(valueLabel, FontSizeProperty, new Binding("SecondaryValueFontSize") { Source = this });
 
 				_categoryLabels.Children.Add(categoryLabel);
 				_categoryLabels.Children.Add(valuePercentLabel);

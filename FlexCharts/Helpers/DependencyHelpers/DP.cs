@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using FlexCharts.Extensions;
 using System.Windows;
+using FlexCharts.Exceptions;
 using FlexCharts.Require;
 
 namespace FlexCharts.Helpers.DependencyHelpers
@@ -20,7 +21,7 @@ namespace FlexCharts.Helpers.DependencyHelpers
 			i.RequireNotNull().SetValue(dp, value);
 		}
 		/// <summary>
-		/// Registers a DependendencyProperty using the generic dependency property system
+		/// Registers a DependencyProperty using the generic dependency property system
 		/// </summary>
 		/// <typeparam name="D">
 		/// The parent DependencyObject type
@@ -115,9 +116,9 @@ namespace FlexCharts.Helpers.DependencyHelpers
 		internal static string GetPropertyName(string autoFieldName)
 		{
 			if (autoFieldName == null)
-				throw new Exception("FSR.DP.AutoCallerNameNotAssigned()");
+				throw new Exception(FSR.DP.AutoCallerNameNotAssigned());
 			if (!autoFieldName.EndsWith("Property"))
-				throw new Exception("FSR.DP.AutoCallerNameNotValid(autoFieldName)");
+				throw new Exception(FSR.DP.AutoCallerNameNotValid(autoFieldName));
 			return autoFieldName.Replace("Property", string.Empty);
 		}
 

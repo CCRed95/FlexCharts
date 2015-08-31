@@ -19,6 +19,7 @@ using FlexCharts.Data.Sorting;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
 using FlexCharts.GenerationContext;
+using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
@@ -448,11 +449,7 @@ namespace FlexCharts.Controls
 					Foreground = XAxisForeground.GetMaterial(material)
 
 				};
-				BindingOperations.SetBinding(axisLabel, FontFamilyProperty, new Binding("XAxisFontFamily") { Source = this });
-				BindingOperations.SetBinding(axisLabel, FontStyleProperty, new Binding("XAxisFontStyle") { Source = this });
-				BindingOperations.SetBinding(axisLabel, FontWeightProperty, new Binding("XAxisFontWeight") { Source = this });
-				BindingOperations.SetBinding(axisLabel, FontSizeProperty, new Binding("XAxisFontSize") { Source = this });
-				BindingOperations.SetBinding(axisLabel, FontStretchProperty, new Binding("XAxisFontStretch") { Source = this });
+				axisLabel.BindTextualPrimitive<XAxisPrimitive>(this);
 				categoryVisualContext.AxisLabel = axisLabel;
 				_xAxisGrid.Children.Add(axisLabel);
 				visualContext.CategoryVisuals.Add(categoryVisualContext);
@@ -531,11 +528,7 @@ namespace FlexCharts.Controls
 					Width = barAvailableWidth,
 					Foreground = BarTotalForeground.GetMaterial(material)
 				};
-				BindingOperations.SetBinding(barLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontStyleProperty, new Binding("BarTotalFontStyle") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontWeightProperty, new Binding("BarTotalFontWeight") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
+				barLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
 
 				currentCategoryVisualContext.BarLabelMarginAnimationAspect = new AnimationAspect
 					<Thickness, Label, ThicknessAnimation>(

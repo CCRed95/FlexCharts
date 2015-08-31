@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Primitives.TextAttributes;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
@@ -11,19 +12,19 @@ namespace FlexCharts.Controls.Primitives
 	public abstract class BarTotalPrimitive : TextualPrimitive, IBarTotalContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Body1;
-
+		[TextualRoleProperty(TextualRole.Font)]
 		public static readonly DependencyProperty BarTotalFontFamilyProperty =
 			DP.Attach<FontFamily>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.FontFamily));
-
+		[TextualRoleProperty(TextualRole.Style)]
 		public static readonly DependencyProperty BarTotalFontStyleProperty =
 			DP.Attach<FontStyle>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.Style));
-
+		[TextualRoleProperty(TextualRole.Weight)]
 		public static readonly DependencyProperty BarTotalFontWeightProperty =
 			DP.Attach<FontWeight>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.Weight));
-
+		[TextualRoleProperty(TextualRole.Stretch)]
 		public static readonly DependencyProperty BarTotalFontStretchProperty =
-			DP.Attach<FontStretch>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.Stretch));
-
+		DP.Attach<FontStretch>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.Stretch));
+		[TextualRoleProperty(TextualRole.Size)]
 		public static readonly DependencyProperty BarTotalFontSizeProperty =
 			DP.Attach<double>(typeof(BarTotalPrimitive), new FrameworkPropertyMetadata(typeface.Size));
 

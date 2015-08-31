@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Primitives.TextAttributes;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
@@ -11,23 +12,23 @@ namespace FlexCharts.Controls.Primitives
 	public class SecondaryValuePrimitive : TextualPrimitive, ISecondaryValueContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Caption;
-
+		[TextualRoleProperty(TextualRole.Font)]
 		public static readonly DependencyProperty SecondaryValueFontFamilyProperty =
 			DP.Attach<FontFamily>(typeof(SecondaryValuePrimitive), new FrameworkPropertyMetadata(typeface.FontFamily));
-
-		public static readonly DependencyProperty SecondaryValueFontStyleProperty = 
+		[TextualRoleProperty(TextualRole.Style)]
+		public static readonly DependencyProperty SecondaryValueFontStyleProperty =
 			DP.Attach<FontStyle>(typeof(SecondaryValuePrimitive), new FrameworkPropertyMetadata(typeface.Style));
-
-		public static readonly DependencyProperty SecondaryValueFontWeightProperty = 
+		[TextualRoleProperty(TextualRole.Weight)]
+		public static readonly DependencyProperty SecondaryValueFontWeightProperty =
 			DP.Attach<FontWeight>(typeof(SecondaryValuePrimitive), new FrameworkPropertyMetadata(typeface.Weight));
-
-		public static readonly DependencyProperty SecondaryValueFontStretchProperty = 
+		[TextualRoleProperty(TextualRole.Stretch)]
+		public static readonly DependencyProperty SecondaryValueFontStretchProperty =
 			DP.Attach<FontStretch>(typeof(SecondaryValuePrimitive), new FrameworkPropertyMetadata(typeface.Stretch));
-
+		[TextualRoleProperty(TextualRole.Size)]
 		public static readonly DependencyProperty SecondaryValueFontSizeProperty =
 			DP.Attach<double>(typeof(SecondaryValuePrimitive), new FrameworkPropertyMetadata(typeface.Size));
 
-		public static readonly DependencyProperty SecondaryValueForegroundProperty = 
+		public static readonly DependencyProperty SecondaryValueForegroundProperty =
 			DP.Attach<AbstractMaterialDescriptor>(typeof(SecondaryValuePrimitive), new FrameworkPropertyMetadata(MaterialPalette.Descriptors.P700Descriptor));
 
 		[TypeConverter(typeof(FontFamilyConverter))]

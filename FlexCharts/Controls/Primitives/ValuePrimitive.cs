@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Primitives.TextAttributes;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
@@ -12,19 +13,19 @@ namespace FlexCharts.Controls.Primitives
 	public abstract class ValuePrimitive : TextualPrimitive, IValueContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Caption;
-
+		[TextualRoleProperty(TextualRole.Font)]
 		public static readonly DependencyProperty ValueFontFamilyProperty =
 			DP.Attach<FontFamily>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.FontFamily));
-
+		[TextualRoleProperty(TextualRole.Style)]
 		public static readonly DependencyProperty ValueFontStyleProperty =
 			DP.Attach<FontStyle>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.Style));
-
+		[TextualRoleProperty(TextualRole.Weight)]
 		public static readonly DependencyProperty ValueFontWeightProperty =
 			DP.Attach<FontWeight>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.Weight));
-
+		[TextualRoleProperty(TextualRole.Stretch)]
 		public static readonly DependencyProperty ValueFontStretchProperty =
 			DP.Attach<FontStretch>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.Stretch));
-
+			[TextualRoleProperty(TextualRole.Size)]
 		public static readonly DependencyProperty ValueFontSizeProperty =
 			DP.Attach<double>(typeof(ValuePrimitive), new FrameworkPropertyMetadata(typeface.Size));
 

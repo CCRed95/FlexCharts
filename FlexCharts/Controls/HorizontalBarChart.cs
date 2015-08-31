@@ -16,6 +16,7 @@ using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
 using FlexCharts.GenerationContext;
+using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.MaterialDesign.Providers;
@@ -314,11 +315,7 @@ namespace FlexCharts.Controls
 					Foreground = BarTotalForeground.GetMaterial(materialSet),
 					Margin = new Thickness(barWidth, 0, 0, 0),
 				};
-				BindingOperations.SetBinding(barLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontStyleProperty, new Binding("BarTotalFontStyle") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontWeightProperty, new Binding("BarTotalFontWeight") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
+				barLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
 				barGrid.Children.Add(barLabel);
 				barContext.BarLabel = barLabel;
 
@@ -336,11 +333,7 @@ namespace FlexCharts.Controls
 					Foreground = YAxisForeground.GetMaterial(materialSet),
 					Margin = new Thickness(0, 0, 0, 0),
 				};
-				BindingOperations.SetBinding(yaxisLabel, FontFamilyProperty, new Binding("YAxisFontFamily") { Source = this });
-				BindingOperations.SetBinding(yaxisLabel, FontStyleProperty, new Binding("YAxisFontStyle") { Source = this });
-				BindingOperations.SetBinding(yaxisLabel, FontWeightProperty, new Binding("YAxisFontWeight") { Source = this });
-				BindingOperations.SetBinding(yaxisLabel, FontSizeProperty, new Binding("YAxisFontSize") { Source = this });
-				BindingOperations.SetBinding(yaxisLabel, FontStretchProperty, new Binding("YAxisFontStretch") { Source = this });
+				yaxisLabel.BindTextualPrimitive<YAxisPrimitive>(this);
 				_YAxisGrid.Children.Add(yaxisLabel);
 
 				visualContext.BarVisuals.Add(barContext);

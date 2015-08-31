@@ -18,6 +18,7 @@ using FlexCharts.Data.Sorting;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
 using FlexCharts.GenerationContext;
+using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Layout;
 using FlexCharts.MaterialDesign;
@@ -26,7 +27,7 @@ using FlexCharts.MaterialDesign.Providers;
 
 namespace FlexCharts.Controls
 {
-	class NestedArc : AbstractFlexChart<DoubleSeries>,
+	public class NestedArc : AbstractFlexChart<DoubleSeries>,
 		ICircularContract, IValueContract, ISecondaryValueContract, ISegmentContract
 	{
 		#region Dependency Properties
@@ -234,7 +235,7 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Fields
-		internal NestedArcVisualContext visualContext;
+		internal NestedArcChartVisualContext visualContext;
 		protected readonly Grid _segments = new Grid
 		{
 			RenderTransformOrigin = new Point(.5, .5),
@@ -252,7 +253,7 @@ namespace FlexCharts.Controls
 		{
 			DataSorterProperty.OverrideMetadata(typeof (NestedArc),
 				new FrameworkPropertyMetadata(new AscendingDataSorter()));
-			TitleProperty.OverrideMetadata(typeof(NestedArc), new FrameworkPropertyMetadata("Nested Arc Chart"));
+			TitleProperty.OverrideMetadata(typeof(NestedArc), new FrameworkPropertyMetadata("Nested Arc 2"));
 		}
 		public NestedArc()
 		{
@@ -353,7 +354,7 @@ namespace FlexCharts.Controls
 		#region Overrided Methods
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-			visualContext = new NestedArcVisualContext();
+			visualContext = new NestedArcChartVisualContext();
 
 			_segments.Children.Clear();
 			_inactiveSegments.Children.Clear();
@@ -389,7 +390,6 @@ namespace FlexCharts.Controls
 
 				var inactiveArcPath = CalculatePath(centerPoint, arcDiameter, subArcActualWidth);
 				inactiveArcPath.Fill = SegmentSpaceBackground.GetMaterial(materialSet);
-				//BindingOperations.SetBinding(inactiveArcPath, Shape.FillProperty, new Binding("SegmentSpaceBackground") { Source = this });
 
 				categoryVisualContext.InactiveArcVisual = inactiveArcPath;
 				_inactiveSegments.Children.Add(inactiveArcPath);
@@ -439,10 +439,8 @@ namespace FlexCharts.Controls
 					DataContext = this
 				};
 				currentCategoryVisualContext.CategoryLabel = categoryLabel;
-				BindingOperations.SetBinding(categoryLabel, FontFamilyProperty, new Binding("ValueFontFamily") { Source = this });
-				BindingOperations.SetBinding(categoryLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
-				BindingOperations.SetBinding(categoryLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
-				BindingOperations.SetBinding(categoryLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
+
+				categoryLabel.BindTextualPrimitive<ValuePrimitive>(this);
 
 				var valuePercentLabel = new Label
 				{
@@ -461,10 +459,7 @@ namespace FlexCharts.Controls
 					DataContext = this
 				};
 				currentCategoryVisualContext.ValuePercentLabel = valuePercentLabel;
-				BindingOperations.SetBinding(valuePercentLabel, FontFamilyProperty, new Binding("ValueFontFamily") { Source = this });
-				BindingOperations.SetBinding(valuePercentLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
-				BindingOperations.SetBinding(valuePercentLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
-				BindingOperations.SetBinding(valuePercentLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
+				valuePercentLabel.BindTextualPrimitive<ValuePrimitive>(this);
 
 				var valueLabelLeftSpace = arcLabelMarginLeft + ValueLabelHorizontalSpacing;
 				var valueLabelWidth = _main.RenderSize.Width - valueLabelLeftSpace;
@@ -485,11 +480,7 @@ namespace FlexCharts.Controls
 					Padding = new Thickness(0),
 				};
 				currentCategoryVisualContext.ValueLabel = valueLabel;
-				BindingOperations.SetBinding(valueLabel, FontFamilyProperty, new Binding("SecondaryValueFontFamily") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontStyleProperty, new Binding("SecondaryValueFontStyle") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontWeightProperty, new Binding("SecondaryValueFontWeight") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontSizeProperty, new Binding("SecondaryValueFontSize") { Source = this });
-				//BindingOperations.SetBinding(valueLabel, ForegroundProperty, new Binding("SecondaryValueForeground") { Source = this });
+				valueLabel.BindTextualPrimitive<SecondaryValuePrimitive>(this);
 
 				_categoryLabels.Children.Add(categoryLabel);
 				_categoryLabels.Children.Add(valuePercentLabel);

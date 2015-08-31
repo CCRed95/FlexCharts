@@ -15,6 +15,7 @@ using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
+using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.MaterialDesign.Providers;
@@ -256,12 +257,7 @@ namespace FlexCharts.Controls
 					Foreground = BarTotalForeground.GetMaterial(materialSet),
 					DataContext = this
 				};
-				BindingOperations.SetBinding(axisLabel, FontFamilyProperty, new Binding("XAxisFontFamily") { Source = this });
-				BindingOperations.SetBinding(axisLabel, FontStyleProperty, new Binding("XAxisFontStyle") { Source = this });
-				BindingOperations.SetBinding(axisLabel, FontWeightProperty, new Binding("XAxisFontWeight") { Source = this });
-				BindingOperations.SetBinding(axisLabel, FontSizeProperty, new Binding("XAxisFontSize") { Source = this });
-				//BindingOperations.SetBinding(axisLabel, ForegroundProperty, new Binding("XAxisForeground") { Source = this });
-				BindingOperations.SetBinding(axisLabel, FontStretchProperty, new Binding("XAxisFontStretch") { Source = this });
+				axisLabel.BindTextualPrimitive<XAxisPrimitive>(this);
 
 				_xAxisGrid.Children.Add(axisLabel);
 				xtrace++;
@@ -328,12 +324,7 @@ namespace FlexCharts.Controls
 					Foreground = BarTotalForeground.GetMaterial(materialSet),
 					Margin = new Thickness(horizontalTrace, 0, 0, xAxisHeight + verticalTrace),
 				};
-				BindingOperations.SetBinding(barLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontStyleProperty, new Binding("BarTotalFontStyle") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontWeightProperty, new Binding("BarTotalFontWeight") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
-				//BindingOperations.SetBinding(barLabel, ForegroundProperty, new Binding("BarTotalForeground") { Source = this });
-				BindingOperations.SetBinding(barLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
+				barLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
 				d.RenderedVisual = pathBuffer;
 				_bars.Children.Add(barLabel);
 				horizontalTrace += barAvailableWidth;

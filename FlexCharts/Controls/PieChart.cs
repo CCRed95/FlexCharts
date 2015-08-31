@@ -17,6 +17,7 @@ using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
+using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Layout;
 using FlexCharts.MaterialDesign;
@@ -374,13 +375,7 @@ namespace FlexCharts.Controls
 				var categoryNameLabel = positionLabel(d, outerLabelRadius, targetAngularOffset, true);
 
 				categoryNameLabel.Content = d.CategoryName;
-				BindingOperations.SetBinding(categoryNameLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontStyleProperty, new Binding("BarTotalFontStyle") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontWeightProperty, new Binding("BarTotalFontWeight") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
-				BindingOperations.SetBinding(categoryNameLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
-				//BindingOperations.SetBinding(categoryNameLabel, ForegroundProperty, new Binding("ValueForeground") { Source = this });
-				//categoryNameLabel.Foreground = d.RenderedVisual.ShouldBeType<ArcPath>().Fill.ShouldBeType<SolidColorBrush>().Lighten(.25);
+				categoryNameLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
 				categoryNameLabel.Foreground = BarTotalForeground.GetMaterial(materialSet);
 				_categoryLabels.Children.Add(categoryNameLabel);
 
@@ -388,11 +383,7 @@ namespace FlexCharts.Controls
 				var valueLabel = positionLabel(d, overlayedLabelRadius, targetAngularOffset);
 
 				valueLabel.Content = d.Value;
-				BindingOperations.SetBinding(valueLabel, FontFamilyProperty, new Binding("ValueFontFamily") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontStyleProperty, new Binding("ValueFontStyle") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontWeightProperty, new Binding("ValueFontWeight") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontSizeProperty, new Binding("ValueFontSize") { Source = this });
-				BindingOperations.SetBinding(valueLabel, FontStretchProperty, new Binding("ValueFontStretch") { Source = this });
+				valueLabel.BindTextualPrimitive<ValuePrimitive>(this);
 				valueLabel.Foreground = ValueForeground.GetMaterial(materialSet);
 				_categoryLabels.Children.Add(valueLabel);
 			}

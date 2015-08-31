@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Primitives.TextAttributes;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
@@ -11,19 +12,19 @@ namespace FlexCharts.Controls.Primitives
 	public abstract class YAxisPrimitive : TextualPrimitive, IYAxisContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Body1;
-
+		[TextualRoleProperty(TextualRole.Font)]
 		public static readonly DependencyProperty YAxisFontFamilyProperty =
 			DP.Attach<FontFamily>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.FontFamily));
-
+		[TextualRoleProperty(TextualRole.Style)]
 		public static readonly DependencyProperty YAxisFontStyleProperty =
 			DP.Attach<FontStyle>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.Style));
-
+		[TextualRoleProperty(TextualRole.Weight)]
 		public static readonly DependencyProperty YAxisFontWeightProperty =
 			DP.Attach<FontWeight>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.Weight));
-
+		[TextualRoleProperty(TextualRole.Stretch)]
 		public static readonly DependencyProperty YAxisFontStretchProperty =
 			DP.Attach<FontStretch>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.Stretch));
-
+		[TextualRoleProperty(TextualRole.Size)]
 		public static readonly DependencyProperty YAxisFontSizeProperty =
 			DP.Attach<double>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.Size));
 
