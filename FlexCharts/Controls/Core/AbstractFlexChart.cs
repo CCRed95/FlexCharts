@@ -1,29 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Markup;
-using System.Windows.Media;
-using FlexCharts.Controls.Primitives;
-using FlexCharts.Data.Filtering;
-using FlexCharts.Data.Sorting;
-using FlexCharts.Extensions;
-using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
-using FlexCharts.Helpers.EventHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.MaterialDesign.Providers;
+using FlexCharts.Require;
+using JetBrains.Annotations;
 
-namespace FlexCharts.Controls
+namespace FlexCharts.Controls.Core
 {
-	public abstract class AbstractFlexChart : ContentControl
+	public abstract class AbstractFlexChart : Control
 	{
 		#region Dependency Properties
 		/// <summary>
@@ -102,33 +91,14 @@ namespace FlexCharts.Controls
 		protected const FrameworkPropertyMetadataOptions FXM = FrameworkPropertyMetadataOptions.AffectsMeasure;
 		protected const FrameworkPropertyMetadataOptions FXA = FrameworkPropertyMetadataOptions.AffectsArrange;
 		protected const FrameworkPropertyMetadataOptions INH = FrameworkPropertyMetadataOptions.Inherits;
-
-		protected readonly DockPanel _content = new DockPanel();
-		protected readonly Grid _main = new Grid();
-		protected readonly Label _titleLabel = new Label()
-		{
-			VerticalContentAlignment = VerticalAlignment.Center,
-			HorizontalContentAlignment = HorizontalAlignment.Center
-		};
 		#endregion
 
-		protected AbstractFlexChart()
+		public T GetTemplateChild<T>(string name) where T : DependencyObject
 		{
-			Content = _content;
-			_content.Children.Add(_titleLabel);
-			_content.Children.Add(_main);
-			_titleLabel.DockTop();
-			_main.DockBottom();
-
-			BindingOperations.SetBinding(_content, BackgroundProperty, new Binding("Background") { Source = this });
-			BindingOperations.SetBinding(_main, MarginProperty, new Binding("Padding") { Source = this });
-
-			BindingOperations.SetBinding(_titleLabel, ContentProperty, new Binding("Title") { Source = this });
-			BindingOperations.SetBinding(_titleLabel, FontFamilyProperty, new Binding("FontFamily") { Source = this });
-			BindingOperations.SetBinding(_titleLabel, FontStyleProperty, new Binding("FontStyle") { Source = this });
-			BindingOperations.SetBinding(_titleLabel, FontWeightProperty, new Binding("FontWeight") { Source = this });
-			BindingOperations.SetBinding(_titleLabel, FontSizeProperty, new Binding("FontSize") { Source = this });
-			BindingOperations.SetBinding(_titleLabel, ForegroundProperty, new Binding("Foreground") { Source = this });
+			var templateChild = GetTemplateChild(name) as T;
+			if (templateChild == null)
+				throw new NullReferenceException($"TemplateChild {name} as {typeof(T)}");
+			return templateChild;
 		}
 	}
 }

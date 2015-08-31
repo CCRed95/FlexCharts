@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
@@ -29,6 +30,12 @@ namespace FlexCharts.Controls
 {
 	//TODO custom [AspectOwnerAttribute(typeof(IAspect))]
 	// TODO better label/size rendering with predictive text rendering 
+	[TemplatePart(Name = "PART_content", Type = typeof(DockPanel))]
+	[TemplatePart(Name = "PART_title", Type = typeof(Label))]
+	[TemplatePart(Name = "PART_main", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_segments", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_focusedsegmentlabel", Type = typeof(Label))]
+	[TemplatePart(Name = "PART_categorylabels", Type = typeof(Grid))]
 	public class RingChart : AbstractFlexChart<DoubleSeries>, ICircularContract, IRingContract, IPolarLabelingContract, IFocusableSegmentContract, IBarTotalContract
 	{
 		#region Dependency Properties
@@ -170,25 +177,25 @@ namespace FlexCharts.Controls
 			set { SetValue(ValueForegroundProperty, value); }
 		}
 		#endregion
-		
+
 		#region			SecondaryValueContract
 		public static readonly DependencyProperty SecondaryValueFontFamilyProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontFamilyProperty,
-			new Meta<RingChart, FontFamily>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<RingChart, FontFamily> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty SecondaryValueFontStyleProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontStyleProperty,
-			new Meta<RingChart, FontStyle>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<RingChart, FontStyle> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty SecondaryValueFontWeightProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontWeightProperty,
-			new Meta<RingChart, FontWeight>{ Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<RingChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty SecondaryValueFontStretchProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontStretchProperty,
-			new Meta<RingChart, FontStretch>{ Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<RingChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty SecondaryValueFontSizeProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontSizeProperty,
-			new Meta<RingChart, double>{ Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<RingChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty SecondaryValueForegroundProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueForegroundProperty,
-			new Meta<RingChart, AbstractMaterialDescriptor>{ Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
+			new Meta<RingChart, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
 		public FontFamily SecondaryValueFontFamily
@@ -282,37 +289,29 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Fields
-		protected readonly Grid _categoryLabels = new Grid();
-		protected readonly Grid _segments = new Grid
-		{
-			RenderTransformOrigin = new Point(.5, .5),
-		};
-		private readonly Label _focusedSegmentValueLabel = new Label
-		{
-			IsHitTestVisible = false,
-			HorizontalContentAlignment = HorizontalAlignment.Center,
-			VerticalContentAlignment = VerticalAlignment.Center
-		};
+		protected DockPanel PART_content;
+		protected Label PART_title;
+		protected Grid PART_main;
+		protected Grid PART_segments;
+		protected Label PART_focusedsegmentlabel;
+		protected Grid PART_categorylabels;
 		#endregion
 
 		#region Constructors
 		static RingChart()
 		{
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(RingChart), new FrameworkPropertyMetadata(typeof(RingChart)));
 			TitleProperty.OverrideMetadata(typeof(RingChart), new FrameworkPropertyMetadata("Ring Chart"));
 		}
 		public RingChart()
 		{
-			var rotateTransform = new RotateTransform(0, .5, .5);
-			_segments.RenderTransform = rotateTransform;
-			BindingOperations.SetBinding(rotateTransform, RotateTransform.AngleProperty, new Binding("AngleOffset") { Source = this });
+			
+			//_main.Children.Add(_segments);
+			//_main.Children.Add(_focusedSegmentValueLabel);
+			//_main.Children.Add(_categoryLabels);
+			
 
-			_main.Children.Add(_segments);
-			_main.Children.Add(_focusedSegmentValueLabel);
-			_main.Children.Add(_categoryLabels);
-			_focusedSegmentValueLabel.BindTextualPrimitive<SecondaryValuePrimitive>(this);
-
-			_focusedSegmentValueLabel.DataContext = this;
-			_focusedSegmentValueLabel.SetBinding(ContentControl.ContentProperty, new Binding("FocusedSegment.DataPoint.Value"));
+			
 
 			Loaded += onLoaded;
 		}
@@ -353,7 +352,7 @@ namespace FlexCharts.Controls
 
 		private void animateTextSwap()
 		{
-			_categoryLabels.BeginAnimation(OpacityProperty, new DoubleAnimationUsingKeyFrames
+			PART_categorylabels.BeginAnimation(OpacityProperty, new DoubleAnimationUsingKeyFrames
 			{
 				KeyFrames = new DoubleKeyFrameCollection
 				{
@@ -403,32 +402,44 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Overrided Methods
+		public override void OnApplyTemplate()
+		{
+			base.OnApplyTemplate();
+			PART_content = GetTemplateChild<DockPanel>(nameof(PART_content));
+			PART_title = GetTemplateChild<Label>(nameof(PART_title));
+			PART_main = GetTemplateChild<Grid>(nameof(PART_main));
+			PART_segments = GetTemplateChild<Grid>(nameof(PART_segments));
+			PART_focusedsegmentlabel = GetTemplateChild<Label>(nameof(PART_focusedsegmentlabel));
+			PART_categorylabels = GetTemplateChild<Grid>(nameof(PART_categorylabels));
+
+			PART_focusedsegmentlabel.BindTextualPrimitive<SecondaryValuePrimitive>(this);
+		}
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-			_focusedSegmentValueLabel.Foreground = SecondaryValueForeground.GetMaterial(FallbackMaterialSet);
-			_segments.Children.Clear();
+			PART_focusedsegmentlabel.Foreground = SecondaryValueForeground.GetMaterial(FallbackMaterialSet);
+			PART_segments.Children.Clear();
 
 			var context = new ProviderContext(Data.Count);
 			MaterialProvider.Reset(context);
 
-			var radius = (_segments.RenderSize.Smallest() * CircleScale) / 2;
+			var radius = (PART_segments.RenderSize.Smallest() * CircleScale) / 2;
 
 			var total = Data.SumValue();
 			var angleTrace = 0d;
-			var actualRingWidth = radius * RingWidthPercentage; 
+			var actualRingWidth = radius * RingWidthPercentage;
 			foreach (var d in Data)
 			{
 				var materialSet = MaterialProvider.ProvideNext(context);
 				var degrees = (d.Value / total) * 360;
-				
-				var activePath = new ArcPath(degrees, angleTrace, actualRingWidth, CircleScale, radius, _segments.RenderSize, d)
+
+				var activePath = new ArcPath(degrees, angleTrace, actualRingWidth, CircleScale, radius, PART_segments.RenderSize, d)
 				{
 					Fill = SegmentForeground.GetMaterial(materialSet),
 					MouseOverFill = materialSet.GetMaterial(Luminosity.P700),
 					DataContext = this
 				};
 				activePath.Click += segmentClicked;
-				_segments.Children.Add(activePath); 
+				PART_segments.Children.Add(activePath);
 				d.RenderedVisual = activePath;
 				angleTrace += degrees;
 			}
@@ -436,8 +447,8 @@ namespace FlexCharts.Controls
 			{
 				return;
 			}
-			_categoryLabels.Children.Clear();
-			var diameter = _segments.RenderSize.Smallest() * CircleScale;
+			PART_categorylabels.Children.Clear();
+			var diameter = PART_segments.RenderSize.Smallest() * CircleScale;
 
 			var outerLabelRadius = (diameter / 2) * OuterLabelPositionScale;
 			var overlayedLabelRadius = (diameter / 2) - (actualRingWidth / 2);
@@ -453,14 +464,14 @@ namespace FlexCharts.Controls
 				categoryNameLabel.Content = d.CategoryName;
 				categoryNameLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
 				categoryNameLabel.Foreground = BarTotalForeground.GetMaterial(materialSet);
-				_categoryLabels.Children.Add(categoryNameLabel);
+				PART_categorylabels.Children.Add(categoryNameLabel);
 
 				var valueLabel = positionLabel(d, overlayedLabelRadius, targetAngularOffset);
 
 				valueLabel.Content = d.Value;
 				valueLabel.BindTextualPrimitive<ValuePrimitive>(this);
 				valueLabel.Foreground = ValueForeground.GetMaterial(materialSet);
-				_categoryLabels.Children.Add(valueLabel);
+				PART_categorylabels.Children.Add(valueLabel);
 			}
 			base.OnRender(drawingContext);
 		}
@@ -472,7 +483,7 @@ namespace FlexCharts.Controls
 			{
 				FocusedSegment = arc;
 			}
-			
+
 			//OnSegmentClicked();
 		}
 

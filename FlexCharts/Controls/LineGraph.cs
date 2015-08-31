@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Sorting;
 using FlexCharts.Data.Structures;
@@ -121,10 +122,10 @@ namespace FlexCharts.Controls
 
 		public LineGraph()
 		{
-			_main.Children.Add(_bars);
-			_main.Children.Add(_xAxisGrid);
-			_main.Children.Add(_barLabels);
-			_main.Children.Add(_lineVisual);
+			//_main.Children.Add(_bars);
+			//_main.Children.Add(_xAxisGrid);
+			//_main.Children.Add(_barLabels);
+			//_main.Children.Add(_lineVisual);
 			//_main.Children.Add(_highlightGrid);
 			Loaded += onLoad;
 			

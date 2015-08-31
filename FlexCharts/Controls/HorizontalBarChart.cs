@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
@@ -23,6 +24,11 @@ using FlexCharts.MaterialDesign.Providers;
 
 namespace FlexCharts.Controls
 {
+	[TemplatePart(Name = "PART_content", Type = typeof(DockPanel))]
+	[TemplatePart(Name = "PART_title", Type = typeof(Label))]
+	[TemplatePart(Name = "PART_main", Type = typeof(DockPanel))]
+	[TemplatePart(Name = "PART_yaxis", Type = typeof(UniformGrid))]
+	[TemplatePart(Name = "PART_bars", Type = typeof(UniformGrid))]
 	public class HorizontalBarChart : AbstractFlexChart<DoubleSeries>, ISegmentContract, IBarTotalContract, IYAxisContract
 	{
 		#region Dependency Properties
@@ -176,28 +182,21 @@ namespace FlexCharts.Controls
 		#region Fields
 		private HorizontalBarChartVisualContext visualContext = new HorizontalBarChartVisualContext();
 
-		protected readonly DockPanel _mainDock = new DockPanel();
-
-		protected readonly UniformGrid _YAxisGrid = new UniformGrid();
-		protected readonly UniformGrid _bars = new UniformGrid
-		{
-			RenderTransformOrigin = new Point(.5, .5),
-		};
+		protected DockPanel PART_content;
+		protected Label PART_title;
+		protected DockPanel PART_main;
+		protected UniformGrid PART_yaxis;
+		protected UniformGrid PART_bars;
 		#endregion
 
 		#region Constructors
 		static HorizontalBarChart()
 		{
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(HorizontalBarChart), new FrameworkPropertyMetadata(typeof(HorizontalBarChart)));
 			TitleProperty.OverrideMetadata(typeof(HorizontalBarChart), new FrameworkPropertyMetadata("Horizontal Bar Chart"));
 		}
 		public HorizontalBarChart()
 		{
-			//_main.Children.Add(_categoryLabels);
-			_main.Children.Add(_mainDock);
-			_mainDock.Children.Add(_YAxisGrid);
-			_YAxisGrid.DockLeft();
-			_mainDock.Children.Add(_bars);
-			_bars.DockRight();
 			
 			//BindingOperations.SetBinding(_YAxisGrid, UniformGrid.RowsProperty, new Binding("Data.Count") {Source = this});
 			//BindingOperations.SetBinding(_bars, UniformGrid.RowsProperty, new Binding("Data.Count") {Source = this});
@@ -236,19 +235,25 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Overrided Methods
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="drawingContext"></param>
+		public override void OnApplyTemplate()
+		{
+			base.OnApplyTemplate();
+			PART_content = GetTemplateChild<DockPanel>(nameof(PART_content));
+			PART_title = GetTemplateChild<Label>(nameof(PART_title));
+			PART_main = GetTemplateChild<DockPanel>(nameof(PART_main));
+			PART_yaxis = GetTemplateChild<UniformGrid>(nameof(PART_yaxis));
+			PART_bars = GetTemplateChild<UniformGrid>(nameof(PART_bars));
+		}
+
 		protected override void OnRender(DrawingContext drawingContext)
 		{
 			visualContext = new HorizontalBarChartVisualContext();
 
-			_bars.Rows = Data.Count;
-			_YAxisGrid.Rows = Data.Count;
+			PART_bars.Rows = Data.Count;
+			PART_yaxis.Rows = Data.Count;
 
-			_bars.Children.Clear();
-			_YAxisGrid.Children.Clear();
+			PART_bars.Children.Clear();
+			PART_yaxis.Children.Clear();
 
 			if (Data.Count < 1)
 			{
@@ -265,14 +270,14 @@ namespace FlexCharts.Controls
 				YAxisFontFamily, YAxisFontSize, d.CategoryName))
 				.Select(renderSize => renderSize.Width).Concat(new[] {0.0}).Max();
 
-			_YAxisGrid.Width = maxYAxisTextLength;
+			PART_yaxis.Width = maxYAxisTextLength;
 
 			var maxValueTextLength = Data.Select(d => RenderingExtensions.EstimateLabelRenderSize(
 				BarTotalFontFamily, BarTotalFontSize, d.Value.ToString(CultureInfo.InvariantCulture)))
 				.Select(renderSize => renderSize.Width).Concat(new[] {0.0}).Max();
 
-			var totalAvailableVerticalSpace = _bars.ActualHeight / Data.Count;
-			var totalAvailableHorizontalExpanse = _bars.ActualWidth;
+			var totalAvailableVerticalSpace = PART_bars.ActualHeight / Data.Count;
+			var totalAvailableHorizontalExpanse = PART_bars.ActualWidth;
 			var totalAvailableHorizontalSpace = totalAvailableHorizontalExpanse - maxValueTextLength;
 			var actualBarHeight = totalAvailableVerticalSpace * SegmentWidthPercentage;
 			foreach (var d in Data)
@@ -319,7 +324,7 @@ namespace FlexCharts.Controls
 				barGrid.Children.Add(barLabel);
 				barContext.BarLabel = barLabel;
 
-				_bars.Children.Add(barGrid);
+				PART_bars.Children.Add(barGrid);
 
 				var yaxisLabel = new Label
 				{
@@ -334,7 +339,7 @@ namespace FlexCharts.Controls
 					Margin = new Thickness(0, 0, 0, 0),
 				};
 				yaxisLabel.BindTextualPrimitive<YAxisPrimitive>(this);
-				_YAxisGrid.Children.Add(yaxisLabel);
+				PART_yaxis.Children.Add(yaxisLabel);
 
 				visualContext.BarVisuals.Add(barContext);
 			}

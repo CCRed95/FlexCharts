@@ -8,7 +8,7 @@ namespace FlexCharts.Require
     public static T RequireType<T>(this object @object)
     {
 			if (!(@object is T))
-		    throw new Exception("RequireType<T>");
+		    throw new Exception($"RequireType<{typeof(T)}>");
       return (T) @object;
     }
     public static T RequireImplement<T>(this object @object)

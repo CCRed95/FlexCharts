@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Extensions;
@@ -157,8 +158,8 @@ namespace FlexCharts.Controls
 			_segments.RenderTransform = rotateTransform;
 			BindingOperations.SetBinding(rotateTransform, RotateTransform.AngleProperty, new Binding("AngleOffset") { Source = this });
 
-			_main.Children.Add(_segments);
-			_main.Children.Add(_valueLabel);
+			//_main.Children.Add(_segments);
+			//_main.Children.Add(_valueLabel);
 
 			BindingOperations.SetBinding(_valueLabel, ContentControl.ContentProperty, new Binding("Data") { Source = this });
 			BindingOperations.SetBinding(_valueLabel, FontFamilyProperty, new Binding("FontFamily") { Source = this });

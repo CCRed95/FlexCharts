@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
@@ -27,7 +28,12 @@ using FlexCharts.Require;
 
 namespace FlexCharts.Controls
 {
-	public class PieChart : AbstractFlexChart<DoubleSeries>, 
+	[TemplatePart(Name = "PART_content", Type = typeof(DockPanel))]
+	[TemplatePart(Name = "PART_title", Type = typeof(Label))]
+	[TemplatePart(Name = "PART_main", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_segments", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_categorylabels", Type = typeof(Grid))]
+	public class PieChart : AbstractFlexChart<DoubleSeries>,
 		IValueContract, IFocusableSegmentContract, IPolarLabelingContract, IBarTotalContract//, IStateSegmentContract
 	{
 		#region Dependency Properties
@@ -67,7 +73,7 @@ namespace FlexCharts.Controls
 			new Meta<PieChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalForegroundProperty = DP.Add(BarTotalPrimitive.BarTotalForegroundProperty,
-			new Meta<PieChart, AbstractMaterialDescriptor> { Flags = INH | FXR}, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
 		public FontFamily BarTotalFontFamily
@@ -263,27 +269,28 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Fields
-		protected readonly Grid _categoryLabels = new Grid();
-		protected readonly Grid _segments = new Grid
-		{
-			RenderTransformOrigin = new Point(.5, .5),
-		};
+		protected DockPanel PART_content;
+		protected Label PART_title;
+		protected Grid PART_main;
+		protected Grid PART_segments;
+		protected Grid PART_categorylabels;
 		#endregion
 
 		#region Constructors
 		static PieChart()
 		{
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(PieChart), new FrameworkPropertyMetadata(typeof(PieChart)));
 			TitleProperty.OverrideMetadata(typeof(PieChart), new FrameworkPropertyMetadata("Pie Chart"));
 		}
 
 		public PieChart()
 		{
-			var rotateTransform = new RotateTransform(0, .5, .5);
-			_segments.RenderTransform = rotateTransform;
-			BindingOperations.SetBinding(rotateTransform, RotateTransform.AngleProperty, new Binding("AngleOffset") { Source = this });
-			_main.Children.Add(_segments);
-			_main.Children.Add(_categoryLabels);
-			
+			//var rotateTransform = new RotateTransform(0, .5, .5);
+			//_segments.RenderTransform = rotateTransform;
+			//BindingOperations.SetBinding(rotateTransform, RotateTransform.AngleProperty, new Binding("AngleOffset") { Source = this });
+			//_main.Children.Add(_segments);
+			//_main.Children.Add(_categoryLabels);
+
 			Loaded += onLoaded;
 		}
 		#endregion
@@ -316,7 +323,7 @@ namespace FlexCharts.Controls
 			};
 			ringSpinTimer.Tick += (s, e) =>
 			{
-				s.RequireType<DispatcherTimer>().Stop();
+				ringSpinTimer.Stop();
 				animateAngularOffset();
 			};
 			ringSpinTimer.Start();
@@ -324,7 +331,7 @@ namespace FlexCharts.Controls
 
 		private void animateTextSwap()
 		{
-			_categoryLabels.BeginAnimation(OpacityProperty, new DoubleAnimationUsingKeyFrames
+			PART_categorylabels.BeginAnimation(OpacityProperty, new DoubleAnimationUsingKeyFrames
 			{
 				KeyFrames = new DoubleKeyFrameCollection
 				{
@@ -349,41 +356,41 @@ namespace FlexCharts.Controls
 			});
 		}
 
-		private void renderCategoryLabels()
-		{
-			if (FocusedSegment == null)
-			{
-				return;
-			}
-			var context = new ProviderContext(Data.Count);
-			MaterialProvider.Reset(context);
-			_categoryLabels.Children.Clear();
-			var diameter = _segments.RenderSize.Smallest() * CircleScale;
+		//private void renderCategoryLabels()
+		//{
+		//	if (FocusedSegment == null)
+		//	{
+		//		return;
+		//	}
+		//	var context = new ProviderContext(Data.Count);
+		//	MaterialProvider.Reset(context);
+		//	_categoryLabels.Children.Clear();
+		//	var diameter = _segments.RenderSize.Smallest() * CircleScale;
 
-			var outerLabelRadius = (diameter / 2) * OuterLabelPositionScale;
-			var overlayedLabelRadius = (diameter / 2) * .7;
+		//	var outerLabelRadius = (diameter / 2) * OuterLabelPositionScale;
+		//	var overlayedLabelRadius = (diameter / 2) * .7;
 
-			var targetAngularOffset = FocusedSegment.RequireType<ArcPath>().CalculateAngularOffset();
+		//	var targetAngularOffset = FocusedSegment.RequireType<ArcPath>().CalculateAngularOffset();
 
-			foreach (var d in Data)
-			{
-				var materialSet = MaterialProvider.ProvideNext(context);
-				var categoryNameLabel = positionLabel(d, outerLabelRadius, targetAngularOffset, true);
+		//	foreach (var d in Data)
+		//	{
+		//		var materialSet = MaterialProvider.ProvideNext(context);
+		//		var categoryNameLabel = positionLabel(d, outerLabelRadius, targetAngularOffset, true);
 
-				categoryNameLabel.Content = d.CategoryName;
-				categoryNameLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
-				categoryNameLabel.Foreground = BarTotalForeground.GetMaterial(materialSet);
-				_categoryLabels.Children.Add(categoryNameLabel);
+		//		categoryNameLabel.Content = d.CategoryName;
+		//		categoryNameLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
+		//		categoryNameLabel.Foreground = BarTotalForeground.GetMaterial(materialSet);
+		//		_categoryLabels.Children.Add(categoryNameLabel);
 
 
-				var valueLabel = positionLabel(d, overlayedLabelRadius, targetAngularOffset);
+		//		var valueLabel = positionLabel(d, overlayedLabelRadius, targetAngularOffset);
 
-				valueLabel.Content = d.Value;
-				valueLabel.BindTextualPrimitive<ValuePrimitive>(this);
-				valueLabel.Foreground = ValueForeground.GetMaterial(materialSet);
-				_categoryLabels.Children.Add(valueLabel);
-			}
-		}
+		//		valueLabel.Content = d.Value;
+		//		valueLabel.BindTextualPrimitive<ValuePrimitive>(this);
+		//		valueLabel.Foreground = ValueForeground.GetMaterial(materialSet);
+		//		_categoryLabels.Children.Add(valueLabel);
+		//	}
+		//}
 
 		private Label positionLabel(CategoricalDouble d, double radius, double targetAngularOffset,
 			bool horizontalPositionSkew = false)
@@ -415,45 +422,109 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Overrided Methods
-
+		public override void OnApplyTemplate()
+		{
+			base.OnApplyTemplate();
+			PART_content = GetTemplateChild<DockPanel>(nameof(PART_content));
+			PART_title = GetTemplateChild<Label>(nameof(PART_title));
+			PART_main = GetTemplateChild<Grid>(nameof(PART_main));
+			PART_segments = GetTemplateChild<Grid>(nameof(PART_segments));
+			PART_categorylabels = GetTemplateChild<Grid>(nameof(PART_categorylabels));
+		}
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-			_segments.Children.Clear();
+			PART_segments.Children.Clear();
 
 			var context = new ProviderContext(Data.Count);
 			MaterialProvider.Reset(context);
 
-			var radius = (_segments.RenderSize.Smallest() * CircleScale) / 2;
+			var radius = (PART_segments.RenderSize.Smallest() * CircleScale) / 2;
 
 			var total = Data.SumValue();
 			var angleTrace = 0d;
-
+			var actualRingWidth = radius;
 			foreach (var d in Data)
 			{
 				var materialSet = MaterialProvider.ProvideNext(context);
-
 				var degrees = (d.Value / total) * 360;
-				//TODO PiePath
-				var activePath = new ArcPath(degrees, angleTrace, radius, CircleScale, radius, _segments.RenderSize, d)
+
+				var activePath = new ArcPath(degrees, angleTrace, actualRingWidth, CircleScale, radius, PART_segments.RenderSize, d)
 				{
 					Fill = SegmentForeground.GetMaterial(materialSet),
 					MouseOverFill = materialSet.GetMaterial(Luminosity.P700),
 					DataContext = this
 				};
-
-				// TODO FIX this
-				//activePath.SetBinding(Shape.StrokeProperty, new Binding("SegmentStroke"));
-				//activePath.SetBinding(Shape.StrokeThicknessProperty, new Binding("SegmentStrokeThickness"));
 				activePath.Click += segmentClicked;
-				
-				_segments.Children.Add(activePath);
-
+				PART_segments.Children.Add(activePath);
 				d.RenderedVisual = activePath;
-
 				angleTrace += degrees;
 			}
-			renderCategoryLabels();
+			if (FocusedSegment == null)
+			{
+				return;
+			}
+			PART_categorylabels.Children.Clear();
+			var diameter = PART_segments.RenderSize.Smallest() * CircleScale;
+
+			var outerLabelRadius = (diameter / 2) * OuterLabelPositionScale;
+			var overlayedLabelRadius = (diameter / 2) - (actualRingWidth / 2);
+
+			var targetAngularOffset = FocusedSegment.RequireType<ArcPath>().CalculateAngularOffset();
+			MaterialProvider.Reset(context);
+			foreach (var d in Data)
+			{
+				var materialSet = MaterialProvider.ProvideNext(context);
+
+				var categoryNameLabel = positionLabel(d, outerLabelRadius, targetAngularOffset, true);
+
+				categoryNameLabel.Content = d.CategoryName;
+				categoryNameLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
+				categoryNameLabel.Foreground = BarTotalForeground.GetMaterial(materialSet);
+				PART_categorylabels.Children.Add(categoryNameLabel);
+
+				var valueLabel = positionLabel(d, overlayedLabelRadius, targetAngularOffset);
+
+				valueLabel.Content = d.Value;
+				valueLabel.BindTextualPrimitive<ValuePrimitive>(this);
+				valueLabel.Foreground = ValueForeground.GetMaterial(materialSet);
+				PART_categorylabels.Children.Add(valueLabel);
+			}
 			base.OnRender(drawingContext);
+
+			//var context = new ProviderContext(Data.Count);
+			//MaterialProvider.Reset(context);
+
+			//var radius = (PART_segments.RenderSize.Smallest() * CircleScale) / 2;
+
+			//var total = Data.SumValue();
+			//var angleTrace = 0d;
+
+			//foreach (var d in Data)
+			//{
+			//	var materialSet = MaterialProvider.ProvideNext(context);
+
+			//	var degrees = (d.Value / total) * 360;
+			//	//TODO PiePath
+			//	var activePath = new ArcPath(degrees, angleTrace, radius, CircleScale, radius, PART_segments.RenderSize, d)
+			//	{
+			//		Fill = SegmentForeground.GetMaterial(materialSet),
+			//		MouseOverFill = materialSet.GetMaterial(Luminosity.P700),
+			//		DataContext = this
+			//	};
+
+			//	// TODO FIX this
+			//	//activePath.SetBinding(Shape.StrokeProperty, new Binding("SegmentStroke"));
+			//	//activePath.SetBinding(Shape.StrokeThicknessProperty, new Binding("SegmentStrokeThickness"));
+			//	activePath.Click += segmentClicked;
+
+			//	PART_segments.Children.Add(activePath);
+
+			//	d.RenderedVisual = activePath;
+
+			//	angleTrace += degrees;
+			//}
+			//renderCategoryLabels();
+			//base.OnRender(drawingContext);
 		}
 
 		private void segmentClicked(object s, RoutedEventArgs e)

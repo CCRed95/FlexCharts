@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Sorting;
@@ -27,6 +28,12 @@ using FlexCharts.MaterialDesign.Providers;
 
 namespace FlexCharts.Controls
 {
+	[TemplatePart(Name = "PART_content", Type = typeof(DockPanel))]
+	[TemplatePart(Name = "PART_title", Type = typeof(Label))]
+	[TemplatePart(Name = "PART_main", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_segments", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_categorylabels", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_inactivesegments", Type = typeof(Grid))]
 	public class NestedArcChart : AbstractFlexChart<DoubleSeries>,
 		ICircularContract, IValueContract, ISecondaryValueContract, ISegmentContract
 	{
@@ -236,36 +243,33 @@ namespace FlexCharts.Controls
 
 		#region Fields
 		internal NestedArcChartVisualContext visualContext;
-		protected readonly Grid _segments = new Grid
-		{
-			RenderTransformOrigin = new Point(.5, .5),
-			ClipToBounds = true
-		};
-		protected readonly Grid _categoryLabels = new Grid();
-		protected readonly Grid _inactiveSegments = new Grid
-		{
-			RenderTransformOrigin = new Point(.5, 1),
-		};
+		protected DockPanel PART_content;
+		protected Label PART_title;
+		protected Grid PART_main;
+		protected Grid PART_segments;
+		protected Grid PART_categorylabels;
+		protected Grid PART_inactivesegments;
 		#endregion
 
 		#region Constructors
 		static NestedArcChart()
 		{
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(NestedArcChart), new FrameworkPropertyMetadata(typeof(NestedArcChart)));
 			DataSorterProperty.OverrideMetadata(typeof (NestedArcChart),
 				new FrameworkPropertyMetadata(new AscendingDataSorter()));
 			TitleProperty.OverrideMetadata(typeof(NestedArcChart), new FrameworkPropertyMetadata("Nested Arc Chart"));
 		}
 		public NestedArcChart()
 		{
-			var rotateTransform = new RotateTransform(0, .5, .5);
-			_segments.RenderTransform = rotateTransform;
-			BindingOperations.SetBinding(rotateTransform, RotateTransform.AngleProperty, new Binding("AngleOffset") { Source = this });
+			//var rotateTransform = new RotateTransform(0, .5, .5);
+			//_segments.RenderTransform = rotateTransform;
+			//BindingOperations.SetBinding(rotateTransform, RotateTransform.AngleProperty, new Binding("AngleOffset") { Source = this });
 
-			_segments.RenderTransformOrigin = new Point(.5, 1);
+			//_segments.RenderTransformOrigin = new Point(.5, 1);
 
-			_main.Children.Add(_inactiveSegments);
-			_main.Children.Add(_segments);
-			_main.Children.Add(_categoryLabels);
+			//_main.Children.Add(_inactiveSegments);
+			//_main.Children.Add(_segments);
+			//_main.Children.Add(_categoryLabels);
 			Loaded += onLoaded;
 		}
 		#endregion
@@ -354,26 +358,37 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Overrided Methods
+		public override void OnApplyTemplate()
+		{
+			base.OnApplyTemplate();
+			PART_content = GetTemplateChild<DockPanel>(nameof(PART_content));
+			PART_title = GetTemplateChild<Label>(nameof(PART_title));
+			PART_main = GetTemplateChild<Grid>(nameof(PART_main));
+			PART_segments = GetTemplateChild<Grid>(nameof(PART_segments));
+			PART_inactivesegments = GetTemplateChild<Grid>(nameof(PART_inactivesegments));
+			PART_categorylabels = GetTemplateChild<Grid>(nameof(PART_categorylabels));
+		}
+
 		protected override void OnRender(DrawingContext drawingContext)
 		{
 			visualContext = new NestedArcChartVisualContext();
 
-			_segments.Children.Clear();
-			_inactiveSegments.Children.Clear();
-			_categoryLabels.Children.Clear();
+			PART_segments.Children.Clear();
+			PART_inactivesegments.Children.Clear();
+			PART_categorylabels.Children.Clear();
 
 			var context = new ProviderContext(Data.Count);
 			MaterialProvider.Reset(context);
 
-			var fullArcDiameter = _main.RenderSize.Height - TopRingPadding;
+			var fullArcDiameter = PART_main.RenderSize.Height - TopRingPadding;
 			var fullArcWidth = fullArcDiameter - BottomRingPadding;
 			var subArcAvailableWidth = fullArcWidth / Data.Count;
 			var subArcActualWidth = subArcAvailableWidth * SegmentWidthPercentage;
 			var subRingOffset = (subArcAvailableWidth - subArcActualWidth) / 2;
 
-			var fullRadius = _main.RenderSize.Width / 2;
+			var fullRadius = PART_main.RenderSize.Width / 2;
 			var centerPoint = new Point(0, fullRadius);
-			
+
 			if (Data.Count < 1)
 			{
 				base.OnRender(drawingContext);
@@ -395,13 +410,13 @@ namespace FlexCharts.Controls
 				//BindingOperations.SetBinding(inactiveArcPath, Shape.FillProperty, new Binding("SegmentSpaceBackground") { Source = this });
 
 				categoryVisualContext.InactiveArcVisual = inactiveArcPath;
-				_inactiveSegments.Children.Add(inactiveArcPath);
+				PART_inactivesegments.Children.Add(inactiveArcPath);
 
 				var activeArcAngle = d.Value.Map(0, max, 0, MaxArcAngle);
-	
+
 				var activeArcPath = CalculateActiveArcPath(centerPoint, arcDiameter, subArcActualWidth, activeArcAngle);
 
-				
+
 				categoryVisualContext.CategoryMaterialSet = materialSet;
 
 				activeArcPath.Fill = SegmentForeground.GetMaterial(materialSet);
@@ -411,7 +426,7 @@ namespace FlexCharts.Controls
 				d.RenderedVisual = activeArcPath;
 
 				categoryVisualContext.ActiveArcVisual = activeArcPath;
-				_segments.Children.Add(activeArcPath);
+				PART_segments.Children.Add(activeArcPath);
 
 				visualContext.CategoryVisuals.Add(categoryVisualContext);
 				trace++;
@@ -434,7 +449,7 @@ namespace FlexCharts.Controls
 					HorizontalContentAlignment = HorizontalAlignment.Left,
 					Margin = new Thickness(arcLabelMarginLeft, (ltrace * subArcAvailableWidth) + subRingOffset + 6, 0, 0),
 					//Foreground = renderedFill.Lighten(.2),
-					Foreground =  ValueForeground.GetMaterial(currentCategoryVisualContext.CategoryMaterialSet),
+					Foreground = ValueForeground.GetMaterial(currentCategoryVisualContext.CategoryMaterialSet),
 					Content = d.CategoryName.ToUpper(),
 					Height = subArcAvailableWidth,
 					Padding = new Thickness(0),
@@ -456,7 +471,7 @@ namespace FlexCharts.Controls
 					HorizontalContentAlignment = HorizontalAlignment.Right,
 					Margin = new Thickness(arcLabelMarginLeft, (ltrace * subArcAvailableWidth) + subRingOffset + 6, 0, 0),
 					//Foreground = renderedFill.Lighten(.2),
-					Foreground =  ValueForeground.GetMaterial(currentCategoryVisualContext.CategoryMaterialSet),
+					Foreground = ValueForeground.GetMaterial(currentCategoryVisualContext.CategoryMaterialSet),
 					Content = d.Value + " Minutes",
 					Height = subArcAvailableWidth,
 					Padding = new Thickness(0),
@@ -466,7 +481,7 @@ namespace FlexCharts.Controls
 				currentCategoryVisualContext.ValuePercentLabel = valuePercentLabel;
 				valuePercentLabel.BindTextualPrimitive<ValuePrimitive>(this);
 				var valueLabelLeftSpace = arcLabelMarginLeft + ValueLabelHorizontalSpacing;
-				var valueLabelWidth = _main.RenderSize.Width - valueLabelLeftSpace;
+				var valueLabelWidth = PART_main.RenderSize.Width - valueLabelLeftSpace;
 				if (valueLabelWidth < 0) valueLabelWidth = 0;
 				var valueLabel = new Label()
 				{
@@ -475,7 +490,7 @@ namespace FlexCharts.Controls
 					HorizontalAlignment = HorizontalAlignment.Left,
 					VerticalContentAlignment = VerticalAlignment.Center,
 					HorizontalContentAlignment = HorizontalAlignment.Left,
-					Foreground =  SecondaryValueForeground.GetMaterial(currentCategoryVisualContext.CategoryMaterialSet),
+					Foreground = SecondaryValueForeground.GetMaterial(currentCategoryVisualContext.CategoryMaterialSet),
 					Margin = new Thickness(arcLabelMarginLeft + ValueLabelHorizontalSpacing, (ltrace * subArcAvailableWidth) + subRingOffset + 6, 0, 0),
 					Content = $" = {Math.Round(d.Value / 60, 2)} Hours",//{Math.Round(d.Value * 48):n0}
 					Height = subArcAvailableWidth,
@@ -485,9 +500,9 @@ namespace FlexCharts.Controls
 				currentCategoryVisualContext.ValueLabel = valueLabel;
 				valueLabel.BindTextualPrimitive<SecondaryValuePrimitive>(this);
 
-				_categoryLabels.Children.Add(categoryLabel);
-				_categoryLabels.Children.Add(valuePercentLabel);
-				_categoryLabels.Children.Add(valueLabel);
+				PART_categorylabels.Children.Add(categoryLabel);
+				PART_categorylabels.Children.Add(valuePercentLabel);
+				PART_categorylabels.Children.Add(valueLabel);
 
 				ltrace++;
 			}
@@ -502,7 +517,7 @@ namespace FlexCharts.Controls
 			var endOuterPolar = new PolarPoint(180, radius);
 			var startInnerPolar = new PolarPoint(0, radius - arcWidth);
 			var endInnerPolar = new PolarPoint(180, radius - arcWidth);
-			var space = new Size(_main.RenderSize.Width, _main.RenderSize.Height * 2);
+			var space = new Size(PART_main.RenderSize.Width, PART_main.RenderSize.Height * 2);
 			return new CustomPath(null)
 			{
 				Data = new PathGeometry
@@ -543,7 +558,7 @@ namespace FlexCharts.Controls
 			var endOuterPolar = new PolarPoint(90 + angle, radius);
 			var startInnerPolar = new PolarPoint(90, radius - arcWidth);
 			var endInnerPolar = new PolarPoint(90 + angle, radius - arcWidth);
-			var space = new Size(_main.RenderSize.Width, _main.RenderSize.Height * 2);
+			var space = new Size(PART_main.RenderSize.Width, PART_main.RenderSize.Height * 2);
 			return new CustomPath(null)
 			{
 				Data = new PathGeometry

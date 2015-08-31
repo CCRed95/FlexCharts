@@ -49,7 +49,7 @@ using System.Windows.Markup;
 
 [assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls")]
 [assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls.Primitives")]
-
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls.Core")]
 
 [assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data")]
 [assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data.Filtering")]

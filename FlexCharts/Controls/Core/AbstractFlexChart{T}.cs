@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
-using FlexCharts.Controls.Core;
 using FlexCharts.Data.Filtering;
 using FlexCharts.Data.Sorting;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Helpers.EventHelpers;
 
-namespace FlexCharts.Controls
+namespace FlexCharts.Controls.Core
 {
 	[ContentProperty("Data")]
-	public abstract class AbstractFlexChart<T> : CustomRootControl// : AbstractFlexChart
+	public abstract class AbstractFlexChart<T> : AbstractFlexChart// : AbstractFlexChart
 		where T : new()
 	{
 		#region Dependency Properties

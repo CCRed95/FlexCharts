@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
@@ -22,6 +23,13 @@ using FlexCharts.MaterialDesign.Providers;
 
 namespace FlexCharts.Controls
 {
+	[TemplatePart(Name = "PART_Content", Type = typeof(DockPanel))]
+	[TemplatePart(Name = "PART_Title", Type = typeof(Label))]
+	[TemplatePart(Name = "PART_Main", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_Bars", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_XAxis", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_BarLabels", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_Line", Type = typeof(Grid))]
 	public class BarChart : AbstractFlexChart<DoubleSeries>, ISegmentContract, IBarTotalContract, IXAxisContract
 	{
 		#region Dependency Properties
@@ -163,30 +171,19 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Fields
-		//protected readonly Grid _categoryLabels = new Grid();
-		protected readonly Grid _highlightGrid = new Grid();
-		protected readonly Grid _xAxisGrid = new Grid()
-		{
-			VerticalAlignment = VerticalAlignment.Bottom
-		};
-		protected readonly Grid _bars = new Grid
-		{
-			RenderTransformOrigin = new Point(.5, .5),
-		};
+		protected Grid _highlightGrid;
+		protected Grid _xAxisGrid;
+		protected Grid _bars;
 		#endregion
 
 		#region Constructors
 		static BarChart()
 		{
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(BarChart), new FrameworkPropertyMetadata(typeof(BarChart)));
 			TitleProperty.OverrideMetadata(typeof(BarChart), new FrameworkPropertyMetadata("Stacked Bar Chart"));
 		}
 		public BarChart()
 		{
-			//_main.Children.Add(_categoryLabels);
-			_main.Children.Add(_bars);
-			_main.Children.Add(_xAxisGrid);
-			_main.Children.Add(_highlightGrid);
-
 			Loaded += onLoad;
 		}
 		#endregion

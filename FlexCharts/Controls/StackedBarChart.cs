@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
@@ -26,6 +27,7 @@ using FlexCharts.Require;
 
 namespace FlexCharts.Controls
 {
+
 	public class StackedBarChart : AbstractFlexChart<CategoricalDoubleSeriesSeries>,
 		ISegmentContract, IBarTotalContract, IXAxisContract
 	{
@@ -189,9 +191,9 @@ namespace FlexCharts.Controls
 		public StackedBarChart()
 		{
 			//_main.Children.Add(_categoryLabels);
-			_main.Children.Add(_bars);
-			_main.Children.Add(_xAxisGrid);
-			_main.Children.Add(_highlightGrid);
+			//_main.Children.Add(_bars);
+			//_main.Children.Add(_xAxisGrid);
+			//_main.Children.Add(_highlightGrid);
 
 			Loaded += onLoad;
 		}

@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
+using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Filtering;
 using FlexCharts.Data.Sorting;
@@ -28,14 +29,13 @@ using FlexCharts.Require;
 
 namespace FlexCharts.Controls
 {
-	[TemplatePart(Name = "PART_Content", Type = typeof(DockPanel))]
-	[TemplatePart(Name = "PART_Title", Type = typeof(Label))]
-	[TemplatePart(Name = "PART_Main", Type = typeof(Grid))]
-
-	[TemplatePart(Name = "PART_Bars", Type = typeof(Grid))]
-	[TemplatePart(Name = "PART_XAxis", Type = typeof(Grid))]
-	[TemplatePart(Name = "PART_BarLabels", Type = typeof(Grid))]
-	[TemplatePart(Name = "PART_Line", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_content", Type = typeof(DockPanel))]
+	[TemplatePart(Name = "PART_title", Type = typeof(Label))]
+	[TemplatePart(Name = "PART_main", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_bars", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_xaxis", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_barlabels", Type = typeof(Grid))]
+	[TemplatePart(Name = "PART_line", Type = typeof(Grid))]
 	public class ParetoChart : AbstractFlexChart<DoubleSeries>,
 		IDotContract, ILineContract, IBarTotalContract, ISegmentContract
 	// TODO should be valuecontract instead of bartotalcontract?
@@ -265,11 +265,13 @@ namespace FlexCharts.Controls
 
 		internal AnimationState animationState = AnimationState.Collapsed;
 
-		protected Grid _barLabels;
-		protected Grid _lineVisual;
-		//protected readonly Grid _highlightGrid = new Grid();
-		protected Grid _xAxisGrid;
-		protected Grid _bars;
+		protected DockPanel PART_content;
+		protected Label PART_title;
+		protected Grid PART_bars;
+		protected Grid PART_main;
+		protected Grid PART_xaxis;
+		protected Grid PART_barlabels;
+		protected Grid PART_line;
 		#endregion
 
 		#region Constructors
@@ -290,9 +292,9 @@ namespace FlexCharts.Controls
 			//_main.Children.Add(_lineVisual);
 			//_main.Children.Add(_highlightGrid);
 			Loaded += onLoad;
-			
+
 		}
-		
+
 		#endregion
 
 		#region Methods
@@ -303,7 +305,7 @@ namespace FlexCharts.Controls
 			{
 				BeginRevealAnimation();
 			}
-			
+
 		}
 
 		//TODO null checks on all visualContext methods
@@ -408,19 +410,14 @@ namespace FlexCharts.Controls
 		public override void OnApplyTemplate()
 		{
 			base.OnApplyTemplate();
-			_content = GetTemplateChild("PART_Content") as DockPanel;
-			_titlelabel = GetTemplateChild("PART_Title") as Label;
-			_main = GetTemplateChild("PART_Main") as Grid;
+			PART_content = GetTemplateChild<DockPanel>(nameof(PART_content));
+			PART_title = GetTemplateChild<Label>(nameof(PART_title));
+			PART_bars = GetTemplateChild<Grid>(nameof(PART_bars));
+			PART_main = GetTemplateChild<Grid>(nameof(PART_main));
+			PART_xaxis = GetTemplateChild<Grid>(nameof(PART_xaxis));
+			PART_barlabels = GetTemplateChild<Grid>(nameof(PART_barlabels));
+			PART_line = GetTemplateChild<Grid>(nameof(PART_line));
 
-			_bars = GetTemplateChild("PART_Bars") as Grid;
-			_xAxisGrid = GetTemplateChild("PART_XAxis") as Grid;
-			_barLabels = GetTemplateChild("PART_BarLabels") as Grid;
-			_lineVisual = GetTemplateChild("PART_Line") as Grid;
-
-			if (_content == null || _titlelabel == null || _main == null || _bars == null || _xAxisGrid == null || _barLabels == null || _lineVisual == null)
-			{
-				throw new NullReferenceException("Template parts not available");
-			}
 		}
 		protected override void OnRender(DrawingContext drawingContext)
 		{
@@ -431,16 +428,16 @@ namespace FlexCharts.Controls
 			}
 			visualContext = new ParetoChartVisualContext();
 
-			_bars.Children.Clear();
-			_barLabels.Children.Clear();
-			_lineVisual.Children.Clear();
-			_xAxisGrid.Children.Clear();
+			PART_bars.Children.Clear();
+			PART_barlabels.Children.Clear();
+			PART_line.Children.Clear();
+			PART_xaxis.Children.Clear();
 			//_highlightGrid.Children.Clear();
 
 			var max = Data.MaxValue();
 
 			var context = new ProviderContext(Data.Count);
-			var barAvailableWidth = (_bars.RenderSize.Width) / Data.Count;
+			var barAvailableWidth = (PART_bars.RenderSize.Width) / Data.Count;
 			var barActiveWidth = barAvailableWidth * SegmentWidthPercentage;
 			var barLeftSpacing = (barAvailableWidth - barActiveWidth) / 2;
 			var barLabelSize = RenderingExtensions.EstimateLabelRenderSize(BarTotalFontFamily, BarTotalFontSize);
@@ -470,7 +467,7 @@ namespace FlexCharts.Controls
 				};
 				axisLabel.BindTextualPrimitive<XAxisPrimitive>(this);
 				categoryVisualContext.AxisLabel = axisLabel;
-				_xAxisGrid.Children.Add(axisLabel);
+				PART_xaxis.Children.Add(axisLabel);
 				visualContext.CategoryVisuals.Add(categoryVisualContext);
 				xtrace++;
 			}
@@ -480,7 +477,7 @@ namespace FlexCharts.Controls
 			MaterialProvider.Reset(context);
 			var horizontalTrace = 0d;
 			var xAxisHeight = barLabelSize.Height; //_xAxisGrid.ActualHeight;
-			var backHeight = _bars.RenderSize.Height - xAxisHeight;
+			var backHeight = PART_bars.RenderSize.Height - xAxisHeight;
 			var trace = 0;
 			foreach (var d in Data)
 			{
@@ -502,9 +499,9 @@ namespace FlexCharts.Controls
 
 
 				currentCategoryVisualContext.InactiveBarVisual = backRectangle;
-				_bars.Children.Add(backRectangle);
+				PART_bars.Children.Add(backRectangle);
 
-				var height = d.Value.Map(0, max, 0, _bars.RenderSize.Height - xAxisHeight - barLabelSize.Height);
+				var height = d.Value.Map(0, max, 0, PART_bars.RenderSize.Height - xAxisHeight - barLabelSize.Height);
 				var rectangle = new Rectangle
 				{
 					Width = barActiveWidth,
@@ -529,7 +526,7 @@ namespace FlexCharts.Controls
 
 				//TODO replace .RenderedVisual pairing method completely
 				d.RenderedVisual = rectangle;
-				_bars.Children.Add(rectangle);
+				PART_bars.Children.Add(rectangle);
 
 				#region Bar Value Label Generation
 
@@ -560,13 +557,13 @@ namespace FlexCharts.Controls
 
 				#endregion
 
-				_barLabels.Children.Add(barLabel);
+				PART_barlabels.Children.Add(barLabel);
 				horizontalTrace += barAvailableWidth;
 				trace++;
 			}
 			var total = Data.SumValue();
-			var availableLineGraphSize = new Size(_bars.ActualWidth - (DotRadius * 2),
-				_bars.ActualHeight - (DotRadius * 2) - xAxisHeight);
+			var availableLineGraphSize = new Size(PART_bars.ActualWidth - (DotRadius * 2),
+				PART_bars.ActualHeight - (DotRadius * 2) - xAxisHeight);
 			var startX = (barAvailableWidth / 2) - DotRadius;
 
 			var verticalpttrace = 0d;
@@ -585,8 +582,8 @@ namespace FlexCharts.Controls
 				var material = MaterialProvider.ProvideNext(context);
 				var currentCategoryVisualContext = visualContext.CategoryVisuals[pttrace];
 				var nextPoint = new Point(startX + (barAvailableWidth * pttrace), verticalpttrace + xAxisHeight);
-				var baseAnimationPoint = new Point(nextPoint.X, 0).LocalizeInCartesianSpace(_lineVisual);
-				var actualNextPoint = nextPoint.LocalizeInCartesianSpace(_lineVisual);
+				var baseAnimationPoint = new Point(nextPoint.X, 0).LocalizeInCartesianSpace(PART_line);
+				var actualNextPoint = nextPoint.LocalizeInCartesianSpace(PART_line);
 
 				// TODO get rid of this
 				var plottedPoint = IsLoaded ? actualNextPoint : baseAnimationPoint;
@@ -643,7 +640,7 @@ namespace FlexCharts.Controls
 						Duration = TimeSpan.FromMilliseconds(800)
 					};
 
-				_lineVisual.Children.Add(dot);
+				PART_line.Children.Add(dot);
 				Panel.SetZIndex(dot, 50);
 				verticalpttrace += d.Value.Map(0, total, 0, availableLineGraphSize.Height);
 				pttrace++;
@@ -665,7 +662,7 @@ namespace FlexCharts.Controls
 			};
 			BindingOperations.SetBinding(path, Shape.StrokeThicknessProperty, new Binding("LineStrokeThickness") { Source = this });
 
-			_lineVisual.Children.Add(path);
+			PART_line.Children.Add(path);
 			base.OnRender(drawingContext);
 		}
 
