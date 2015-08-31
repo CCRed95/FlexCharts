@@ -112,6 +112,8 @@ namespace FlexCharts.CustomGeometry
 		#endregion
 
 		#region Properties
+		public Guid Guid { get; } = Guid.NewGuid();
+
 		public static ArcPath Empty => new ArcPath();
 
 		protected override Geometry DefiningGeometry => CalculateArcPath(RenderSize, Radius, RingWidth, ArcAngle, PolarOffset);
@@ -123,6 +125,7 @@ namespace FlexCharts.CustomGeometry
 
 		#region Constructors
 		public ArcPath() { }
+
 		public ArcPath(double arcAngle, double polarOffset, double ringWidth, double ringScale, double radius, Size actualRenderSize, object dataPoint)
 		{
 			ArcAngle = arcAngle;
@@ -221,5 +224,10 @@ namespace FlexCharts.CustomGeometry
 			base.OnMouseLeave(e);
 		}
 		#endregion
+
+		public bool CheckEquality(ArcPath other)
+		{
+			return Guid == other.Guid;
+		}
 	}
 }

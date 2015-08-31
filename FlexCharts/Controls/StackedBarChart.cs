@@ -168,10 +168,6 @@ namespace FlexCharts.Controls
 		#endregion
 		#endregion
 
-		#region Properties
-		//public override IMaterialProvider MaterialProvider { get; set; } = GradientMaterialProvider.MaterialHLbB;
-		#endregion
-
 		#region Fields
 		//protected readonly Grid _categoryLabels = new Grid();
 		protected readonly Grid _highlightGrid = new Grid();
@@ -267,12 +263,6 @@ namespace FlexCharts.Controls
 					DataContext = this
 				};
 				axisLabel.BindTextualPrimitive<XAxisPrimitive>(this);
-				//BindingOperations.SetBinding(axisLabel, FontFamilyProperty, new Binding("XAxisFontFamily") { Source = this });
-				//BindingOperations.SetBinding(axisLabel, FontStyleProperty, new Binding("XAxisFontStyle") { Source = this });
-				//BindingOperations.SetBinding(axisLabel, FontWeightProperty, new Binding("XAxisFontWeight") { Source = this });
-				//BindingOperations.SetBinding(axisLabel, FontSizeProperty, new Binding("XAxisFontSize") { Source = this });
-				//BindingOperations.SetBinding(axisLabel, FontStretchProperty, new Binding("XAxisFontStretch") { Source = this });
-
 				_xAxisGrid.Children.Add(axisLabel);
 				xtrace++;
 			}
@@ -338,11 +328,6 @@ namespace FlexCharts.Controls
 					Margin = new Thickness(horizontalTrace, 0, 0, xAxisHeight + verticalTrace),
 				};
 				barLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
-				//BindingOperations.SetBinding(barLabel, FontFamilyProperty, new Binding("BarTotalFontFamily") { Source = this });
-				//BindingOperations.SetBinding(barLabel, FontStyleProperty, new Binding("BarTotalFontStyle") { Source = this });
-				//BindingOperations.SetBinding(barLabel, FontWeightProperty, new Binding("BarTotalFontWeight") { Source = this });
-				//BindingOperations.SetBinding(barLabel, FontSizeProperty, new Binding("BarTotalFontSize") { Source = this });
-				//BindingOperations.SetBinding(barLabel, FontStretchProperty, new Binding("BarTotalFontStretch") { Source = this });
 				d.RenderedVisual = pathBuffer;
 				_bars.Children.Add(barLabel);
 				horizontalTrace += barAvailableWidth;

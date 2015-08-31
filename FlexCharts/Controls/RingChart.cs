@@ -310,11 +310,6 @@ namespace FlexCharts.Controls
 			_main.Children.Add(_focusedSegmentValueLabel);
 			_main.Children.Add(_categoryLabels);
 			_focusedSegmentValueLabel.BindTextualPrimitive<SecondaryValuePrimitive>(this);
-			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontFamilyProperty, new Binding("SecondaryValueFontFamily") { Source = this });
-			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontStyleProperty, new Binding("SecondaryValueFontStyle") { Source = this });
-			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontWeightProperty, new Binding("SecondaryValueFontWeight") { Source = this });
-			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontSizeProperty, new Binding("SecondaryValueFontSize") { Source = this });
-			//BindingOperations.SetBinding(_focusedSegmentValueLabel, FontStretchProperty, new Binding("SecondaryValueFontStretch") { Source = this });
 
 			_focusedSegmentValueLabel.DataContext = this;
 			_focusedSegmentValueLabel.SetBinding(ContentProperty, new Binding("FocusedSegment.DataPoint.Value"));
@@ -472,7 +467,12 @@ namespace FlexCharts.Controls
 
 		private void segmentClicked(object s, RoutedEventArgs e)
 		{
-			FocusedSegment = s.RequireType<ArcPath>();
+			var arc = s.RequireType<ArcPath>();
+			if (!arc.CheckEquality(FocusedSegment.RequireType<ArcPath>()))
+			{
+				FocusedSegment = arc;
+			}
+			
 			//OnSegmentClicked();
 		}
 

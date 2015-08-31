@@ -262,10 +262,6 @@ namespace FlexCharts.Controls
 		}
 		#endregion
 
-		#region Properties
-		//public override IMaterialProvider MaterialProvider { get; set; } = SequentialMaterialProvider.RainbowPaletteOrder;
-		#endregion
-
 		#region Fields
 		protected readonly Grid _categoryLabels = new Grid();
 		protected readonly Grid _segments = new Grid

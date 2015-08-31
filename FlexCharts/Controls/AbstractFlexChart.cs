@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Markup;
 using System.Windows.Media;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Filtering;
@@ -22,40 +24,73 @@ using FlexCharts.MaterialDesign.Providers;
 namespace FlexCharts.Controls
 {
 	// TODO implement IAnimationreveal|collapseaspect here ( as abstract methods with no implementations? )
+	
 	public abstract class AbstractFlexChart : ContentControl
 	{
 		#region Dependency Properties
+		/// <summary>
+		/// Identifies the <see cref="Title"/> dependency property
+		/// </summary>
+		/// <returns>
+		/// The identifier for the <see cref="Title"/> dependency property
+		/// </returns>
 		public static readonly DependencyProperty TitleProperty = DP.Register(
 			new Meta<AbstractFlexChart, string>("Abstract Flex Chart"));
-
+		/// <summary>
+		/// Identifies the <see cref="FallbackMaterialSet"/> dependency property
+		/// </summary>
+		/// <returns>
+		/// The identifier for the <see cref="FallbackMaterialSet"/> dependency property
+		/// </returns>
 		public static readonly DependencyProperty FallbackMaterialSetProperty = DP.Register(
 			new Meta<AbstractFlexChart, MaterialSet>(MaterialPalette.Sets.GreyBrushSet));
-
+		/// <summary>
+		/// Identifies the <see cref="MaterialProvider"/> dependency property
+		/// </summary>
+		/// <returns>
+		/// The identifier for the <see cref="MaterialProvider"/> dependency property
+		/// </returns>
 		public static readonly DependencyProperty MaterialProviderProperty = DP.Register(
 			new Meta<AbstractFlexChart, IMaterialProvider>(SequentialMaterialProvider.RainbowPaletteOrder) { Flags = FXR });
-
+		/// <summary>
+		/// Identifies the <see cref="SegmentForeground"/> dependency property
+		/// </summary>
+		/// <returns>
+		/// The identifier for the <see cref="SegmentForeground"/> dependency property
+		/// </returns>
 		public static readonly DependencyProperty SegmentForegroundProperty = DP.Register(
 			new Meta<AbstractFlexChart, AbstractMaterialDescriptor>(new LuminosityMaterialDescriptor(Luminosity.P500)));
 
-
+		/// <summary>
+    /// Gets or sets a string that specifies the chart's title
+    /// </summary>
 		[Category("Charting")]
-		public string TitleContent
+		public string Title
 		{
 			get { return (string)GetValue(TitleProperty); }
 			set { SetValue(TitleProperty, value); }
 		}
+		/// <summary>
+		/// Gets or sets a MaterialSet for MaterialDescriptors to source from that cannot be logically paired with the MaterialProvider
+		/// </summary>
 		[Category("Charting")]
 		public MaterialSet FallbackMaterialSet
 		{
 			get { return (MaterialSet)GetValue(FallbackMaterialSetProperty); }
 			set { SetValue(FallbackMaterialSetProperty, value); }
 		}
+		/// <summary>
+		/// Gets or sets the MaterialProvider for the chart. Used during rendering to select material colors dynamically
+		/// </summary>
 		[Category("Charting")]
 		public IMaterialProvider MaterialProvider
 		{
 			get { return (IMaterialProvider)GetValue(MaterialProviderProperty); }
 			set { SetValue(MaterialProviderProperty, value); }
 		}
+		/// <summary>
+		/// Gets or sets the MaterialDescriptor for selecting the main segment foreground
+		/// </summary>
 		[Category("Charting")]
 		public AbstractMaterialDescriptor SegmentForeground
 		{
@@ -72,7 +107,6 @@ namespace FlexCharts.Controls
 
 		protected readonly DockPanel _content = new DockPanel();
 		protected readonly Grid _main = new Grid();
-
 		protected readonly Label _titleLabel = new Label()
 		{
 			VerticalContentAlignment = VerticalAlignment.Center,
@@ -99,6 +133,7 @@ namespace FlexCharts.Controls
 			BindingOperations.SetBinding(_titleLabel, ForegroundProperty, new Binding("Foreground") { Source = this });
 		}
 	}
+	[ContentProperty("Data")]
 	public abstract class AbstractFlexChart<T> : AbstractFlexChart
 		where T : new()
 	{
