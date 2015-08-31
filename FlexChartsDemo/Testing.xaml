@@ -4,97 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlexChartsDemo"
-        xmlns:controls="http://www.flexcharts.com/schemas/core"
-        xmlns:core="clr-namespace:FlexCharts.Controls.Core;assembly=FlexCharts"
         mc:Ignorable="d"
         Title="Testing" Height="300" Width="600">
-	<Window.Resources>
-		<Style x:Key="DarkFlexChart" TargetType="controls:AbstractFlexChart" BasedOn="{StaticResource Text22p}">
-			<Setter Property="Padding" Value="15"/>
-			<Setter Property="SegmentForeground" Value="P600"/>
-			<Setter Property="Foreground" Value="{StaticResource mtGrey200}"/>
-			<Setter Property="FontWeight" Value="Light"/>
-			<Setter Property="MaterialProvider" Value="{x:Static controls:GradientMaterialProvider.CoolColors}"/>
-
-			<Setter Property="controls:DotPrimitive.DotStroke" Value="->Grey400"/>
-			<Setter Property="controls:DotPrimitive.DotStrokeThickness" Value="2"/>
-			<Setter Property="controls:DotPrimitive.DotFill" Value="P500"/>
-			<Setter Property="controls:DotPrimitive.DotRadius" Value="5"/>
-
-			<Setter Property="controls:LinePrimitive.LineStroke" Value="P400"/>
-			<Setter Property="controls:LinePrimitive.LineStrokeThickness" Value="2"/>
-
-			<Setter Property="controls:XAxisPrimitive.XAxisForeground" Value="P400"/>
-			<Setter Property="controls:XAxisPrimitive.XAxisFontSize" Value="11pt"/>
-			<Setter Property="controls:XAxisPrimitive.XAxisFontStyle" Value="Italic"/>
-			<Setter Property="controls:XAxisPrimitive.XAxisFontWeight" Value="Light"/>
-
-			<Setter Property="controls:ValuePrimitive.ValueForeground" Value="->White000"/>
-			<Setter Property="controls:ValuePrimitive.ValueFontSize" Value="11pt"/>
-			<Setter Property="controls:ValuePrimitive.ValueFontStyle" Value="Italic"/>
-			<Setter Property="controls:ValuePrimitive.ValueFontWeight" Value="Light"/>
-
-			<Setter Property="controls:SegmentPrimitive.SegmentSpaceBackground" Value="->White000,0.03"/>
-			<Setter Property="controls:SegmentPrimitive.SegmentWidthPercentage" Value=".6"/>
-
-			<Setter Property="controls:BarTotalPrimitive.BarTotalForeground" Value="P600"/>
-			<Setter Property="controls:BarTotalPrimitive.BarTotalFontSize" Value="14pt"/>
-
-
-		</Style>
-		<Style x:Key="darkpareto" TargetType="controls:AbstractFlexChart" BasedOn="{StaticResource DarkFlexChart}">
-			<Setter Property="controls:BarTotalPrimitive.BarTotalFontSize" Value="10pt"/>
-		</Style>
-		<Style x:Key="darkring" TargetType="controls:AbstractFlexChart" BasedOn="{StaticResource DarkFlexChart}">
-			<Setter Property="controls:SegmentPrimitive.SegmentWidthPercentage" Value=".7"/>
-			<Setter Property="controls:BarTotalPrimitive.BarTotalForeground" Value="P500"/>
-			<Setter Property="controls:SecondaryValuePrimitive.SecondaryValueForeground" Value="P100"/>
-			<Setter Property="controls:SecondaryValuePrimitive.SecondaryValueFontSize" Value="32pt"/>
-			<Setter Property="controls:RingPrimitive.RingWidthPercentage" Value=".3"/>
-			<Setter Property="controls:PolarLabelingPrimitive.OuterLabelPositionScale" Value="1.2"/>
-
-		</Style>
-		<Style x:Key="darkpie" TargetType="controls:AbstractFlexChart" BasedOn="{StaticResource DarkFlexChart}">
-
-
-		</Style>
-		<Style x:Key="darkstackedbar" TargetType="controls:AbstractFlexChart" BasedOn="{StaticResource DarkFlexChart}">
-			<Setter Property="controls:XAxisPrimitive.XAxisForeground" Value="P200"/>
-			<Setter Property="controls:BarTotalPrimitive.BarTotalForeground" Value="P300"/>
-			<Setter Property="controls:BarTotalPrimitive.BarTotalFontSize" Value="11pt"/>
-			<Setter Property="controls:SegmentPrimitive.SegmentSpaceBackground" Value="->White000,.05"/>
-			<Setter Property="MaterialProvider" Value="{x:Static controls:SequentialMaterialProvider.CoolColors}"/>
-		</Style>
-		<Style x:Key="darknestedarc" TargetType="controls:NestedArcChart" BasedOn="{StaticResource DarkFlexChart}">
-			<Setter Property="SecondaryValueForeground" Value="->Grey500"/>
-			<Setter Property="ValueForeground" Value="P400"/>
-		</Style>
-		<Style x:Key="darkhorizontalbarchart" TargetType="controls:HorizontalBarChart" BasedOn="{StaticResource DarkFlexChart}">
-			<Setter Property="BarTotalFontSize" Value="12pt"/>
-			<Setter Property="YAxisFontStyle" Value="Italic"/>
-		</Style>
-		
-	</Window.Resources>
-	<Grid >
-
-		<!--<local:TestCustomControl Width="30" Height="50" Background="BlueViolet">
-			
-		</local:TestCustomControl>-->
-		<!--<core:CustomRootControl></core:CustomRootControl>-->
-
-		<controls:ParetoChart >
-                <controls:ParetoChart.Data>
-                    <controls:CategoricalDouble CategoryName="A" Value="31"/>
-                    <controls:CategoricalDouble CategoryName="B" Value="34"/>
-                    <controls:CategoricalDouble CategoryName="C" Value="27"/>
-                    <controls:CategoricalDouble CategoryName="D" Value="24"/>
-                    <controls:CategoricalDouble CategoryName="E" Value="21"/>
-                    <controls:CategoricalDouble CategoryName="F" Value="18"/>
-                    <controls:CategoricalDouble CategoryName="R" Value="15"/>
-                    <controls:CategoricalDouble CategoryName="E" Value="13"/>
-                    <controls:CategoricalDouble CategoryName="F" Value="9"/>
-                    <controls:CategoricalDouble CategoryName="R" Value="7"/>
-                </controls:ParetoChart.Data>
-            </controls:ParetoChart>
-	</Grid>
+  <Grid >
+    <!--<controls:ParetoChart >
+      <controls:ParetoChart.Data>
+        <controls:CategoricalDouble CategoryName="A" Value="31"/>
+        <controls:CategoricalDouble CategoryName="B" Value="34"/>
+        <controls:CategoricalDouble CategoryName="C" Value="27"/>
+        <controls:CategoricalDouble CategoryName="D" Value="24"/>
+        <controls:CategoricalDouble CategoryName="E" Value="21"/>
+        <controls:CategoricalDouble CategoryName="F" Value="18"/>
+        <controls:CategoricalDouble CategoryName="R" Value="15"/>
+        <controls:CategoricalDouble CategoryName="E" Value="13"/>
+        <controls:CategoricalDouble CategoryName="F" Value="9"/>
+        <controls:CategoricalDouble CategoryName="R" Value="7"/>
+      </controls:ParetoChart.Data>
+    </controls:ParetoChart>-->
+  </Grid>
 </Window>
