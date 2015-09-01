@@ -51,8 +51,8 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="materialControls:MaterialShell">
-					<Border x:Name="WindowBorder" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}" Background="{StaticResource mtGrey50}">
-						<Grid>
+					<Border x:Name="WindowBorder" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}" Background="{Binding MaterialTheme.P800}">
+						<Grid Background="{Binding MaterialTheme.P800}">
 							<Border BorderThickness="0">
 								<AdornerDecorator>
 									<Grid x:Name="LayoutRoot">
@@ -61,8 +61,8 @@
 											<RowDefinition Height="*" />
 											<RowDefinition Height="15" />
 										</Grid.RowDefinitions>
-										<ContentPresenter Grid.Row="1" Grid.RowSpan="2" Margin="0"/>
-										<Rectangle x:Name="HeaderBackground" Height="32" Fill="{StaticResource mtTeal800}" VerticalAlignment="Top" Grid.Row="0"/>
+										<ContentPresenter Grid.Row="1" Grid.RowSpan="1" Margin="2"/>
+										<Rectangle x:Name="HeaderBackground" Height="32" Fill="{Binding MaterialTheme.P800}" VerticalAlignment="Top" Grid.Row="0"/>
 										<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" Grid.Row="0">
 											<Button Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}" ToolTip="minimize" Style="{StaticResource WindowButtonStyle}">
 												<Button.Content>
@@ -104,7 +104,7 @@
 													 FontWeight="{TemplateBinding FontWeight}"/>-->
 										<Grid Grid.Row="2">
 											<Path x:Name="ResizeGrip" Visibility="Collapsed" Width="12" Height="12" Margin="1" HorizontalAlignment="Right"
-                                        Stroke="{StaticResource mtTeal400}" StrokeThickness="1" Stretch="None" Data="F1 M1,10 L3,10 M5,10 L7,10 M9,10 L11,10 M2,9 L2,11 M6,9 L6,11 M10,9 L10,11 M5,6 L7,6 M9,6 L11,6 M6,5 L6,7 M10,5 L10,7 M9,2 L11,2 M10,1 L10,3" />
+                                        Stroke="{Binding MaterialTheme.P400}" StrokeThickness="1" Stretch="None" Data="F1 M1,10 L3,10 M5,10 L7,10 M9,10 L11,10 M2,9 L2,11 M6,9 L6,11 M10,9 L10,11 M5,6 L7,6 M9,6 L11,6 M6,5 L6,7 M10,5 L10,7 M9,2 L11,2 M10,1 L10,3" />
 										</Grid>
 									</Grid>
 								</AdornerDecorator>

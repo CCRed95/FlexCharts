@@ -151,6 +151,7 @@
     <Compile Include="MaterialDesign\Material.cs" />
     <Compile Include="MaterialDesign\MaterialPalette.cs" />
     <Compile Include="MaterialDesign\MaterialSet.cs" />
+    <Compile Include="MaterialDesign\MaterialTheme.cs" />
     <Compile Include="MaterialDesign\Providers\AlternatingMaterialProvider.cs" />
     <Compile Include="MaterialDesign\Providers\CyclicalBehavior.cs" />
     <Compile Include="MaterialDesign\Providers\GradientMaterialProvider.cs" />

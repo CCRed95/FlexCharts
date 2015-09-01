@@ -55,12 +55,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\LuminosityToBrushConverter.cs" />
+    <Compile Include="IconDrawablesGallery.xaml.cs">
+      <DependentUpon>IconDrawablesGallery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MaterialControls\Converters\TextFieldHintVisibilityConverter.cs" />
     <Compile Include="MaterialControls\MaterialShell.cs" />
     <Compile Include="MaterialControls\TextField.cs" />
     <Compile Include="ReportViewer.xaml.cs">
       <DependentUpon>ReportViewer.xaml</DependentUpon>
     </Compile>
+    <Page Include="IconDrawablesGallery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
