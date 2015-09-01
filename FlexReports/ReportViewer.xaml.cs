@@ -14,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FlexCharts.Controls;
+using FlexCharts.Extensions;
 using FlexCharts.Require;
 
 namespace FlexReports
@@ -30,14 +31,22 @@ namespace FlexReports
 
 		private void MenuExpand(object s, RoutedEventArgs e)
 		{
-			LeftMenu.BeginAnimation(WidthProperty, new DoubleAnimation(500, new Duration(TimeSpan.FromMilliseconds(200))));
-			Dimmer.BeginAnimation(OpacityProperty, new DoubleAnimation(.6, new Duration(TimeSpan.FromMilliseconds(200))));
+			LeftMenu.beginAnimation(WidthProperty, 300, 500);
+			Dimmer.beginAnimation(OpacityProperty, 300, .5);
+			TopDimmer.beginAnimation(OpacityProperty, 300, .5);
+			//LeftMenu.BeginAnimation(WidthProperty, new DoubleAnimation(500, new Duration(TimeSpan.FromMilliseconds(200))));
+			//Dimmer.BeginAnimation(OpacityProperty, new DoubleAnimation(.7, new Duration(TimeSpan.FromMilliseconds(200))));
 		}
 
 		private void MenuCollapse(object s, RoutedEventArgs e)
 		{
-			LeftMenu.BeginAnimation(WidthProperty, new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(200))));
-			Dimmer.BeginAnimation(OpacityProperty, new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(200))));
+			LeftMenu.beginAnimation(WidthProperty, 300, 0);
+			Dimmer.beginAnimation(OpacityProperty, 300, 0);
+			TopDimmer.beginAnimation(OpacityProperty, 300, 0);
+			//LeftMenu.BeginAnimation(WidthProperty, new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(200))));
+			//Dimmer.BeginAnimation(OpacityProperty, new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(200))));
 		}
+
+		
 	}
 }

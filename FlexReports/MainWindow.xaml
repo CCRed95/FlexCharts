@@ -5,64 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://www.flexcharts.com/schemas/core"
         xmlns:materialControls="clr-namespace:FlexReports.MaterialControls"
-        mc:Ignorable="d" Style ="{StaticResource MyWindowStyle}"
+        mc:Ignorable="d" 
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
 				TextOptions.TextRenderingMode="Aliased"
-        Title="TestFlexDocumentViewer" Height="600" Width="1000">
-    <Window.Resources>
-        <Style x:Key="PathButton" TargetType="{x:Type Button}">
-            <Setter Property="Foreground" Value="{StaticResource mtGrey600}" />
-            <Setter Property="Background" Value="{StaticResource mtBlue300}" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Padding" Value="1" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid Background="{TemplateBinding Background}">
-                            <ContentPresenter x:Name="contentPresenter"
-                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                          Margin="{TemplateBinding Padding}"
-                          RecognizesAccessKey="True" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource mtGrey400}" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource BlueColorBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    <DockPanel Background="White">
-        <DockPanel Dock="Top" Height="50" VerticalAlignment="Top">
-            <Button DockPanel.Dock="Left" Width="60" HorizontalAlignment="Left" Style="{StaticResource PathButton}">
-                <Button.Content>
-                    <Path Data="M3,18h18v-2H3v2zm0,-5h18v-2H3v2zm0,-7v2h18V6H3z" Fill="White">
-                        <Path.RenderTransform>
-                            <ScaleTransform ScaleX="1.6" ScaleY="1.6" CenterX="15" CenterY="15"/>
-                        </Path.RenderTransform>
-                    </Path>
-                </Button.Content>
-            </Button>
-            <StackPanel Background="{StaticResource mtGrey900}"/>
-        </DockPanel>
-			<DockPanel Dock="Bottom">
-				<StackPanel Orientation="Horizontal">
-					<StackPanel Width="60" Background="{StaticResource mtGrey900}"/>	
-				</StackPanel>
-			</DockPanel>
-
-    </DockPanel>
+        Title="TestFlexDocumentViewer" Height="200" Width="1000">
+	<Grid>
+		
+	</Grid>
 
 </Window>
 <!--<DockPanel>

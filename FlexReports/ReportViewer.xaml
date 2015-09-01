@@ -7,35 +7,33 @@
         mc:Ignorable="d"
 				Style="{StaticResource MaterialShell}"
         Title="Report Viewer" Height="600" Width="800">
+	<DockPanel>
+		<StackPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey50}" Width="0" Orientation="Vertical">
 
-  <StackPanel Background="{StaticResource mtGrey50}" Orientation="Vertical">
-    <DockPanel DockPanel.Dock="Top" Height="70" Background="{StaticResource mtIndigo600}">
-      
-			<StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-				<ToggleButton Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="20 0" 
+		</StackPanel>
+		<Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
+			<StackPanel  Orientation="Vertical">
+				<DockPanel Height="70" Background="{StaticResource mtTeal500}" TextElement.Foreground="{StaticResource mtGrey50}">
+					<StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+						<ToggleButton Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="20 0" 
 											HorizontalAlignment="Right" Checked="MenuExpand" Unchecked="MenuCollapse"/>
-				<Label Content="Report Viewer" Foreground="{StaticResource mtGrey50}" Style="{StaticResource _t16pSubheadMed}" 
+						<Label Content="Report Viewer" Style="{StaticResource _t16pSubheadMed}" 
 							 Padding="30 0"/>
-			</StackPanel>
-			
-      <DockPanel DockPanel.Dock="Right">
-        <Path Style="{StaticResource drawableSearch}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="10 0"/>
-				<TextBox Height="30" Width="200" DockPanel.Dock="Right" Style="{StaticResource MaterialDesignTextBox}" 
+					</StackPanel>
+					<DockPanel DockPanel.Dock="Right">
+						<Path Style="{StaticResource drawableSearch}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="10 0"/>
+						<TextBox Height="40" Width="300" DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
 								 materialControls:TextField.Hint="Search" HorizontalAlignment="Right"/>
-        
-      </DockPanel>
+					</DockPanel>
+				</DockPanel>
+				<Border Height="70" Background="{StaticResource mtTeal500}"></Border>
+			</StackPanel>
+			<Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False" Margin="0 70 0 0"/>
+			<Border Background="Black" Name="TopDimmer" Opacity="0" IsHitTestVisible="False" Margin="80 0 0 0" Height="70" VerticalAlignment="Top"/>
+		</Grid>
 
-    </DockPanel>
-    <Border Height="80" Background="{StaticResource mtIndigo600}"></Border>
-    <DockPanel>
-      <StackPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey50}" Width="0"  Orientation="Vertical">
+	</DockPanel>
 
-      </StackPanel>
-      <Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
-        <Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
-      </Grid>
-    </DockPanel>
-  </StackPanel>
 
 </materialControls:MaterialShell>
 <!--<DockPanel Background="White">

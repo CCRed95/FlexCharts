@@ -113,6 +113,7 @@
     <Compile Include="Data\Structures\DoubleSeries.cs" />
     <Compile Include="Data\Structures\CategoricalDoubleSeries.cs" />
     <Compile Include="Exceptions\FSR.cs" />
+    <Compile Include="Extensions\AnimationExtensions.cs" />
     <Compile Include="Extensions\ChartingExtensions.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\CoordinateHelpers.cs" />

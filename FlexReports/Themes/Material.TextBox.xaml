@@ -7,8 +7,8 @@
 
     <Style x:Key="MaterialDesignTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource mtCyan500}" />
-        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource mtTeal200}" />
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
         <Setter Property="wpf:TextField.TextBoxViewMargin" Value="1 0 1 0" />
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="CaretBrush" Value="{Binding RelativeSource={RelativeSource Self}, Path=BorderBrush}"/>
@@ -48,12 +48,12 @@
                             <Setter Property="Opacity" TargetName="border" Value="0.56"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" Value="{StaticResource mtCyan500}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource mtTeal50}"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
                             <Setter TargetName="border" Property="Padding" Value="0 4 0 3"/>
-                            <Setter Property="BorderThickness" Value="0 0 0 2"/>
-                            <Setter Property="BorderBrush"  Value="{StaticResource mtCyan500}"/>
+                            <Setter Property="BorderThickness" Value="0 0 0 3"/>
+                            <Setter Property="BorderBrush"  Value="{StaticResource mtTeal100}"/>
                         </Trigger>
                         <Trigger Property="Validation.HasError" Value="true">
                             <Setter Property="BorderBrush" Value="#f44336"/>
@@ -81,19 +81,19 @@
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="MoveHintAsideStoryboard">
                             <DoubleAnimation Storyboard.TargetProperty="FontSize" Storyboard.TargetName="Hint"
-                                             Duration="0:0:0.3" To="10">
+                                             Duration="0:0:0.2" To="10">
                                 <DoubleAnimation.EasingFunction>
                                     <SineEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>    
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Hint"
-                                             Duration="0:0:0.3" To="1">
+                                             Duration="0:0:0.2" To="1">
                                 <DoubleAnimation.EasingFunction>
                                     <SineEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ThicknessAnimation Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Hint"
-                                             Duration="0:0:0.3" To="1,-16,1,0">
+                                             Duration="0:0:0.2" To="1,-16,1,0">
                                 <ThicknessAnimation.EasingFunction>
                                     <SineEase EasingMode="EaseOut" />
                                 </ThicknessAnimation.EasingFunction>
@@ -101,19 +101,19 @@
                         </Storyboard>
                         <Storyboard x:Key="MoveHintBackStoryboard">
                             <DoubleAnimation Storyboard.TargetProperty="FontSize" Storyboard.TargetName="Hint"
-                                             Duration="0:0:0.3">
+                                             Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <SineEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Hint"
-                                             Duration="0:0:0.3">
+                                             Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <SineEase EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ThicknessAnimation Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Hint"
-                                             Duration="0:0:0.3">
+                                             Duration="0:0:0.2">
                                 <ThicknessAnimation.EasingFunction>
                                     <SineEase EasingMode="EaseOut" />
                                 </ThicknessAnimation.EasingFunction>
@@ -147,18 +147,18 @@
                                 <Condition Property="wpf:TextField.IsNullOrEmpty" Value="False" />
                                 <Condition Property="IsKeyboardFocused" Value="True" />                                
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Hint" Property="Foreground" Value="{StaticResource mtCyan500}" />
+                            <Setter TargetName="Hint" Property="Foreground" Value="{StaticResource mtTeal300}" />
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" TargetName="border" Value="0.56"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" Value="{StaticResource mtCyan500}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource mtTeal50}"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
                             <Setter TargetName="border" Property="Padding" Value="0 4 0 3"/>
                             <Setter Property="BorderThickness" Value="0 0 0 2"/>
-                            <Setter Property="BorderBrush"  Value="{StaticResource mtCyan500}"/>
+                            <Setter Property="BorderBrush"  Value="{StaticResource mtTeal100}"/>
                         </Trigger>
                         <Trigger Property="Validation.HasError" Value="true">
                             <Setter Property="BorderBrush" Value="#f44336"/>
