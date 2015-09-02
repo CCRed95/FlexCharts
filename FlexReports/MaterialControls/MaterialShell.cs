@@ -8,13 +8,13 @@ namespace FlexReports.MaterialControls
 {
 	public class MaterialShell : Window
 	{
-		public static readonly DependencyProperty MaterialThemeProperty = DP.Register(
-			new Meta<MaterialShell, MaterialTheme>(new MaterialTheme()));
-		public MaterialTheme MaterialTheme
-		{
-			get { return (MaterialTheme) GetValue(MaterialThemeProperty); }
-			set { SetValue(MaterialThemeProperty, value); }
-		}
+		//public static readonly DependencyProperty MaterialThemeProperty = DP.Register(
+		//	new Meta<MaterialShell, MaterialTheme>(MaterialThemes.BlueTheme));
+		//public MaterialTheme MaterialTheme
+		//{
+		//	get { return (MaterialTheme) GetValue(MaterialThemeProperty); }
+		//	set { SetValue(MaterialThemeProperty, value); }
+		//}
 
 		protected void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)
 		{

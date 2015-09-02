@@ -29,19 +29,24 @@ namespace FlexReports
 	/// </summary>
 	public partial class ReportViewer
 	{
-		//private static readonly MaterialTheme purpleTheme = new MaterialTheme(MaterialPalette.Sets.PurpleBrushSet);
-
 		public ReportViewer()
 		{
-			//MaterialTheme = new MaterialTheme();//MaterialPalette.Sets.PurpleBrushSet);
 			InitializeComponent();
 			Loaded += OnLoaded;
 		}
-		private static DirectoryInfo rootDirectory = new DirectoryInfo(@"C:\Users\Eric\Downloads");
+		private static DirectoryInfo rootDirectory = new DirectoryInfo(@"C:\Users\bfgevren\Documents\FlexDocuments");
 
 		private void OnLoaded(object Sender, RoutedEventArgs Args)
 		{
-			LeftPanelItems.Children.Add(new DirectoryListItem() { Directory = rootDirectory });
+			foreach (var directory in rootDirectory.GetDirectories())
+			{
+				LeftPanelItems.Children.Add(new DirectoryListItem { Directory = directory });
+			}
+			foreach (var file in rootDirectory.GetFiles("*.flex"))
+			{
+				//LeftPanelItems.Children.Add(new DirectoryListItem { Directory = directory });
+			}
+
 		}
 
 		private void MenuExpand(object s, RoutedEventArgs e)
@@ -50,8 +55,8 @@ namespace FlexReports
 			Dimmer.beginAnimation(OpacityProperty, 300, .5);
 			AppToolbar.beginAnimation(OpacityProperty, 300, 0);
 			LeftPanelItems.beginAnimation(OpacityProperty, 300, 1);
-			//LeftMenu.BeginAnimation(WidthProperty, new DoubleAnimation(500, new Duration(TimeSpan.FromMilliseconds(200))));
-			//Dimmer.BeginAnimation(OpacityProperty, new DoubleAnimation(.7, new Duration(TimeSpan.FromMilliseconds(200))));
+			LeftIconMenu.beginAnimation(WidthProperty, 300, 0);
+			LeftTitleBar.beginAnimation(OpacityProperty, 300, 1);
 		}
 
 		private void MenuCollapse(object s, RoutedEventArgs e)
@@ -60,30 +65,19 @@ namespace FlexReports
 			Dimmer.beginAnimation(OpacityProperty, 300, 0);
 			AppToolbar.beginAnimation(OpacityProperty, 300, 1);
 			LeftPanelItems.beginAnimation(OpacityProperty, 300, 0);
-			//LeftMenu.BeginAnimation(WidthProperty, new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(200))));
-			//Dimmer.BeginAnimation(OpacityProperty, new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(200))));
+			LeftIconMenu.beginAnimation(WidthProperty, 300, 65);
+			LeftTitleBar.beginAnimation(OpacityProperty, 300, 0);
 		}
 
-		private Regex pathdataregex = new Regex("pathData=\"([^\"]*)");
-		private DirectoryInfo dir = new DirectoryInfo(@"C:\Users\bfgevren\Downloads\material-design-icons-master\XML Drawables");
-		//private void generateDrawableStyles()
-		//{
-		//	var xmlFiles = dir.GetFiles("*.xml");
-		//	var styleSheet = "";
-		//	foreach (var xmlFile in xmlFiles)
-		//	{
-		//		var filestream = new StreamReader(xmlFile.FullName);
-		//		var xmlContents = filestream.ReadToEnd();
-		//		var pathDataMatch = pathdataregex.Match(xmlContents);
-		//		var parsedPathData = pathDataMatch.Groups[1].Value;
-		//		var styleName = xmlFile.Name.Replace("_black_24dp","").Replace("ic_", "").Replace(".xml", "");
-		//		var styleStr =
-		//			$"<Style TargetType=\"Path\" x:Key=\"drawable{styleName}\" BasedOn=\"{{StaticResource drawable}}\"><Setter Property=\"Data\" Value=\"{parsedPathData}\"/></Style>";
-		//      styleSheet += styleStr;
+		private void SelectTheme(object s, RoutedEventArgs e)
+		{
+			PopupSpace.Content = new ThemeSelector(themeSelected);
+		}
 
-		//	}
+		private void themeSelected(MaterialTheme theme)
+		{
+			ThemePrimitive.SetTheme(this, theme);
 
-		//}
-
+		}
 	}
 }

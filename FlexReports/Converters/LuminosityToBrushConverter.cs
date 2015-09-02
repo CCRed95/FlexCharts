@@ -10,15 +10,36 @@ using FlexCharts.Require;
 
 namespace FlexReports.Converters
 {
-	public class LuminosityToBrushConverter : IValueConverter
+	public class LuminosityToBrushConverter : IMultiValueConverter
 	{
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+
+		public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+		{
+			try
+			{
+				var luminosity = values[1].RequireType<Luminosity>();
+				var themeSource = values[0].RequireType<MaterialTheme>();
+				return themeSource.FromLuminosity(luminosity);
+			}
+			catch
+			{
+				return MaterialPalette.Red500;
+			}
+		}
+
+		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+	}
+}
+/*public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			try
 			{
 				var luminosity = parameter.RequireType<Luminosity>();
-				var themeSource = value.RequireType<MaterialSet>();
-				return themeSource.GetMaterial(luminosity);
+				var themeSource = value.RequireType<MaterialTheme>();
+				return themeSource.FromLuminosity(luminosity);
 			}
 			catch
 			{
@@ -31,6 +52,4 @@ namespace FlexReports.Converters
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			throw new NotImplementedException();
-		}
-	}
-}
+		}*/

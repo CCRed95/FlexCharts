@@ -28,7 +28,7 @@
 								</StackPanel>
 
 							</StackPanel>
-							<Path HorizontalAlignment="Right" Margin="0 10 10 0"  Style="{StaticResource drawablemore_vert}" Fill="{Binding MaterialTheme.P700}"/>
+							<Path HorizontalAlignment="Right" Margin="0 10 10 0"  Style="{StaticResource drawablemore_vert}" Fill="{Binding Path=(materialControls:ThemePrimitive.Theme).P700}"/>
 						</Grid>
 					</Border>
 				</ControlTemplate>

@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.Require;
 
 namespace FlexCharts.MaterialDesign
 {
-	public class MaterialPalette
+	public static class MaterialPalette
 	{
+		
 		#region Materials
 		public static readonly Material White000 = new Material(Colors.c_White);
 		public static readonly Material Black000 = new Material(Colors.c_Black);
@@ -638,6 +640,7 @@ namespace FlexCharts.MaterialDesign
 			});
 		}
 
+
 		public class Shadows
 		{
 			public static DropShadowEffect ShadowDelta1 = new DropShadowEffect
@@ -774,7 +777,7 @@ namespace FlexCharts.MaterialDesign
 
 		public class Descriptors
 		{
-			
+
 			public static LuminosityMaterialDescriptor P050Descriptor = new LuminosityMaterialDescriptor(Luminosity.P050);
 			public static LuminosityMaterialDescriptor P100Descriptor = new LuminosityMaterialDescriptor(Luminosity.P100);
 			public static LuminosityMaterialDescriptor P200Descriptor = new LuminosityMaterialDescriptor(Luminosity.P200);
@@ -806,7 +809,8 @@ namespace FlexCharts.MaterialDesign
 
 		public class Filters
 		{
-		
+
 		}
+
 	}
 }

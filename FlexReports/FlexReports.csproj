@@ -59,10 +59,15 @@
     <Compile Include="IconDrawablesGallery.xaml.cs">
       <DependentUpon>IconDrawablesGallery.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MaterialControls\Converters\LuminosityToMaterialConverter.cs" />
     <Compile Include="MaterialControls\Converters\TextFieldHintVisibilityConverter.cs" />
     <Compile Include="MaterialControls\DirectoryListItem.cs" />
     <Compile Include="MaterialControls\MaterialShell.cs" />
+    <Compile Include="MaterialControls\PopupManager.cs" />
     <Compile Include="MaterialControls\TextField.cs" />
+    <Compile Include="MaterialControls\ThemePrimitive.cs" />
+    <Compile Include="MaterialControls\ThemeSelector.cs" />
+    <Compile Include="MaterialControls\VisualFeedback.cs" />
     <Compile Include="ReportViewer.xaml.cs">
       <DependentUpon>ReportViewer.xaml</DependentUpon>
     </Compile>
@@ -86,6 +91,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.DirectoryListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +107,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.PopupManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.Shadows.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -107,6 +120,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Material.TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.ThemeSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
