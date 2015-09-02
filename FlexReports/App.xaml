@@ -13,6 +13,7 @@
         <ResourceDictionary Source="Themes/Material.ToggleControl.xaml"/>
         <ResourceDictionary Source="Themes/Material.Drawables.xaml"/>
 				<ResourceDictionary Source="Themes/Material.TextBox.xaml"/>
+				<ResourceDictionary Source="Themes/Material.DirectoryListItem.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

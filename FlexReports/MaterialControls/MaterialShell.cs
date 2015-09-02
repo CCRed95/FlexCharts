@@ -15,13 +15,7 @@ namespace FlexReports.MaterialControls
 			get { return (MaterialTheme) GetValue(MaterialThemeProperty); }
 			set { SetValue(MaterialThemeProperty, value); }
 		}
-		public static readonly DependencyProperty P000Property = DP.Register(
-			new Meta<MaterialShell, SolidColorBrush>(new SolidColorBrush(Color.FromRgb(50,240,20))));
-		public SolidColorBrush P000
-		{
-			get { return (SolidColorBrush) GetValue(P000Property); }
-			set { SetValue(P000Property, value); }
-		}
+
 		protected void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)
 		{
 			e.CanExecute = ResizeMode == ResizeMode.CanResize || ResizeMode == ResizeMode.CanResizeWithGrip;

@@ -60,6 +60,7 @@
       <DependentUpon>IconDrawablesGallery.xaml</DependentUpon>
     </Compile>
     <Compile Include="MaterialControls\Converters\TextFieldHintVisibilityConverter.cs" />
+    <Compile Include="MaterialControls\DirectoryListItem.cs" />
     <Compile Include="MaterialControls\MaterialShell.cs" />
     <Compile Include="MaterialControls\TextField.cs" />
     <Compile Include="ReportViewer.xaml.cs">
@@ -82,6 +83,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ReportViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.DirectoryListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

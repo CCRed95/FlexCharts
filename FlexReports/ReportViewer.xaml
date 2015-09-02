@@ -23,7 +23,7 @@
 	</materialControls:MaterialShell.MaterialTheme>-->
   <Grid>
     <DockPanel>
-      <StackPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey900}" Width="65" Orientation="Vertical">
+      <StackPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" Width="360" Orientation="Vertical">
         <Grid Height="64" Background="{Binding MaterialTheme.P500}" TextElement.Foreground="{StaticResource mtGrey50}">
           <Label Content="Open Report" Style="{StaticResource t15pSubhead}" Padding="30 0" HorizontalAlignment="Left"/>
           <Grid>
@@ -33,8 +33,11 @@
             </Border>
           </Grid>
         </Grid>
-        <StackPanel Orientation="Vertical" Name="LeftPanelItems" Opacity="0">
-          <Border Height="60" BorderBrush="{StaticResource mtGrey300}" BorderThickness="0 0 0 1">
+        <StackPanel Orientation="Vertical" Name="LeftPanelItems" Opacity="1">
+          <!--<materialControls:DirectoryListItem Height="60"/>
+					<materialControls:DirectoryListItem Height="60"/>
+					<materialControls:DirectoryListItem Height="60"/>-->
+					<!--<Border Height="60" BorderBrush="{StaticResource mtGrey300}" BorderThickness="0 0 0 1">
             <Grid>
               <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                 <Path Style="{StaticResource drawablefolder}" Margin="15 9" Fill="{StaticResource mtGrey800}">
@@ -52,7 +55,7 @@
               </StackPanel>
 							<Path HorizontalAlignment="Right" Margin="0 10 10 0"  Style="{StaticResource drawablemore_vert}" Fill="{StaticResource mtGrey800}"/>
             </Grid>
-          </Border>
+          </Border>-->
 					<Border Height="80" BorderBrush="{StaticResource mtGrey800}" BorderThickness="0 0 0 1">
             <DockPanel>
               <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">

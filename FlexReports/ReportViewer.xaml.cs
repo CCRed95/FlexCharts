@@ -20,6 +20,7 @@ using FlexCharts.Extensions;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.Require;
+using FlexReports.MaterialControls;
 
 namespace FlexReports
 {
@@ -29,11 +30,18 @@ namespace FlexReports
 	public partial class ReportViewer
 	{
 		//private static readonly MaterialTheme purpleTheme = new MaterialTheme(MaterialPalette.Sets.PurpleBrushSet);
-		
+
 		public ReportViewer()
 		{
 			//MaterialTheme = new MaterialTheme();//MaterialPalette.Sets.PurpleBrushSet);
 			InitializeComponent();
+			Loaded += OnLoaded;
+		}
+		private static DirectoryInfo rootDirectory = new DirectoryInfo(@"C:\Users\Eric\Downloads");
+
+		private void OnLoaded(object Sender, RoutedEventArgs Args)
+		{
+			LeftPanelItems.Children.Add(new DirectoryListItem() { Directory = rootDirectory });
 		}
 
 		private void MenuExpand(object s, RoutedEventArgs e)
@@ -71,11 +79,11 @@ namespace FlexReports
 		//		var styleName = xmlFile.Name.Replace("_black_24dp","").Replace("ic_", "").Replace(".xml", "");
 		//		var styleStr =
 		//			$"<Style TargetType=\"Path\" x:Key=\"drawable{styleName}\" BasedOn=\"{{StaticResource drawable}}\"><Setter Property=\"Data\" Value=\"{parsedPathData}\"/></Style>";
-  //      styleSheet += styleStr;
+		//      styleSheet += styleStr;
 
 		//	}
 
 		//}
-		
+
 	}
 }
