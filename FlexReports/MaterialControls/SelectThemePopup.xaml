@@ -9,10 +9,10 @@
 	<UserControl.Resources>
 		<Style TargetType="local:SelectThemePopup">
 			<Setter Property="Background" Value="{StaticResource mtGrey50}"/>
-			<Setter Property="Padding" Value="20 10 20 20"/>
+			<Setter Property="Padding" Value="20 20 20 20"/>
 			<Setter Property="Effect" Value="{StaticResource MaterialDesignShadowDepth3}"/>
 			<Setter Property="Width" Value="340"/>
-			<Setter Property="Height" Value="260"/>
+			<Setter Property="Height" Value="280"/>
 			<!--<Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>-->
 			<!--<Setter Property="FontFamily" Value="Roboto"/>-->
 			<!--<Setter Property="d:DataContext" Value="{d:DesignInstance materialControls:MaterialShell, IsDesignTimeCreatable=True}"/>-->
@@ -21,22 +21,27 @@
 				<Setter.Value>
 					<ControlTemplate TargetType="local:SelectThemePopup">
 						<DockPanel Background="{TemplateBinding Background}">
-							<StackPanel DockPanel.Dock="Top" Height="50" Background="{Binding Path=(local:ThemePrimitive.Theme).P500}" 
+							<StackPanel DockPanel.Dock="Top" Height="50" Background="{Binding Path=(local:ThemePrimitive.Theme).P600}" 
 										Orientation="Horizontal"  TextElement.Foreground="{StaticResource mtGrey50}">
 								<Button Style="{StaticResource PathButton}" local:VisualFeedback.ClickFeedback="P800" Click="closePopup">
 									<Path Style="{StaticResource drawableclose}"/>
 								</Button>
 								<Label Content="Choose a Theme" Style="{StaticResource t15pSubhead}" Padding="20 0" HorizontalAlignment="Left"/>
 							</StackPanel>
-							<DockPanel DockPanel.Dock="Bottom" Margin="{TemplateBinding Padding}">
-								<WrapPanel Name="PART_bubbles" DockPanel.Dock="Bottom">
-								</WrapPanel>
-							</DockPanel>
+							<Grid DockPanel.Dock="Bottom" Margin="{TemplateBinding Padding}">
+								<UniformGrid Name="PART_bubbles" DockPanel.Dock="Bottom" Rows="3" Columns="4">
+									
+								</UniformGrid>
+								<!--<Grid Name="PART_explosion">
+									
+								</Grid>-->
+							</Grid>
 						</DockPanel>
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
 		</Style>
+
 	</UserControl.Resources>
 	<Grid>
 

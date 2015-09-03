@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlexReports"
         mc:Ignorable="d"
-        Title="IconDrawablesGallery" Height="800" Width="500">
+        Title="IconDrawablesGallery" Height="1800" Width="500">
   <Grid Background="{StaticResource mtGrey900}">
     <WrapPanel Margin="5">
       <Path Style="{StaticResource drawableannouncement}"/>

@@ -2,11 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:FlexReports.Themes"
                     xmlns:materialControls="clr-namespace:FlexReports.MaterialControls"
-                    xmlns:converters="clr-namespace:FlexReports.Converters">
+                    xmlns:converters="clr-namespace:FlexReports.Converters"
+                    xmlns:materialDesign="http://www.flexcharts.com/schemas/core">
   <converters:LuminosityToBrushConverter x:Key="l2bc"/>
   <Style x:Key="PathButton" TargetType="{x:Type Button}">
     <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
     <Setter Property="Background" Value="Transparent" />
+		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -22,21 +24,25 @@
 													Height="{TemplateBinding ActualHeight}" 
 													RenderTransformOrigin=".5,.5">
                   <Ellipse.Fill>
-										<MultiBinding Converter="{StaticResource l2bc}">
-											<Binding Path="(materialControls:ThemePrimitive.Theme)"/>
-											<Binding Path="(materialControls:VisualFeedback.ClickFeedback)"/>
-										</MultiBinding>
-									</Ellipse.Fill>
+                    <MultiBinding Converter="{StaticResource l2bc}">
+                      <Binding Path="(materialControls:ThemePrimitive.Theme)"/>
+                      <Binding Path="(materialControls:VisualFeedback.ClickFeedback)"/>
+                    </MultiBinding>
+                  </Ellipse.Fill>
                   <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
                   </Ellipse.RenderTransform>
                 </Ellipse>
               </Grid>
-              <ContentPresenter Name="icon" RenderTransformOrigin=".5,.5">
-                <ContentPresenter.RenderTransform>
-                  <ScaleTransform x:Name="iconScale" ScaleX="1" ScaleY="1"/>
-                </ContentPresenter.RenderTransform>
-              </ContentPresenter>
+
+              <Viewbox>
+                <ContentPresenter Name="icon" RenderTransformOrigin=".5,.5">
+                  <ContentPresenter.RenderTransform>
+                    <ScaleTransform x:Name="iconScale" ScaleX="1" ScaleY="1"/>
+                  </ContentPresenter.RenderTransform>
+                </ContentPresenter>
+              </Viewbox>
+
             </Grid>
           </Border>
 
@@ -88,4 +94,8 @@
       </Setter.Value>
     </Setter>
   </Style>
+  <Style x:Key="PathButtonDarkSurface" TargetType="{x:Type Button}" BasedOn="{StaticResource PathButton}">
+		<Setter Property="materialControls:VisualFeedback.ClickFeedback" Value="P600"/>
+		<Setter Property="materialControls:ThemePrimitive.Theme" Value="{x:Static materialDesign:MaterialThemes.GreyTheme}"/>
+	</Style>
 </ResourceDictionary>

@@ -251,7 +251,15 @@ namespace FlexCharts.MaterialDesign
 
 		public static ReadOnlyCollection<MaterialTheme> AllThemes = new ReadOnlyCollection<MaterialTheme>(new List<MaterialTheme>()
 		{
-			RedTheme, PinkTheme, PurpleTheme, DeepPurpleTheme, IndigoTheme, BlueTheme, LightBlueTheme, CyanTheme, TealTheme, GreenTheme, LightGreenTheme, LimeTheme, YellowTheme, AmberTheme, OrangeTheme, DeepOrangeTheme, BrownTheme, GreyTheme, BlueTheme
+			RedTheme, PinkTheme, PurpleTheme, DeepPurpleTheme, IndigoTheme, BlueTheme, LightBlueTheme, CyanTheme, TealTheme, GreenTheme, LightGreenTheme, LimeTheme, YellowTheme, AmberTheme, OrangeTheme, DeepOrangeTheme, BrownTheme, GreyTheme,
+		});
+		public static ReadOnlyCollection<MaterialTheme> CoreThemes = new ReadOnlyCollection<MaterialTheme>(new List<MaterialTheme>()
+		{
+			RedTheme, PinkTheme, PurpleTheme, DeepPurpleTheme, IndigoTheme, BlueTheme, LightBlueTheme, CyanTheme, TealTheme, GreenTheme, LightGreenTheme, LimeTheme, YellowTheme, AmberTheme, OrangeTheme, DeepOrangeTheme, BrownTheme
+		});
+		public static ReadOnlyCollection<MaterialTheme> RecommendedThemes = new ReadOnlyCollection<MaterialTheme>(new List<MaterialTheme>()
+		{
+			RedTheme, PinkTheme, PurpleTheme, DeepPurpleTheme, IndigoTheme, BlueTheme, LightBlueTheme, CyanTheme, TealTheme, GreenTheme, OrangeTheme, DeepOrangeTheme,
 		});
 	}
 }

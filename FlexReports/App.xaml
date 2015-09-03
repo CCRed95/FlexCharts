@@ -14,6 +14,7 @@
         <ResourceDictionary Source="Themes/Material.Drawables.xaml"/>
 				<ResourceDictionary Source="Themes/Material.TextBox.xaml"/>
 				<ResourceDictionary Source="Themes/Material.DirectoryListItem.xaml"/>
+				<ResourceDictionary Source="Themes/Material.FileListItem.xaml"/>
 				<!--<ResourceDictionary Source="Themes/Material.ThemeSelector.xaml"/>-->
 				<ResourceDictionary Source="Themes/Material.PopupManager.xaml"/>
 				<ResourceDictionary Source="Themes/Material.Button.xaml"/>

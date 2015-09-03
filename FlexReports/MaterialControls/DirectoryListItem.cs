@@ -10,7 +10,7 @@ using FlexCharts.Helpers.DependencyHelpers;
 
 namespace FlexReports.MaterialControls
 {
-	public class DirectoryListItem : Control
+	public class DirectoryListItem : ListBoxItem
 	{
 		public static readonly DependencyProperty DirectoryProperty = DP.Register(
 			new Meta<DirectoryListItem, DirectoryInfo>(null, DirectoryChanged));
@@ -33,7 +33,7 @@ namespace FlexReports.MaterialControls
 			set { SetValue(DirectoryProperty, value); }
 		}
 		public static readonly DependencyProperty DescriptionProperty = DP.Register(
-			new Meta<DirectoryListItem, string>("Directory Description"));
+			new Meta<DirectoryListItem, string>("Contains # Files"));
 		public string Description
 		{
 			get { return (string) GetValue(DescriptionProperty); }

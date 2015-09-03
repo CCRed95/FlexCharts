@@ -56,12 +56,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\LuminosityToBrushConverter.cs" />
+    <Compile Include="Data\DirectoryItemDataSource.cs" />
+    <Compile Include="Data\FileIconSelector.cs" />
+    <Compile Include="Data\FileItemDataSource.cs" />
+    <Compile Include="Data\FileSystemInfoDataSource.cs" />
     <Compile Include="IconDrawablesGallery.xaml.cs">
       <DependentUpon>IconDrawablesGallery.xaml</DependentUpon>
     </Compile>
     <Compile Include="MaterialControls\Converters\LuminosityToMaterialConverter.cs" />
     <Compile Include="MaterialControls\Converters\TextFieldHintVisibilityConverter.cs" />
     <Compile Include="MaterialControls\DirectoryListItem.cs" />
+    <Compile Include="MaterialControls\FileListItem.cs" />
     <Compile Include="MaterialControls\MaterialShell.cs" />
     <Compile Include="MaterialControls\PopupManager.cs" />
     <Compile Include="MaterialControls\SelectThemePopup.xaml.cs">
@@ -106,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.Drawables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.FileListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

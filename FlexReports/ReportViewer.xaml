@@ -5,26 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:m="clr-namespace:FlexReports.MaterialControls"
         xmlns:materialDesign="http://www.flexcharts.com/schemas/core"
+        xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
+        xmlns:data="clr-namespace:FlexReports.Data"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
-				d:DataContext="{d:DesignInstance m:MaterialShell, IsDesignTimeCreatable=True}"
+				
 				Style="{StaticResource MaterialShell}"
-																
+							m:VisualFeedback.ClickFeedback="P300"									
         Title="Report Viewer" Height="600" Width="800">
+  <!--d:DataContext="{d:DesignInstance m:MaterialShell, IsDesignTimeCreatable=True}"-->
   <m:MaterialShell.Resources>
 
   </m:MaterialShell.Resources>
   <Grid>
     <DockPanel>
       <DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" 
-									Width="65">
+									Width="360">
         <Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(m:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
           <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="64"/>
           </Grid.ColumnDefinitions>
-          <Grid Name="LeftTitleBar">
+          <Grid Name="LeftTitleBar" Opacity="1">
             <Label Content="Open Report" Style="{StaticResource t15pSubhead}" Padding="30 0" HorizontalAlignment="Left"/>
-            <Path Style="{StaticResource drawablesort_by_alpha}" HorizontalAlignment="Right"/>
+            <Button Style="{StaticResource PathButtonDarkSurface}" HorizontalAlignment="Right">
+              <Path Style="{StaticResource drawablesort_by_alpha}"/>
+            </Button>
           </Grid>
           <Border Grid.Column="1">
             <ToggleButton Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 0" 
@@ -32,127 +38,55 @@
           </Border>
         </Grid>
         <Grid DockPanel.Dock="Bottom">
-          <StackPanel Orientation="Vertical" Name="LeftPanelItems" Opacity="1">
-            <Border Height="80" BorderBrush="{StaticResource mtGrey800}" BorderThickness="0 0 0 1">
-              <DockPanel>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                  <Grid Width="80" HorizontalAlignment="Left">
-                    <Ellipse Margin="15" Width="50" Height="50" Fill="{Binding Path=(m:ThemePrimitive.Theme).P500}"/>
-                    <Label Content="M"/>
-                  </Grid>
-                  <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <Label Content="Monday, August 31 2015" Foreground="{StaticResource mtGrey400}" 
-										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-                    <Label Content="More information" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
-										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
-                  </StackPanel>
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="0 0 15 0"  VerticalAlignment="Center">
-                  <Label Content="12:10P" Foreground="{StaticResource mtGrey600}" 
-										 Style="{StaticResource t12pCaption}" FontSize="10pt"  Padding="0 0 0 5" HorizontalContentAlignment="Right"/>
-                  <Ellipse  Width="13" Height="13" Margin="0 0 10 0"  Fill="{Binding Path=(m:ThemePrimitive.Theme).P500}" HorizontalAlignment="Right "/>
-                </StackPanel>
-              </DockPanel>
-            </Border>
-            <Border Height="80" BorderBrush="{StaticResource mtGrey800}" BorderThickness="0 0 0 1">
-              <DockPanel>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                  <Grid Width="80" HorizontalAlignment="Left">
-                    <Ellipse Margin="15" Width="50" Height="50" Fill="{Binding Path=(m:ThemePrimitive.Theme).P500}"/>
-                    <Label Content="M"/>
-                  </Grid>
-                  <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <Label Content="Monday, August 31 2015" Foreground="{StaticResource mtGrey400}" 
-										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-                    <Label Content="More information" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
-										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
-                  </StackPanel>
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="0 0 15 0"  VerticalAlignment="Center">
-                  <Label Content="12:10P" Foreground="{StaticResource mtGrey600}" 
-										 Style="{StaticResource t12pCaption}" FontSize="10pt"  Padding="0 0 0 5" HorizontalContentAlignment="Right"/>
-                  <Ellipse  Width="13" Height="13" Margin="0 0 10 0"  Fill="{Binding Path=(m:ThemePrimitive.Theme).P500}" HorizontalAlignment="Right "/>
-                </StackPanel>
-              </DockPanel>
-            </Border>
-            <Border Height="80" BorderBrush="{StaticResource mtGrey800}" BorderThickness="0 0 0 1">
-              <DockPanel>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                  <Grid Width="80" HorizontalAlignment="Left">
-                    <Ellipse Margin="15" Width="50" Height="50" Fill="{Binding Path=(m:ThemePrimitive.Theme).P500}"/>
-                    <Label Content="M"/>
-                  </Grid>
-                  <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <Label Content="Monday, August 31 2015" Foreground="{StaticResource mtGrey400}" 
-										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-                    <Label Content="More information" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
-										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
-                  </StackPanel>
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="0 0 15 0"  VerticalAlignment="Center">
-                  <Label Content="12:10P" Foreground="{StaticResource mtGrey600}" 
-										 Style="{StaticResource t12pCaption}" FontSize="10pt"  Padding="0 0 0 5" HorizontalContentAlignment="Right"/>
-                  <Ellipse  Width="13" Height="13" Margin="0 0 10 0"  Fill="{Binding Path=(m:ThemePrimitive.Theme).P500}" HorizontalAlignment="Right "/>
-                </StackPanel>
-              </DockPanel>
-            </Border>
-            <Border Height="80" BorderBrush="{StaticResource mtGrey800}" BorderThickness="0 0 0 1">
-              <DockPanel>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                  <Grid Width="80" HorizontalAlignment="Left">
-                    <Ellipse Margin="15" Width="50" Height="50" Fill="{Binding Path=(m:ThemePrimitive.Theme).P500}"/>
-                    <Label Content="M"/>
-                  </Grid>
-                  <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <Label Content="Monday, August 31 2015" Foreground="{StaticResource mtGrey400}" 
-										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-                    <Label Content="More information" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
-										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
-                  </StackPanel>
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Margin="0 0 15 0"  VerticalAlignment="Center">
-                  <Label Content="12:10P" Foreground="{StaticResource mtGrey600}" 
-										 Style="{StaticResource t12pCaption}" FontSize="10pt"  Padding="0 0 0 5" HorizontalContentAlignment="Right"/>
-                  <Ellipse  Width="13" Height="13" Margin="0 0 10 0"  Fill="{Binding Path=(m:ThemePrimitive.Theme).P500}" HorizontalAlignment="Right "/>
-                </StackPanel>
-              </DockPanel>
-            </Border>
+          <StackPanel m:VisualFeedback.ClickFeedback="P050"	
+											Orientation="Vertical" Name="LeftPanelItems" Opacity="1">
+            <m:DirectoryListItem/>
+            <m:DirectoryListItem/>
+            <m:DirectoryListItem/>
+            <m:FileListItem/>
+            <m:FileListItem/>
+            <m:FileListItem/>
+            <m:FileListItem/>
           </StackPanel>
-          <StackPanel Orientation="Vertical" Name="LeftIconMenu" HorizontalAlignment="Right" Width="65"
+          <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="65"
 								Background="{StaticResource mtGrey900}">
-            <Path Style="{StaticResource drawablefind_in_page}"/>
-            <Path Style="{StaticResource drawablecode}"/>
-            <Path Style="{StaticResource drawabledashboard}"/>
-            <Path Style="{StaticResource drawableview_carousel}"/>
-            <Path Style="{StaticResource drawableview_day}"/>
-          </StackPanel>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+              <Button Style="{StaticResource PathButtonDarkSurface}">
+                <Path Style="{StaticResource drawablefind_in_page}"/>
+              </Button>
+              <Button Style="{StaticResource PathButtonDarkSurface}">
+                <Path Style="{StaticResource drawablecode}"/>
+              </Button>
+              <Button Style="{StaticResource PathButtonDarkSurface}">
+                <Path Style="{StaticResource drawabledashboard}"/>
+              </Button>
+              <Button Style="{StaticResource PathButtonDarkSurface}">
+                <Path Style="{StaticResource drawableview_carousel}"/>
+              </Button>
+              <Button Style="{StaticResource PathButtonDarkSurface}">
+                <Path Style="{StaticResource drawableview_day}"/>
+              </Button>
+            </StackPanel>
+          </Grid>
         </Grid>
-
-
-
       </DockPanel>
       <Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
         <StackPanel Orientation="Vertical">
           <Grid Height="64" Background="{Binding Path=(m:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
 
-            <Label Content="Report Viewer" Style="{StaticResource t15pSubhead}" HorizontalAlignment="Left"
+            <Label Content="FlexVIEW Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
 							 Padding="30 0" />
             <StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
-
-              <Button Style="{StaticResource PathButton}" m:VisualFeedback.ClickFeedback="P100">
+              <Button Style="{StaticResource PathButton}">
                 <Path Style="{StaticResource drawablesearch}"/>
               </Button>
-              <Button Style="{StaticResource PathButton}" m:VisualFeedback.ClickFeedback="P200">
+              <Button Style="{StaticResource PathButton}" Click="TransitionTheme">
                 <Path Style="{StaticResource drawableview_module}"/>
               </Button>
-              <Button Style="{StaticResource PathButton}" m:VisualFeedback.ClickFeedback="P700" Click="SelectTheme">
+              <Button Style="{StaticResource PathButton}" Click="SelectTheme">
                 <Path Style="{StaticResource drawablecolor_lens}"/>
               </Button>
-              <Button Style="{StaticResource PathButton}" m:VisualFeedback.ClickFeedback="P800">
+              <Button Style="{StaticResource PathButton}">
                 <Path Style="{StaticResource drawablemore_vert}"/>
               </Button>
             </StackPanel>
@@ -160,6 +94,52 @@
 								 materialControls:TextField.Hint="Search" HorizontalAlignment="Right"/>-->
 
           </Grid>
+          <!--<ListBox ItemsSource="{Binding FileExplorerItems}">
+            <ListBox.ItemTemplate>
+              <DataTemplate DataType="{x:Type data:FileSystemInfoDataSource}">
+                <Grid Height="60">
+                  <Border x:Name="active" Opacity="0"  Background="{Binding Path=(m:ThemePrimitive.Theme).P050}"/>
+                  <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                    <Path Name="icon" Style="{StaticResource drawable3d_rotation}" Margin="15 9" Fill="{StaticResource mtGrey700}">
+                      <Path.LayoutTransform>
+                        <ScaleTransform ScaleY="1.75" ScaleX="1.75" />
+                      </Path.LayoutTransform>
+                    </Path>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                      <Label Content="{Binding Item.Name, FallbackValue='archive folder'}" 
+														 Foreground="{StaticResource mtGrey800}" 
+										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
+                      <Label Content="{Binding Description}" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
+										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+
+                  </StackPanel>
+                  <Path HorizontalAlignment="Right" Margin="0 10 10 0"  Style="{StaticResource drawablemore_vert}" 
+										Fill="{Binding Path=(m:ThemePrimitive.Theme).P700}"/>
+                </Grid>
+                <DataTemplate.Triggers>
+									
+									--><!--<Trigger Property="IconSelector" Value="Directory">
+										<Setter Property="Style" Value="{StaticResource drawablefolder}" TargetName="icon"/>
+									</Trigger>
+									<Trigger Property="data:FileSystemInfoDataSource.IconSelector" Value="File">
+										<Setter Property="Style" Value="{StaticResource drawableinsert_drive_file}" TargetName="icon"/>
+									</Trigger>
+									<Trigger Property="data:FileSystemInfoDataSource.IconSelector" Value="Unknown">
+										<Setter Property="Style" Value="{StaticResource drawablelive_help}" TargetName="icon"/>
+									</Trigger>--><!--
+                </DataTemplate.Triggers>
+              </DataTemplate>
+
+            </ListBox.ItemTemplate>
+            --><!--<m:DirectoryListItem/>
+            <m:DirectoryListItem/>
+            <m:FileListItem/>
+
+            <ListBoxItem Content="archive folder"/>
+            <ListBoxItem Content="archive folder"/>--><!--
+          </ListBox>-->
+          <!--<m:FileListItem></m:FileListItem>-->
         </StackPanel>
         <Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
       </Grid>
@@ -171,32 +151,5 @@
       <!--<m:ThemeSelector Width="300" Height="450" ThemeSelected="themeSelected"/>-->
 
     </m:PopupManager>
-    
   </Grid>
-
-
-
 </m:MaterialShell>
-<!--<DockPanel Background="White">
-    <StackPanel Name="LeftMenu" DockPanel.Dock="Left" Width="70" Orientation="Vertical" Background ="{StaticResource mtGrey900}">
-      <ToggleButton Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 7 16 0" HorizontalAlignment="Right" Checked="MenuExpand" Unchecked="MenuCollapse"/>
-		</StackPanel> 
-		<StackPanel DockPanel.Dock="Right" Background="{StaticResource mtGrey50}" Orientation="Vertical">
-        <StackPanel Height="50" Background="{StaticResource mtBlueGrey600}" Orientation="Horizontal">
-					<Label Content="Report Viewer" Foreground="{StaticResource mtGrey50}" Style="{StaticResource t13pBody2}" Padding="20 0"/>
-				</StackPanel>
-    </StackPanel>
-	</DockPanel>-->
-
-<!--<DockPanel Height="70" Background="{StaticResource mtTeal500}" TextElement.Foreground="{StaticResource mtGrey50}">
-					<StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-						<ToggleButton Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="20 0" 
-											HorizontalAlignment="Right" Checked="MenuExpand" Unchecked="MenuCollapse"/>
-						<Label Content="Report Viewer" Style="{StaticResource _t16pSubheadMed}" 
-							 Padding="30 0"/>
-					</StackPanel>
-					<DockPanel DockPanel.Dock="Right">
-						<Path Style="{StaticResource drawablesearch}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="10 0"/>
-						<TextBox Height="40" Width="300" DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-								 materialControls:TextField.Hint="Search" HorizontalAlignment="Right"/>
-					</DockPanel>-->

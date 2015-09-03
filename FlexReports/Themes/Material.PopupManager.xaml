@@ -1,10 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:FlexReports.Themes"
-                    xmlns:materialControls="clr-namespace:FlexReports.MaterialControls">
+                    xmlns:materialControls="clr-namespace:FlexReports.MaterialControls"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
 	
 	<Duration x:Key="transition">0:0:0.15</Duration>
 	<KeyTime x:Key="transitionComplete">0:0:0.15</KeyTime>
+  <system:Double x:Key="revealStartZoom">1.2</system:Double>
+  <system:Double x:Key="collapseEndZoom">.8</system:Double>
 	<Style TargetType="materialControls:PopupManager">
 		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
 		<Setter Property="IsHitTestVisible" Value="False"/>
@@ -18,7 +21,7 @@
 						<Grid>
 							<ContentPresenter x:Name="cp" RenderTransformOrigin=".5,.5">
 								<ContentPresenter.RenderTransform>
-									<ScaleTransform x:Name="popupScale" ScaleX="1.2" ScaleY="1.2"/>
+									<ScaleTransform x:Name="popupScale" ScaleX="{StaticResource collapseEndZoom}" ScaleY="{StaticResource collapseEndZoom}"/>
 								</ContentPresenter.RenderTransform>
 							</ContentPresenter>
 						</Grid>
@@ -42,13 +45,13 @@
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleX" 
-																		 To=".8" Duration="{StaticResource transition}">
+																		 To="{StaticResource revealStartZoom}" Duration="{StaticResource transition}">
 											<DoubleAnimation.EasingFunction>
 												<SineEase EasingMode="EaseOut"/>
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleY" 
-																		 To=".8" Duration="{StaticResource transition}">
+																		 To="{StaticResource revealStartZoom}" Duration="{StaticResource transition}">
 											<DoubleAnimation.EasingFunction>
 												<SineEase EasingMode="EaseOut"/>
 											</DoubleAnimation.EasingFunction>
@@ -64,10 +67,10 @@
 											<DiscreteBooleanKeyFrame KeyTime="{StaticResource transitionComplete}" Value="False"/>
 										</BooleanAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleX">
-											<DiscreteDoubleKeyFrame KeyTime="{StaticResource transitionComplete}" Value="1.2"/>
+											<DiscreteDoubleKeyFrame KeyTime="{StaticResource transitionComplete}" Value="{StaticResource collapseEndZoom}"/>
 										</DoubleAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleY">
-											<DiscreteDoubleKeyFrame KeyTime="{StaticResource transitionComplete}" Value="1.2"/>
+											<DiscreteDoubleKeyFrame KeyTime="{StaticResource transitionComplete}" Value="{StaticResource collapseEndZoom}"/>
 										</DoubleAnimationUsingKeyFrames>
 
 									</Storyboard>

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using FlexCharts.Helpers.DependencyHelpers;
@@ -8,6 +10,8 @@ namespace FlexReports.MaterialControls
 {
 	public class MaterialShell : Window
 	{
+		private Grid ShellOverlayRoot;
+		public Grid GetShellOverlayRoot => ShellOverlayRoot;
 		//public static readonly DependencyProperty MaterialThemeProperty = DP.Register(
 		//	new Meta<MaterialShell, MaterialTheme>(MaterialThemes.BlueTheme));
 		//public MaterialTheme MaterialTheme
@@ -56,6 +60,18 @@ namespace FlexReports.MaterialControls
 			CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
 			CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
 			CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
+		}
+		public override void OnApplyTemplate()
+		{
+			base.OnApplyTemplate();
+			ShellOverlayRoot = GetTemplateChild<Grid>(nameof(ShellOverlayRoot));
+		}
+		public T GetTemplateChild<T>(string name) where T : DependencyObject
+		{
+			var templateChild = GetTemplateChild(name) as T;
+			if (templateChild == null)
+				throw new NullReferenceException($"TemplateChild {name} as {typeof(T)}");
+			return templateChild;
 		}
 	}
 }

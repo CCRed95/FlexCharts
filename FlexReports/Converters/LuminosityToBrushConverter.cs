@@ -18,6 +18,7 @@ namespace FlexReports.Converters
 			try
 			{
 				var luminosity = values[1].RequireType<Luminosity>();
+
 				var themeSource = values[0].RequireType<MaterialTheme>();
 				return themeSource.FromLuminosity(luminosity);
 			}
