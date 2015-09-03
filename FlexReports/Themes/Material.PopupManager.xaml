@@ -2,61 +2,117 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:FlexReports.Themes"
                     xmlns:materialControls="clr-namespace:FlexReports.MaterialControls">
-  <Style TargetType="materialControls:PopupManager">
-    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
+	
+	<Duration x:Key="transition">0:0:0.15</Duration>
+	<KeyTime x:Key="transitionComplete">0:0:0.15</KeyTime>
+	<Style TargetType="materialControls:PopupManager">
+		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
 		<Setter Property="IsHitTestVisible" Value="False"/>
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type materialControls:PopupManager}">
-          <Grid>
-            <Border Background="Black" x:Name="rootBorder" Opacity="0">
-							
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type materialControls:PopupManager}">
+					<Grid>
+						<Border Background="Black" x:Name="rootBorder" Opacity="0">
+
 						</Border>
 						<Grid>
 							<ContentPresenter x:Name="cp" RenderTransformOrigin=".5,.5">
-                <ContentPresenter.RenderTransform>
-                  <ScaleTransform x:Name="popupScale" ScaleX="0" ScaleY="0"/>
-                </ContentPresenter.RenderTransform>
-              </ContentPresenter>
+								<ContentPresenter.RenderTransform>
+									<ScaleTransform x:Name="popupScale" ScaleX="1.2" ScaleY="1.2"/>
+								</ContentPresenter.RenderTransform>
+							</ContentPresenter>
 						</Grid>
-            
-          </Grid>
-          <ControlTemplate.Triggers>
-					
-            <Trigger Property="HasContent" Value="True">
-							<Setter Property="IsHitTestVisible" Value="True"/>
-              <Trigger.EnterActions>
-                <BeginStoryboard>
-                  <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="rootBorder" Storyboard.TargetProperty="Opacity" 
-																		 To=".65" Duration="0:0:.1" />
+
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="materialControls:SelectThemePopup.PopupRequestClose">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="rootBorder" Storyboard.TargetProperty="Opacity" 
+																		 To="0" Duration="{StaticResource transition}">
+											<DoubleAnimation.EasingFunction>
+												<SineEase EasingMode="EaseOut"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="cp" Storyboard.TargetProperty="Opacity" 
-																		 To="1" Duration="0:0:.3" />
+																		 To="0" Duration="{StaticResource transition}">
+											<DoubleAnimation.EasingFunction>
+												<SineEase EasingMode="EaseOut"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleX" 
-																		 To="1" Duration="0:0:.3" />
+																		 To=".8" Duration="{StaticResource transition}">
+											<DoubleAnimation.EasingFunction>
+												<SineEase EasingMode="EaseOut"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleY" 
-																		 To="1" Duration="0:0:.3" />
-                  </Storyboard>
-                </BeginStoryboard>
-              </Trigger.EnterActions>
-              <Trigger.ExitActions>
-                <BeginStoryboard>
-                  <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="rootBorder" Storyboard.TargetProperty="Opacity" 
-																		 To="0" Duration="0:0:.1" />
+																		 To=".8" Duration="{StaticResource transition}">
+											<DoubleAnimation.EasingFunction>
+												<SineEase EasingMode="EaseOut"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+										<!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content">
+											<DiscreteObjectKeyFrame KeyTime="00:00:1.2" >
+												<DiscreteObjectKeyFrame.Value>
+													<Grid Background="PaleVioletRed"></Grid>
+												</DiscreteObjectKeyFrame.Value>
+											</DiscreteObjectKeyFrame>
+										</ObjectAnimationUsingKeyFrames>-->
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="{StaticResource transitionComplete}" Value="False"/>
+										</BooleanAnimationUsingKeyFrames>
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleX">
+											<DiscreteDoubleKeyFrame KeyTime="{StaticResource transitionComplete}" Value="1.2"/>
+										</DoubleAnimationUsingKeyFrames>
+										<DoubleAnimationUsingKeyFrames Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleY">
+											<DiscreteDoubleKeyFrame KeyTime="{StaticResource transitionComplete}" Value="1.2"/>
+										</DoubleAnimationUsingKeyFrames>
+
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="materialControls:PopupManager.PopupAdded">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:.1" Value="True"/>
+										</BooleanAnimationUsingKeyFrames>
+										<DoubleAnimation Storyboard.TargetName="rootBorder" Storyboard.TargetProperty="Opacity" 
+																		 To=".65" Duration="{StaticResource transition}">
+											<DoubleAnimation.EasingFunction>
+												<SineEase EasingMode="EaseIn"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="cp" Storyboard.TargetProperty="Opacity" 
-																		 To="0" Duration="0:0:.3" />
+																		 To="1" Duration="{StaticResource transition}" >
+											<DoubleAnimation.EasingFunction>
+												<SineEase EasingMode="EaseIn"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleX" 
-																		 To="0" Duration="0:0:.3" />
+																		 To="1" Duration="{StaticResource transition}" >
+											<DoubleAnimation.EasingFunction>
+												<SineEase EasingMode="EaseIn"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
 										<DoubleAnimation Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleY" 
-																		 To="0" Duration="0:0:.3" />
-                  </Storyboard>
-                </BeginStoryboard>
-              </Trigger.ExitActions>
-            </Trigger>
-          </ControlTemplate.Triggers>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
+																		 To="1" Duration="{StaticResource transition}" >
+											<DoubleAnimation.EasingFunction>
+												<SineEase EasingMode="EaseIn"/>
+											</DoubleAnimation.EasingFunction>
+										</DoubleAnimation>
+										
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

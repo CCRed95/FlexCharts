@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -15,17 +11,18 @@ using FlexCharts.Require;
 
 namespace FlexReports.MaterialControls
 {
-	[TemplatePart(Name = "PART_bubbles", Type = typeof(WrapPanel))]
-	public class ThemeSelector : Control
+	/// <summary>
+	/// Interaction logic for SelectThemePopup.xaml
+	/// </summary>
+	public partial class SelectThemePopup
 	{
-		public static readonly RoutedEvent PopupRequestCloseEvent = EM.Register<ThemeSelector, RoutedEventHandler>();
-
+		public static readonly RoutedEvent PopupRequestCloseEvent = EM.Register<SelectThemePopup, RoutedEventHandler>();
 		public event RoutedEventHandler PopupRequestClose
 		{
 			add { AddHandler(PopupRequestCloseEvent, value); }
 			remove { RemoveHandler(PopupRequestCloseEvent, value); }
 		}
-
+		
 		public event ThemeSelectedHandler ThemeSelected;
 		public delegate void ThemeSelectedHandler(MaterialTheme e);
 		public void RaiseThemeSelectedEvent(MaterialTheme e)
@@ -34,15 +31,21 @@ namespace FlexReports.MaterialControls
 		}
 
 		private ReadOnlyCollection<MaterialTheme> themeSource = MaterialThemes.AllThemes;
-		protected UniformGrid PART_bubbles;
+		protected WrapPanel PART_bubbles;
 
-		static ThemeSelector()
+		static SelectThemePopup()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(ThemeSelector), new FrameworkPropertyMetadata(typeof(ThemeSelector)));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(SelectThemePopup), new FrameworkPropertyMetadata(typeof(SelectThemePopup)));
+			 
 		}
-		public ThemeSelector() { }
+		public SelectThemePopup()
+		{
+			InitializeComponent();
+		}
 
-		public ThemeSelector(ThemeSelectedHandler callback)
+		
+
+		public SelectThemePopup(ThemeSelectedHandler callback) : this()
 		{
 			ThemeSelected += callback;
 		}
@@ -50,7 +53,7 @@ namespace FlexReports.MaterialControls
 		public override void OnApplyTemplate()
 		{
 			base.OnApplyTemplate();
-			PART_bubbles = GetTemplateChild<UniformGrid>(nameof(PART_bubbles));
+			PART_bubbles = GetTemplateChild<WrapPanel>(nameof(PART_bubbles));
 			loadBubbles();
 		}
 
@@ -61,8 +64,9 @@ namespace FlexReports.MaterialControls
 			{
 				var bubbles = new Ellipse
 				{
-					Width = 50,
-					Height = 50,
+					Width = 30,
+					Height = 30,
+					Margin = new Thickness(10),
 					Tag = theme,
 					Fill = theme.P500,
 					Effect = MaterialPalette.Shadows.ShadowDelta2,
@@ -92,3 +96,5 @@ namespace FlexReports.MaterialControls
 		}
 	}
 }
+
+		
