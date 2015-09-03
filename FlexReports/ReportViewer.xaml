@@ -20,7 +20,7 @@
         <Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(m:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
           <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="65"/>
+            <ColumnDefinition Width="64"/>
           </Grid.ColumnDefinitions>
           <Grid Name="LeftTitleBar">
             <Label Content="Open Report" Style="{StaticResource t15pSubhead}" Padding="30 0" HorizontalAlignment="Left"/>

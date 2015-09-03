@@ -16,7 +16,7 @@ namespace FlexReports.MaterialControls
 		static PopupManager()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(PopupManager), new FrameworkPropertyMetadata(typeof(PopupManager)));
-			EventManager.RegisterClassHandler(typeof(PopupManager), ThemeSelector.PopupRequestCloseEvent, new RoutedEventHandler(LocalOnPopupRequestClose));
+			//EventManager.RegisterClassHandler(typeof(PopupManager), ThemeSelector.PopupRequestCloseEvent, new RoutedEventHandler(LocalOnPopupRequestClose));
 		}
 
 		internal static void LocalOnPopupRequestClose(object sender, RoutedEventArgs e)

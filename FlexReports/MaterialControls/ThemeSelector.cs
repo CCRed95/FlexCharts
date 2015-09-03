@@ -15,8 +15,8 @@ using FlexCharts.Require;
 
 namespace FlexReports.MaterialControls
 {
-	[TemplatePart(Name = "PART_bubbles", Type = typeof(UniformGrid))]
-	public partial class ThemeSelector : Control
+	[TemplatePart(Name = "PART_bubbles", Type = typeof(WrapPanel))]
+	public class ThemeSelector : Control
 	{
 		public static readonly RoutedEvent PopupRequestCloseEvent = EM.Register<ThemeSelector, RoutedEventHandler>();
 
