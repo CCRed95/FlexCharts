@@ -7,6 +7,7 @@
         xmlns:materialDesign="http://www.flexcharts.com/schemas/core"
         xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
         xmlns:data="clr-namespace:FlexReports.Data"
+        xmlns:fileExplorer="clr-namespace:FlexReports.MaterialControls.FileExplorer"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
 				
@@ -40,13 +41,13 @@
         <Grid DockPanel.Dock="Bottom">
           <StackPanel m:VisualFeedback.ClickFeedback="P050"	
 											Orientation="Vertical" Name="LeftPanelItems" Opacity="1">
-            <m:DirectoryListItem/>
-            <m:DirectoryListItem/>
-            <m:DirectoryListItem/>
-            <m:FileListItem/>
-            <m:FileListItem/>
-            <m:FileListItem/>
-            <m:FileListItem/>
+            <fileExplorer:DirectoryListItem/>
+            <fileExplorer:DirectoryListItem/>
+            <fileExplorer:DirectoryListItem/>
+            <fileExplorer:FileListItem/>
+            <fileExplorer:FileListItem/>
+            <fileExplorer:FileListItem/>
+            <fileExplorer:FileListItem/>
           </StackPanel>
           <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="65"
 								Background="{StaticResource mtGrey900}">

@@ -2,9 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:FlexReports.Themes"
                     xmlns:materialControls="clr-namespace:FlexReports.MaterialControls"
-                    xmlns:converters="clr-namespace:FlexReports.Converters">
+                    xmlns:converters="clr-namespace:FlexReports.Converters"
+                    xmlns:fileExplorer="clr-namespace:FlexReports.MaterialControls.FileExplorer">
   <converters:LuminosityToBrushConverter x:Key="l2bc"/>
-  <Style TargetType="materialControls:FileListItem">
+  <Style TargetType="fileExplorer:FileListItem">
     <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
     <Setter Property="Height" Value="60"/>
 		<Setter Property="Background" Value="{StaticResource mtGrey100}"/>
@@ -12,7 +13,7 @@
     <Setter Property="BorderThickness" Value="0 0 0 1"/>
     <Setter Property="Template">
       <Setter.Value>
-        <ControlTemplate TargetType="{x:Type materialControls:FileListItem}">
+        <ControlTemplate TargetType="{x:Type fileExplorer:FileListItem}">
           <Border Background="{TemplateBinding Background}"
                  BorderBrush="{TemplateBinding BorderBrush}"
                  BorderThickness="{TemplateBinding BorderThickness}">

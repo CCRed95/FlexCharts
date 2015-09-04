@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using FlexCharts.Helpers.DependencyHelpers;
 
-namespace FlexReports.MaterialControls
+namespace FlexReports.Data
 {
-	public class DirectoryListItem : ListBoxItem
+	public class DirectoryItemDataSource : DependencyObject
 	{
 		public static readonly DependencyProperty DirectoryProperty = DP.Register(
-			new Meta<DirectoryListItem, DirectoryInfo>(null, DirectoryChanged));
+			new Meta<DirectoryItemDataSource, DirectoryInfo>(null, DirectoryChanged));
 
-		private static void DirectoryChanged(DirectoryListItem i, DPChangedEventArgs<DirectoryInfo> e)
+		private static void DirectoryChanged(DirectoryItemDataSource i, DPChangedEventArgs<DirectoryInfo> e)
 		{
 			if (e.NewValue != null)
 			{
@@ -33,16 +32,12 @@ namespace FlexReports.MaterialControls
 			set { SetValue(DirectoryProperty, value); }
 		}
 		public static readonly DependencyProperty DescriptionProperty = DP.Register(
-			new Meta<DirectoryListItem, string>("Contains # Files"));
+			new Meta<DirectoryItemDataSource, string>("Contains # Items"));
 		public string Description
 		{
 			get { return (string) GetValue(DescriptionProperty); }
 			set { SetValue(DescriptionProperty, value); }
 		}
-		static DirectoryListItem()
-		{
-			 DefaultStyleKeyProperty.OverrideMetadata(typeof(DirectoryListItem), new FrameworkPropertyMetadata(typeof(DirectoryListItem)));
-			
-		}
+		public DirectoryItemDataSource() { }
 	}
 }

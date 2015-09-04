@@ -65,8 +65,9 @@
     </Compile>
     <Compile Include="MaterialControls\Converters\LuminosityToMaterialConverter.cs" />
     <Compile Include="MaterialControls\Converters\TextFieldHintVisibilityConverter.cs" />
-    <Compile Include="MaterialControls\DirectoryListItem.cs" />
-    <Compile Include="MaterialControls\FileListItem.cs" />
+    <Compile Include="MaterialControls\FileExplorer\DirectoryListItem.cs" />
+    <Compile Include="MaterialControls\FileExplorer\FileExplorerListItem.cs" />
+    <Compile Include="MaterialControls\FileExplorer\FileListItem.cs" />
     <Compile Include="MaterialControls\MaterialShell.cs" />
     <Compile Include="MaterialControls\PopupManager.cs" />
     <Compile Include="MaterialControls\SelectThemePopup.xaml.cs">
