@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,7 +20,7 @@ using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.MaterialDesign.Providers;
 using FlexCharts.Require;
 
-namespace FlexCharts.Controls
+namespace FlexCharts.Controls.Charts
 {
 	public class LineGraph : AbstractFlexChart<DoubleSeries>, IDotContract, ILineContract
 	{

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -16,12 +12,11 @@ using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
-using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.MaterialDesign.Providers;
 
-namespace FlexCharts.Controls
+namespace FlexCharts.Controls.Charts
 {
 	[TemplatePart(Name = "PART_Content", Type = typeof(DockPanel))]
 	[TemplatePart(Name = "PART_Title", Type = typeof(Label))]

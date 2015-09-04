@@ -4,20 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:m="clr-namespace:FlexReports.MaterialControls"
-        xmlns:materialDesign="http://www.flexcharts.com/schemas/core"
-        xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
-        xmlns:data="clr-namespace:FlexReports.Data"
-        xmlns:fileExplorer="clr-namespace:FlexReports.MaterialControls.FileExplorer"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
-				
 				Style="{StaticResource MaterialShell}"
-							m:VisualFeedback.ClickFeedback="P300"									
+				m:VisualFeedback.ClickFeedback="P300"									
         Title="Report Viewer" Height="600" Width="800">
-  <!--d:DataContext="{d:DesignInstance m:MaterialShell, IsDesignTimeCreatable=True}"-->
-  <m:MaterialShell.Resources>
-
-  </m:MaterialShell.Resources>
   <Grid>
     <DockPanel>
       <DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" 
@@ -39,18 +29,9 @@
           </Border>
         </Grid>
         <Grid DockPanel.Dock="Bottom">
-          <fileExplorer:FileExplorerHost m:VisualFeedback.ClickFeedback="P050"	
-											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile">
-            <!--<fileExplorer:FileExplorerHost.FileList>
-              <fileExplorer:DirectoryListItem/>
-              <fileExplorer:DirectoryListItem/>
-              <fileExplorer:DirectoryListItem/>
-              <fileExplorer:FileListItem/>
-              <fileExplorer:FileListItem/>
-              <fileExplorer:FileListItem/>
-              <fileExplorer:FileListItem/>
-            </fileExplorer:FileExplorerHost.FileList>-->
-          </fileExplorer:FileExplorerHost>
+					<fileExplorer:FileExplorerHost m:VisualFeedback.ClickFeedback="P050"	
+											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile"/>
+					
           <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="65"
 								Background="{StaticResource mtGrey900}">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
@@ -76,90 +57,31 @@
       <Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
         <StackPanel Orientation="Vertical">
           <Grid Height="64" Background="{Binding Path=(m:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
-
             <Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
 							 Padding="30 0" />
-            <StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
-              <Button Style="{StaticResource PathButton}">
-                <Path Style="{StaticResource drawablesearch}"/>
-              </Button>
-              <Button Style="{StaticResource PathButton}" Click="TransitionTheme">
-                <Path Style="{StaticResource drawableview_module}"/>
-              </Button>
-              <Button Style="{StaticResource PathButton}" Click="SelectTheme">
-                <Path Style="{StaticResource drawablecolor_lens}"/>
-              </Button>
-              <Button Style="{StaticResource PathButton}">
-                <Path Style="{StaticResource drawablemore_vert}"/>
-              </Button>
-            </StackPanel>
-            <!--<TextBox Height="40" Width="300" DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-								 materialControls:TextField.Hint="Search" HorizontalAlignment="Right"/>-->
-
-          </Grid>
+						<StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
+							<Button Style="{StaticResource PathButton}">
+								<Path Style="{StaticResource drawablesearch}"/>
+							</Button>
+							<Button Style="{StaticResource PathButton}">
+								<Path Style="{StaticResource drawableview_module}"/>
+							</Button>
+							<Button Style="{StaticResource PathButton}" Click="SelectTheme">
+								<Path Style="{StaticResource drawablecolor_lens}"/>
+							</Button>
+							<Button Style="{StaticResource PathButton}">
+								<Path Style="{StaticResource drawablemore_vert}"/>
+							</Button>
+						</StackPanel>
+					</Grid>
 					<m:DocumentViewport x:Name="documentViewport">
 						
 					</m:DocumentViewport>
-          <!--<ListBox ItemsSource="{Binding FileExplorerItems}">
-            <ListBox.ItemTemplate>
-              <DataTemplate DataType="{x:Type data:FileSystemInfoDataSource}">
-                <Grid Height="60">
-                  <Border x:Name="active" Opacity="0"  Background="{Binding Path=(m:ThemePrimitive.Theme).P050}"/>
-                  <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                    <Path Name="icon" Style="{StaticResource drawable3d_rotation}" Margin="15 9" Fill="{StaticResource mtGrey700}">
-                      <Path.LayoutTransform>
-                        <ScaleTransform ScaleY="1.75" ScaleX="1.75" />
-                      </Path.LayoutTransform>
-                    </Path>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                      <Label Content="{Binding Item.Name, FallbackValue='archive folder'}" 
-														 Foreground="{StaticResource mtGrey800}" 
-										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-                      <Label Content="{Binding Description}" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
-										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
-                    </StackPanel>
-
-                  </StackPanel>
-                  <Path HorizontalAlignment="Right" Margin="0 10 10 0"  Style="{StaticResource drawablemore_vert}" 
-										Fill="{Binding Path=(m:ThemePrimitive.Theme).P700}"/>
-                </Grid>
-                <DataTemplate.Triggers>
-									
-									-->
-          <!--<Trigger Property="IconSelector" Value="Directory">
-										<Setter Property="Style" Value="{StaticResource drawablefolder}" TargetName="icon"/>
-									</Trigger>
-									<Trigger Property="data:FileSystemInfoDataSource.IconSelector" Value="File">
-										<Setter Property="Style" Value="{StaticResource drawableinsert_drive_file}" TargetName="icon"/>
-									</Trigger>
-									<Trigger Property="data:FileSystemInfoDataSource.IconSelector" Value="Unknown">
-										<Setter Property="Style" Value="{StaticResource drawablelive_help}" TargetName="icon"/>
-									</Trigger>-->
-          <!--
-                </DataTemplate.Triggers>
-              </DataTemplate>
-
-            </ListBox.ItemTemplate>
-            -->
-          <!--<m:DirectoryListItem/>
-            <m:DirectoryListItem/>
-            <m:FileListItem/>
-
-            <ListBoxItem Content="archive folder"/>
-            <ListBoxItem Content="archive folder"/>-->
-          <!--
-          </ListBox>-->
-          <!--<m:FileListItem></m:FileListItem>-->
         </StackPanel>
         <Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
       </Grid>
 
     </DockPanel>
-    <m:PopupManager x:Name="PopupSpace">
-
-
-      <!--<m:ThemeSelector Width="300" Height="450" ThemeSelected="themeSelected"/>-->
-
-    </m:PopupManager>
+		<m:PopupManager x:Name="PopupSpace"/>
   </Grid>
 </m:MaterialShell>

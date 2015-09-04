@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,19 +11,16 @@ using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
-using FlexCharts.Data.Filtering;
 using FlexCharts.Data.Sorting;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
 using FlexCharts.GenerationContext;
-using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
-using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.MaterialDesign.Providers;
 using FlexCharts.Require;
 
-namespace FlexCharts.Controls
+namespace FlexCharts.Controls.Charts
 {
 	[TemplatePart(Name = "PART_content", Type = typeof(DockPanel))]
 	[TemplatePart(Name = "PART_title", Type = typeof(Label))]

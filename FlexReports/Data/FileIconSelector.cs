@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlexCharts.Controls
+namespace FlexReports.Data
 {
-	class HeatMap
+	public enum FileIconSelector
 	{
+		Directory,
+		File,
+		Unknown
 	}
 }

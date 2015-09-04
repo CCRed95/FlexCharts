@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexCharts", "FlexCharts\FlexCharts.csproj", "{53B04142-3FA5-4D7E-989E-EFAFF6B92631}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexChartsDemo", "FlexChartsDemo\FlexChartsDemo.csproj", "{520951ED-720A-44E9-8253-E5C63625032B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexReports", "FlexReports\FlexReports.csproj", "{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Material", "Material\Material.csproj", "{902B5087-D3BD-40D2-8E62-69505E9EDD8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD02E820-EB66-4E07-8B4F-B7F13BE4E1D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{902B5087-D3BD-40D2-8E62-69505E9EDD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{902B5087-D3BD-40D2-8E62-69505E9EDD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{902B5087-D3BD-40D2-8E62-69505E9EDD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{902B5087-D3BD-40D2-8E62-69505E9EDD8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -70,13 +70,6 @@ namespace FlexReports
 
 			LeftTitleBar.animate(OpacityProperty, 200, 0, 0, new CubicEase { EasingMode = EasingMode.EaseOut });
 			LeftPanelItems.animate(OpacityProperty, 300, 0, 100, new CubicEase { EasingMode = EasingMode.EaseOut });
-
-			//LeftMenu.animate(WidthProperty, 300, 65);
-			//Dimmer.animate(OpacityProperty, 300, 0);
-			//AppToolbar.animate(OpacityProperty, 300, 1);
-			//LeftPanelItems.animate(OpacityProperty, 300, 0);
-			//LeftIconMenu.animate(WidthProperty, 300, 65);
-			//LeftTitleBar.animate(OpacityProperty, 300, 0);
 		}
 
 		private void SelectTheme(object s, RoutedEventArgs e)
@@ -87,11 +80,6 @@ namespace FlexReports
 		private void themeSelected(MaterialTheme theme)
 		{
 			ThemePrimitive.SetTheme(this, theme);
-		}
-
-		private void TransitionTheme(object s, RoutedEventArgs e)
-		{
-
 		}
 
 		private void OnRequestOpenFile(object s, RoutedEventArgs e)

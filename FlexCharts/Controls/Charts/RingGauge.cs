@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,7 +12,7 @@ using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 
-namespace FlexCharts.Controls
+namespace FlexCharts.Controls.Charts
 {
 
 	public class RingGauge : AbstractFlexChart<double>, ICircularContract, IStateSegmentContract, ISegmentContract //IRingAspect//

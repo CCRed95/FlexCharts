@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -18,7 +14,6 @@ using FlexCharts.Controls.Primitives;
 using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
-using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Layout;
 using FlexCharts.MaterialDesign;
@@ -26,25 +21,23 @@ using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.MaterialDesign.Providers;
 using FlexCharts.Require;
 
-namespace FlexCharts.Controls
+namespace FlexCharts.Controls.Charts
 {
-	//TODO custom [AspectOwnerAttribute(typeof(IAspect))]
-	// TODO better label/size rendering with predictive text rendering 
 	[TemplatePart(Name = "PART_content", Type = typeof(DockPanel))]
 	[TemplatePart(Name = "PART_title", Type = typeof(Label))]
 	[TemplatePart(Name = "PART_main", Type = typeof(Grid))]
 	[TemplatePart(Name = "PART_segments", Type = typeof(Grid))]
-	[TemplatePart(Name = "PART_focusedsegmentlabel", Type = typeof(Label))]
 	[TemplatePart(Name = "PART_categorylabels", Type = typeof(Grid))]
-	public class RingChart : AbstractFlexChart<DoubleSeries>, ICircularContract, IRingContract, IPolarLabelingContract, IFocusableSegmentContract, IBarTotalContract
+	public class PieChart : AbstractFlexChart<DoubleSeries>,
+		IValueContract, IFocusableSegmentContract, IPolarLabelingContract, IBarTotalContract//, IStateSegmentContract
 	{
 		#region Dependency Properties
 		#region			CircularContract
 		public static readonly DependencyProperty CircleScaleProperty = DP.Add(CircularPrimitive.CircleScaleProperty,
-			new Meta<RingChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty AngleOffsetProperty = DP.Add(CircularPrimitive.AngleOffsetProperty,
-			new Meta<RingChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public double CircleScale
 		{
@@ -60,22 +53,22 @@ namespace FlexCharts.Controls
 
 		#region			BarTotalContract
 		public static readonly DependencyProperty BarTotalFontFamilyProperty = DP.Add(BarTotalPrimitive.BarTotalFontFamilyProperty,
-			new Meta<RingChart, FontFamily> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, FontFamily> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontStyleProperty = DP.Add(BarTotalPrimitive.BarTotalFontStyleProperty,
-			new Meta<RingChart, FontStyle> { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, FontStyle> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontWeightProperty = DP.Add(BarTotalPrimitive.BarTotalFontWeightProperty,
-			new Meta<RingChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontStretchProperty = DP.Add(BarTotalPrimitive.BarTotalFontStretchProperty,
-			new Meta<RingChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalFontSizeProperty = DP.Add(BarTotalPrimitive.BarTotalFontSizeProperty,
-			new Meta<RingChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, double> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty BarTotalForegroundProperty = DP.Add(BarTotalPrimitive.BarTotalForegroundProperty,
-			new Meta<RingChart, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
 		public FontFamily BarTotalFontFamily
@@ -115,62 +108,56 @@ namespace FlexCharts.Controls
 		}
 		#endregion
 
-		#region			ValueContract
+		#region			ValueContact
 		public static readonly DependencyProperty ValueFontFamilyProperty = DP.Add(ValuePrimitive.ValueFontFamilyProperty,
-			new Meta<ParetoChart, FontFamily> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, FontFamily> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty ValueFontStyleProperty = DP.Add(ValuePrimitive.ValueFontStyleProperty,
-			new Meta<ParetoChart, FontStyle> { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, FontStyle> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty ValueFontWeightProperty = DP.Add(ValuePrimitive.ValueFontWeightProperty,
-			new Meta<ParetoChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, FontWeight> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty ValueFontStretchProperty = DP.Add(ValuePrimitive.ValueFontStretchProperty,
-			new Meta<ParetoChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, FontStretch> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty ValueFontSizeProperty = DP.Add(ValuePrimitive.ValueFontSizeProperty,
-			new Meta<ParetoChart, double> { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty ValueForegroundProperty = DP.Add(ValuePrimitive.ValueForegroundProperty,
-			new Meta<ParetoChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
-
-		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof(FontFamilyConverter))]
+		[Category("Charting")]
 		public FontFamily ValueFontFamily
 		{
 			get { return (FontFamily)GetValue(ValueFontFamilyProperty); }
 			set { SetValue(ValueFontFamilyProperty, value); }
 		}
-		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof(FontStyleConverter))]
+		[Category("Charting")]
 		public FontStyle ValueFontStyle
 		{
 			get { return (FontStyle)GetValue(ValueFontStyleProperty); }
 			set { SetValue(ValueFontStyleProperty, value); }
 		}
-		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof(FontWeightConverter))]
+		[Category("Charting")]
 		public FontWeight ValueFontWeight
 		{
 			get { return (FontWeight)GetValue(ValueFontWeightProperty); }
 			set { SetValue(ValueFontWeightProperty, value); }
 		}
-		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof(FontStretchConverter))]
+		[Category("Charting")]
 		public FontStretch ValueFontStretch
 		{
 			get { return (FontStretch)GetValue(ValueFontStretchProperty); }
 			set { SetValue(ValueFontStretchProperty, value); }
 		}
-		[Bindable(true), Category("Charting")]
-		[TypeConverter(typeof(FontSizeConverter))]
+		[Category("Charting")]
 		public double ValueFontSize
 		{
 			get { return (double)GetValue(ValueFontSizeProperty); }
 			set { SetValue(ValueFontSizeProperty, value); }
 		}
-		[Bindable(true), Category("Charting")]
+		[Category("Charting")]
 		public AbstractMaterialDescriptor ValueForeground
 		{
 			get { return (AbstractMaterialDescriptor)GetValue(ValueForegroundProperty); }
@@ -178,66 +165,9 @@ namespace FlexCharts.Controls
 		}
 		#endregion
 
-		#region			SecondaryValueContract
-		public static readonly DependencyProperty SecondaryValueFontFamilyProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontFamilyProperty,
-			new Meta<RingChart, FontFamily> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
-
-		public static readonly DependencyProperty SecondaryValueFontStyleProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontStyleProperty,
-			new Meta<RingChart, FontStyle> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
-
-		public static readonly DependencyProperty SecondaryValueFontWeightProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontWeightProperty,
-			new Meta<RingChart, FontWeight> { Flags = INH }, DPExtOptions.ForceManualInherit);
-
-		public static readonly DependencyProperty SecondaryValueFontStretchProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontStretchProperty,
-			new Meta<RingChart, FontStretch> { Flags = INH }, DPExtOptions.ForceManualInherit);
-
-		public static readonly DependencyProperty SecondaryValueFontSizeProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueFontSizeProperty,
-			new Meta<RingChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
-
-		public static readonly DependencyProperty SecondaryValueForegroundProperty = DP.Add(SecondaryValuePrimitive.SecondaryValueForegroundProperty,
-			new Meta<RingChart, AbstractMaterialDescriptor> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
-
-		[Category("Charting")]
-		public FontFamily SecondaryValueFontFamily
-		{
-			get { return (FontFamily)GetValue(SecondaryValueFontFamilyProperty); }
-			set { SetValue(SecondaryValueFontFamilyProperty, value); }
-		}
-		[Category("Charting")]
-		public FontStyle SecondaryValueFontStyle
-		{
-			get { return (FontStyle)GetValue(SecondaryValueFontStyleProperty); }
-			set { SetValue(SecondaryValueFontStyleProperty, value); }
-		}
-		[Category("Charting")]
-		public FontWeight SecondaryValueFontWeight
-		{
-			get { return (FontWeight)GetValue(SecondaryValueFontWeightProperty); }
-			set { SetValue(SecondaryValueFontWeightProperty, value); }
-		}
-		[Category("Charting")]
-		public FontStretch SecondaryValueFontStretch
-		{
-			get { return (FontStretch)GetValue(SecondaryValueFontStretchProperty); }
-			set { SetValue(SecondaryValueFontStretchProperty, value); }
-		}
-		[Category("Charting")]
-		public double SecondaryValueFontSize
-		{
-			get { return (double)GetValue(SecondaryValueFontSizeProperty); }
-			set { SetValue(SecondaryValueFontSizeProperty, value); }
-		}
-		[Category("Charting")]
-		public AbstractMaterialDescriptor SecondaryValueForeground
-		{
-			get { return (AbstractMaterialDescriptor)GetValue(SecondaryValueForegroundProperty); }
-			set { SetValue(SecondaryValueForegroundProperty, value); }
-		}
-		#endregion
-
-		#region			FocusableSegmentContract
+		#region			SegmentFocusableContract
 		public static readonly DependencyProperty FocusedSegmentProperty = DP.Add(FocusableSegmentPrimitive.FocusedSegmentProperty,
-			new Meta<RingChart, Shape>(null, FocusedSegmentChanged) { Flags = INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, Shape>(null, FocusedSegmentChanged) { Flags = INH });
 
 		[Category("Charting")]
 		public Shape FocusedSegment
@@ -247,24 +177,12 @@ namespace FlexCharts.Controls
 		}
 		#endregion
 
-		#region			RingContract
-		public static readonly DependencyProperty RingWidthPercentageProperty = DP.Add(RingPrimitive.RingWidthPercentageProperty,
-			new Meta<RingChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
-
-		[Category("Charting")]
-		public double RingWidthPercentage
-		{
-			get { return (double)GetValue(RingWidthPercentageProperty); }
-			set { SetValue(RingWidthPercentageProperty, value); }
-		}
-		#endregion
-
 		#region			PolarLabelingContract
 		public static readonly DependencyProperty HorizontalLabelPositionSkewProperty = DP.Add(PolarLabelingPrimitive.HorizontalLabelPositionSkewProperty,
-			new Meta<RingChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		public static readonly DependencyProperty OuterLabelPositionScaleProperty = DP.Add(PolarLabelingPrimitive.OuterLabelPositionScaleProperty,
-			new Meta<RingChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+			new Meta<PieChart, double> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
 
 		[Category("Charting")]
 		public double HorizontalLabelPositionSkew
@@ -279,10 +197,67 @@ namespace FlexCharts.Controls
 			set { SetValue(OuterLabelPositionScaleProperty, value); }
 		}
 		#endregion
+
+		//#region			StateSegmentContract
+		//public static readonly DependencyProperty ActiveFillProperty = DP.Add(StateSegmentPrimative.ActiveFillProperty,
+		//	new Meta<PieChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+
+		//public static readonly DependencyProperty ActiveStrokeThicknessProperty = DP.Add(StateSegmentPrimative.ActiveStrokeThicknessProperty,
+		//	new Meta<PieChart, int> { Flags = INH }, DPExtOptions.ForceManualInherit);
+
+		//public static readonly DependencyProperty ActiveStrokeProperty = DP.Add(StateSegmentPrimative.ActiveStrokeProperty,
+		//	new Meta<PieChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+
+		//public static readonly DependencyProperty InactiveFillProperty = DP.Add(StateSegmentPrimative.InactiveFillProperty,
+		//	new Meta<PieChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+
+		//public static readonly DependencyProperty InactiveStrokeThicknessProperty = DP.Add(StateSegmentPrimative.InactiveStrokeThicknessProperty,
+		//	new Meta<PieChart, int> { Flags = INH }, DPExtOptions.ForceManualInherit);
+
+		//public static readonly DependencyProperty InactiveStrokeProperty = DP.Add(StateSegmentPrimative.InactiveStrokeProperty,
+		//	new Meta<PieChart, AbstractMaterialDescriptor> { Flags = FXR | INH }, DPExtOptions.ForceManualInherit);
+
+		//[Category("Charting")]
+		//public AbstractMaterialDescriptor ActiveFill
+		//{
+		//	get { return (AbstractMaterialDescriptor)GetValue(ActiveFillProperty); }
+		//	set { SetValue(ActiveFillProperty, value); }
+		//}
+		//[Category("Charting")]
+		//public int ActiveStrokeThickness
+		//{
+		//	get { return (int)GetValue(ActiveStrokeThicknessProperty); }
+		//	set { SetValue(ActiveStrokeThicknessProperty, value); }
+		//}
+		//[Category("Charting")]
+		//public AbstractMaterialDescriptor ActiveStroke
+		//{
+		//	get { return (AbstractMaterialDescriptor)GetValue(ActiveStrokeProperty); }
+		//	set { SetValue(ActiveStrokeProperty, value); }
+		//}
+		//[Category("Charting")]
+		//public AbstractMaterialDescriptor InactiveFill
+		//{
+		//	get { return (AbstractMaterialDescriptor)GetValue(InactiveFillProperty); }
+		//	set { SetValue(InactiveFillProperty, value); }
+		//}
+		//[Category("Charting")]
+		//public int InactiveStrokeThickness
+		//{
+		//	get { return (int)GetValue(InactiveStrokeThicknessProperty); }
+		//	set { SetValue(InactiveStrokeThicknessProperty, value); }
+		//}
+		//[Category("Charting")]
+		//public AbstractMaterialDescriptor InactiveStroke
+		//{
+		//	get { return (AbstractMaterialDescriptor)GetValue(InactiveStrokeProperty); }
+		//	set { SetValue(InactiveStrokeProperty, value); }
+		//}
+		//#endregion
 		#endregion
 
 		#region Dependency Property Callbacks
-		private static void FocusedSegmentChanged(RingChart i, DPChangedEventArgs<Shape> e)
+		private static void FocusedSegmentChanged(PieChart i, DPChangedEventArgs<Shape> e)
 		{
 			i.animateSegmentRefocus();
 		}
@@ -293,25 +268,23 @@ namespace FlexCharts.Controls
 		protected Label PART_title;
 		protected Grid PART_main;
 		protected Grid PART_segments;
-		protected Label PART_focusedsegmentlabel;
 		protected Grid PART_categorylabels;
 		#endregion
 
 		#region Constructors
-		static RingChart()
+		static PieChart()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(RingChart), new FrameworkPropertyMetadata(typeof(RingChart)));
-			TitleProperty.OverrideMetadata(typeof(RingChart), new FrameworkPropertyMetadata("Ring Chart"));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(PieChart), new FrameworkPropertyMetadata(typeof(PieChart)));
+			TitleProperty.OverrideMetadata(typeof(PieChart), new FrameworkPropertyMetadata("Pie Chart"));
 		}
-		public RingChart()
-		{
-			
-			//_main.Children.Add(_segments);
-			//_main.Children.Add(_focusedSegmentValueLabel);
-			//_main.Children.Add(_categoryLabels);
-			
 
-			
+		public PieChart()
+		{
+			//var rotateTransform = new RotateTransform(0, .5, .5);
+			//_segments.RenderTransform = rotateTransform;
+			//BindingOperations.SetBinding(rotateTransform, RotateTransform.AngleProperty, new Binding("AngleOffset") { Source = this });
+			//_main.Children.Add(_segments);
+			//_main.Children.Add(_categoryLabels);
 
 			Loaded += onLoaded;
 		}
@@ -322,12 +295,13 @@ namespace FlexCharts.Controls
 		{
 			focusLargestDataPoint();
 		}
+
 		private void focusLargestDataPoint()
 		{
 			if (Data.Count < 1) return;
 			CategoricalDouble[] maxrsp = { Data[0] };
 			foreach (var d in Data.Where(d =>
-			d.RenderedVisual.RequireType<ArcPath>().ArcAngle > maxrsp[0].RenderedVisual.RequireType<ArcPath>().ArcAngle))
+				d.RenderedVisual.RequireType<ArcPath>().ArcAngle > maxrsp[0].RenderedVisual.RequireType<ArcPath>().ArcAngle))
 			{
 				maxrsp[0] = d;
 			}
@@ -377,7 +351,44 @@ namespace FlexCharts.Controls
 			});
 		}
 
-		private Label positionLabel(CategoricalDouble d, double radius, double targetAngularOffset, bool horizontalPositionSkew = false)
+		//private void renderCategoryLabels()
+		//{
+		//	if (FocusedSegment == null)
+		//	{
+		//		return;
+		//	}
+		//	var context = new ProviderContext(Data.Count);
+		//	MaterialProvider.Reset(context);
+		//	_categoryLabels.Children.Clear();
+		//	var diameter = _segments.RenderSize.Smallest() * CircleScale;
+
+		//	var outerLabelRadius = (diameter / 2) * OuterLabelPositionScale;
+		//	var overlayedLabelRadius = (diameter / 2) * .7;
+
+		//	var targetAngularOffset = FocusedSegment.RequireType<ArcPath>().CalculateAngularOffset();
+
+		//	foreach (var d in Data)
+		//	{
+		//		var materialSet = MaterialProvider.ProvideNext(context);
+		//		var categoryNameLabel = positionLabel(d, outerLabelRadius, targetAngularOffset, true);
+
+		//		categoryNameLabel.Content = d.CategoryName;
+		//		categoryNameLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
+		//		categoryNameLabel.Foreground = BarTotalForeground.GetMaterial(materialSet);
+		//		_categoryLabels.Children.Add(categoryNameLabel);
+
+
+		//		var valueLabel = positionLabel(d, overlayedLabelRadius, targetAngularOffset);
+
+		//		valueLabel.Content = d.Value;
+		//		valueLabel.BindTextualPrimitive<ValuePrimitive>(this);
+		//		valueLabel.Foreground = ValueForeground.GetMaterial(materialSet);
+		//		_categoryLabels.Children.Add(valueLabel);
+		//	}
+		//}
+
+		private Label positionLabel(CategoricalDouble d, double radius, double targetAngularOffset,
+			bool horizontalPositionSkew = false)
 		{
 			var categoryLabel = new Label
 			{
@@ -391,14 +402,18 @@ namespace FlexCharts.Controls
 			var pretransformedLabelAngle = pretransformedOffset + (arcAngle / 2);
 			var actualLabelAngle = pretransformedLabelAngle - targetAngularOffset;
 
-			var horizontalLabelSkew = horizontalPositionSkew ? Math.Cos(CoordinateHelpers.ToRadian(actualLabelAngle)) * HorizontalLabelPositionSkew : 0;
+			var horizontalLabelSkew = horizontalPositionSkew
+				? Math.Cos(CoordinateHelpers.ToRadian(actualLabelAngle)) * HorizontalLabelPositionSkew
+				: 0;
 
 			var labelRadius = radius;
 			var polarPoint = new PolarPoint(actualLabelAngle, labelRadius);
 			var labelCoordinate = polarPoint.ToCartesian();
-			categoryLabel.Margin = new Thickness(labelCoordinate.X + horizontalLabelSkew, -labelCoordinate.Y, -labelCoordinate.X - horizontalLabelSkew, labelCoordinate.Y);
+			categoryLabel.Margin = new Thickness(labelCoordinate.X + horizontalLabelSkew, -labelCoordinate.Y,
+				-labelCoordinate.X - horizontalLabelSkew, labelCoordinate.Y);
 			return categoryLabel;
 		}
+
 		#endregion
 
 		#region Overrided Methods
@@ -409,14 +424,10 @@ namespace FlexCharts.Controls
 			PART_title = GetTemplateChild<Label>(nameof(PART_title));
 			PART_main = GetTemplateChild<Grid>(nameof(PART_main));
 			PART_segments = GetTemplateChild<Grid>(nameof(PART_segments));
-			PART_focusedsegmentlabel = GetTemplateChild<Label>(nameof(PART_focusedsegmentlabel));
 			PART_categorylabels = GetTemplateChild<Grid>(nameof(PART_categorylabels));
-
-			PART_focusedsegmentlabel.BindTextualPrimitive<SecondaryValuePrimitive>(this);
 		}
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-			PART_focusedsegmentlabel.Foreground = SecondaryValueForeground.GetMaterial(FallbackMaterialSet);
 			PART_segments.Children.Clear();
 
 			var context = new ProviderContext(Data.Count);
@@ -426,7 +437,7 @@ namespace FlexCharts.Controls
 
 			var total = Data.SumValue();
 			var angleTrace = 0d;
-			var actualRingWidth = radius * RingWidthPercentage;
+			var actualRingWidth = radius;
 			foreach (var d in Data)
 			{
 				var materialSet = MaterialProvider.ProvideNext(context);
@@ -474,19 +485,54 @@ namespace FlexCharts.Controls
 				PART_categorylabels.Children.Add(valueLabel);
 			}
 			base.OnRender(drawingContext);
+
+			//var context = new ProviderContext(Data.Count);
+			//MaterialProvider.Reset(context);
+
+			//var radius = (PART_segments.RenderSize.Smallest() * CircleScale) / 2;
+
+			//var total = Data.SumValue();
+			//var angleTrace = 0d;
+
+			//foreach (var d in Data)
+			//{
+			//	var materialSet = MaterialProvider.ProvideNext(context);
+
+			//	var degrees = (d.Value / total) * 360;
+			//	//TODO PiePath
+			//	var activePath = new ArcPath(degrees, angleTrace, radius, CircleScale, radius, PART_segments.RenderSize, d)
+			//	{
+			//		Fill = SegmentForeground.GetMaterial(materialSet),
+			//		MouseOverFill = materialSet.GetMaterial(Luminosity.P700),
+			//		DataContext = this
+			//	};
+
+			//	// TODO FIX this
+			//	//activePath.SetBinding(Shape.StrokeProperty, new Binding("SegmentStroke"));
+			//	//activePath.SetBinding(Shape.StrokeThicknessProperty, new Binding("SegmentStrokeThickness"));
+			//	activePath.Click += segmentClicked;
+
+			//	PART_segments.Children.Add(activePath);
+
+			//	d.RenderedVisual = activePath;
+
+			//	angleTrace += degrees;
+			//}
+			//renderCategoryLabels();
+			//base.OnRender(drawingContext);
 		}
 
 		private void segmentClicked(object s, RoutedEventArgs e)
 		{
-			var arc = s.RequireType<ArcPath>();
-			if (!arc.CheckEquality(FocusedSegment.RequireType<ArcPath>()))
-			{
-				FocusedSegment = arc;
-			}
-
-			//OnSegmentClicked();
+			FocusedSegment = s.RequireType<ArcPath>();
+			OnSegmentClicked();
 		}
 
+		public override void OnSegmentClicked()
+		{
+
+			base.OnSegmentClicked();
+		}
 
 		#endregion
 	}

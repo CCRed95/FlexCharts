@@ -6,6 +6,7 @@
         xmlns:fc="http://www.flexcharts.com/schemas/core"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         xmlns:core="clr-namespace:FlexCharts.Controls.Core;assembly=FlexCharts"
+        xmlns:charts="clr-namespace:FlexCharts.Controls.Charts;assembly=FlexCharts"
         mc:Ignorable="d"
 				TextOptions.TextFormattingMode="Ideal"
 				TextOptions.TextRenderingMode="Aliased"
@@ -67,11 +68,11 @@
             <Setter Property="fc:SegmentPrimitive.SegmentSpaceBackground" Value="->White000,.05"/>
             <Setter Property="MaterialProvider" Value="{x:Static fc:SequentialMaterialProvider.CoolColors}"/>
         </Style>
-        <Style x:Key="darknestedarc" TargetType="fc:NestedArcChart" BasedOn="{StaticResource DarkFlexChart}">
+        <Style x:Key="darknestedarc" TargetType="charts:NestedArcChart" BasedOn="{StaticResource DarkFlexChart}">
             <Setter Property="SecondaryValueForeground" Value="->Grey500"/>
             <Setter Property="ValueForeground" Value="P400"/>
         </Style>
-        <Style x:Key="darkhorizontalbarchart" TargetType="fc:HorizontalBarChart" BasedOn="{StaticResource DarkFlexChart}">
+        <Style x:Key="darkhorizontalbarchart" TargetType="charts:HorizontalBarChart" BasedOn="{StaticResource DarkFlexChart}">
             <Setter Property="BarTotalFontSize" Value="12pt"/>
             <Setter Property="YAxisFontStyle" Value="Italic"/>
         </Style>
@@ -92,8 +93,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-      <fc:ParetoChart Style="{StaticResource darkpareto}">
-        <fc:ParetoChart.Data>
+      <charts:ParetoChart Style="{StaticResource darkpareto}">
+        <charts:ParetoChart.Data>
           <fc:CategoricalDouble CategoryName="A" Value="31"/>
           <fc:CategoricalDouble CategoryName="B" Value="3"/>
           <fc:CategoricalDouble CategoryName="C" Value="1"/>
@@ -112,8 +113,8 @@
           <fc:CategoricalDouble CategoryName="P" Value="5"/>
           <fc:CategoricalDouble CategoryName="Q" Value="7"/>
           <fc:CategoricalDouble CategoryName="R" Value="5"/>
-        </fc:ParetoChart.Data>
-      </fc:ParetoChart>
+        </charts:ParetoChart.Data>
+      </charts:ParetoChart>
       <!--<fc:StackedBarChart Style="{StaticResource darkstackedbar}" Grid.Column="1">
                 <fc:StackedBarChart.Data>
                     <fc:CategoricalDoubleSeries CategoryName="A">
@@ -245,8 +246,8 @@
                 <ColumnDefinition Width="1.7*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <fc:RingChart Style="{StaticResource darkring}">
-                <fc:RingChart.Data>
+            <charts:RingChart Style="{StaticResource darkring}">
+                <charts:RingChart.Data>
                     <fc:CategoricalDouble CategoryName="A" Value="8"/>
                     <fc:CategoricalDouble CategoryName="B" Value="4"/>
                     <fc:CategoricalDouble CategoryName="C" Value="7"/>
@@ -255,10 +256,10 @@
                     <fc:CategoricalDouble CategoryName="F" Value="3"/>
                     <fc:CategoricalDouble CategoryName="G" Value="5"/>
                     <fc:CategoricalDouble CategoryName="H" Value="4"/>
-                </fc:RingChart.Data>
-            </fc:RingChart>
-            <fc:NestedArcChart Style="{StaticResource darknestedarc}" Grid.Column="1">
-                <fc:NestedArcChart.Data>
+                </charts:RingChart.Data>
+            </charts:RingChart>
+            <charts:NestedArcChart Style="{StaticResource darknestedarc}" Grid.Column="1">
+                <charts:NestedArcChart.Data>
                     <fc:CategoricalDouble CategoryName="A" Value="31"/>
                     <fc:CategoricalDouble CategoryName="B" Value="34"/>
                     <fc:CategoricalDouble CategoryName="C" Value="27"/>
@@ -269,25 +270,24 @@
                     <fc:CategoricalDouble CategoryName="E" Value="13"/>
                     <fc:CategoricalDouble CategoryName="F" Value="9"/>
                     <fc:CategoricalDouble CategoryName="R" Value="7"/>
-                </fc:NestedArcChart.Data>
-            </fc:NestedArcChart>
-            <fc:PieChart  Style="{StaticResource darkpie}" Grid.Column="2" >
-                <fc:PieChart.Data>
-                    <fc:CategoricalDouble CategoryName="A" Value="8"/>
-                    <fc:CategoricalDouble CategoryName="B" Value="4"/>
-                    <fc:CategoricalDouble CategoryName="C" Value="7"/>
-                    <fc:CategoricalDouble CategoryName="D" Value="2"/>
-                    <fc:CategoricalDouble CategoryName="E" Value="1"/>
-                    <fc:CategoricalDouble CategoryName="F" Value="3"/>
-                    <fc:CategoricalDouble CategoryName="G" Value="5"/>
-                    <fc:CategoricalDouble CategoryName="H" Value="4"/>
-                </fc:PieChart.Data>
-            </fc:PieChart>
-
-        </Grid>
+                </charts:NestedArcChart.Data>
+            </charts:NestedArcChart>
+			<charts:PieChart  Style="{StaticResource darkpie}" Grid.Column="2" >
+				<charts:PieChart.Data>
+					<fc:CategoricalDouble CategoryName="A" Value="8"/>
+					<fc:CategoricalDouble CategoryName="B" Value="4"/>
+					<fc:CategoricalDouble CategoryName="C" Value="7"/>
+					<fc:CategoricalDouble CategoryName="D" Value="2"/>
+					<fc:CategoricalDouble CategoryName="E" Value="1"/>
+					<fc:CategoricalDouble CategoryName="F" Value="3"/>
+					<fc:CategoricalDouble CategoryName="G" Value="5"/>
+					<fc:CategoricalDouble CategoryName="H" Value="4"/>
+				</charts:PieChart.Data>
+			</charts:PieChart>
+		</Grid>
     <Grid Column="1" Grid.RowSpan="2">
-      <fc:HorizontalBarChart  Style="{StaticResource darkhorizontalbarchart}">
-        <fc:HorizontalBarChart.Data>
+      <charts:HorizontalBarChart  Style="{StaticResource darkhorizontalbarchart}">
+        <charts:HorizontalBarChart.Data>
           <fc:CategoricalDouble CategoryName="A" Value="31"/>
           <fc:CategoricalDouble CategoryName="B" Value="34"/>
           <fc:CategoricalDouble CategoryName="C" Value="27"/>
@@ -308,8 +308,8 @@
           <fc:CategoricalDouble CategoryName="E" Value="13"/>
           <fc:CategoricalDouble CategoryName="F" Value="9"/>
           <fc:CategoricalDouble CategoryName="R" Value="7"/>
-        </fc:HorizontalBarChart.Data>
-      </fc:HorizontalBarChart>
+        </charts:HorizontalBarChart.Data>
+      </charts:HorizontalBarChart>
     </Grid>
   </Grid>
 </Window>

@@ -12,6 +12,7 @@ namespace FlexCharts.Controls.Primitives
 	public abstract class YAxisPrimitive : TextualPrimitive, IYAxisContract
 	{
 		internal static readonly FlexTypeface typeface = MaterialPalette.Typesets.Body1;
+
 		[TextualRoleProperty(TextualRole.Font)]
 		public static readonly DependencyProperty YAxisFontFamilyProperty =
 			DP.Attach<FontFamily>(typeof(YAxisPrimitive), new FrameworkPropertyMetadata(typeface.FontFamily));
@@ -49,6 +50,7 @@ namespace FlexCharts.Controls.Primitives
 		[Bindable(true), Category("Charting")]
 		[TypeConverter(typeof(FontStyleConverter))]
 		public FontStyle YAxisFontStyle
+
 		{
 			get { return (FontStyle)GetValue(YAxisFontStyleProperty); }
 			set { SetValue(YAxisFontStyleProperty, value); }
