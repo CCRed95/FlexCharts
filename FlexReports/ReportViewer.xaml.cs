@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using FlexCharts.Documents;
 using FlexCharts.Extensions;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.MaterialDesign;
@@ -22,35 +23,8 @@ namespace FlexReports
 	/// </summary>
 	public partial class ReportViewer
 	{
-		public static readonly DependencyProperty FileExplorerItemsProperty = DP.Register(
-			new Meta<ReportViewer, ObservableCollection<FileSystemInfoDataSource>>());
-		public ObservableCollection<FileSystemInfoDataSource> FileExplorerItems
-		{
-			get { return (ObservableCollection<FileSystemInfoDataSource>)GetValue(FileExplorerItemsProperty); }
-			set { SetValue(FileExplorerItemsProperty, value); }
-		}
-		public void OnFileItemSelected(object s, RoutedEventArgs e)
-		{
-			var directoryItem = e.Source as DirectoryListItem;
-			if (directoryItem != null)
-			{
-				MessageBox.Show("dir: " + directoryItem);
-			}
-			var fileItem = e.Source as FileListItem;
-			if (fileItem != null)
-			{
-				MessageBox.Show("file: " + fileItem);
-			}
-		}
 		public ReportViewer()
 		{
-			EventManager.RegisterClassHandler(typeof(ReportViewer), FileExplorerListItem.FileExplorerItemSelectedEvent, new RoutedEventHandler(OnFileItemSelected));
-			//FileExplorerItems = new ObservableCollection<FileSystemInfoDataSource>(new List<FileSystemInfoDataSource>
-			//{
-			//	new FileSystemInfoDataSource(new DirectoryInfo(@"C:\Users\bfgevren\Documents\FlexDocuments\August 23 - August 29, 2015")),
-			//	new FileSystemInfoDataSource(new FileInfo(@"C:\Users\bfgevren\Documents\FlexDocuments\flexdoc.flex")),
-			//});
-
 			InitializeComponent();
 			resetUI();
 			Loaded += OnLoaded;
@@ -71,18 +45,7 @@ namespace FlexReports
 
 		private void OnLoaded(object s, RoutedEventArgs e)
 		{
-			if (!rootDirectory.Exists)
-				rootDirectory.Create();
-
-			LeftPanelItems.Children.Clear();
-			foreach (var directory in rootDirectory.GetDirectories())
-			{
-				LeftPanelItems.Children.Add(new DirectoryListItem { Directory = directory });
-			}
-			foreach (var file in rootDirectory.GetFiles("*.flex"))
-			{
-				LeftPanelItems.Children.Add(new FileListItem { File = file });
-			}
+			LeftPanelItems.ActiveDirectory = rootDirectory;
 		}
 
 		private void MenuExpand(object s, RoutedEventArgs e)
@@ -129,6 +92,13 @@ namespace FlexReports
 		private void TransitionTheme(object s, RoutedEventArgs e)
 		{
 
+		}
+
+		private void OnRequestOpenFile(object s, RoutedEventArgs e)
+		{
+			var fileInfo = e.OriginalSource.RequireType<FileListItem>().File;
+			var parsedDocument = FlexDocumentReader.ParseDocument(fileInfo.FullName);
+			documentViewport.FlexDocument = parsedDocument;
 		}
 	}
 }

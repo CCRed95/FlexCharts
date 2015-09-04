@@ -66,6 +66,7 @@
     <Compile Include="MaterialControls\Converters\LuminosityToMaterialConverter.cs" />
     <Compile Include="MaterialControls\Converters\TextFieldHintVisibilityConverter.cs" />
     <Compile Include="MaterialControls\FileExplorer\DirectoryListItem.cs" />
+    <Compile Include="MaterialControls\FileExplorer\FileExplorerHost.cs" />
     <Compile Include="MaterialControls\FileExplorer\FileExplorerListItem.cs" />
     <Compile Include="MaterialControls\FileExplorer\FileListItem.cs" />
     <Compile Include="MaterialControls\MaterialShell.cs" />
@@ -115,6 +116,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.FileExplorerHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.FileListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,7 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MaterialControls\DocumentViewport.cs" />
-    <Compile Include="MaterialControls\FlexDocument.cs" />
     <Compile Include="MaterialControls\FlexTabItem.cs" />
     <Compile Include="MaterialControls\MaterialButton.cs" />
     <Compile Include="MaterialControls\MaterialButtonList.cs" />

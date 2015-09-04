@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using FlexCharts.Documents;
 using FlexCharts.Helpers.DependencyHelpers;
 
 namespace FlexReports.MaterialControls
