@@ -62,6 +62,7 @@ namespace FlexReports
 			}
 			
 		}
+
 		private void expandMenu()
 		{
 			LeftMenu.animate(WidthProperty, 300, 360, 0, new CubicEase { EasingMode = EasingMode.EaseOut });
@@ -73,6 +74,7 @@ namespace FlexReports
 			LeftTitleBar.animate(OpacityProperty, 200, 1, 200, new CubicEase { EasingMode = EasingMode.EaseOut });
 			LeftPanelItems.animate(OpacityProperty, 300, 1, 300, new CubicEase { EasingMode = EasingMode.EaseOut });
 		}
+
 		private void collapseMenu()
 		{
 			LeftMenu.animate(WidthProperty, 300, 65, 300, new CubicEase { EasingMode = EasingMode.EaseOut });
@@ -84,6 +86,7 @@ namespace FlexReports
 			LeftTitleBar.animate(OpacityProperty, 200, 0, 0, new CubicEase { EasingMode = EasingMode.EaseOut });
 			LeftPanelItems.animate(OpacityProperty, 300, 0, 100, new CubicEase { EasingMode = EasingMode.EaseOut });
 		}
+
 		private void quickCollapseMenu()
 		{
 			LeftMenu.animate(WidthProperty, 300, 65, 0, new CubicEase { EasingMode = EasingMode.EaseOut });
@@ -111,6 +114,11 @@ namespace FlexReports
 			LeftPanelItems.NavigateParentDirectory();
 		}
 
+		private void viewDocumentCode(object s, RoutedEventArgs e)
+		{
+			documentViewport.ViewCodeBehind();
+		}
+
 		private void OnRequestOpenFile(object s, RoutedEventArgs e)
 		{
 			try
@@ -124,7 +132,7 @@ namespace FlexReports
 			}
 			catch(Exception ex)
 			{
-				PopupSpace.Content = new FileParseExceptionPopup() {MoreInfo = ex.ToString()};
+				PopupSpace.Content = new FileParseExceptionPopup {MoreInfo = ex.ToString()};
 			}
 		}
 	}

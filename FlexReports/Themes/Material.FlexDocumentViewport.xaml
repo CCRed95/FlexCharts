@@ -12,7 +12,13 @@
         <ControlTemplate TargetType="{x:Type materialControls:FlexDocumentViewport}">
           <Viewbox  Name="PART_root" RenderTransformOrigin=".5, .5">
             <Viewbox.RenderTransform>
-              <ScaleTransform CenterX=".5" CenterY=".5" ScaleX=".9" ScaleY=".9"/>
+							<TransformGroup>
+								<TranslateTransform X="0" Y="{Binding VerticalScrollOffset}"></TranslateTransform>
+								<ScaleTransform CenterX=".5" CenterY=".5" ScaleX="{Binding ZoomOffset}" ScaleY="{Binding ZoomOffset}"/>
+								
+							</TransformGroup>
+							
+              
             </Viewbox.RenderTransform>
             <Grid>
               <!--<Border Background="Black" x:Name="rootBorder" Opacity="0">

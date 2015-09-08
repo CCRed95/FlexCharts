@@ -42,11 +42,11 @@
               <Button Style="{StaticResource PathButtonDarkSurface}">
                 <Path Style="{StaticResource drawablefind_in_page}"/>
               </Button>
-              <Button Style="{StaticResource PathButtonDarkSurface}">
+              <Button Style="{StaticResource PathButtonDarkSurface}" Click="viewDocumentCode">
                 <Path Style="{StaticResource drawablecode}"/>
               </Button>
               <Button Style="{StaticResource PathButtonDarkSurface}">
-                <Path Style="{StaticResource drawabledashboard}"/>
+                <Path Style="{StaticResource drawableinsert_comment}"/>
               </Button>
               <Button Style="{StaticResource PathButtonDarkSurface}">
                 <Path Style="{StaticResource drawableview_carousel}"/>
@@ -90,5 +90,11 @@
 
     </DockPanel>
     <m:PopupManager x:Name="PopupSpace"/>
+    <Grid>
+			<Grid Width="200" Height="150" Background="{StaticResource mtYellow200}"
+						Effect="{StaticResource MaterialDesignShadowDepth2}">
+				<Label Content="Example Note" Foreground="Black" VerticalAlignment="Top"></Label>
+			</Grid>
+		</Grid>
   </Grid>
 </m:MaterialShell>
