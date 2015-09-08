@@ -11,7 +11,11 @@ namespace FlexCharts.Helpers.EventHelpers
 {
 	public static class EM
 	{
-		public static RoutedEvent Register<D, H>(RoutingStrategy rs = RoutingStrategy.Bubble, [CallerMemberName] string afn = null)
+		public const RoutingStrategy BUBBLE = RoutingStrategy.Bubble;
+		public const RoutingStrategy DIRECT = RoutingStrategy.Direct;
+		public const RoutingStrategy TUNNEL = RoutingStrategy.Tunnel;
+
+		public static RoutedEvent Register<D, H>(RoutingStrategy rs, [CallerMemberName] string afn = null)
 			where H : class where D : UIElement
 		{
 			if (!typeof(H).IsSubclassOf(typeof(Delegate)))

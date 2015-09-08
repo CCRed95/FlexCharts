@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:core="clr-namespace:FlexCharts.Controls.Core"
     xmlns:controls="clr-namespace:FlexCharts.Controls"
-    xmlns:charts="clr-namespace:FlexCharts.Controls.Charts">
+    xmlns:charts="clr-namespace:FlexCharts.Controls.Charts"
+    xmlns:documents="clr-namespace:FlexCharts.Documents">
   <Style TargetType="{x:Type charts:ParetoChart}">
     <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
     <Setter Property="Template">
@@ -214,4 +215,19 @@
       </Setter.Value>
     </Setter>
   </Style>
+  <Style TargetType="documents:FlexDocument">
+		<Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="documents:FlexDocument">
+          <Border Background="{TemplateBinding Background}"
+                 BorderBrush="{TemplateBinding BorderBrush}"
+                 BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid Name="PART_document" Margin="{TemplateBinding Padding}">
+							
+						</Grid>
+					</Border>
+				</ControlTemplate>
+      </Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

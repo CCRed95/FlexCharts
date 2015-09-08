@@ -67,7 +67,7 @@ namespace FlexCharts.Controls.Core
 
 		#region Routed Events
 
-		public static readonly RoutedEvent SegmentClickedEvent = EM.Register<AbstractFlexChart<T>, RoutedEventHandler>();
+		public static readonly RoutedEvent SegmentClickedEvent = EM.Register<AbstractFlexChart<T>, RoutedEventHandler>(EM.BUBBLE);
 
 		public event RoutedEventHandler SegmentClicked
 		{

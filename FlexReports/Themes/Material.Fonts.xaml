@@ -11,6 +11,9 @@
 	<Style TargetType="Label" BasedOn="{StaticResource {x:Type FrameworkElement}}">
 		
 	</Style>
+	<!--<Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type FrameworkElement}}">
+		
+	</Style>-->
   <Style TargetType="FrameworkElement" x:Key="t14pButton" BasedOn="{StaticResource {x:Type FrameworkElement}}">
     <Setter Property="Control.FontWeight" Value="Medium"/>
 	</Style>
@@ -45,5 +48,12 @@
 	<Style TargetType="FrameworkElement" x:Key="_t16pSubheadMed" BasedOn="{StaticResource {x:Type FrameworkElement}}">
     <Setter Property="Control.FontSize" Value="16pt"/>
 		<Setter Property="Control.FontWeight" Value="Medium"/>
+	</Style>
+	<Style TargetType="FrameworkElement" x:Key="_t18pLSubheadMed" BasedOn="{StaticResource {x:Type FrameworkElement}}">
+    <Setter Property="Control.FontSize" Value="18pt"/>
+		<Setter Property="Control.FontWeight" Value="Medium"/>
+	</Style>
+	<Style TargetType="FrameworkElement" x:Key="_t10pSubCaption" BasedOn="{StaticResource {x:Type FrameworkElement}}">
+    <Setter Property="Control.FontSize" Value="10pt"/>
 	</Style>
 </ResourceDictionary>

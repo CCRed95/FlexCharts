@@ -4,22 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlexChartsDemo"
+        xmlns:controls="clr-namespace:Material.Controls;assembly=Material"
         mc:Ignorable="d"
-        Title="Testing" Height="300" Width="600">
+        Title="Testing" Height="300" Width="300">
   <Grid >
-    <!--<controls:ParetoChart >
-      <controls:ParetoChart.Data>
-        <controls:CategoricalDouble CategoryName="A" Value="31"/>
-        <controls:CategoricalDouble CategoryName="B" Value="34"/>
-        <controls:CategoricalDouble CategoryName="C" Value="27"/>
-        <controls:CategoricalDouble CategoryName="D" Value="24"/>
-        <controls:CategoricalDouble CategoryName="E" Value="21"/>
-        <controls:CategoricalDouble CategoryName="F" Value="18"/>
-        <controls:CategoricalDouble CategoryName="R" Value="15"/>
-        <controls:CategoricalDouble CategoryName="E" Value="13"/>
-        <controls:CategoricalDouble CategoryName="F" Value="9"/>
-        <controls:CategoricalDouble CategoryName="R" Value="7"/>
-      </controls:ParetoChart.Data>
-    </controls:ParetoChart>-->
+		<!--<controls:FileManager/>-->
   </Grid>
 </Window>

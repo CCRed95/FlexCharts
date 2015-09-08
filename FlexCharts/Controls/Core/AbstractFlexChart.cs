@@ -12,7 +12,7 @@ using JetBrains.Annotations;
 
 namespace FlexCharts.Controls.Core
 {
-	public abstract class AbstractFlexChart : Control
+	public abstract class AbstractFlexChart : FlexControl
 	{
 		#region Dependency Properties
 		/// <summary>
@@ -93,12 +93,6 @@ namespace FlexCharts.Controls.Core
 		protected const FrameworkPropertyMetadataOptions INH = FrameworkPropertyMetadataOptions.Inherits;
 		#endregion
 
-		public T GetTemplateChild<T>(string name) where T : DependencyObject
-		{
-			var templateChild = GetTemplateChild(name) as T;
-			if (templateChild == null)
-				throw new NullReferenceException($"TemplateChild {name} as {typeof(T)}");
-			return templateChild;
-		}
+		
 	}
 }

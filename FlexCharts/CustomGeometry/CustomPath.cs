@@ -34,7 +34,7 @@ namespace FlexCharts.CustomGeometry
 		#endregion
 
 		#region Routed Events
-		public static readonly RoutedEvent ClickEvent = EM.Register<CustomPath, RoutedEventHandler>();
+		public static readonly RoutedEvent ClickEvent = EM.Register<CustomPath, RoutedEventHandler>(EM.BUBBLE);
 
 		public event RoutedEventHandler Click
 		{

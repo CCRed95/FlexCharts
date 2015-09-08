@@ -5,10 +5,71 @@
                     xmlns:converters="clr-namespace:FlexReports.Converters"
                     xmlns:materialDesign="http://www.flexcharts.com/schemas/core">
   <converters:LuminosityToBrushConverter x:Key="l2bc"/>
+  <Style x:Key="MaterialButton" TargetType="{x:Type Button}" BasedOn="{StaticResource t14pButton}">
+    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Padding" Value="10 5"/>
+		 <Setter Property="materialControls:VisualFeedback.ClickFeedback" Value="P050"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Background="{TemplateBinding Background}">
+            <Grid ClipToBounds="True">
+              <Grid>
+                <Ellipse Name="clickWave" Width="{TemplateBinding ActualWidth}" 
+													Height="{TemplateBinding ActualWidth}" 
+													RenderTransformOrigin=".5,.5"
+												 VerticalAlignment="Center" HorizontalAlignment="Center">
+                  <Ellipse.Fill>
+                    <MultiBinding Converter="{StaticResource l2bc}">
+                      <Binding Path="(materialControls:ThemePrimitive.Theme)"/>
+                      <Binding Path="(materialControls:VisualFeedback.ClickFeedback)"/>
+                    </MultiBinding>
+                  </Ellipse.Fill>
+                  <Ellipse.RenderTransform>
+                    <ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
+                  </Ellipse.RenderTransform>
+                </Ellipse>
+              </Grid>
+
+              <ContentPresenter Margin="{TemplateBinding Padding}" />
+
+            </Grid>
+          </Border>
+
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Foreground" Value="{Binding Path=(materialControls:ThemePrimitive.Theme).P600}"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="Click">
+              <EventTrigger.Actions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleX" 
+																		 From="0" To="2.5" Duration="0:0:.3" />
+
+                    <DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleY" 
+																		 From="0" To="2.5" Duration="0:0:.3" />
+
+                    <DoubleAnimation Storyboard.TargetName="clickWave" Storyboard.TargetProperty="Opacity" 
+																		 From="1" To="0" Duration="0:0:.3" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </EventTrigger.Actions>
+            </EventTrigger>
+            <Trigger Property="Button.IsDefaulted" Value="true"/>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
   <Style x:Key="PathButton" TargetType="{x:Type Button}">
     <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
     <Setter Property="Background" Value="Transparent" />
-		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
+    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -95,7 +156,7 @@
     </Setter>
   </Style>
   <Style x:Key="PathButtonDarkSurface" TargetType="{x:Type Button}" BasedOn="{StaticResource PathButton}">
-		<Setter Property="materialControls:VisualFeedback.ClickFeedback" Value="P600"/>
-		<Setter Property="materialControls:ThemePrimitive.Theme" Value="{x:Static materialDesign:MaterialThemes.GreyTheme}"/>
-	</Style>
+    <Setter Property="materialControls:VisualFeedback.ClickFeedback" Value="P600"/>
+    <Setter Property="materialControls:ThemePrimitive.Theme" Value="{x:Static materialDesign:MaterialThemes.GreyTheme}"/>
+  </Style>
 </ResourceDictionary>

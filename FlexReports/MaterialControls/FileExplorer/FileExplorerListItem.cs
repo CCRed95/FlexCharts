@@ -20,13 +20,13 @@ namespace FlexReports.MaterialControls.FileExplorer
 			set { SetValue(DescriptionProperty, value); }
 		}
 
-		public static readonly RoutedEvent FileExplorerItemSelectedEvent = EM.Register<FileExplorerListItem, RoutedEventHandler>();
+		public static readonly RoutedEvent FileExplorerItemSelectedEvent = EM.Register
+			<FileExplorerListItem, RoutedEventHandler>(EM.BUBBLE);
 
 		public event RoutedEventHandler FileExplorerItemSelected
 		{
 			add { AddHandler(FileExplorerItemSelectedEvent, value); }
 			remove { RemoveHandler(FileExplorerItemSelectedEvent, value); }
 		}
-		
 	}
 }

@@ -13,6 +13,7 @@ using FlexCharts.Extensions;
 using FlexCharts.Helpers.EventHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.Require;
+using FlexReports.MaterialControls.Popups;
 
 namespace FlexReports.MaterialControls
 {
@@ -21,13 +22,6 @@ namespace FlexReports.MaterialControls
 	/// </summary>
 	public partial class SelectThemePopup
 	{
-		public static readonly RoutedEvent PopupRequestCloseEvent = EM.Register<SelectThemePopup, RoutedEventHandler>();
-		public event RoutedEventHandler PopupRequestClose
-		{
-			add { AddHandler(PopupRequestCloseEvent, value); }
-			remove { RemoveHandler(PopupRequestCloseEvent, value); }
-		}
-		
 		public event ThemeSelectedHandler ThemeSelected;
 		public delegate void ThemeSelectedHandler(MaterialTheme e);
 		public void RaiseThemeSelectedEvent(MaterialTheme e)
@@ -190,13 +184,6 @@ namespace FlexReports.MaterialControls
 		}
 
 		#endregion
-		public T GetTemplateChild<T>(string name) where T : DependencyObject
-		{
-			var templateChild = GetTemplateChild(name) as T;
-			if (templateChild == null)
-				throw new NullReferenceException($"TemplateChild {name} as {typeof(T)}");
-			return templateChild;
-		}
 	}
 }
 

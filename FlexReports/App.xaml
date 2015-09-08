@@ -10,14 +10,19 @@
         <ResourceDictionary Source="Themes/Material.Fonts.xaml"/>
         <ResourceDictionary Source="Themes/Material.Shadows.xaml"/>
         <ResourceDictionary Source="Themes/Material.Shell.xaml"/>
+        <ResourceDictionary Source="Themes/Material.ScrollViewer.xaml"/>
         <ResourceDictionary Source="Themes/Material.ToggleControl.xaml"/>
         <ResourceDictionary Source="Themes/Material.Drawables.xaml"/>
-				<ResourceDictionary Source="Themes/Material.TextBox.xaml"/>
-				<ResourceDictionary Source="Themes/Material.DirectoryListItem.xaml"/>
-				<ResourceDictionary Source="Themes/Material.FileListItem.xaml"/>
-				<ResourceDictionary Source="Themes/Material.FileExplorerHost.xaml"/>
-				<ResourceDictionary Source="Themes/Material.PopupManager.xaml"/>
-				<ResourceDictionary Source="Themes/Material.Button.xaml"/>
+        <ResourceDictionary Source="Themes/Material.TextBox.xaml"/>
+        <ResourceDictionary Source="Themes/Material.DirectoryListItem.xaml"/>
+        <ResourceDictionary Source="Themes/Material.FileListItem.xaml"/>
+        <ResourceDictionary Source="Themes/Material.FileExplorerHost.xaml"/>
+        <ResourceDictionary Source="Themes/Material.PopupManager.xaml"/>
+        <ResourceDictionary Source="Themes/Material.Button.xaml"/>
+        <ResourceDictionary Source="Themes/Material.FileParseExceptionPopup.xaml"/>
+				<ResourceDictionary Source="Themes/Material.FlexDocumentViewport.xaml"/>
+				
+
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

@@ -8,9 +8,9 @@
         mc:Ignorable="d" 
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
 				TextOptions.TextRenderingMode="Aliased"
-        Title="TestFlexDocumentViewer" Height="300" Width="500">
+        Title="TestFlexDocumentViewer" Height="300" Width="300">
 	<Grid>
-		<Label Content="{Binding TestData}" Foreground="Black"/>
+		
 	</Grid>
 
 </Window>

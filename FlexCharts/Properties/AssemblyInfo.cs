@@ -47,7 +47,7 @@ using System.Windows.Markup;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls")]
+[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls.Charts")]
 [assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls.Primitives")]
 [assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls.Core")]
 

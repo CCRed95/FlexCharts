@@ -9,13 +9,14 @@ using System.Windows.Markup;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Helpers.EventHelpers;
 using FlexCharts.Require;
+using FlexReports.MaterialControls.Popups;
 
 namespace FlexReports.MaterialControls
 {
 	//[ContentProperty("Content")]
 	public class PopupManager : ContentControl
 	{
-		public static readonly RoutedEvent PopupAddedEvent = EM.Register<PopupManager, RoutedEventHandler>();
+		public static readonly RoutedEvent PopupAddedEvent = EM.Register<PopupManager, RoutedEventHandler>(EM.BUBBLE);
 
 		public event RoutedEventHandler PopupAdded
 		{
@@ -26,21 +27,14 @@ namespace FlexReports.MaterialControls
 		static PopupManager()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(PopupManager), new FrameworkPropertyMetadata(typeof(PopupManager)));
-			EventManager.RegisterClassHandler(typeof(PopupManager), SelectThemePopup.PopupRequestCloseEvent, new RoutedEventHandler(LocalOnPopupRequestClose));
+			EventManager.RegisterClassHandler(typeof(PopupManager), Popup.PopupRequestCloseEvent, new RoutedEventHandler(LocalOnPopupRequestClose));
 		}
 
 		protected override void OnContentChanged(object oldContent, object newContent)
 		{
 			base.OnContentChanged(oldContent, newContent);
-			//if (!(newContent is Grid))
-			//{
-				RaiseEvent(new RoutedEventArgs(PopupAddedEvent));
-			//}
-			//else
-			//{
-				
-			//}
-			
+			RaiseEvent(new RoutedEventArgs(PopupAddedEvent));
+
 		}
 
 		public static void LocalOnPopupRequestClose(object i, RoutedEventArgs e)

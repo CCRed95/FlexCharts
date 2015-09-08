@@ -65,12 +65,16 @@
     </Compile>
     <Compile Include="MaterialControls\Converters\LuminosityToMaterialConverter.cs" />
     <Compile Include="MaterialControls\Converters\TextFieldHintVisibilityConverter.cs" />
+    <Compile Include="MaterialControls\DropdownService.cs" />
     <Compile Include="MaterialControls\FileExplorer\DirectoryListItem.cs" />
     <Compile Include="MaterialControls\FileExplorer\FileExplorerHost.cs" />
     <Compile Include="MaterialControls\FileExplorer\FileExplorerListItem.cs" />
     <Compile Include="MaterialControls\FileExplorer\FileListItem.cs" />
+    <Compile Include="MaterialControls\FlexDocumentViewport.cs" />
     <Compile Include="MaterialControls\MaterialShell.cs" />
     <Compile Include="MaterialControls\PopupManager.cs" />
+    <Compile Include="MaterialControls\Popups\Popup.cs" />
+    <Compile Include="MaterialControls\Popups\FileParseExceptionPopup.cs" />
     <Compile Include="MaterialControls\SelectThemePopup.xaml.cs">
       <DependentUpon>SelectThemePopup.xaml</DependentUpon>
     </Compile>
@@ -124,11 +128,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.FileParseExceptionPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.FlexDocumentViewport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.Fonts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.PopupManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.ScrollViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using FlexCharts.Extensions;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Helpers.EventHelpers;
 
@@ -35,11 +37,17 @@ namespace FlexReports.MaterialControls.FileExplorer
 
 			foreach (var directory in rootDirectory.GetDirectories())
 			{
-				i.FileList.Add(new DirectoryListItem { Directory = directory });
+				if (directory.IsAccessible())
+				{
+					i.FileList.Add(new DirectoryListItem { Directory = directory });
+				}
 			}
 			foreach (var file in rootDirectory.GetFiles("*.flex"))
 			{
-				i.FileList.Add(new FileListItem { File = file });
+				if (file.IsAccessible())
+				{
+					i.FileList.Add(new FileListItem { File = file });
+				}
 			}
 		}
 
@@ -49,7 +57,7 @@ namespace FlexReports.MaterialControls.FileExplorer
 			set { SetValue(ActiveDirectoryProperty, value); }
 		}
 
-		public static readonly RoutedEvent RequestOpenFileEvent = EM.Register<FileExplorerHost, RoutedEventHandler>();
+		public static readonly RoutedEvent RequestOpenFileEvent = EM.Register<FileExplorerHost, RoutedEventHandler>(EM.BUBBLE);
 
 		public event RoutedEventHandler RequestOpenFile
 		{
@@ -70,7 +78,7 @@ namespace FlexReports.MaterialControls.FileExplorer
 		public void OnFileItemSelected(object s, RoutedEventArgs e)
 		{
 			var directoryItem = e.OriginalSource as DirectoryListItem;
-			if (directoryItem != null)
+			if (directoryItem != null && directoryItem.Directory.IsAccessible())
 			{
 				ActiveDirectory = directoryItem.Directory;
 			}
@@ -79,6 +87,11 @@ namespace FlexReports.MaterialControls.FileExplorer
 			{
 				RaiseEvent(new RoutedEventArgs(RequestOpenFileEvent, fileItem));
 			}
+		}
+
+		public void NavigateParentDirectory()
+		{
+			ActiveDirectory = ActiveDirectory.Parent;
 		}
 	}
 }

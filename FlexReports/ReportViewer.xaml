@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:m="clr-namespace:FlexReports.MaterialControls"
+        xmlns:fileExplorer="clr-namespace:FlexReports.MaterialControls.FileExplorer"
         mc:Ignorable="d"
 				Style="{StaticResource MaterialShell}"
 				m:VisualFeedback.ClickFeedback="P300"									
@@ -11,27 +12,30 @@
   <Grid>
     <DockPanel>
       <DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" 
-									Width="360">
+									Width="65">
         <Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(m:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
           <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="64"/>
           </Grid.ColumnDefinitions>
           <Grid Name="LeftTitleBar" Opacity="1">
-            <Label Content="Open Report" Style="{StaticResource t15pSubhead}" Padding="30 0" HorizontalAlignment="Left"/>
-            <Button Style="{StaticResource PathButtonDarkSurface}" HorizontalAlignment="Right">
-              <Path Style="{StaticResource drawablesort_by_alpha}"/>
+            <Button Style="{StaticResource PathButton}" HorizontalAlignment="Left" Click="parentDirectory">
+              <Button.LayoutTransform>
+                <RotateTransform Angle="0"/>
+              </Button.LayoutTransform>
+              <Path Style="{StaticResource drawablereply}"/>
             </Button>
+            <Label Content="Open Report" Style="{StaticResource t15pSubhead}" Padding="30 0" HorizontalAlignment="Center"/>
           </Grid>
           <Border Grid.Column="1">
-            <ToggleButton Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 0" 
-											HorizontalAlignment="Center" Checked="MenuExpand" Unchecked="MenuCollapse"/>
+            <ToggleButton Name="MenuToggle" Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 0" 
+											HorizontalAlignment="Center" Click="toggleMenu"/>
           </Border>
         </Grid>
         <Grid DockPanel.Dock="Bottom">
-					<fileExplorer:FileExplorerHost m:VisualFeedback.ClickFeedback="P050"	
+          <fileExplorer:FileExplorerHost m:VisualFeedback.ClickFeedback="P050"	
 											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile"/>
-					
+
           <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="65"
 								Background="{StaticResource mtGrey900}">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
@@ -59,29 +63,32 @@
           <Grid Height="64" Background="{Binding Path=(m:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
             <Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
 							 Padding="30 0" />
-						<StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
-							<Button Style="{StaticResource PathButton}">
-								<Path Style="{StaticResource drawablesearch}"/>
-							</Button>
-							<Button Style="{StaticResource PathButton}">
-								<Path Style="{StaticResource drawableview_module}"/>
-							</Button>
-							<Button Style="{StaticResource PathButton}" Click="SelectTheme">
-								<Path Style="{StaticResource drawablecolor_lens}"/>
-							</Button>
-							<Button Style="{StaticResource PathButton}">
-								<Path Style="{StaticResource drawablemore_vert}"/>
-							</Button>
-						</StackPanel>
-					</Grid>
-					<m:DocumentViewport x:Name="documentViewport">
-						
-					</m:DocumentViewport>
+            <StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
+              <Button Style="{StaticResource PathButton}">
+                <Path Style="{StaticResource drawablesearch}"/>
+              </Button>
+              <Button Style="{StaticResource PathButton}">
+                <Path Style="{StaticResource drawableview_module}"/>
+              </Button>
+              <Button Style="{StaticResource PathButton}" Click="SelectTheme">
+                <Path Style="{StaticResource drawablecolor_lens}"/>
+              </Button>
+              <Button Style="{StaticResource PathButton}">
+                <Path Style="{StaticResource drawablemore_vert}"/>
+              </Button>
+            </StackPanel>
+          </Grid>
+          <Grid ClipToBounds="True">
+            <m:FlexDocumentViewport x:Name="documentViewport">
+
+            </m:FlexDocumentViewport>
+          </Grid>
+
         </StackPanel>
         <Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
       </Grid>
 
     </DockPanel>
-		<m:PopupManager x:Name="PopupSpace"/>
+    <m:PopupManager x:Name="PopupSpace"/>
   </Grid>
 </m:MaterialShell>

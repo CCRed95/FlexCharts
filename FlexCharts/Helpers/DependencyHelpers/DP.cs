@@ -121,6 +121,5 @@ namespace FlexCharts.Helpers.DependencyHelpers
 				throw new Exception(FSR.DP.AutoCallerNameNotValid(autoFieldName));
 			return autoFieldName.Replace("Property", string.Empty);
 		}
-
 	}
 }

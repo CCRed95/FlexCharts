@@ -166,7 +166,7 @@ namespace FlexReports.MaterialControls
 		#endregion
 
 		#region Routed Events
-		public static readonly RoutedEvent ClickEvent = EM.Register<MaterialButton, RoutedEventHandler>();
+		public static readonly RoutedEvent ClickEvent = EM.Register<MaterialButton, RoutedEventHandler>(EM.BUBBLE);
 
 		public event RoutedEventHandler Click
 		{
