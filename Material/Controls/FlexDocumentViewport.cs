@@ -126,6 +126,8 @@ namespace Material.Controls
 
 		}
 
+		public bool HasContent => Document != null;
+
 		//private Point getActualRenderingOrigin()
 		//{
 		//	var viewportCenter = new Point(ActualWidth / 2, ActualHeight / 2);

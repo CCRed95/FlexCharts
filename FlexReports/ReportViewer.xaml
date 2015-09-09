@@ -7,6 +7,7 @@
         xmlns:controls="clr-namespace:Material.Controls;assembly=Material"
         xmlns:fileManager="clr-namespace:Material.Controls.FileManager;assembly=Material"
         xmlns:documents="http://www.flexcharts.com/schemas/core"
+        xmlns:tabSelector="clr-namespace:Material.Controls.TabSelector;assembly=Material"
         mc:Ignorable="d"
 				Style="{StaticResource MaterialShell}"
 				primitives:VisualFeedback.ClickFeedback="P300"									
@@ -40,7 +41,7 @@
               <Button Style="{StaticResource PathButtonDarkSurface}" Click="viewDocumentCode">
                 <Path Style="{StaticResource drawablecode}"/>
               </Button>
-              <Button Style="{StaticResource PathButtonDarkSurface}">
+              <Button Style="{StaticResource PathButtonDarkSurface}" Click="insertDocumentComment">
                 <Path Style="{StaticResource drawableinsert_comment}"/>
               </Button>
               <Button Style="{StaticResource PathButtonDarkSurface}">
@@ -55,7 +56,8 @@
       </DockPanel>
       <Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
         <StackPanel Orientation="Vertical">
-          <Grid Height="64" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
+          <Grid Height="64" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P500}" 
+								TextElement.Foreground="{StaticResource mtGrey50}">
             <Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
 							 Padding="30 0" HorizontalContentAlignment="Left" />
             <StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
@@ -73,11 +75,31 @@
               </Button>
             </StackPanel>
           </Grid>
-          <Grid ClipToBounds="True">
-            <controls:FlexDocumentViewport x:Name="documentViewport">
+          <DockPanel>
+            <Grid Height="44" DockPanel.Dock="Top" Background="{Binding Source={StaticResource Grey}, Path=P300}"
+									Effect="{StaticResource shadowDelta2}" >
+              <Grid ClipToBounds="True">
+                <UniformGrid Columns="5" >
+                  <tabSelector:TabSelectorItem Content="TAB ONE"/>
+                  <tabSelector:TabSelectorItem Content="TAB TWO"/>
+                  <tabSelector:TabSelectorItem Content="TAB THREE"/>
+                  <tabSelector:TabSelectorItem Content="TAB FOUR"/>
+                  <tabSelector:TabSelectorItem Content="TAB FIVE"/>
+                </UniformGrid>
+                <Border Background="{Binding Source={StaticResource Red}, Path=P700}" 
+											HorizontalAlignment="Left"  VerticalAlignment="Bottom" Height="5"  Width="143" Margin="285 0 0 0"/>
+              </Grid>
 
-            </controls:FlexDocumentViewport>
-          </Grid>
+
+            </Grid>
+
+            <Grid ClipToBounds="True" DockPanel.Dock="Bottom">
+              <controls:FlexDocumentViewport x:Name="documentViewport">
+
+              </controls:FlexDocumentViewport>
+            </Grid>
+          </DockPanel>
+
 
         </StackPanel>
         <Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
@@ -86,11 +108,11 @@
     </DockPanel>
     <controls:PopupManager x:Name="PopupSpace"/>
     <Grid>
-			<!--<Grid Width="200" Height="150" Background="{Binding Source={StaticResource Yellow}, Path=P200}"
+      <!--<Grid Width="200" Height="150" Background="{Binding Source={StaticResource Yellow}, Path=P200}"
 						Effect="{StaticResource shadowDelta2}">
 				<Label Content="Example Note" Foreground="Black" VerticalAlignment="Top"></Label>
 			</Grid>-->
-			<!--<Grid.Resources>
+      <!--<Grid.Resources>
         <Style TargetType="TextBlock" x:Key="codetext">
 					<Setter Property="Foreground" Value="DeepSkyBlue"/>
 					<Setter Property="FontSize" Value="12pt"/>
@@ -103,7 +125,7 @@
 					<TextBlock Text="hello" Style="{StaticResource codetext}" />	
 				</StackPanel>
       </Grid>-->
-      
+
     </Grid>
   </Grid>
 </controls:MaterialShell>

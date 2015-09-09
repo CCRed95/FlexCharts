@@ -25,7 +25,7 @@
 							</ItemsControl>
 						</ScrollViewer>
 						<UniformGrid Grid.Row="1" Columns="3" Background="{StaticResource mtGrey900}"><!--"{Binding Path=(primitives:ThemePrimitive.Theme).P600}"-->
-              <Button Width="40" Style="{StaticResource PathButton}" Name="PART_directoryup">
+              <Button Style="{StaticResource PathButton}" Name="PART_directoryup">
                 <Path Style="{StaticResource drawablereply}" RenderTransformOrigin=".5,.5">
                   <Path.RenderTransform>
                     <TransformGroup>
@@ -35,10 +35,10 @@
                   </Path.RenderTransform>
                 </Path>
               </Button>
-							<Button Width="40" Style="{StaticResource PathButton}" Name="PART_filter">
+							<Button Style="{StaticResource PathButton}" Name="PART_filter">
                 <Path Style="{StaticResource drawablefilter}"/>
               </Button>
-							<Button Width="40" Style="{StaticResource PathButton}" Name="PART_sort">
+							<Button Style="{StaticResource PathButton}" Name="PART_sort">
                 <Path Style="{StaticResource drawablesort}"/>
               </Button>
 

@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using FlexCharts.Documents;
 using FlexCharts.Extensions;
-using FlexCharts.Helpers.DependencyHelpers;
-using FlexCharts.MaterialDesign;
 using FlexCharts.Require;
 using Material;
 using Material.Controls.FileManager;
@@ -112,6 +105,18 @@ namespace FlexReports
 		private void viewDocumentCode(object s, RoutedEventArgs e)
 		{
 			documentViewport.ViewCodeBehind();
+		}
+		private void insertDocumentComment(object s, RoutedEventArgs e)
+		{
+			if (!documentViewport.HasContent)
+			{
+				PopupSpace.Content = new MessagePopup
+				{
+					Title = "Cannot Add Comment",
+					Message = "Open a document first."
+				};
+			}
+
 		}
 
 		private void OnRequestOpenFile(object s, RoutedEventArgs e)

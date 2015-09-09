@@ -16,5 +16,8 @@
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FlexDocumentViewport.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FileParseExceptionPopup.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Shell.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.MessagePopup.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.TabSelectorItem.xaml"/>
+		
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

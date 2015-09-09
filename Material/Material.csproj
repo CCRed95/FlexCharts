@@ -64,10 +64,14 @@
     <Compile Include="Controls\MaterialShell.cs" />
     <Compile Include="Controls\PopupManager.cs" />
     <Compile Include="Controls\Popups\FileParseExceptionPopup.cs" />
+    <Compile Include="Controls\Popups\MessagePopup.cs" />
     <Compile Include="Controls\Popups\Popup.cs" />
     <Compile Include="Controls\Popups\SelectThemePopup.xaml.cs">
       <DependentUpon>SelectThemePopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TabSelector\TabSelector.cs" />
+    <Compile Include="Controls\TabSelector\TabSelectorItem.cs" />
+    <Compile Include="Converters\LargestValueConverter.cs" />
     <Compile Include="Static\Palette.cs" />
     <Page Include="Controls\Popups\SelectThemePopup.xaml">
       <SubType>Designer</SubType>
@@ -109,6 +113,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.MessagePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.Palette.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.Shell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.TabSelectorItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

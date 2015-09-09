@@ -1,6 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:popups="clr-namespace:Material.Controls.Popups">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="Material.Shadows.xaml"/>
+		<ResourceDictionary Source="Material.Fonts.xaml"/>
+    <ResourceDictionary Source="Material.Palette.xaml"/>
+		<ResourceDictionary Source="Material.Button.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
   <Style TargetType="popups:FileParseExceptionPopup">
     <Setter Property="Width" Value="320"/>
     <Setter Property="Height" Value="240"/>
@@ -11,12 +17,12 @@
           <Border Background="{TemplateBinding Background}"
                  BorderBrush="{TemplateBinding BorderBrush}"
                  BorderThickness="{TemplateBinding BorderThickness}"
-									 Effect="{StaticResource MaterialDesignShadowDepth4}">
+									 Effect="{StaticResource shadowDelta4}">
             <DockPanel >
               <StackPanel DockPanel.Dock="Top" Margin="24 24 24 8">
                 <TextBlock Text="Document Read Error." Foreground="Black" Padding="0 0 0 15" TextWrapping="Wrap" Style="{StaticResource _t18pLSubheadMed}"/>
-                <TextBlock Text="An error occured while parsing this document. The document may be contain invalid markup or corrupt data. " Foreground="{StaticResource mtGrey700}" Padding="0" TextWrapping="Wrap"
-										 Style="{StaticResource t15pSubhead}"/>
+                <TextBlock Text="An error occured while parsing this document. The document may be contain invalid markup or corrupt data. " 
+													 Foreground="{StaticResource mtGrey700}" Padding="0" TextWrapping="Wrap" Style="{StaticResource t15pSubhead}"/>
               </StackPanel>
               <DockPanel VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Height="48" Margin="10 8">
                 <Button Content="OKAY" Name="PART_buttonok" Style="{StaticResource MaterialButton}" Height="36" DockPanel.Dock="Right"/>
