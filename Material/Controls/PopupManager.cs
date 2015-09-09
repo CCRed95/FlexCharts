@@ -5,15 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
-using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Helpers.EventHelpers;
-using FlexCharts.Require;
-using FlexReports.MaterialControls.Popups;
+using Material.Controls.Popups;
 
-namespace FlexReports.MaterialControls
+namespace Material.Controls
 {
-	//[ContentProperty("Content")]
 	public class PopupManager : ContentControl
 	{
 		public static readonly RoutedEvent PopupAddedEvent = EM.Register<PopupManager, RoutedEventHandler>(EM.BUBBLE);

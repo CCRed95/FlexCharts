@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:materialControls="clr-namespace:Material.Controls"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:core="http://www.flexcharts.com/schemas/core">
+  <system:Double x:Key="fdvcollapseEndZoom">.65</system:Double>
+  <Duration x:Key="fdvtransition">0:0:.3</Duration>
+  <Style TargetType="materialControls:FlexDocumentViewport">
+    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type materialControls:FlexDocumentViewport}">
+          <Viewbox  Name="PART_root" RenderTransformOrigin=".5, 0">
+            <Viewbox.RenderTransform>
+              <TransformGroup>
+                <TranslateTransform X="0" Y="{Binding VerticalScrollOffset}"/>
+                <ScaleTransform ScaleX="{Binding ZoomOffset}" ScaleY="{Binding ZoomOffset}"/>
+              </TransformGroup>
+            </Viewbox.RenderTransform>
+            <Grid>
+              <core:FlexContentControl Content="{Binding Document}" x:Name="fcc" Opacity="0" RenderTransformOrigin=".5,.5">
+                <core:FlexContentControl.RenderTransform>
+                  <ScaleTransform x:Name="popupScale" ScaleX="{StaticResource fdvcollapseEndZoom}" ScaleY="{StaticResource fdvcollapseEndZoom}"/>
+                </core:FlexContentControl.RenderTransform>
+              </core:FlexContentControl>
+            </Grid>
+          </Viewbox>
+          <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="materialControls:FlexDocumentViewport.DocumentAdded">
+              <EventTrigger.Actions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible">
+                      <DiscreteBooleanKeyFrame KeyTime="0:0:.1" Value="True"/>
+                    </BooleanAnimationUsingKeyFrames>
+                    <DoubleAnimation Storyboard.TargetName="fcc" Storyboard.TargetProperty="Opacity" 
+																		 From="0" To="1" Duration="{StaticResource fdvtransition}" >
+                      <DoubleAnimation.EasingFunction>
+                        <SineEase EasingMode="EaseIn"/>
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleX" 
+																		 From="{StaticResource fdvcollapseEndZoom}" To="1" Duration="{StaticResource fdvtransition}" >
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetName="popupScale" Storyboard.TargetProperty="ScaleY" 
+																		 From="{StaticResource fdvcollapseEndZoom}" To="1" Duration="{StaticResource fdvtransition}" >
+                      <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                  </Storyboard>
+                </BeginStoryboard>
+              </EventTrigger.Actions>
+            </EventTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

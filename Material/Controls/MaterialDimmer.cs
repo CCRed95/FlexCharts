@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using FlexCharts.Animation;
 using FlexCharts.Helpers.DependencyHelpers;
 
-namespace FlexReports.MaterialControls
+namespace Material.Controls
 {
 	public class MaterialDimmer : ContentControl
 	{

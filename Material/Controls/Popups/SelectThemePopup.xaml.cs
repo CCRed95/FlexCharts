@@ -1,21 +1,27 @@
 ﻿using System;
-using System.CodeDom;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using FlexCharts.Extensions;
-using FlexCharts.Helpers.EventHelpers;
 using FlexCharts.MaterialDesign;
 using FlexCharts.Require;
-using FlexReports.MaterialControls.Popups;
+using Material.Static;
 
-namespace FlexReports.MaterialControls
+namespace Material.Controls.Popups
 {
 	/// <summary>
 	/// Interaction logic for SelectThemePopup.xaml
@@ -23,16 +29,16 @@ namespace FlexReports.MaterialControls
 	public partial class SelectThemePopup
 	{
 		public event ThemeSelectedHandler ThemeSelected;
-		public delegate void ThemeSelectedHandler(MaterialTheme e);
-		public void RaiseThemeSelectedEvent(MaterialTheme e)
+		public delegate void ThemeSelectedHandler(AccentedMaterialSet e);
+		public void RaiseThemeSelectedEvent(AccentedMaterialSet e)
 		{
 			ThemeSelected?.Invoke(e);
 		}
 
-		private ReadOnlyCollection<MaterialTheme> themeSource = MaterialThemes.RecommendedThemes;
+		private readonly ReadOnlyCollection<AccentedMaterialSet> themeSource = Palette.RecommendedThemeSets;
 		protected UniformGrid PART_bubbles;
 		protected Grid ROOT_explosion;
-		private MaterialTheme lastSelectedTheme = null;
+		private AccentedMaterialSet lastSelectedTheme;
 
 		static SelectThemePopup()
 		{
@@ -60,7 +66,6 @@ namespace FlexReports.MaterialControls
 		{
 			base.OnApplyTemplate();
 			PART_bubbles = GetTemplateChild<UniformGrid>(nameof(PART_bubbles));
-			//PART_explosion = GetTemplateChild<Grid>(nameof(PART_explosion));
 			var dt = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(300)};
 			dt.Tick += (Sender, Args) =>
 			{
@@ -84,15 +89,15 @@ namespace FlexReports.MaterialControls
 					Tag = theme,
 					Fill = theme.P500,
 					Effect = MaterialPalette.Shadows.ShadowDelta2,
-					RenderTransformOrigin = new Point(.5,.5),
+					RenderTransformOrigin = new Point(.5, .5),
 					RenderTransform = scaleTransfrom
 				};
 				bubbles.MouseUp += bubbleClicked;
 				PART_bubbles.Children.Add(bubbles);
 				scaleTransfrom.animate(ScaleTransform.ScaleXProperty, 400, 1, animationSkew, new BackEase
-					{  EasingMode = EasingMode.EaseOut, Amplitude = .6});
+				{ EasingMode = EasingMode.EaseOut, Amplitude = .6 });
 				scaleTransfrom.animate(ScaleTransform.ScaleYProperty, 400, 1, animationSkew, new BackEase
-					{ EasingMode = EasingMode.EaseOut, Amplitude = .6});
+				{ EasingMode = EasingMode.EaseOut, Amplitude = .6 });
 				animationSkew += 10;
 				//new SineEase {EasingMode = EasingMode.EaseIn});
 				//scaleTransfrom.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation())
@@ -134,7 +139,7 @@ namespace FlexReports.MaterialControls
 			var shellSize = ROOT_explosion.RenderSize.Largest() * 2;
 			
 			var bubble = s.RequireType<Ellipse>();
-			lastSelectedTheme = bubble.Tag.RequireType<MaterialTheme>();
+			lastSelectedTheme = bubble.Tag.RequireType<AccentedMaterialSet>();
 
 			var cursor = Mouse.GetPosition(ROOT_explosion);
 			var explosionBubble = new Ellipse()
@@ -150,10 +155,10 @@ namespace FlexReports.MaterialControls
 			};
 			ROOT_explosion.Children.Add(explosionBubble);
 
-			bubble.RenderTransform.animate(ScaleTransform.ScaleXProperty, 400, 1, 0, new BackEase
-					{ EasingMode = EasingMode.EaseInOut, Amplitude = .3}, by:1.2);
-			bubble.RenderTransform.animate(ScaleTransform.ScaleYProperty, 400, 1, 0, new BackEase
-					{ EasingMode = EasingMode.EaseInOut, Amplitude = .3}, by:1.2);
+			//bubble.RenderTransform.animate(ScaleTransform.ScaleXProperty, 400, 1, 0, new BackEase
+			//		{ EasingMode = EasingMode.EaseInOut, Amplitude = .3}, by:1.2);
+			//bubble.RenderTransform.animate(ScaleTransform.ScaleYProperty, 400, 1, 0, new BackEase
+			//		{ EasingMode = EasingMode.EaseInOut, Amplitude = .3}, by:1.2);
 
 			explosionBubble.RenderTransform.animate(ScaleTransform.ScaleXProperty, 400, shellSize, 0, new BackEase
 					{ EasingMode = EasingMode.EaseInOut, Amplitude = .3});

@@ -2,23 +2,13 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using FlexCharts.Helpers.DependencyHelpers;
-using FlexCharts.MaterialDesign;
 
-namespace FlexReports.MaterialControls
+namespace Material.Controls
 {
 	public class MaterialShell : Window
 	{
 		private Grid ShellOverlayRoot;
 		public Grid GetShellOverlayRoot => ShellOverlayRoot;
-		//public static readonly DependencyProperty MaterialThemeProperty = DP.Register(
-		//	new Meta<MaterialShell, MaterialTheme>(MaterialThemes.BlueTheme));
-		//public MaterialTheme MaterialTheme
-		//{
-		//	get { return (MaterialTheme) GetValue(MaterialThemeProperty); }
-		//	set { SetValue(MaterialThemeProperty, value); }
-		//}
 
 		protected void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)
 		{

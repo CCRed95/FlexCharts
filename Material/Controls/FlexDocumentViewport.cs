@@ -13,7 +13,7 @@ using FlexCharts.Documents;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Helpers.EventHelpers;
 
-namespace FlexReports.MaterialControls
+namespace Material.Controls
 {
 	[TemplatePart(Name = "PART_root", Type = typeof(Viewbox))]
 	public class FlexDocumentViewport : FlexControl
@@ -44,7 +44,7 @@ namespace FlexReports.MaterialControls
 		private static void DocumentChanged(FlexDocumentViewport i, DPChangedEventArgs<FlexDocument> e)
 		{
 			i.VerticalScrollOffset = 0;
-			i.ZoomOffset = 1;
+			i.ZoomOffset = .9;
 			i.RaiseEvent(new RoutedEventArgs(DocumentAddedEvent));
 		}
 
@@ -86,7 +86,7 @@ namespace FlexReports.MaterialControls
 					lastZoomTarget = ZoomOffset;
 				}
 				lastZoomTarget = lastZoomTarget + (e.Delta / 2000.0);
-
+				//PART_root.RenderTransformOrigin = getActualRenderingOrigin();
 				BeginAnimation(ZoomOffsetProperty,
 					new DoubleAnimation(lastZoomTarget.GetValueOrDefault(.9), new Duration(TimeSpan.FromMilliseconds(150))));
 			}
@@ -125,5 +125,15 @@ namespace FlexReports.MaterialControls
 				{ EasingFunction = new CircleEase() {EasingMode = EasingMode.EaseInOut} });
 
 		}
+
+		//private Point getActualRenderingOrigin()
+		//{
+		//	var viewportCenter = new Point(ActualWidth / 2, ActualHeight / 2);
+		//	var viewportHeight = ActualHeight;
+		//	var documentHeight = Document.ActualHeight * Zo;
+		//	var midScale = viewportHeight / documentHeight;
+		//	var topScale = 1 - midScale;
+		//	return new Point(.5, topScale);
+		//}
 	}
 }

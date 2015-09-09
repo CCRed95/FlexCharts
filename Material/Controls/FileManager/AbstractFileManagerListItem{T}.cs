@@ -18,13 +18,6 @@ namespace Material.Controls.FileManager
 
 		public override FileSystemInfo FileSystemItemBase => FileSystemItem;
 
-		protected override void OnMouseUp(MouseButtonEventArgs e)
-		{
-			base.OnMouseUp(e);
-			if (IsEnabled)
-			{
-				RaiseEvent(new RoutedEventArgs(SelectedEvent));
-			}
-		}
+		
 	}
 }

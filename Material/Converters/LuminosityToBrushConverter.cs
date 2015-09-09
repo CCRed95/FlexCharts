@@ -4,9 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using FlexCharts.MaterialDesign;
 using FlexCharts.Require;
+using Material.Static;
 
 namespace Material.Converters
 {
@@ -16,13 +18,20 @@ namespace Material.Converters
 		{
 			try
 			{
+				var themeSource = values[0] as MaterialSet;
+				if (themeSource == null || Equals(themeSource, DependencyProperty.UnsetValue))
+				{
+					themeSource = Palette.Pink;
+				}
 				var luminosity = values[1].RequireType<Luminosity>();
-				var themeSource = values[0].RequireType<MaterialSet>();
+				
+
 				return themeSource.FromLuminosity(luminosity);
 			}
 			catch
 			{
-				throw new NotSupportedException("luminosity not supported");
+				return Palette.Pink.P500;
+				//throw new NotSupportedException($"LuminosityToBrushConverter with params {values[0]} - {values[1]} not supported");
 			}
 		}
 

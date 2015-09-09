@@ -59,9 +59,27 @@
     <Compile Include="Controls\FileManager\DirectoryListItem.cs" />
     <Compile Include="Controls\FileManager\FileListItem.cs" />
     <Compile Include="Controls\FileManager\FileManager.cs" />
+    <Compile Include="Controls\FlexDocumentViewport.cs" />
+    <Compile Include="Controls\MaterialDimmer.cs" />
+    <Compile Include="Controls\MaterialShell.cs" />
+    <Compile Include="Controls\PopupManager.cs" />
+    <Compile Include="Controls\Popups\FileParseExceptionPopup.cs" />
+    <Compile Include="Controls\Popups\Popup.cs" />
+    <Compile Include="Controls\Popups\SelectThemePopup.xaml.cs">
+      <DependentUpon>SelectThemePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Static\Palette.cs" />
+    <Page Include="Controls\Popups\SelectThemePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Material.Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.DirectoryListItem.xaml">
       <SubType>Designer</SubType>
@@ -79,6 +97,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.FileParseExceptionPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.FlexDocumentViewport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.Fonts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,7 +113,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Material.PathButton.xaml">
+    <Page Include="Themes\Material.PopupManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.ScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.Shadows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.Shell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.ToggleButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,6 +172,7 @@
       <Name>FlexCharts</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

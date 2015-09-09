@@ -1,17 +1,24 @@
-﻿<popups:Popup x:Class="FlexReports.MaterialControls.SelectThemePopup"
+﻿<local:Popup x:Class="Material.Controls.Popups.SelectThemePopup"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FlexReports.MaterialControls"
-             xmlns:popups="clr-namespace:FlexReports.MaterialControls.Popups"
+             xmlns:local="clr-namespace:Material.Controls.Popups"
+             xmlns:primitives="clr-namespace:Material.Controls.Primitives"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-  <popups:Popup.Resources>
-    <Style TargetType="local:SelectThemePopup">
+  <local:Popup.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="../../Themes/Material.Palette.xaml"/>
+				<ResourceDictionary Source="../../Themes/Material.Shadows.xaml"/>
+				<ResourceDictionary Source="../../Themes/Material.Drawables.xaml"/>
+				<ResourceDictionary Source="../../Themes/Material.Button.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+			<Style TargetType="local:SelectThemePopup">
       <Setter Property="Background" Value="{StaticResource mtGrey50}"/>
       <Setter Property="Padding" Value="20 20 20 20"/>
-      <Setter Property="Effect" Value="{StaticResource MaterialDesignShadowDepth3}"/>
+      <Setter Property="Effect" Value="{StaticResource shadowDelta3}"/>
       <Setter Property="Width" Value="340"/>
       <Setter Property="Height" Value="280"/>
       <!--<Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>-->
@@ -22,9 +29,9 @@
         <Setter.Value>
           <ControlTemplate TargetType="local:SelectThemePopup">
             <DockPanel Background="{TemplateBinding Background}">
-              <StackPanel DockPanel.Dock="Top" Height="50" Background="{Binding Path=(local:ThemePrimitive.Theme).P600}" 
+              <StackPanel DockPanel.Dock="Top" Height="50" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P600}" 
 										Orientation="Horizontal"  TextElement.Foreground="{StaticResource mtGrey50}">
-                <Button Style="{StaticResource PathButton}" local:VisualFeedback.ClickFeedback="P800" Click="closePopup">
+                <Button Style="{StaticResource PathButton}" primitives:VisualFeedback.ClickFeedback="P800" Click="closePopup">
                   <Path Style="{StaticResource drawableclose}"/>
                 </Button>
                 <Label Content="Choose a Theme" Style="{StaticResource t15pSubhead}" Padding="20 0" HorizontalAlignment="Left"/>
@@ -42,6 +49,9 @@
         </Setter.Value>
       </Setter>
     </Style>
+		</ResourceDictionary>
+    
 
-  </popups:Popup.Resources>
-</popups:Popup>
+  </local:Popup.Resources>
+</local:Popup>
+

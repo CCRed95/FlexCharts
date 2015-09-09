@@ -7,7 +7,7 @@ using System.Windows;
 using FlexCharts.Controls.Core;
 using FlexCharts.Helpers.EventHelpers;
 
-namespace FlexReports.MaterialControls.Popups
+namespace Material.Controls.Popups
 {
 	public class Popup : FlexControl
 	{

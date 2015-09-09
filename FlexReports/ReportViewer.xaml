@@ -1,29 +1,26 @@
-﻿<m:MaterialShell x:Class="FlexReports.ReportViewer"
+﻿<controls:MaterialShell x:Class="FlexReports.ReportViewer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:m="clr-namespace:FlexReports.MaterialControls"
+        xmlns:primitives="clr-namespace:Material.Controls.Primitives;assembly=Material"
+        xmlns:controls="clr-namespace:Material.Controls;assembly=Material"
+        xmlns:fileManager="clr-namespace:Material.Controls.FileManager;assembly=Material"
+        xmlns:documents="http://www.flexcharts.com/schemas/core"
         mc:Ignorable="d"
 				Style="{StaticResource MaterialShell}"
-				m:VisualFeedback.ClickFeedback="P300"									
+				primitives:VisualFeedback.ClickFeedback="P300"									
         Title="Report Viewer" Height="600" Width="800">
   <Grid>
     <DockPanel>
       <DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" 
 									Width="65">
-        <Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(m:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
+        <Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
           <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="64"/>
           </Grid.ColumnDefinitions>
           <Grid Name="LeftTitleBar" Opacity="1">
-            <Button Style="{StaticResource PathButton}" HorizontalAlignment="Left" Click="parentDirectory">
-              <Button.LayoutTransform>
-                <RotateTransform Angle="0"/>
-              </Button.LayoutTransform>
-              <Path Style="{StaticResource drawablereply}"/>
-            </Button>
             <Label Content="Open Report" Style="{StaticResource t15pSubhead}" Padding="30 0" HorizontalAlignment="Center"/>
           </Grid>
           <Border Grid.Column="1">
@@ -32,9 +29,8 @@
           </Border>
         </Grid>
         <Grid DockPanel.Dock="Bottom">
-          <!--<fileExplorer:FileExplorerHost m:VisualFeedback.ClickFeedback="P050"	
-											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile"/>-->
-
+          <fileManager:FileManager primitives:VisualFeedback.ClickFeedback="P050"	
+											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile"/>
           <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="65"
 								Background="{StaticResource mtGrey900}">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
@@ -59,9 +55,9 @@
       </DockPanel>
       <Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
         <StackPanel Orientation="Vertical">
-          <Grid Height="64" Background="{Binding Path=(m:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
+          <Grid Height="64" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
             <Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
-							 Padding="30 0" />
+							 Padding="30 0" HorizontalContentAlignment="Left" />
             <StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
               <Button Style="{StaticResource PathButton}">
                 <Path Style="{StaticResource drawablesearch}"/>
@@ -78,9 +74,9 @@
             </StackPanel>
           </Grid>
           <Grid ClipToBounds="True">
-            <m:FlexDocumentViewport x:Name="documentViewport">
+            <controls:FlexDocumentViewport x:Name="documentViewport">
 
-            </m:FlexDocumentViewport>
+            </controls:FlexDocumentViewport>
           </Grid>
 
         </StackPanel>
@@ -88,12 +84,26 @@
       </Grid>
 
     </DockPanel>
-    <m:PopupManager x:Name="PopupSpace"/>
+    <controls:PopupManager x:Name="PopupSpace"/>
     <Grid>
-			<Grid Width="200" Height="150" Background="{StaticResource mtYellow200}"
-						Effect="{StaticResource MaterialDesignShadowDepth2}">
+			<!--<Grid Width="200" Height="150" Background="{Binding Source={StaticResource Yellow}, Path=P200}"
+						Effect="{StaticResource shadowDelta2}">
 				<Label Content="Example Note" Foreground="Black" VerticalAlignment="Top"></Label>
-			</Grid>
-		</Grid>
+			</Grid>-->
+			<!--<Grid.Resources>
+        <Style TargetType="TextBlock" x:Key="codetext">
+					<Setter Property="Foreground" Value="DeepSkyBlue"/>
+					<Setter Property="FontSize" Value="12pt"/>
+					<Setter Property="FontFamily" Value="Consolas"/>
+				</Style>
+			</Grid.Resources>
+      <Grid Width="600" Height="400" Background="#282828">
+        <StackPanel Orientation="Horizontal" Margin="30">
+					<TextBlock Text="" Style="{StaticResource codetext}" />	
+					<TextBlock Text="hello" Style="{StaticResource codetext}" />	
+				</StackPanel>
+      </Grid>-->
+      
+    </Grid>
   </Grid>
-</m:MaterialShell>
+</controls:MaterialShell>

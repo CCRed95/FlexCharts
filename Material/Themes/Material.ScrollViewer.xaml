@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:FlexReports.Themes">
-  <SolidColorBrush x:Key="StandardBorderBrush" Color="#888" />
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+      <SolidColorBrush x:Key="StandardBorderBrush" Color="#888" />
   <SolidColorBrush x:Key="StandardBackgroundBrush" Color="#FFF" />
   <SolidColorBrush x:Key="HoverBorderBrush" Color="#DDD" />
   <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="Gray" />

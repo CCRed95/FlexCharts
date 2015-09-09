@@ -1,9 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:fr="clr-namespace:FlexReports"
-										xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:controls="http://www.flexcharts.com/schemas/core"
-                    xmlns:materialControls="clr-namespace:FlexReports.MaterialControls">
+                    xmlns:controls="clr-namespace:Material.Controls"
+                    xmlns:materialControls="clr-namespace:Material.Controls.Primitives">
 
   <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
   <Style x:Key="WindowButtonStyle" TargetType="{x:Type Button}">
@@ -41,7 +39,7 @@
     </Setter>
   </Style>
 
-  <Style TargetType="materialControls:MaterialShell" x:Key="MaterialShell">
+  <Style TargetType="controls:MaterialShell" x:Key="MaterialShell">
     <!--<Setter Property="Foreground" Value="{StaticResource mtTeal50}" />-->
     <!--<Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>-->
     <!--<Setter Property="FontFamily" Value="Roboto"/>-->
@@ -52,7 +50,7 @@
     <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
     <Setter Property="Template">
       <Setter.Value>
-        <ControlTemplate TargetType="materialControls:MaterialShell">
+        <ControlTemplate TargetType="controls:MaterialShell">
           <Border x:Name="WindowBorder" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}" Background="{Binding Path=(materialControls:ThemePrimitive.Theme).P800}">
             <Grid>
               <Border BorderThickness="0">

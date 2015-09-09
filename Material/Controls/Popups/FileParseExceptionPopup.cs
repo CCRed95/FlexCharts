@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Threading;
-using FlexCharts.Controls.Core;
 using FlexCharts.Helpers.DependencyHelpers;
 
-namespace FlexReports.MaterialControls.Popups
+namespace Material.Controls.Popups
 {
 	[TemplatePart(Name="PART_buttonok", Type=typeof(Button))]
 	[TemplatePart(Name="PART_buttonmoreinfo", Type=typeof(Button))]

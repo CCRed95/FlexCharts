@@ -74,6 +74,7 @@ namespace Material.Controls.FileManager
 		{
 			FileList = new ObservableCollection<AbstractFileManagerListItem>();
 			EventManager.RegisterClassHandler(typeof(FileManager), AbstractFileManagerListItem.SelectedEvent, new RoutedEventHandler(OnFileItemSelected));
+
 		}
 
 
