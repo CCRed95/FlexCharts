@@ -2,10 +2,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="Material.Palette.xaml"/>
-		<ResourceDictionary Source="Material.Drawables.xaml"/>
-		<ResourceDictionary Source="Material.DirectoryListItem.xaml"/>
-		<ResourceDictionary Source="Material.FileListItem.xaml"/>
-		<ResourceDictionary Source="Material.FileManager.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Palette.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Drawables.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.DirectoryListItem.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FileListItem.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FileManager.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.PathButton.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

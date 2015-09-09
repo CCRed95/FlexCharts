@@ -14,7 +14,6 @@ using FlexCharts.MaterialDesign;
 using FlexCharts.Require;
 using FlexReports.Data;
 using FlexReports.MaterialControls;
-using FlexReports.MaterialControls.FileExplorer;
 using FlexReports.MaterialControls.Popups;
 
 namespace FlexReports
@@ -40,14 +39,14 @@ namespace FlexReports
 			LeftTitleBar.Opacity = 0;
 			LeftIconMenu.Width = 65;
 			LeftTitleBar.Opacity = 0;
-			LeftPanelItems.Opacity = 0;
+			//LeftPanelItems.Opacity = 0;
 		}
 
 		private static readonly DirectoryInfo rootDirectory = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\FlexDocuments");
 
 		private void OnLoaded(object s, RoutedEventArgs e)
 		{
-			LeftPanelItems.ActiveDirectory = rootDirectory;
+			//LeftPanelItems.ActiveDirectory = rootDirectory;
 		}
 
 		private void toggleMenu(object s, RoutedEventArgs e)
@@ -72,7 +71,7 @@ namespace FlexReports
 			LeftIconMenu.animate(WidthProperty, 300, 0, 0, new CubicEase { EasingMode = EasingMode.EaseOut });
 
 			LeftTitleBar.animate(OpacityProperty, 200, 1, 200, new CubicEase { EasingMode = EasingMode.EaseOut });
-			LeftPanelItems.animate(OpacityProperty, 300, 1, 300, new CubicEase { EasingMode = EasingMode.EaseOut });
+			//LeftPanelItems.animate(OpacityProperty, 300, 1, 300, new CubicEase { EasingMode = EasingMode.EaseOut });
 		}
 
 		private void collapseMenu()
@@ -84,7 +83,7 @@ namespace FlexReports
 			LeftIconMenu.animate(WidthProperty, 300, 65, 300, new CubicEase { EasingMode = EasingMode.EaseOut });
 
 			LeftTitleBar.animate(OpacityProperty, 200, 0, 0, new CubicEase { EasingMode = EasingMode.EaseOut });
-			LeftPanelItems.animate(OpacityProperty, 300, 0, 100, new CubicEase { EasingMode = EasingMode.EaseOut });
+			//LeftPanelItems.animate(OpacityProperty, 300, 0, 100, new CubicEase { EasingMode = EasingMode.EaseOut });
 		}
 
 		private void quickCollapseMenu()
@@ -96,7 +95,7 @@ namespace FlexReports
 			LeftIconMenu.animate(WidthProperty, 300, 65, 0, new CubicEase { EasingMode = EasingMode.EaseOut });
 
 			LeftTitleBar.animate(OpacityProperty, 100, 0, 0, new CubicEase { EasingMode = EasingMode.EaseOut });
-			LeftPanelItems.animate(OpacityProperty, 150, 0, 100, new CubicEase { EasingMode = EasingMode.EaseOut });
+			//LeftPanelItems.animate(OpacityProperty, 150, 0, 100, new CubicEase { EasingMode = EasingMode.EaseOut });
 		}
 
 		private void SelectTheme(object s, RoutedEventArgs e)
@@ -111,7 +110,7 @@ namespace FlexReports
 
 		private void parentDirectory(object s, RoutedEventArgs e)
 		{
-			LeftPanelItems.NavigateParentDirectory();
+			//LeftPanelItems.NavigateParentDirectory();
 		}
 
 		private void viewDocumentCode(object s, RoutedEventArgs e)
@@ -119,21 +118,21 @@ namespace FlexReports
 			documentViewport.ViewCodeBehind();
 		}
 
-		private void OnRequestOpenFile(object s, RoutedEventArgs e)
-		{
-			try
-			{
-				var fileInfo = e.OriginalSource.RequireType<FileListItem>().File;
-				var parsedDocument = FlexDocumentReader.ParseDocument(fileInfo.FullName);
-				documentViewport.Document = parsedDocument;
-				MenuToggle.IsChecked = false;
-				quickCollapseMenu();
+		//private void OnRequestOpenFile(object s, RoutedEventArgs e)
+		//{
+		//	try
+		//	{
+		//		var fileInfo = e.OriginalSource.RequireType<FileListItem>().File;
+		//		var parsedDocument = FlexDocumentReader.ParseDocument(fileInfo.FullName);
+		//		documentViewport.Document = parsedDocument;
+		//		MenuToggle.IsChecked = false;
+		//		quickCollapseMenu();
 			
-			}
-			catch(Exception ex)
-			{
-				PopupSpace.Content = new FileParseExceptionPopup {MoreInfo = ex.ToString()};
-			}
-		}
+		//	}
+		//	catch(Exception ex)
+		//	{
+		//		PopupSpace.Content = new FileParseExceptionPopup {MoreInfo = ex.ToString()};
+		//	}
+		//}
 	}
 }

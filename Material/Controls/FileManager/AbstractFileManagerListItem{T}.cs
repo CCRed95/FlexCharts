@@ -1,10 +1,9 @@
 ﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Input;
 using FlexCharts.Helpers.DependencyHelpers;
-using FlexCharts.Helpers.EventHelpers;
 
-namespace Material.Controls
+namespace Material.Controls.FileManager
 {
 	public abstract class AbstractFileManagerListItem<T> : AbstractFileManagerListItem 
 		where T : FileSystemInfo
@@ -18,5 +17,14 @@ namespace Material.Controls
 		}
 
 		public override FileSystemInfo FileSystemItemBase => FileSystemItem;
+
+		protected override void OnMouseUp(MouseButtonEventArgs e)
+		{
+			base.OnMouseUp(e);
+			if (IsEnabled)
+			{
+				RaiseEvent(new RoutedEventArgs(SelectedEvent));
+			}
+		}
 	}
 }

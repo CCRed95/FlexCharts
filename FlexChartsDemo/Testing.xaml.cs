@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,19 +18,20 @@ namespace FlexChartsDemo
 	/// <summary>
 	/// Interaction logic for Testing.xaml
 	/// </summary>
-	public partial class Testing : Window
+	public partial class Testing 
 	{
 		public Testing()
 		{
 			InitializeComponent();
 			Loaded += OnLoaded;
 		}
+		
+		private static readonly DirectoryInfo rootDirectory = new DirectoryInfo(
+			Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\FlexDocuments");
 
-		private void OnLoaded(object Sender, RoutedEventArgs Args)
+		private void OnLoaded(object s, RoutedEventArgs e)
 		{
-			//var ct = FindResource("ct") as ControlTemplate;
-
-			//crc.Template = ct;
+			//fileManager.ActiveDirectory = rootDirectory;
 		}
 	}
 }

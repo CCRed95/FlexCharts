@@ -97,5 +97,28 @@ namespace Material
 		{
 			return new MaterialSet();
 		}
+
+		public virtual Dictionary<Luminosity, DependencyProperty> LuinosityPairs { get; } = new Dictionary<Luminosity, DependencyProperty>()
+		{
+			[Luminosity.P050] = P050Property,
+			[Luminosity.P100] = P100Property,
+			[Luminosity.P200] = P200Property,
+			[Luminosity.P300] = P300Property,
+			[Luminosity.P400] = P400Property,
+			[Luminosity.P500] = P500Property,
+			[Luminosity.P600] = P600Property,
+			[Luminosity.P700] = P700Property,
+			[Luminosity.P800] = P800Property,
+			[Luminosity.P900] = P900Property,
+		};
+
+		public SolidColorBrush FromLuminosity(Luminosity l)
+		{
+			if (LuinosityPairs.ContainsKey(l))
+			{
+				return (SolidColorBrush)GetValue(LuinosityPairs[l]);
+			}
+			throw new NotSupportedException($"Luminosity {l} not supported");
+		} 
 	}
 }

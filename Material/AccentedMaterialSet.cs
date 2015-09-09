@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using FlexCharts.Helpers.DependencyHelpers;
+using FlexCharts.MaterialDesign;
 
 namespace Material
 {
@@ -43,5 +44,22 @@ namespace Material
 			get { return (SolidColorBrush)GetValue(A700Property); }
 			set { SetValue(A700Property, value); }
 		}
+		public override Dictionary<Luminosity, DependencyProperty> LuinosityPairs { get; } = new Dictionary<Luminosity, DependencyProperty>
+		{
+			[Luminosity.P050] = P050Property,
+			[Luminosity.P100] = P100Property,
+			[Luminosity.P200] = P200Property,
+			[Luminosity.P300] = P300Property,
+			[Luminosity.P400] = P400Property,
+			[Luminosity.P500] = P500Property,
+			[Luminosity.P600] = P600Property,
+			[Luminosity.P700] = P700Property,
+			[Luminosity.P800] = P800Property,
+			[Luminosity.P900] = P900Property,
+			[Luminosity.A100] = A100Property,
+			[Luminosity.A200] = A200Property,
+			[Luminosity.A400] = A400Property,
+			[Luminosity.A700] = A700Property
+		};
 	}
 }

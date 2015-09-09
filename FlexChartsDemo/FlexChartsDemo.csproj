@@ -118,10 +118,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlexCharts\FlexCharts.csproj">
-      <Project>{53b04142-3fa5-4d7e-989e-efaff6b92631}</Project>
-      <Name>FlexCharts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Material\Material.csproj">
       <Project>{902b5087-d3bd-40d2-8e62-69505e9edd8e}</Project>
       <Name>Material</Name>

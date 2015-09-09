@@ -8,7 +8,7 @@ using System.Windows.Data;
 using FlexCharts.MaterialDesign;
 using FlexCharts.Require;
 
-namespace FlexReports.Converters
+namespace Material.Converters
 {
 	public class LuminosityToBrushConverter : IMultiValueConverter
 	{
@@ -17,13 +17,12 @@ namespace FlexReports.Converters
 			try
 			{
 				var luminosity = values[1].RequireType<Luminosity>();
-
-				var themeSource = values[0].RequireType<MaterialTheme>();
+				var themeSource = values[0].RequireType<MaterialSet>();
 				return themeSource.FromLuminosity(luminosity);
 			}
 			catch
 			{
-				return MaterialPalette.Red500;
+				throw new NotSupportedException("luminosity not supported");
 			}
 		}
 
@@ -33,23 +32,3 @@ namespace FlexReports.Converters
 		}
 	}
 }
-/*public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			try
-			{
-				var luminosity = parameter.RequireType<Luminosity>();
-				var themeSource = value.RequireType<MaterialTheme>();
-				return themeSource.FromLuminosity(luminosity);
-			}
-			catch
-			{
-				return MaterialPalette.Red500;
-			}
-
-
-		}
-
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			throw new NotImplementedException();
-		}*/

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-namespace Material.Controls
+
+namespace Material.Controls.FileManager
 {
 	public class DirectoryListItem : AbstractFileManagerListItem<DirectoryInfo>
 	{

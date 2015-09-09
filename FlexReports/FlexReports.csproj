@@ -66,10 +66,6 @@
     <Compile Include="MaterialControls\Converters\LuminosityToMaterialConverter.cs" />
     <Compile Include="MaterialControls\Converters\TextFieldHintVisibilityConverter.cs" />
     <Compile Include="MaterialControls\DropdownService.cs" />
-    <Compile Include="MaterialControls\FileExplorer\DirectoryListItem.cs" />
-    <Compile Include="MaterialControls\FileExplorer\FileExplorerHost.cs" />
-    <Compile Include="MaterialControls\FileExplorer\FileExplorerListItem.cs" />
-    <Compile Include="MaterialControls\FileExplorer\FileListItem.cs" />
     <Compile Include="MaterialControls\FlexDocumentViewport.cs" />
     <Compile Include="MaterialControls\MaterialShell.cs" />
     <Compile Include="MaterialControls\PopupManager.cs" />
@@ -112,19 +108,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Material.DirectoryListItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Themes\Material.Drawables.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.FileExplorerHost.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.FileListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

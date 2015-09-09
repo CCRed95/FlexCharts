@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:m="clr-namespace:FlexReports.MaterialControls"
-        xmlns:fileExplorer="clr-namespace:FlexReports.MaterialControls.FileExplorer"
         mc:Ignorable="d"
 				Style="{StaticResource MaterialShell}"
 				m:VisualFeedback.ClickFeedback="P300"									
@@ -33,8 +32,8 @@
           </Border>
         </Grid>
         <Grid DockPanel.Dock="Bottom">
-          <fileExplorer:FileExplorerHost m:VisualFeedback.ClickFeedback="P050"	
-											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile"/>
+          <!--<fileExplorer:FileExplorerHost m:VisualFeedback.ClickFeedback="P050"	
+											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile"/>-->
 
           <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="65"
 								Background="{StaticResource mtGrey900}">
