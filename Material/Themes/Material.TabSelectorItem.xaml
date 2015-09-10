@@ -8,18 +8,20 @@
     <ResourceDictionary Source="Material.Palette.xaml"/>
   </ResourceDictionary.MergedDictionaries>
   <converters:LuminosityToBrushConverter x:Key="l2bc"/>
-  <converters:LargestValueConverter x:Key="lvc"/>  
-	<Style TargetType="tabSelector:TabSelectorItem" BasedOn="{StaticResource t12pCaption}">
-		<Setter Property="Foreground" Value="{Binding Source={StaticResource Grey}, Path=P900}"/>
+  <converters:LargestValueConverter x:Key="lvc"/>
+  <converters:LuminosityToRadialBrushConverter x:Key="l2rbc"/>
+  <CubicEase x:Key="cubicEaseOut" EasingMode="EaseOut"/>
+  <CubicEase x:Key="cubicEaseIn" EasingMode="EaseIn"/>
+
+  <Style TargetType="tabSelector:TabSelectorItem" BasedOn="{StaticResource t12pCaption}">
+    <Setter Property="Foreground" Value="{Binding Source={StaticResource Grey}, Path=P700}"/>
     <Setter Property="Background" Value="Transparent" />
-		 <Setter Property="FontWeight" Value="Medium" />
-		<!--<Setter Property="FontStyle" Value="Italic" />-->
-		<Setter Property="FontSize" Value="10pt" />
+    <Setter Property="FontWeight" Value="Medium" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
     <Setter Property="Padding" Value="10 5 10 0"/>
-    <Setter Property="primitives:VisualFeedback.ClickFeedback" Value="P300"/>
+    <Setter Property="primitives:VisualFeedback.ClickFeedback" Value="P200"/>
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="tabSelector:TabSelectorItem">
@@ -31,7 +33,7 @@
                 <Ellipse Name="clickWave" RenderTransformOrigin=".5,.5"
 												 VerticalAlignment="Center" HorizontalAlignment="Center">
                   <Ellipse.Fill>
-                    <MultiBinding Converter="{StaticResource l2bc}">
+                    <MultiBinding Converter="{StaticResource l2rbc}">
                       <Binding Path="(primitives:ThemePrimitive.Theme)"/>
                       <Binding Path="(primitives:VisualFeedback.ClickFeedback)"/>
                     </MultiBinding>
@@ -48,41 +50,61 @@
                       <Binding Path="ActualHeight"/>
                     </MultiBinding>
                   </Ellipse.Height>
-                  <Ellipse.RenderTransform>
+                  <Ellipse.LayoutTransform>
                     <ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
-                  </Ellipse.RenderTransform>
+                  </Ellipse.LayoutTransform>
                 </Ellipse>
               </Grid>
-
-              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" 
+																Margin="{TemplateBinding Padding}" RenderTransformOrigin=".5,.5">
+                <ContentPresenter.RenderTransform>
+                  <ScaleTransform x:Name="textScale" ScaleX="1" ScaleY="1"/>
+                </ContentPresenter.RenderTransform>
+              </ContentPresenter>
             </Grid>
           </Border>
-
           <ControlTemplate.Triggers>
-						<!--{Binding Path=(primitives:ThemePrimitive.Theme).P900}-->
-						<Trigger Property="IsSelected" Value="True">
-							<Setter Property="Foreground" Value="{Binding Path=(primitives:ThemePrimitive.Theme).P900}"/>
-							<Setter Property="Background" Value="{Binding Path=(primitives:ThemePrimitive.Theme).P100}" />
-						</Trigger>
+            <Trigger Property="IsSelected" Value="True">
+              <Setter Property="Foreground" Value="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
+            </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-              <Setter Property="Foreground" Value="{Binding Source={StaticResource Grey}, Path=P700}"/>
+              <Setter Property="Foreground" Value="{Binding Path=(primitives:ThemePrimitive.Theme).P800}"/>
+              <Trigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="textScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1.05" Duration="0:0:.15" />
+
+                    <DoubleAnimation Storyboard.TargetName="textScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1.05" Duration="0:0:.15" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.EnterActions>
+              <Trigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="textScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1" Duration="0:0:.15" />
+
+                    <DoubleAnimation Storyboard.TargetName="textScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1" Duration="0:0:.15" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.ExitActions>
             </Trigger>
             <EventTrigger RoutedEvent="Click">
               <EventTrigger.Actions>
                 <BeginStoryboard>
                   <Storyboard>
-										<BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsSelected">
-											<DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
-										</BooleanAnimationUsingKeyFrames>
                     <DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleX" 
-																		 From="0" To="2.5" Duration="0:0:.3" />
+																		 From="0" To="1.5" Duration="0:0:.3" EasingFunction="{StaticResource cubicEaseOut}"/>
 
                     <DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleY" 
-																		 From="0" To="2.5" Duration="0:0:.3" />
+																		 From="0" To="1.5" Duration="0:0:.3" EasingFunction="{StaticResource cubicEaseOut}"/>
 
                     <DoubleAnimation Storyboard.TargetName="clickWave" Storyboard.TargetProperty="Opacity" 
-																		 From="1" To="0" Duration="0:0:.3" />
+																		 From="1" To="0" Duration="0:0:.3" EasingFunction="{StaticResource cubicEaseIn}"/>
+
                   </Storyboard>
                 </BeginStoryboard>
               </EventTrigger.Actions>

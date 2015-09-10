@@ -104,8 +104,9 @@ namespace FlexReports
 
 		private void viewDocumentCode(object s, RoutedEventArgs e)
 		{
-			documentViewport.ViewCodeBehind();
+			//documentViewport.ViewCodeBehind();
 		}
+
 		private void insertDocumentComment(object s, RoutedEventArgs e)
 		{
 			if (!documentViewport.HasContent)
@@ -134,6 +135,11 @@ namespace FlexReports
 			{
 				PopupSpace.Content = new FileParseExceptionPopup { MoreInfo = ex.ToString() };
 			}
+		}
+
+		private void OnTabSelected(object s, RoutedEventArgs e)
+		{
+			
 		}
 	}
 }

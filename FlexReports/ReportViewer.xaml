@@ -1,22 +1,22 @@
-﻿<controls:MaterialShell x:Class="FlexReports.ReportViewer"
+﻿<MaterialShell x:Class="FlexReports.ReportViewer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:primitives="clr-namespace:Material.Controls.Primitives;assembly=Material"
-        xmlns:controls="clr-namespace:Material.Controls;assembly=Material"
-        xmlns:fileManager="clr-namespace:Material.Controls.FileManager;assembly=Material"
-        xmlns:documents="http://www.flexcharts.com/schemas/core"
-        xmlns:tabSelector="clr-namespace:Material.Controls.TabSelector;assembly=Material"
+        xmlns:converters="clr-namespace:Material.Converters;assembly=Material"
+
         mc:Ignorable="d"
 				Style="{StaticResource MaterialShell}"
-				primitives:VisualFeedback.ClickFeedback="P300"									
+				VisualFeedback.ClickFeedback="P300"									
         Title="Report Viewer" Height="600" Width="800">
+	<MaterialShell.Resources>
+		<!--<converters:FlexDocumentTabSelectorAdapter x:Key="fdtsa"/>-->
+	</MaterialShell.Resources>
   <Grid>
     <DockPanel>
       <DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" 
-									Width="65">
-        <Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
+									Width="64">
+        <Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
           <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="64"/>
@@ -30,9 +30,9 @@
           </Border>
         </Grid>
         <Grid DockPanel.Dock="Bottom">
-          <fileManager:FileManager primitives:VisualFeedback.ClickFeedback="P050"	
+          <FileManager VisualFeedback.ClickFeedback="P050"	
 											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile"/>
-          <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="65"
+          <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="64"
 								Background="{StaticResource mtGrey900}">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
               <Button Style="{StaticResource PathButtonDarkSurface}">
@@ -56,7 +56,7 @@
       </DockPanel>
       <Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
         <StackPanel Orientation="Vertical">
-          <Grid Height="64" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P500}" 
+          <Grid Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500}" 
 								TextElement.Foreground="{StaticResource mtGrey50}">
             <Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
 							 Padding="30 0" HorizontalContentAlignment="Left" />
@@ -76,27 +76,16 @@
             </StackPanel>
           </Grid>
           <DockPanel>
-            <Grid Height="44" DockPanel.Dock="Top" Background="{Binding Source={StaticResource Grey}, Path=P300}"
-									Effect="{StaticResource shadowDelta2}" >
-              <Grid ClipToBounds="True">
-                <UniformGrid Columns="5" >
-                  <tabSelector:TabSelectorItem Content="TAB ONE"/>
-                  <tabSelector:TabSelectorItem Content="TAB TWO"/>
-                  <tabSelector:TabSelectorItem Content="TAB THREE"/>
-                  <tabSelector:TabSelectorItem Content="TAB FOUR"/>
-                  <tabSelector:TabSelectorItem Content="TAB FIVE"/>
-                </UniformGrid>
-                <Border Background="{Binding Source={StaticResource Red}, Path=P700}" 
-											HorizontalAlignment="Left"  VerticalAlignment="Bottom" Height="5"  Width="143" Margin="285 0 0 0"/>
-              </Grid>
-
-
+            <Grid Height="44" DockPanel.Dock="Top">
+              <!--Effect="{StaticResource shadowDelta2}" >-->
+              <TabSelector x:Name="documentTabSelector" TabSelected="OnTabSelected"
+																			 Tabs="{Binding ElementName=documentViewport, Path=Document, Converter={converters:FlexDocumentTabSelectorAdapter}}"/>
+         
             </Grid>
-
             <Grid ClipToBounds="True" DockPanel.Dock="Bottom">
-              <controls:FlexDocumentViewport x:Name="documentViewport">
+              <FlexDocumentViewport x:Name="documentViewport">
 
-              </controls:FlexDocumentViewport>
+              </FlexDocumentViewport>
             </Grid>
           </DockPanel>
 
@@ -106,26 +95,15 @@
       </Grid>
 
     </DockPanel>
-    <controls:PopupManager x:Name="PopupSpace"/>
+    <PopupManager x:Name="PopupSpace"/>
     <Grid>
-      <!--<Grid Width="200" Height="150" Background="{Binding Source={StaticResource Yellow}, Path=P200}"
-						Effect="{StaticResource shadowDelta2}">
-				<Label Content="Example Note" Foreground="Black" VerticalAlignment="Top"></Label>
-			</Grid>-->
-      <!--<Grid.Resources>
-        <Style TargetType="TextBlock" x:Key="codetext">
-					<Setter Property="Foreground" Value="DeepSkyBlue"/>
-					<Setter Property="FontSize" Value="12pt"/>
-					<Setter Property="FontFamily" Value="Consolas"/>
-				</Style>
-			</Grid.Resources>
-      <Grid Width="600" Height="400" Background="#282828">
-        <StackPanel Orientation="Horizontal" Margin="30">
-					<TextBlock Text="" Style="{StaticResource codetext}" />	
-					<TextBlock Text="hello" Style="{StaticResource codetext}" />	
-				</StackPanel>
-      </Grid>-->
+      
+      <!--<StackPanel Orientation="Vertical"  Width="200" Height="150" Background="{Binding Source={StaticResource Yellow}, Path=P200}"
+						Effect="{StaticResource shadowDelta3}">
+				<Label Content="Annotation" Foreground="Black" VerticalAlignment="Top"/>
+				<TextBlock Text="Here is some stuff written on an annotation" Margin="12"></TextBlock>
+			</StackPanel>-->
 
     </Grid>
   </Grid>
-</controls:MaterialShell>
+</MaterialShell>

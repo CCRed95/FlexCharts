@@ -23,7 +23,7 @@
       <Setter Property="Height" Value="280"/>
       <!--<Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>-->
       <!--<Setter Property="FontFamily" Value="Roboto"/>-->
-      <!--<Setter Property="d:DataContext" Value="{d:DesignInstance materialControls:MaterialShell, IsDesignTimeCreatable=True}"/>-->
+      <!--<Setter Property="d:DataContext" Value="{d:DesignInstance materialMaterialShell, IsDesignTimeCreatable=True}"/>-->
       <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
       <Setter Property="Template">
         <Setter.Value>

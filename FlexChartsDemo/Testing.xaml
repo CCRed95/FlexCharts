@@ -1,13 +1,21 @@
-﻿<Window x:Class="FlexChartsDemo.Testing"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<av:Window x:Class="FlexChartsDemo.Testing"
+       xmlns="http://www.flexcharts.com/schemas/core"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FlexChartsDemo"
-        xmlns:controls="clr-namespace:Material.Controls;assembly=Material"
+        xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:primitives="clr-namespace:Material.Controls.Primitives;assembly=Material"
         mc:Ignorable="d"
-        Title="Testing" Height="300" Width="300">
-  <Grid >
-		<!--<controls:FileManager/>-->
-  </Grid>
-</Window>
+        DataContext="{av:Binding RelativeSource={av:RelativeSource Self}}"
+        Title="Testing" Height="200" Width="350">
+	<!--primitives:ThemePrimitive.Theme="{StaticResource Red}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"-->
+  <av:Grid >
+		<ParetoChart BarTotalForeground="P200"></ParetoChart>
+    <!--<R xmlns="http://www.flexcharts.com/schemas/core">
+			
+		</R>-->
+		<!--<core:ParetoChart primitives:VisualFeedback.ClickFeedback="P300"/>
+    --><!--<fileManager:FileManager x:Name="fileManager"/>-->
+
+	</av:Grid>
+</av:Window>

@@ -23,6 +23,13 @@ namespace FlexCharts.Extensions
 				timeline.By = by;
 			i.BeginAnimation(dp, timeline);
 		}
+		public static void unregisterAnimation<T>(this T i, DependencyProperty dp) 
+			where T : DependencyObject, IAnimatable
+		{
+			var target = i.GetValue(dp);
+			i.SetValue(dp, target);
+			i.ApplyAnimationClock(dp, null);
+		}
 		//public static void animate(this IAnimatable i, DependencyProperty dp, int ms, double to, int skewms = 0, IEasingFunction easing = null)
 		//{
 		//	i.BeginAnimation(dp, new DoubleAnimation(to, new Duration(TimeSpan.FromMilliseconds(ms)))

@@ -51,7 +51,8 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="controls:MaterialShell">
-          <Border x:Name="WindowBorder" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}" Background="{Binding Path=(materialControls:ThemePrimitive.Theme).P800}">
+          <Border x:Name="WindowBorder" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}" 
+									Background="{Binding Path=(materialControls:ThemePrimitive.Theme).P800}">
             <Grid>
               <Border BorderThickness="0">
                 <AdornerDecorator>

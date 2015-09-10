@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Material.Converters"
+                    xmlns:tabSelector="clr-namespace:Material.Controls.TabSelector"
+                    xmlns:materialControls="clr-namespace:Material.Controls.Primitives">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="Material.Fonts.xaml"/>
+    <ResourceDictionary Source="Material.Palette.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+  <converters:LuminosityToBrushConverter x:Key="l2bc"/>
+  <converters:LargestValueConverter x:Key="lvc"/>
+  <Style TargetType="tabSelector:TabSelector" BasedOn="{StaticResource t12pCaption}">
+    <Setter Property="Background" Value="{Binding Source={StaticResource Grey}, Path=P300}" />
+    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="tabSelector:TabSelector">
+          <Border Background="{TemplateBinding Background}"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}">
+						<Border.LayoutTransform>
+							<ScaleTransform x:Name="barScale" ScaleX="1" ScaleY="0"/>
+						</Border.LayoutTransform>
+            <Grid>
+              <ItemsControl ItemsSource="{Binding Tabs}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding Tabs.Count}"/>
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+              <Border Name="PART_activeindicator" Background="{Binding Path=(materialControls:ThemePrimitive.Theme).P700}"
+											HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="4" Width="0"/>
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding Tabs}" Value="{x:Null}">
+              <DataTrigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="barScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="0" Duration="0:0:.3" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </DataTrigger.EnterActions>
+							<DataTrigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="barScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1" Duration="0:0:.3" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </DataTrigger.ExitActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Tabs.Count}" Value="0">
+              <Setter Property="Background" Value="Red"/>
+            </DataTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

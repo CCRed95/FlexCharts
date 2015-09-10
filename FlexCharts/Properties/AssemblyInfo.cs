@@ -47,17 +47,17 @@ using System.Windows.Markup;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls.Charts")]
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls.Primitives")]
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Controls.Core")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.Controls.Charts")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.Controls.Primitives")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.Controls.Core")]
 
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Documents")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.Documents")]
 
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data")]
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data.Filtering")]
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data.Sorting")]
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.Data.Structures")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.Data")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.Data.Filtering")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.Data.Sorting")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.Data.Structures")]
 
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.MaterialDesign")]
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.MaterialDesign.Descriptors")]
-[assembly: XmlnsDefinition(@"http://www.flexcharts.com/schemas/core", "FlexCharts.MaterialDesign.Providers")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.MaterialDesign")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.MaterialDesign.Descriptors")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "FlexCharts.MaterialDesign.Providers")]

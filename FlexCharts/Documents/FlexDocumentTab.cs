@@ -26,5 +26,10 @@ namespace FlexCharts.Documents
 			add { AddHandler(ViewTabRequestedEvent, value); }
 			remove { RemoveHandler(ViewTabRequestedEvent, value); }
 		}
+
+		public void RequestViewTab()
+		{
+			RaiseEvent(new RoutedEventArgs(ViewTabRequestedEvent));
+		}
 	}
 }

@@ -2,22 +2,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Fonts.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Palette.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Drawables.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Shadows.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.DirectoryListItem.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FileListItem.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FileManager.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ToggleButton.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Button.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ScrollViewer.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.PopupManager.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FlexDocumentViewport.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FileParseExceptionPopup.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Shell.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.MessagePopup.xaml"/>
-		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.TabSelectorItem.xaml"/>
-		
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

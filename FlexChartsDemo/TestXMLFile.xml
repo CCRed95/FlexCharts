@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<R xmlns="http://www.flexcharts.com/schemas/core">
+	<ParetoChart  BarTotalForeground="P400"/>
+	
+</R>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema 
+    targetNamespace="http://www.flexcharts.com/schemas/core"
+    xmlns="http://www.flexcharts.com/schemas/core"
+	  elementFormDefault="qualified"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+						xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense"
+						vs:friendlyname="Custom Intellisense Forms Controls 2"
+						vs:ishtmlschema="false"
+						vs:iscasesensitive="false"
+						vs:requireattributequotes="true">
+	<!--<xsd:import namespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" schemaLocation="PresentationCore.dll"/>-->
+	<xsd:element name="ParetoChart" type="ParetoChartDef"/>
+	<xsd:element name="R"/>
+	<xsd:simpleType name="LuminosityDef">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="P050"/>
+			<xsd:enumeration value="P100"/>
+			<xsd:enumeration value="P200"/>
+			<xsd:enumeration value="P300"/>
+			<xsd:enumeration value="P400"/>
+			<xsd:enumeration value="P500"/>
+			<xsd:enumeration value="P600"/>
+			<xsd:enumeration value="P700"/>
+			<xsd:enumeration value="P800"/>
+			<xsd:enumeration value="P900"/>
+			<xsd:enumeration value="A100"/>
+			<xsd:enumeration value="A200"/>
+			<xsd:enumeration value="A400"/>
+			<xsd:enumeration value="A700"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ParetoChartDef">
+		<xsd:attribute name="BarTotalForeground" type="LuminosityDef"/>
+	</xsd:complexType>
+	<!--<xsd:complexType name="LuminosityDef">
+		<xsd:attribute name="Alpha" type="xsd:boolean"/>
+		<xsd:attribute name="Delta" type="xsd:double"/>
+		<xsd:attribute name="Lum">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="P050"/>
+					<xsd:enumeration value="P100"/>
+					<xsd:enumeration value="P200"/>
+					<xsd:enumeration value="P300"/>
+					<xsd:enumeration value="P400"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		-->
+	<!--<xsd:attributeGroup ref="BaseClassAttributes"/>-->
+	<!--
+	</xsd:complexType>-->
+</xsd:schema>

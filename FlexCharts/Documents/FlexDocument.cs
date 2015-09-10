@@ -60,7 +60,13 @@ namespace FlexCharts.Documents
 
 		private void OnTabViewChangeRequested(object s, RoutedEventArgs e)
 		{
-			
+			//var src = e.OriginalSource;
+			//PART_document.Children.Clear();
+
+			//if (Tabs == null)
+			//	throw new NullReferenceException("Tabs null.");
+			//if (Tabs.Count >= 1)
+			//	PART_document.Children.Add(Tabs[0]);
 		}
 	}
 }
