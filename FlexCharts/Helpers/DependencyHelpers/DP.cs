@@ -46,6 +46,15 @@ namespace FlexCharts.Helpers.DependencyHelpers
 			=> DependencyProperty.Register(GetPropertyName(autoFieldName), typeof(T), typeof(D),
 				new FrameworkPropertyMetadata(meta.DefaultValue, meta.Flags, meta.ChangedCallback.TryInvoke,
 					meta.CoerceCallback.TryInvoke), validation.TryInvoke);
+
+
+		[MethodImpl(MethodImplOptions.NoInlining)]
+		public static DependencyPropertyKey RegisterReadOnly<D, T>(Meta<D, T> meta, PropertyValidate<T> validation = null, [CallerMemberName] string autoFieldName = null) where D : DependencyObject
+			=> DependencyProperty.RegisterReadOnly(GetReadOnlyPropertyName(autoFieldName), typeof(T), typeof(D),
+				new FrameworkPropertyMetadata(meta.DefaultValue, meta.Flags, meta.ChangedCallback.TryInvoke,
+					meta.CoerceCallback.TryInvoke), validation.TryInvoke);
+
+
 		/// <summary>
 		/// Registers an Attached DependencyProperty using the generic dependency property system
 		/// </summary>
@@ -120,6 +129,14 @@ namespace FlexCharts.Helpers.DependencyHelpers
 			if (!autoFieldName.EndsWith("Property"))
 				throw new Exception(FSR.DP.AutoCallerNameNotValid(autoFieldName));
 			return autoFieldName.Replace("Property", string.Empty);
+		}
+		internal static string GetReadOnlyPropertyName(string autoFieldName)
+		{
+			if (autoFieldName == null)
+				throw new Exception(FSR.DP.AutoCallerNameNotAssigned());
+			if (!autoFieldName.EndsWith("PropertyKey"))
+				throw new Exception(FSR.DP.AutoCallerNameNotValid(autoFieldName));
+			return autoFieldName.Replace("PropertyKey", string.Empty);
 		}
 	}
 }

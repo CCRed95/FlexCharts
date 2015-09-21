@@ -12,6 +12,6 @@ namespace FlexCharts.MaterialDesign.Descriptors
 	public abstract class AbstractMaterialDescriptor
 	{
 		public double Opacity { get; set; } = 1.0;
-		public abstract Material GetMaterial(MaterialSet materialSet);
+		public abstract Material GetMaterial(MaterialSetOLD materialSet);
 	}
 }

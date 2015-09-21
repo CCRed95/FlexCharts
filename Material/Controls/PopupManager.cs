@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using FlexCharts.Helpers.EventHelpers;
+using FlexCharts.Require;
 using Material.Controls.Popups;
 
 namespace Material.Controls
@@ -23,7 +24,7 @@ namespace Material.Controls
 		static PopupManager()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(PopupManager), new FrameworkPropertyMetadata(typeof(PopupManager)));
-			EventManager.RegisterClassHandler(typeof(PopupManager), Popup.PopupRequestCloseEvent, new RoutedEventHandler(LocalOnPopupRequestClose));
+			EventManager.RegisterClassHandler(typeof(PopupManager), PopupBase.PopupRequestCloseEvent, new RoutedEventHandler(LocalOnPopupRequestClose));
 		}
 
 		protected override void OnContentChanged(object oldContent, object newContent)
@@ -35,8 +36,8 @@ namespace Material.Controls
 
 		public static void LocalOnPopupRequestClose(object i, RoutedEventArgs e)
 		{
-			//var popupManager = i.RequireType<PopupManager>();
-			//popupManager.Content = null;
+			var popupManager = i.RequireType<PopupManager>();
+			popupManager.Content = null;
 		}
 	}
 }

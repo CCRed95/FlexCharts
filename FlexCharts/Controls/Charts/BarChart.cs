@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -25,6 +26,7 @@ namespace FlexCharts.Controls.Charts
 	[TemplatePart(Name = "PART_XAxis", Type = typeof(Grid))]
 	[TemplatePart(Name = "PART_BarLabels", Type = typeof(Grid))]
 	[TemplatePart(Name = "PART_Line", Type = typeof(Grid))]
+	[ContentProperty("Data")]
 	public class BarChart : AbstractFlexChart<DoubleSeries>, ISegmentContract, IBarTotalContract, IXAxisContract
 	{
 		#region Dependency Properties

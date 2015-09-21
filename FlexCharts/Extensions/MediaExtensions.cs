@@ -124,7 +124,7 @@ namespace FlexCharts.Extensions
 			return new SolidColorBrush(Color.FromRgb(eR, eG, eB));
 		}
 
-		public static MaterialSet Interpolate(MaterialSet a, MaterialSet b, double p)
+		public static MaterialSetOLD Interpolate(MaterialSetOLD a, MaterialSetOLD b, double p)
 		{
 			var materials = new List<Material>();
 			var mc = a.Materials.Count.Smallest(b.Materials.Count);
@@ -143,7 +143,7 @@ namespace FlexCharts.Extensions
 				materials.Add(new Material(colorMixed.Color, materialA.Luminosity, "interpolated"));
 			}
 
-			return new MaterialSet(materials.ToArray());
+			return new MaterialSetOLD(materials.ToArray());
 		}
 	}
 }

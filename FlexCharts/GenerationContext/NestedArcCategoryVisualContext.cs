@@ -19,7 +19,7 @@ namespace FlexCharts.GenerationContext
 	{
 		internal CategoricalDouble CategoryDataPoint { get; set; }
 
-		internal MaterialSet CategoryMaterialSet { get; set; }
+		internal MaterialSetOLD CategoryMaterialSet { get; set; }
 
 		internal CustomPath InactiveArcVisual { get; set; }
 

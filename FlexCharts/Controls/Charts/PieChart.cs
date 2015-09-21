@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -28,6 +29,7 @@ namespace FlexCharts.Controls.Charts
 	[TemplatePart(Name = "PART_main", Type = typeof(Grid))]
 	[TemplatePart(Name = "PART_segments", Type = typeof(Grid))]
 	[TemplatePart(Name = "PART_categorylabels", Type = typeof(Grid))]
+	[ContentProperty("Data")]
 	public class PieChart : AbstractFlexChart<DoubleSeries>,
 		IValueContract, IFocusableSegmentContract, IPolarLabelingContract, IBarTotalContract//, IStateSegmentContract
 	{

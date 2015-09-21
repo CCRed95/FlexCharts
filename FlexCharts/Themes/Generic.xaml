@@ -69,6 +69,37 @@
       </Setter.Value>
     </Setter>
   </Style>
+		<Style TargetType="{x:Type charts:StackedBarChart}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type charts:StackedBarChart}">
+          <Border Background="{TemplateBinding Background}"
+                 BorderBrush="{TemplateBinding BorderBrush}"
+                 BorderThickness="{TemplateBinding BorderThickness}">
+            <DockPanel x:Name="PART_Content" Margin="{TemplateBinding Padding}">
+              <Label x:Name="PART_Title" 
+										FontFamily="{TemplateBinding FontFamily}"
+										FontStyle="{TemplateBinding FontStyle}"
+										FontWeight="{TemplateBinding FontWeight}"
+										FontSize="{TemplateBinding FontSize}"
+										FontStretch="{TemplateBinding FontStretch}"
+										Foreground="{TemplateBinding Foreground}"
+										DockPanel.Dock="Top"
+										Content="{Binding Title}"
+										VerticalContentAlignment="Center"
+										HorizontalContentAlignment="Center">
+              </Label>
+              <Grid x:Name="PART_main" DockPanel.Dock="Bottom">
+                <Grid x:Name="PART_bars" RenderTransformOrigin=".5,.5"/>
+                <Grid x:Name="PART_xAxisGrid" VerticalAlignment="Bottom"/>
+                <Grid x:Name="PART_highlightGrid"/>
+              </Grid>
+            </DockPanel>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 	<Style TargetType="{x:Type charts:HorizontalBarChart}">
     <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
     <Setter Property="Template">

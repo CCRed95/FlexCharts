@@ -10,7 +10,6 @@
         Title="Testing" Height="200" Width="350">
 	<!--primitives:ThemePrimitive.Theme="{StaticResource Red}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"-->
   <av:Grid >
-		<ParetoChart BarTotalForeground="P200"></ParetoChart>
     <!--<R xmlns="http://www.flexcharts.com/schemas/core">
 			
 		</R>-->

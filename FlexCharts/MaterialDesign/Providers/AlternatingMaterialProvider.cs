@@ -9,9 +9,9 @@ namespace FlexCharts.MaterialDesign.Providers
 	public class AlternatingMaterialProvider : IMaterialProvider
 	{
 		#region Properties
-		public MaterialSet MaterialSet1 { get; }
+		public MaterialSetOLD MaterialSet1 { get; }
 
-		public MaterialSet MaterialSet2 { get; }
+		public MaterialSetOLD MaterialSet2 { get; }
 		#endregion
 
 		#region Fields
@@ -20,7 +20,7 @@ namespace FlexCharts.MaterialDesign.Providers
 
 		#region Constructors
 
-		public AlternatingMaterialProvider(MaterialSet materialSet1, MaterialSet materialSet2)
+		public AlternatingMaterialProvider(MaterialSetOLD materialSet1, MaterialSetOLD materialSet2)
 		{
 			MaterialSet1 = materialSet1;
 			MaterialSet2 = materialSet2;
@@ -28,7 +28,7 @@ namespace FlexCharts.MaterialDesign.Providers
 		#endregion
 
 		#region Methods
-		public MaterialSet ProvideNext(ProviderContext context)
+		public MaterialSetOLD ProvideNext(ProviderContext context)
 		{
 			var materialSet = currentIndex % 2 == 0 ? MaterialSet1 : MaterialSet2;
 			currentIndex++;

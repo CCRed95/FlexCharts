@@ -26,11 +26,14 @@
               <Grid>
                 <Border x:Name="active" Opacity="0" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P050}"/>
                 <StackPanel Orientation="Horizontal" Margin="0 0 50 0">
-                  <Path Style="{StaticResource drawableinsert_drive_file}" Margin="15 9" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}">
+									<Viewbox>
+										<Path Style="{StaticResource drawablefile_outline}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
+									</Viewbox>
+                  <!--<Path Style="{StaticResource drawableinsert_drive_file}" Margin="15 9" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}">
                     <Path.LayoutTransform>
                       <ScaleTransform ScaleY="1.75" ScaleX="1.75" />
                     </Path.LayoutTransform>
-                  </Path>
+                  </Path>-->
                   <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                     <Label Content="{Binding FileSystemItem.Name, FallbackValue='document.flex'}" Foreground="{StaticResource mtGrey800}" 
 										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>

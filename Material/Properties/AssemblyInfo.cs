@@ -61,5 +61,7 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "Material.Controls.Popups")]
 [assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "Material.Controls.Primitives")]
 [assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "Material.Controls.TabSelector")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "Material.Controls.ScannerIO")]
+[assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "Material.Controls.ScannerIO.Validation")]
 [assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "Material.Converters")]
 [assembly: XmlnsDefinition(@"http://schemas.microsoft.com/winfx/2006/xaml/presentation", "Material.Static")]

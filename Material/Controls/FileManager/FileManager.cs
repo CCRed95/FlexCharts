@@ -65,6 +65,8 @@ namespace Material.Controls.FileManager
 			remove { RemoveHandler(RequestOpenFileEvent, value); }
 		}
 		private Button PART_directoryup;
+		private Button PART_home;
+		private Button PART_settings;
 
 		static FileManager()
 		{
@@ -96,7 +98,21 @@ namespace Material.Controls.FileManager
 		{
 			base.OnApplyTemplate();
 			PART_directoryup = GetTemplateChild<Button>(nameof(PART_directoryup));
+			PART_home = GetTemplateChild<Button>(nameof(PART_home));
+			PART_settings = GetTemplateChild<Button>(nameof(PART_settings));
 			PART_directoryup.Click += directoryUp;
+			PART_home.Click += homeClicked;
+			PART_settings.Click += settingsClicked;
+		}
+
+		private void settingsClicked(object s, RoutedEventArgs e)
+		{
+			
+		}
+
+		private void homeClicked(object s, RoutedEventArgs e)
+		{
+			ActiveDirectory = defaultDirectory;
 		}
 
 		private void directoryUp(object s, RoutedEventArgs e)

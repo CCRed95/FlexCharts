@@ -28,7 +28,7 @@
 
 					</Grid>
 					<ControlTemplate.Triggers>
-						<EventTrigger RoutedEvent="popups:Popup.PopupRequestClose">
+						<EventTrigger RoutedEvent="popups:PopupBase.PopupRequestClose">
 							<EventTrigger.Actions>
 								<BeginStoryboard>
 									<Storyboard>

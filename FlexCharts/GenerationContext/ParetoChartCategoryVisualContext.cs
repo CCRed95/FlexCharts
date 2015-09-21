@@ -32,7 +32,7 @@ namespace FlexCharts.GenerationContext
 		// TODO remobe this, replace with seperate collection
 		//internal AnimationAspect<Point, PointAnimation> LineSegmentPointAnimationAspect { get; set; }
 
-		internal MaterialSet CategoryMaterialSet { get; set; }
+		internal MaterialSetOLD CategoryMaterialSet { get; set; }
 
 		internal Rectangle InactiveBarVisual { get; set; }
 

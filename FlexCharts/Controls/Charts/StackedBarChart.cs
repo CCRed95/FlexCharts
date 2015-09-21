@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -15,23 +12,20 @@ using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
-using FlexCharts.CustomGeometry;
 using FlexCharts.Data.Structures;
 using FlexCharts.Extensions;
-using FlexCharts.Helpers;
 using FlexCharts.Helpers.DependencyHelpers;
-using FlexCharts.MaterialDesign;
 using FlexCharts.MaterialDesign.Descriptors;
 using FlexCharts.MaterialDesign.Providers;
 using FlexCharts.Require;
 
-namespace FlexCharts.Controls
+namespace FlexCharts.Controls.Charts
 {
-
+	[ContentProperty("Data")]
 	public class StackedBarChart : AbstractFlexChart<CategoricalDoubleSeriesSeries>,
 		ISegmentContract, IBarTotalContract, IXAxisContract
 	{
-	#region Dependency Properties
+		#region Dependency Properties
 		#region			BarTotalContract
 		public static readonly DependencyProperty BarTotalFontFamilyProperty = DP.Add(BarTotalPrimitive.BarTotalFontFamilyProperty,
 			new Meta<StackedBarChart, FontFamily> { Flags = INH | FXR }, DPExtOptions.ForceManualInherit);
@@ -171,22 +165,27 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Fields
+		protected Grid PART_highlightGrid;
+		protected Grid PART_xAxisGrid;
+		protected Grid PART_bars;
 		//protected readonly Grid _categoryLabels = new Grid();
-		protected readonly Grid _highlightGrid = new Grid();
-		protected readonly Grid _xAxisGrid = new Grid()
-		{
-			VerticalAlignment = VerticalAlignment.Bottom
-		};
-		protected readonly Grid _bars = new Grid
-		{
-			RenderTransformOrigin = new Point(.5, .5),
-		};
+		//protected readonly Grid _highlightGrid = new Grid();
+		//protected readonly Grid _xAxisGrid = new Grid()
+		//{
+		//	VerticalAlignment = VerticalAlignment.Bottom
+		//};
+		//protected readonly Grid _bars = new Grid
+		//{
+		//	RenderTransformOrigin = new Point(.5, .5),
+		//};
 		#endregion
 
 		#region Constructors
 		static StackedBarChart()
 		{
 			TitleProperty.OverrideMetadata(typeof(StackedBarChart), new FrameworkPropertyMetadata("Stacked Bar Chart"));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(StackedBarChart),
+				new FrameworkPropertyMetadata(typeof(StackedBarChart)));
 		}
 		public StackedBarChart()
 		{
@@ -229,11 +228,21 @@ namespace FlexCharts.Controls
 		#endregion
 
 		#region Overrided Methods
+
+		public override void OnApplyTemplate()
+		{
+			base.OnApplyTemplate();
+			PART_highlightGrid = GetTemplateChild<Grid>(nameof(PART_highlightGrid));
+			PART_xAxisGrid = GetTemplateChild<Grid>(nameof(PART_xAxisGrid));
+			PART_bars = GetTemplateChild<Grid>(nameof(PART_bars));
+
+		}
+
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-			_bars.Children.Clear();
-			_xAxisGrid.Children.Clear();
-			_highlightGrid.Children.Clear();
+			PART_bars.Children.Clear();
+			PART_xAxisGrid.Children.Clear();
+			PART_highlightGrid.Children.Clear();
 
 			if (Data.Count < 1)
 			{
@@ -243,7 +252,7 @@ namespace FlexCharts.Controls
 			var total = Data.MaxSubsetSum();
 
 			var context = new ProviderContext(Data.Count);
-			var barAvailableWidth = _bars.RenderSize.Width / Data.Count;
+			var barAvailableWidth = PART_bars.RenderSize.Width / Data.Count;
 			var barActiveWidth = barAvailableWidth * SegmentWidthPercentage;
 			var barLeftSpacing = (barAvailableWidth - barActiveWidth) / 2;
 			var barLabelSize = RenderingExtensions.EstimateLabelRenderSize(BarTotalFontFamily, BarTotalFontSize);
@@ -265,12 +274,12 @@ namespace FlexCharts.Controls
 					DataContext = this
 				};
 				axisLabel.BindTextualPrimitive<XAxisPrimitive>(this);
-				_xAxisGrid.Children.Add(axisLabel);
+				PART_xAxisGrid.Children.Add(axisLabel);
 				xtrace++;
 			}
 			var horizontalTrace = 0d;
-			var xAxisHeight = _xAxisGrid.ActualHeight;
-			var backHeight = _bars.RenderSize.Height - xAxisHeight;
+			var xAxisHeight = PART_xAxisGrid.ActualHeight;
+			var backHeight = PART_bars.RenderSize.Height - xAxisHeight;
 			foreach (var d in Data)
 			{
 				var backRectangle = new Rectangle
@@ -283,8 +292,7 @@ namespace FlexCharts.Controls
 					Fill = SegmentSpaceBackground.GetMaterial(FallbackMaterialSet)
 				};
 				//backRectangle.MouseEnter += (s, e) => barMouseEnter(d);
-				//backRectangle.Fill = SegmentSpaceBackground.GetMaterial() TODO remove above. make this work
-				_bars.Children.Add(backRectangle);
+				PART_bars.Children.Add(backRectangle);
 
 				MaterialProvider.Reset(context);
 				var verticalTrace = 0d;
@@ -292,7 +300,7 @@ namespace FlexCharts.Controls
 				foreach (var sd in d.Value)
 				{
 					var materialSet = MaterialProvider.ProvideNext(context);
-					var height = sd.Value.Map(0, total, 0, _bars.RenderSize.Height - xAxisHeight - barLabelSize.Height);
+					var height = sd.Value.Map(0, total, 0, PART_bars.RenderSize.Height - xAxisHeight - barLabelSize.Height);
 					var rectangle = new Rectangle
 					{
 						Width = barActiveWidth,
@@ -315,7 +323,7 @@ namespace FlexCharts.Controls
 				for (var x = pathBuffer.Count - 1; x >= 0; x--)
 				{
 					var path = pathBuffer[x];
-					_bars.Children.Add(path);
+					PART_bars.Children.Add(path);
 				}
 				var barLabel = new Label
 				{
@@ -331,7 +339,7 @@ namespace FlexCharts.Controls
 				};
 				barLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
 				d.RenderedVisual = pathBuffer;
-				_bars.Children.Add(barLabel);
+				PART_bars.Children.Add(barLabel);
 				horizontalTrace += barAvailableWidth;
 			}
 			base.OnRender(drawingContext);

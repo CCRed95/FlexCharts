@@ -30,7 +30,7 @@ namespace FlexCharts.Controls.Core
 		/// The identifier for the <see cref="FallbackMaterialSet"/> dependency property
 		/// </returns>
 		public static readonly DependencyProperty FallbackMaterialSetProperty = DP.Register(
-			new Meta<AbstractFlexChart, MaterialSet>(MaterialPalette.Sets.GreyBrushSet));
+			new Meta<AbstractFlexChart, MaterialSetOLD>(MaterialPalette.Sets.GreyBrushSet));
 		/// <summary>
 		/// Identifies the <see cref="MaterialProvider"/> dependency property
 		/// </summary>
@@ -61,9 +61,9 @@ namespace FlexCharts.Controls.Core
 		/// Gets or sets a MaterialSet for MaterialDescriptors to source from that cannot be logically paired with the MaterialProvider
 		/// </summary>
 		[Category("Charting")]
-		public MaterialSet FallbackMaterialSet
+		public MaterialSetOLD FallbackMaterialSet
 		{
-			get { return (MaterialSet)GetValue(FallbackMaterialSetProperty); }
+			get { return (MaterialSetOLD)GetValue(FallbackMaterialSetProperty); }
 			set { SetValue(FallbackMaterialSetProperty, value); }
 		}
 		/// <summary>

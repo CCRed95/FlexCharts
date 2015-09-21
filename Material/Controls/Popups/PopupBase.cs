@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using FlexCharts.Controls.Core;
 using FlexCharts.Helpers.EventHelpers;
 
 namespace Material.Controls.Popups
 {
-	public class Popup : FlexControl
+	public class PopupBase : FlexControl
 	{
-		public static readonly RoutedEvent PopupRequestCloseEvent = EM.Register<Popup, RoutedEventHandler>(EM.BUBBLE);
+		public static readonly RoutedEvent PopupRequestCloseEvent = EM.Register<PopupBase, RoutedEventHandler>(EM.BUBBLE);
 
 		public event RoutedEventHandler PopupRequestClose
 		{
@@ -19,6 +14,10 @@ namespace Material.Controls.Popups
 			remove { RemoveHandler(PopupRequestCloseEvent, value); }
 		}
 
+		public PopupBase()
+		{
+			Loaded += (s, e) => Focus();
+		}
 
 	}
 }

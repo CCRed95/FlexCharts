@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Markup;
 using System.Windows.Media;
 using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Core;
@@ -14,7 +15,7 @@ using FlexCharts.MaterialDesign.Descriptors;
 
 namespace FlexCharts.Controls.Charts
 {
-
+	[ContentProperty("Data")]
 	public class RingGauge : AbstractFlexChart<double>, ICircularContract, IStateSegmentContract, ISegmentContract //IRingAspect//
   {
 		#region Dependency Properties

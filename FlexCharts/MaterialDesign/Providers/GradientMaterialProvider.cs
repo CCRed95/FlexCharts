@@ -27,7 +27,7 @@ namespace FlexCharts.MaterialDesign.Providers
 			GradientStepData = gradientStepData;
 		}
 
-		public MaterialSet ProvideNext(ProviderContext context)
+		public MaterialSetOLD ProvideNext(ProviderContext context)
 		{
 
 			if (currentIndex > context.CycleLength) currentIndex = 0;
@@ -35,7 +35,7 @@ namespace FlexCharts.MaterialDesign.Providers
 			var position = 1.0 / context.CycleLength * currentIndex;
 			var gradientStepSpan = GradientStepData.Sum(step => step.Offset);
 			var additivestepPercentage = 0d;
-			MaterialSet interpolatedMaterialSet = MaterialPalette.Sets.BrownBrushSet;
+			MaterialSetOLD interpolatedMaterialSet = MaterialPalette.Sets.BrownBrushSet;
 			if (position >= 1)
 			{
 				currentIndex++;

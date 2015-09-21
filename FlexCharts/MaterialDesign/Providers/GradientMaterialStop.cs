@@ -6,21 +6,21 @@ namespace FlexCharts.MaterialDesign.Providers
 	public class GradientMaterialStop : DependencyObject
 	{
 		public static readonly DependencyProperty MaterialSetProperty = DP.Register(
-			new Meta<GradientMaterialStop, MaterialSet>());
+			new Meta<GradientMaterialStop, MaterialSetOLD>());
 		public static readonly DependencyProperty OffsetProperty = DP.Register(
 			new Meta<GradientMaterialStop, double>());
 
 		public GradientMaterialStop() { }
 
-		public GradientMaterialStop(MaterialSet materialSet, double offset = 1)
+		public GradientMaterialStop(MaterialSetOLD materialSet, double offset = 1)
 		{
 			MaterialSet = materialSet;
 			Offset = offset;
 		}
 
-		public MaterialSet MaterialSet
+		public MaterialSetOLD MaterialSet
 		{
-			get { return (MaterialSet)GetValue(MaterialSetProperty); }
+			get { return (MaterialSetOLD)GetValue(MaterialSetProperty); }
 			set { SetValue(MaterialSetProperty, value); }
 		}
 		public double Offset

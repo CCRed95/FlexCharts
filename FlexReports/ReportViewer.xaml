@@ -6,104 +6,110 @@
         xmlns:converters="clr-namespace:Material.Converters;assembly=Material"
 
         mc:Ignorable="d"
-				Style="{StaticResource MaterialShell}"
 				VisualFeedback.ClickFeedback="P300"									
-        Title="Report Viewer" Height="600" Width="800">
+        Title="Report Viewer" Height="700" Width="1000">
 	<MaterialShell.Resources>
 		<!--<converters:FlexDocumentTabSelectorAdapter x:Key="fdtsa"/>-->
 	</MaterialShell.Resources>
-  <Grid>
-    <DockPanel>
-      <DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" 
+	<Grid>
+		<DockPanel>
+			<DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" 
 									Width="64">
-        <Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500}" TextElement.Foreground="{StaticResource mtGrey50}">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="64"/>
-          </Grid.ColumnDefinitions>
-          <Grid Name="LeftTitleBar" Opacity="1">
-            <Label Content="Open Report" Style="{StaticResource t15pSubhead}" Padding="30 0" HorizontalAlignment="Center"/>
-          </Grid>
-          <Border Grid.Column="1">
-            <ToggleButton Name="MenuToggle" Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 0" 
+				<Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtPink500}}" TextElement.Foreground="{StaticResource mtGrey50}">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition Width="64"/>
+					</Grid.ColumnDefinitions>
+					<Grid Name="LeftTitleBar" Opacity="1">
+						<Label Content="Open Report" Style="{StaticResource t15pSubhead}" Padding="30 0" HorizontalAlignment="Center"/>
+					</Grid>
+					<Border Grid.Column="1">
+						<ToggleButton Name="MenuToggle" Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 0" 
 											HorizontalAlignment="Center" Click="toggleMenu"/>
-          </Border>
-        </Grid>
-        <Grid DockPanel.Dock="Bottom">
-          <FileManager VisualFeedback.ClickFeedback="P050"	
+					</Border>
+				</Grid>
+				<Grid DockPanel.Dock="Bottom">
+					<FileManager VisualFeedback.ClickFeedback="P050"	
 											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile"/>
-          <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="64"
+					<Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="64"
 								Background="{StaticResource mtGrey900}">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-              <Button Style="{StaticResource PathButtonDarkSurface}">
-                <Path Style="{StaticResource drawablefind_in_page}"/>
-              </Button>
-              <Button Style="{StaticResource PathButtonDarkSurface}" Click="viewDocumentCode">
-                <Path Style="{StaticResource drawablecode}"/>
-              </Button>
-              <Button Style="{StaticResource PathButtonDarkSurface}" Click="insertDocumentComment">
-                <Path Style="{StaticResource drawableinsert_comment}"/>
-              </Button>
-              <Button Style="{StaticResource PathButtonDarkSurface}">
-                <Path Style="{StaticResource drawableview_carousel}"/>
-              </Button>
-              <Button Style="{StaticResource PathButtonDarkSurface}">
-                <Path Style="{StaticResource drawableview_day}"/>
-              </Button>
-            </StackPanel>
-          </Grid>
-        </Grid>
-      </DockPanel>
-      <Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
-        <StackPanel Orientation="Vertical">
-          <Grid Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500}" 
+						<StackPanel Orientation="Vertical" VerticalAlignment="Center">
+							<Button Style="{StaticResource PathButtonDarkSurface}">
+								<Path Style="{StaticResource drawablefind_in_page}"/>
+							</Button>
+							<Button Style="{StaticResource PathButtonDarkSurface}" Click="viewDocumentCode">
+								<Path Style="{StaticResource drawablecode}"/>
+							</Button>
+							<Button Style="{StaticResource PathButtonDarkSurface}" Click="insertDocumentComment">
+								<Path Style="{StaticResource drawableinsert_comment}"/>
+							</Button>
+							<Button Style="{StaticResource PathButtonDarkSurface}">
+								<Path Style="{StaticResource drawableview_carousel}"/>
+							</Button>
+							<Button Style="{StaticResource PathButtonDarkSurface}">
+								<Path Style="{StaticResource drawableview_day}"/>
+							</Button>
+						</StackPanel>
+					</Grid>
+				</Grid>
+			</DockPanel>
+			<Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
+				<StackPanel Orientation="Vertical">
+					<Grid Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtPink500}}" 
 								TextElement.Foreground="{StaticResource mtGrey50}">
-            <Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
+						<Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
 							 Padding="30 0" HorizontalContentAlignment="Left" />
-            <StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
-              <Button Style="{StaticResource PathButton}">
-                <Path Style="{StaticResource drawablesearch}"/>
-              </Button>
-              <Button Style="{StaticResource PathButton}">
-                <Path Style="{StaticResource drawableview_module}"/>
-              </Button>
-              <Button Style="{StaticResource PathButton}" Click="SelectTheme">
-                <Path Style="{StaticResource drawablecolor_lens}"/>
-              </Button>
-              <Button Style="{StaticResource PathButton}">
-                <Path Style="{StaticResource drawablemore_vert}"/>
-              </Button>
-            </StackPanel>
-          </Grid>
-          <DockPanel>
-            <Grid Height="44" DockPanel.Dock="Top">
-              <!--Effect="{StaticResource shadowDelta2}" >-->
-              <TabSelector x:Name="documentTabSelector" TabSelected="OnTabSelected"
+						<StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
+							<Button Style="{StaticResource PathButton}">
+								<Path Style="{StaticResource drawablesearch}"/>
+							</Button>
+							<Button Style="{StaticResource PathButton}">
+								<Path Style="{StaticResource drawableview_module}"/>
+							</Button>
+							<Button Style="{StaticResource PathButton}" Click="SelectTheme">
+								<Path Style="{StaticResource drawablecolor_lens}"/>
+							</Button>
+							<Button Style="{StaticResource PathButton}">
+								<Path Style="{StaticResource drawablemore_vert}"/>
+							</Button>
+						</StackPanel>
+					</Grid>
+					<DockPanel>
+						<Grid Height="44" DockPanel.Dock="Top">
+							<!--Effect="{StaticResource shadowDelta2}" >-->
+							<TabSelector x:Name="documentTabSelector" TabSelected="OnTabSelected"
 																			 Tabs="{Binding ElementName=documentViewport, Path=Document, Converter={converters:FlexDocumentTabSelectorAdapter}}"/>
-         
-            </Grid>
-            <Grid ClipToBounds="True" DockPanel.Dock="Bottom">
-              <FlexDocumentViewport x:Name="documentViewport">
 
-              </FlexDocumentViewport>
-            </Grid>
-          </DockPanel>
+						</Grid>
+						<Grid ClipToBounds="True" DockPanel.Dock="Bottom">
+							<FlexDocumentViewport x:Name="documentViewport">
+
+							</FlexDocumentViewport>
+							<!--<Grid Width="270" Height="400" Background="{StaticResource mtGrey900}">
+								<Grid Margin="3 10" Background="{StaticResource mtGrey50}">
 
 
-        </StackPanel>
-        <Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
-      </Grid>
+								</Grid>
 
-    </DockPanel>
-    <PopupManager x:Name="PopupSpace"/>
-    <Grid>
-      
-      <!--<StackPanel Orientation="Vertical"  Width="200" Height="150" Background="{Binding Source={StaticResource Yellow}, Path=P200}"
+							</Grid>-->
+						</Grid>
+					</DockPanel>
+
+
+				</StackPanel>
+				<Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
+			</Grid>
+
+		</DockPanel>
+		<PopupManager x:Name="PopupSpace"/>
+		<Grid>
+
+			<!--<StackPanel Orientation="Vertical"  Width="200" Height="150" Background="{Binding Source={StaticResource Yellow}, Path=P200}"
 						Effect="{StaticResource shadowDelta3}">
 				<Label Content="Annotation" Foreground="Black" VerticalAlignment="Top"/>
 				<TextBlock Text="Here is some stuff written on an annotation" Margin="12"></TextBlock>
 			</StackPanel>-->
 
-    </Grid>
-  </Grid>
+		</Grid>
+	</Grid>
 </MaterialShell>

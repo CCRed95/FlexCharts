@@ -109,7 +109,6 @@
                 </BeginStoryboard>
               </EventTrigger.Actions>
             </EventTrigger>
-            <Trigger Property="Button.IsDefaulted" Value="true"/>
           </ControlTemplate.Triggers>
         </ControlTemplate>
       </Setter.Value>

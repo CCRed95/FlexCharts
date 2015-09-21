@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using FlexCharts.Controls.Contracts;
@@ -23,6 +24,7 @@ namespace FlexCharts.Controls.Charts
 	[TemplatePart(Name = "PART_main", Type = typeof(DockPanel))]
 	[TemplatePart(Name = "PART_yaxis", Type = typeof(UniformGrid))]
 	[TemplatePart(Name = "PART_bars", Type = typeof(UniformGrid))]
+	[ContentProperty("Data")]
 	public class HorizontalBarChart : AbstractFlexChart<DoubleSeries>, ISegmentContract, IBarTotalContract, IYAxisContract
 	{
 		#region Dependency Properties

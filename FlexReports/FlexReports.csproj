@@ -55,114 +55,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\LuminosityToBrushConverter.cs" />
-    <Compile Include="Data\DirectoryItemDataSource.cs" />
-    <Compile Include="Data\FileIconSelector.cs" />
-    <Compile Include="Data\FileItemDataSource.cs" />
-    <Compile Include="Data\FileSystemInfoDataSource.cs" />
-    <Compile Include="IconDrawablesGallery.xaml.cs">
-      <DependentUpon>IconDrawablesGallery.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MaterialControls\Converters\LuminosityToMaterialConverter.cs" />
-    <Compile Include="MaterialControls\Converters\TextFieldHintVisibilityConverter.cs" />
-    <Compile Include="MaterialControls\DropdownService.cs" />
-    <Compile Include="MaterialControls\FlexDocumentViewport.cs" />
-    <Compile Include="MaterialControls\MaterialShell.cs" />
-    <Compile Include="MaterialControls\PopupManager.cs" />
-    <Compile Include="MaterialControls\Popups\Popup.cs" />
-    <Compile Include="MaterialControls\Popups\FileParseExceptionPopup.cs" />
-    <Compile Include="MaterialControls\SelectThemePopup.xaml.cs">
-      <DependentUpon>SelectThemePopup.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MaterialControls\TextField.cs" />
-    <Compile Include="MaterialControls\ThemePrimitive.cs" />
-    <Compile Include="MaterialControls\VisualFeedback.cs" />
     <Compile Include="ReportViewer.xaml.cs">
       <DependentUpon>ReportViewer.xaml</DependentUpon>
     </Compile>
-    <Page Include="IconDrawablesGallery.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Page Include="MaterialControls\SelectThemePopup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ReportViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Material.Button.xaml">
+    <Page Include="Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.Drawables.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.FileParseExceptionPopup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.FlexDocumentViewport.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.Fonts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.PopupManager.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.ScrollViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.Shadows.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Material.Shell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Material.TextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.ToggleControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MaterialControls\DocumentViewport.cs" />
-    <Compile Include="MaterialControls\FlexTabItem.cs" />
-    <Compile Include="MaterialControls\MaterialButton.cs" />
-    <Compile Include="MaterialControls\MaterialButtonList.cs" />
-    <Compile Include="MaterialControls\MaterialDimmer.cs" />
-    <Compile Include="MaterialControls\MaterialFileButton.cs" />
-    <Compile Include="MaterialControls\MaterialSetToBrushSetConverter.cs" />
-    <Compile Include="MaterialControls\MaterialTabControl.cs" />
-    <Compile Include="MaterialControls\MaterialTabItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -193,6 +105,10 @@
     <ProjectReference Include="..\FlexCharts\FlexCharts.csproj">
       <Project>{53b04142-3fa5-4d7e-989e-efaff6b92631}</Project>
       <Name>FlexCharts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Material\Material.csproj">
+      <Project>{902b5087-d3bd-40d2-8e62-69505e9edd8e}</Project>
+      <Name>Material</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

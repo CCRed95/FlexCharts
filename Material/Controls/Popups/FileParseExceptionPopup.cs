@@ -6,7 +6,7 @@ namespace Material.Controls.Popups
 {
 	[TemplatePart(Name="PART_buttonok", Type=typeof(Button))]
 	[TemplatePart(Name="PART_buttonmoreinfo", Type=typeof(Button))]
-	public class FileParseExceptionPopup : Popup
+	public class FileParseExceptionPopup : PopupBase
 	{
 		public static readonly DependencyProperty MoreInfoProperty = DP.Register(
 			new Meta<FileParseExceptionPopup, string>());

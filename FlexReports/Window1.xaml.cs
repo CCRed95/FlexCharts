@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace FlexReports
 {
 	/// <summary>
-	/// Interaction logic for IconDrawablesGallery.xaml
+	/// Interaction logic for Window1.xaml
 	/// </summary>
-	public partial class IconDrawablesGallery : Window
+	public partial class Window1
 	{
-		public IconDrawablesGallery()
+		public Window1()
 		{
 			InitializeComponent();
 		}

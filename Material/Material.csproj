@@ -55,20 +55,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccentedMaterialSet.cs" />
+    <Compile Include="Controls\Card.cs" />
     <Compile Include="Controls\FileManager\AbstractFileManagerListItem.cs" />
     <Compile Include="Controls\FileManager\DirectoryListItem.cs" />
     <Compile Include="Controls\FileManager\FileListItem.cs" />
     <Compile Include="Controls\FileManager\FileManager.cs" />
     <Compile Include="Controls\FlexDocumentViewport.cs" />
+    <Compile Include="Controls\ScannerIO\HIDBarcodeScannerInput.cs" />
     <Compile Include="Controls\MaterialDimmer.cs" />
     <Compile Include="Controls\MaterialShell.cs" />
     <Compile Include="Controls\PopupManager.cs" />
+    <Compile Include="Controls\Popups\ErrorPopup.cs" />
     <Compile Include="Controls\Popups\FileParseExceptionPopup.cs" />
     <Compile Include="Controls\Popups\MessagePopup.cs" />
-    <Compile Include="Controls\Popups\Popup.cs" />
+    <Compile Include="Controls\Popups\PopupBase.cs" />
     <Compile Include="Controls\Popups\SelectThemePopup.xaml.cs">
       <DependentUpon>SelectThemePopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ScannerIO\RoutedBarcodeInputEventArgs.cs" />
+    <Compile Include="Controls\ScannerIO\Validation\AbstractValidator.cs" />
+    <Compile Include="Controls\ScannerIO\Validation\EmptyValidator.cs" />
+    <Compile Include="Controls\ScannerIO\Validation\ValidatorResult.cs" />
     <Compile Include="Controls\TabSelector\TabSelector.cs" />
     <Compile Include="Controls\TabSelector\TabSelectorItem.cs" />
     <Compile Include="Converters\BrushToRadialGradientBrushConverter.cs" />
@@ -76,6 +83,7 @@
     <Compile Include="Converters\LargestValueConverter.cs" />
     <Compile Include="Converters\LuminosityToRadialBrushConverter.cs" />
     <Compile Include="Static\Palette.cs" />
+    <Compile Include="Static\ResourceProvider.cs" />
     <Page Include="Controls\Popups\SelectThemePopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -88,11 +96,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.Card.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.DefinedBrushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.DirectoryListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.Drawables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.ErrorPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.HIDBarcodeScannerInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

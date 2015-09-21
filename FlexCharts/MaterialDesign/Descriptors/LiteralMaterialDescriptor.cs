@@ -5,7 +5,7 @@ namespace FlexCharts.MaterialDesign.Descriptors
 	{
 		public Material LiteralMaterial { get; set; }
 
-		public override Material GetMaterial(MaterialSet materialSet) => LiteralMaterial.WithOpacity(Opacity);
+		public override Material GetMaterial(MaterialSetOLD materialSet) => LiteralMaterial.WithOpacity(Opacity);
 
 		public LiteralMaterialDescriptor(Material literalMaterial, double opacity = 1.0)
 		{

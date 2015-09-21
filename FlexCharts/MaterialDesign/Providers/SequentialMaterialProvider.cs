@@ -10,7 +10,7 @@ namespace FlexCharts.MaterialDesign.Providers
 	public class SequentialMaterialProvider : IMaterialProvider
 	{
 		#region Properties
-		public ReadOnlyCollection<MaterialSet> MaterialSetSequence { get; }
+		public ReadOnlyCollection<MaterialSetOLD> MaterialSetSequence { get; }
 
 		public CyclicalBehavior CyclicalMode { get; }
 
@@ -23,27 +23,27 @@ namespace FlexCharts.MaterialDesign.Providers
 		#endregion
 
 		#region Constructors
-		public SequentialMaterialProvider(params MaterialSet[] materialSetSequence)
+		public SequentialMaterialProvider(params MaterialSetOLD[] materialSetSequence)
 			: this(CyclicalBehavior.Repeat, materialSetSequence)
 		{ }
 
-		public SequentialMaterialProvider(IList<MaterialSet> materialSetSequence)
+		public SequentialMaterialProvider(IList<MaterialSetOLD> materialSetSequence)
 			: this(CyclicalBehavior.Repeat, materialSetSequence)
 		{ }
 
 		public SequentialMaterialProvider(CyclicalBehavior mode = CyclicalBehavior.Repeat,
-			params MaterialSet[] materialSetSequence) : this(mode, materialSetSequence.ToList())
+			params MaterialSetOLD[] materialSetSequence) : this(mode, materialSetSequence.ToList())
 		{ }
 
-		public SequentialMaterialProvider(CyclicalBehavior mode, IList<MaterialSet> materialSetSequence)
+		public SequentialMaterialProvider(CyclicalBehavior mode, IList<MaterialSetOLD> materialSetSequence)
 		{
-			MaterialSetSequence = new ReadOnlyCollection<MaterialSet>(materialSetSequence);
+			MaterialSetSequence = new ReadOnlyCollection<MaterialSetOLD>(materialSetSequence);
 			CyclicalMode = mode;
 		}
 		#endregion
 
 		#region Methods
-		public MaterialSet ProvideNext(ProviderContext context)
+		public MaterialSetOLD ProvideNext(ProviderContext context)
 		{
 			switch (CyclicalMode)
 			{

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -29,6 +30,7 @@ namespace FlexCharts.Controls.Charts
 	[TemplatePart(Name = "PART_xaxis", Type = typeof(Grid))]
 	[TemplatePart(Name = "PART_barlabels", Type = typeof(Grid))]
 	[TemplatePart(Name = "PART_line", Type = typeof(Grid))]
+	[ContentProperty("Data")]
 	public class ParetoChart : AbstractFlexChart<DoubleSeries>,
 		IDotContract, ILineContract, IBarTotalContract, ISegmentContract
 	// TODO should be valuecontract instead of bartotalcontract?

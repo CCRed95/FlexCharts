@@ -4,7 +4,7 @@
 	{
 		public Luminosity Luminosity { get; set; }
 
-		public override Material GetMaterial(MaterialSet materialSet)
+		public override Material GetMaterial(MaterialSetOLD materialSet)
 		{
 			return materialSet.GetMaterial(Luminosity).WithOpacity(Opacity);
 		}

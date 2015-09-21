@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FlexCharts.MaterialDesign
 {
-	public class MaterialSet
+	public class MaterialSetOLD
 	{
 		public ReadOnlyCollection<Material> Materials { get; }
 		
@@ -25,11 +25,11 @@ namespace FlexCharts.MaterialDesign
 			return material.WithOpacity(opacity);
 		}
 
-		public MaterialSet(ReadOnlyCollection<Material> materials)
+		public MaterialSetOLD(ReadOnlyCollection<Material> materials)
 		{
 			Materials = materials;
 		}
-		public MaterialSet(params Material[] materials)
+		public MaterialSetOLD(params Material[] materials)
 		{
 			Materials = new ReadOnlyCollection<Material>(materials.ToList());
 		}

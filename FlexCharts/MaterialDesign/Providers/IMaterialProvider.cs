@@ -8,7 +8,7 @@ namespace FlexCharts.MaterialDesign.Providers
 {
 	public interface IMaterialProvider
 	{
-		MaterialSet ProvideNext(ProviderContext context);
+		MaterialSetOLD ProvideNext(ProviderContext context);
 		void Reset(ProviderContext context);
 	}
 }
