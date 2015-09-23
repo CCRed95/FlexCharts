@@ -109,6 +109,7 @@
     <Compile Include="Data\Sorting\AscendingDataSorter.cs" />
     <Compile Include="Data\Sorting\DescendingDataSorter.cs" />
     <Compile Include="Data\Sorting\EmptyDataSorter.cs" />
+    <Compile Include="Data\Sorting\Sorters.cs" />
     <Compile Include="Data\Structures\Categorical.cs" />
     <Compile Include="Data\Structures\CategoricalDoubleSeriesSeries.cs" />
     <Compile Include="Data\Structures\CategoricalDouble.cs" />

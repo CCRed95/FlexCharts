@@ -19,17 +19,17 @@ namespace FlexCharts.Documents
 			get { return (string) GetValue(TitleProperty); }
 			set { SetValue(TitleProperty, value); }
 		}
-		public static readonly RoutedEvent ViewTabRequestedEvent = EM.Register<FlexDocumentTab, RoutedEventHandler>(EM.BUBBLE);
+		//public static readonly RoutedEvent ViewTabRequestedEvent = EM.Register<FlexDocumentTab, RoutedEventHandler>(EM.BUBBLE);
 
-		public event RoutedEventHandler ViewTabRequested
-		{
-			add { AddHandler(ViewTabRequestedEvent, value); }
-			remove { RemoveHandler(ViewTabRequestedEvent, value); }
-		}
+		//public event RoutedEventHandler ViewTabRequested
+		//{
+		//	add { AddHandler(ViewTabRequestedEvent, value); }
+		//	remove { RemoveHandler(ViewTabRequestedEvent, value); }
+		//}
 
-		public void RequestViewTab()
-		{
-			RaiseEvent(new RoutedEventArgs(ViewTabRequestedEvent));
-		}
+		//public void RequestViewTab()
+		//{
+		//	RaiseEvent(new RoutedEventArgs(ViewTabRequestedEvent));
+		//}
 	}
 }

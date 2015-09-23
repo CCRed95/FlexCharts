@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,12 +8,19 @@ using FlexCharts.Controls.Core;
 using FlexCharts.Documents;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Helpers.EventHelpers;
+using FlexCharts.Extensions;
 
 namespace Material.Controls
 {
 	[TemplatePart(Name = "PART_root", Type = typeof(Viewbox))]
 	public class FlexDocumentViewport : FlexControl
 	{
+		public const double zoomMin = 0.4;
+		public const double zoomMax = 2.0;
+
+		public const double defaultZoomOffset = 0.9;
+		public const double defaultVerticalScrollOffset = 25;
+
 		public static readonly RoutedEvent DocumentAddedEvent = EM.Register<FlexDocumentViewport, RoutedEventHandler>(EM.BUBBLE);
 		public event RoutedEventHandler DocumentAdded
 		{
@@ -25,14 +28,14 @@ namespace Material.Controls
 			remove { RemoveHandler(DocumentAddedEvent, value); }
 		}
 		public static readonly DependencyProperty ZoomOffsetProperty = DP.Register(
-			new Meta<FlexDocumentViewport, double>(.9));
+			new Meta<FlexDocumentViewport, double>(defaultZoomOffset));
 		public double ZoomOffset
 		{
 			get { return (double)GetValue(ZoomOffsetProperty); }
 			set { SetValue(ZoomOffsetProperty, value); }
 		}
 		public static readonly DependencyProperty VerticalScrollOffsetProperty = DP.Register(
-			new Meta<FlexDocumentViewport, double>());
+			new Meta<FlexDocumentViewport, double>(defaultVerticalScrollOffset));
 		public double VerticalScrollOffset
 		{
 			get { return (double)GetValue(VerticalScrollOffsetProperty); }
@@ -43,8 +46,10 @@ namespace Material.Controls
 
 		private static void DocumentChanged(FlexDocumentViewport i, DPChangedEventArgs<FlexDocument> e)
 		{
-			i.VerticalScrollOffset = 0;
-			i.ZoomOffset = .9;
+			i.unregisterAnimation(VerticalScrollOffsetProperty);
+			i.unregisterAnimation(ZoomOffsetProperty);
+			i.VerticalScrollOffset = defaultVerticalScrollOffset;
+			i.ZoomOffset = defaultZoomOffset;
 			i.RaiseEvent(new RoutedEventArgs(DocumentAddedEvent));
 		}
 
@@ -55,8 +60,8 @@ namespace Material.Controls
 			set { SetValue(DocumentProperty, value); }
 		}
 		private Viewbox PART_root;
-		private double? lastTarget = null;
-		private double? lastZoomTarget = null;
+		private double? lastTarget;
+		private double? lastZoomTarget;
 
 		public FlexDocumentViewport()
 		{
@@ -85,10 +90,14 @@ namespace Material.Controls
 				{
 					lastZoomTarget = ZoomOffset;
 				}
-				lastZoomTarget = lastZoomTarget + (e.Delta / 2000.0);
-				//PART_root.RenderTransformOrigin = getActualRenderingOrigin();
-				BeginAnimation(ZoomOffsetProperty,
-					new DoubleAnimation(lastZoomTarget.GetValueOrDefault(.9), new Duration(TimeSpan.FromMilliseconds(150))));
+				var possibleTarget = lastZoomTarget + (e.Delta / 2000.0);
+				if (possibleTarget >= zoomMin && possibleTarget <= zoomMax)
+				{
+					lastZoomTarget = possibleTarget;
+					//PART_root.RenderTransformOrigin = getActualRenderingOrigin();
+					BeginAnimation(ZoomOffsetProperty,new DoubleAnimation(lastZoomTarget
+						.GetValueOrDefault(defaultZoomOffset), new Duration(TimeSpan.FromMilliseconds(150))));
+				}
 			}
 			else
 			{
@@ -97,14 +106,9 @@ namespace Material.Controls
 					lastTarget = VerticalScrollOffset;
 				}
 				lastTarget = lastTarget + (e.Delta / 2.0);
-
 				BeginAnimation(VerticalScrollOffsetProperty,
-					new DoubleAnimation(lastTarget.GetValueOrDefault(0), new Duration(TimeSpan.FromMilliseconds(150))));
+					new DoubleAnimation(lastTarget.GetValueOrDefault(defaultVerticalScrollOffset), new Duration(TimeSpan.FromMilliseconds(150))));
 			}
-
-
-
-
 		}
 
 		public override void OnApplyTemplate()
@@ -118,11 +122,11 @@ namespace Material.Controls
 			if (Document == null)
 				return;
 			Document.RenderTransformOrigin = new Point(.5, .5);
-			var rt = new ScaleTransform(1,1,.5,.5);
+			var rt = new ScaleTransform(1, 1, .5, .5);
 			Document.RenderTransform = rt;
 			rt.BeginAnimation(ScaleTransform.ScaleXProperty,
 				new DoubleAnimation(-1, new Duration(TimeSpan.FromMilliseconds(500)))
-				{ EasingFunction = new CircleEase() {EasingMode = EasingMode.EaseInOut} });
+				{ EasingFunction = new CircleEase { EasingMode = EasingMode.EaseInOut } });
 
 		}
 

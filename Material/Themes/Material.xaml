@@ -22,5 +22,7 @@
     <ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.TabSelectorItem.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Card.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.HIDBarcodeScannerInput.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ActionButton.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FavoritesPopup.xaml"/>
   </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

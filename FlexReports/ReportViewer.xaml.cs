@@ -9,6 +9,7 @@ using Material;
 using Material.Controls.FileManager;
 using Material.Controls.Popups;
 using Material.Controls.Primitives;
+using Material.Controls.TabSelector;
 
 namespace FlexReports
 {
@@ -139,7 +140,9 @@ namespace FlexReports
 
 		private void OnTabSelected(object s, RoutedEventArgs e)
 		{
-			
+			var tab = e.OriginalSource.RequireType<TabSelectorItem>().DocumentTab;
+			documentViewport.Document.FocusTab(tab);
+			//tab.RequestViewTab();
 		}
 	}
 }

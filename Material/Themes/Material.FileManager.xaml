@@ -1,30 +1,42 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:fileManager="clr-namespace:Material.Controls.FileManager">
-	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="Material.Drawables.xaml"/>
-		<ResourceDictionary Source="Material.Button.xaml"/>
-	</ResourceDictionary.MergedDictionaries>
-	<Style TargetType="{x:Type fileManager:FileManager}">
-		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type fileManager:FileManager}">
-					<Grid>
-						<Grid.RowDefinitions>
-							<RowDefinition/>
-							<RowDefinition Height="40"/>
-						</Grid.RowDefinitions>
-						<ScrollViewer>
-							<ItemsControl ItemsSource="{Binding FileList}">
-								<ItemsControl.ItemsPanel>
-									<ItemsPanelTemplate>
-										<StackPanel Orientation="Vertical"/>
-									</ItemsPanelTemplate>
-								</ItemsControl.ItemsPanel>
-							</ItemsControl>
-						</ScrollViewer>
-						<UniformGrid Grid.Row="1" Columns="4" Background="{StaticResource mtGrey900}">
+                    xmlns:fileManager="clr-namespace:Material.Controls.FileManager"
+                    xmlns:controls="clr-namespace:Material.Controls"
+                    xmlns:primitives="clr-namespace:Material.Controls.Primitives">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="Material.Drawables.xaml"/>
+    <ResourceDictionary Source="Material.Button.xaml"/>
+    <ResourceDictionary Source="Material.Shadows.xaml"/>
+    <ResourceDictionary Source="Material.ActionButton.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+  <Style TargetType="{x:Type fileManager:FileManager}">
+    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type fileManager:FileManager}">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+              <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer>
+              <ItemsControl ItemsSource="{Binding FileList}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+            </ScrollViewer>
+            <Grid>
+              <ToggleButton x:Name="PART_favoritetoggle" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsChecked="{Binding IsCurrentDirectoryFavorited, Mode=OneWay}"
+											Style="{StaticResource FloatingActionToggleButton}"
+											Margin="0 0 30 20">
+                <Path Style="{StaticResource drawablestar}"/>
+              </ToggleButton>
+            </Grid>
+            <controls:PopupManager x:Name="PART_popupmanager" IsHitTestVisible="False"/>
+            <UniformGrid Grid.Row="1" Columns="5" Background="{StaticResource mtGrey900}">
               <Button Style="{StaticResource PathButton}" Name="PART_directoryup">
                 <Path Style="{StaticResource drawablereply}" RenderTransformOrigin=".5,.5">
                   <Path.RenderTransform>
@@ -35,20 +47,22 @@
                   </Path.RenderTransform>
                 </Path>
               </Button>
-							<Button Style="{StaticResource PathButton}" Name="PART_home">
+              <Button Style="{StaticResource PathButton}" Name="PART_home">
                 <Path Style="{StaticResource drawablehome}"/>
               </Button>
-							<Button Style="{StaticResource PathButton}" Name="PART_sort">
-                <Path Style="{StaticResource drawablesort}"/>
+              <Button Style="{StaticResource PathButton}" Name="PART_favorites">
+                <Path Style="{StaticResource drawablestar}"/>
               </Button>
-							<Button Style="{StaticResource PathButton}" Name="PART_settings">
+              <Button Style="{StaticResource PathButton}" Name="PART_selectdisk">
+                <Path Style="{StaticResource drawableharddisk}"/>
+              </Button>
+              <Button Style="{StaticResource PathButton}" Name="PART_settings">
                 <Path Style="{StaticResource drawablesettings}"/>
               </Button>
-
             </UniformGrid>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 </ResourceDictionary>

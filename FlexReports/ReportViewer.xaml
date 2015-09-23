@@ -21,7 +21,7 @@
 						<ColumnDefinition Width="64"/>
 					</Grid.ColumnDefinitions>
 					<Grid Name="LeftTitleBar" Opacity="1">
-						<Label Content="Open Report" Style="{StaticResource t15pSubhead}" Padding="30 0" HorizontalAlignment="Center"/>
+						<Label Content="Open Report" Style="{StaticResource t20pTitle}" FontSize="18pt"  Padding="30 0" HorizontalAlignment="Center"/>
 					</Grid>
 					<Border Grid.Column="1">
 						<ToggleButton Name="MenuToggle" Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 0" 
@@ -60,12 +60,7 @@
 						<Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
 							 Padding="30 0" HorizontalContentAlignment="Left" />
 						<StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
-							<Button Style="{StaticResource PathButton}">
-								<Path Style="{StaticResource drawablesearch}"/>
-							</Button>
-							<Button Style="{StaticResource PathButton}">
-								<Path Style="{StaticResource drawableview_module}"/>
-							</Button>
+							<Image Width="200" Source="Resources/FlexVIEX_Logo_t.png"></Image>
 							<Button Style="{StaticResource PathButton}" Click="SelectTheme">
 								<Path Style="{StaticResource drawablecolor_lens}"/>
 							</Button>
@@ -85,6 +80,7 @@
 							<FlexDocumentViewport x:Name="documentViewport">
 
 							</FlexDocumentViewport>
+							<!--<ParetoChart DataSorter="{x:Static Sorters.Ascending}"></ParetoChart>-->
 							<!--<Grid Width="270" Height="400" Background="{StaticResource mtGrey900}">
 								<Grid Margin="3 10" Background="{StaticResource mtGrey50}">
 

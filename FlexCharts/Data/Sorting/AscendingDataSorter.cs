@@ -7,7 +7,7 @@ using FlexCharts.Data.Structures;
 
 namespace FlexCharts.Data.Sorting
 {
-public class AscendingDataSorter : AbstractDataSorter<DoubleSeries>
+	public class AscendingDataSorter : AbstractDataSorter<DoubleSeries>
 	{
 		public override DoubleSeries Sort(DoubleSeries dataSet)
 		{

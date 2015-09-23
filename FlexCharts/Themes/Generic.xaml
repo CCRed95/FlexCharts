@@ -1,8 +1,6 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:core="clr-namespace:FlexCharts.Controls.Core"
-    xmlns:controls="clr-namespace:FlexCharts.Controls"
     xmlns:charts="clr-namespace:FlexCharts.Controls.Charts"
     xmlns:documents="clr-namespace:FlexCharts.Documents">
   <Style TargetType="{x:Type charts:ParetoChart}">
@@ -58,10 +56,10 @@
 										VerticalContentAlignment="Center"
 										HorizontalContentAlignment="Center">
               </Label>
-              <Grid x:Name="PART_Main" DockPanel.Dock="Bottom">
-                <Grid x:Name="PART_Bars" RenderTransformOrigin=".5,.5"/>
-                <Grid x:Name="PART_XAxis" VerticalAlignment="Bottom"/>
-                <Grid x:Name="PART_HighlightGrid"/>
+              <Grid x:Name="PART_main" DockPanel.Dock="Bottom">
+                <Grid x:Name="PART_bars" RenderTransformOrigin=".5,.5"/>
+                <Grid x:Name="PART_xAxis" VerticalAlignment="Bottom"/>
+                <Grid x:Name="PART_highlight"/>
               </Grid>
             </DockPanel>
           </Border>
@@ -250,11 +248,12 @@
 		<Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="documents:FlexDocument">
-          <Border Background="{TemplateBinding Background}"
-                 BorderBrush="{TemplateBinding BorderBrush}"
-                 BorderThickness="{TemplateBinding BorderThickness}">
-            <Grid Name="PART_document" Margin="{TemplateBinding Padding}">
-							
+          <Border>
+            <Grid Name="PART_document" Margin="{TemplateBinding Padding}"
+									RenderTransformOrigin=".5,.5">
+							<!--<Grid.RenderTransform>
+								<ScaleTransform ScaleX="1" ScaleY="1"/>
+							</Grid.RenderTransform>-->
 						</Grid>
 					</Border>
 				</ControlTemplate>

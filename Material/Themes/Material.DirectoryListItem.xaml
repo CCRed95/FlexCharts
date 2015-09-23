@@ -52,7 +52,7 @@
                   <ScaleTransform x:Name="menuScale" ScaleY="1" ScaleX="0"/>
                 </Grid.RenderTransform>-->
 								<UniformGrid Margin="50 0" Columns="4">
-									<Button Name="delete" Style="{StaticResource PathButton}" Width="60">
+									<Button Name="PART_delete" Style="{StaticResource PathButton}" Width="60">
 										<Path Style="{StaticResource drawabledelete}"/>
 									</Button>
 									<Button Name="bookmarked" Style="{StaticResource PathButton}" Width="60">

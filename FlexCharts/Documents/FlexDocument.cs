@@ -3,8 +3,10 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using System.Windows.Media;
 using FlexCharts.Controls.Core;
 using FlexCharts.Helpers.DependencyHelpers;
+using FlexCharts.Extensions;
 
 namespace FlexCharts.Documents
 {
@@ -54,19 +56,37 @@ namespace FlexCharts.Documents
 		public FlexDocument()
 		{
 			Tabs = new ObservableCollection<FlexDocumentTab>();
-			EventManager.RegisterClassHandler(typeof (FlexDocument), FlexDocumentTab.ViewTabRequestedEvent,
-				new RoutedEventHandler(OnTabViewChangeRequested));
+			//EventManager.RegisterClassHandler(typeof (FlexDocument), FlexDocumentTab.ViewTabRequestedEvent,
+			//	new RoutedEventHandler(OnTabViewChangeRequested));
 		}
 
-		private void OnTabViewChangeRequested(object s, RoutedEventArgs e)
+		public void FocusTab(FlexDocumentTab t)
 		{
-			//var src = e.OriginalSource;
-			//PART_document.Children.Clear();
+			//PART_document.Children[0].RenderTransformOrigin = new Point(.5, .5);
+			//PART_document.Children[0].RenderTransform = new ScaleTransform(1, 1,.5,.5);
+			//PART_document.Children[0].RenderTransform.animate(ScaleTransform.ScaleXProperty, 200, 0);
+			//PART_document.Children[0].RenderTransform.animate(ScaleTransform.ScaleYProperty, 200, 0, onCompleted:onCompleted);
+			//PART_document.Children[0].animate(OpacityProperty, 100, 0);
 
-			//if (Tabs == null)
-			//	throw new NullReferenceException("Tabs null.");
-			//if (Tabs.Count >= 1)
-			//	PART_document.Children.Add(Tabs[0]);
+			PART_document.Children.Clear();
+			PART_document.Children.Add(t);
+			//t.animate(OpacityProperty, 300, 1, from:0, skewms:100);
 		}
+
+		private void onCompleted(object s, EventArgs e)
+		{
+			PART_document.Children.RemoveAt(0);
+		}
+
+		//private void OnTabViewChangeRequested(object s, RoutedEventArgs e)
+		//{
+		//	//var src = e.OriginalSource;
+		//	//PART_document.Children.Clear();
+
+		//	//if (Tabs == null)
+		//	//	throw new NullReferenceException("Tabs null.");
+		//	//if (Tabs.Count >= 1)
+		//	//	PART_document.Children.Add(Tabs[0]);
+		//}
 	}
 }

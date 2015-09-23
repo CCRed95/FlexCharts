@@ -19,13 +19,13 @@ using FlexCharts.MaterialDesign.Providers;
 
 namespace FlexCharts.Controls.Charts
 {
-	[TemplatePart(Name = "PART_Content", Type = typeof(DockPanel))]
-	[TemplatePart(Name = "PART_Title", Type = typeof(Label))]
-	[TemplatePart(Name = "PART_Main", Type = typeof(Grid))]
-	[TemplatePart(Name = "PART_Bars", Type = typeof(Grid))]
-	[TemplatePart(Name = "PART_XAxis", Type = typeof(Grid))]
-	[TemplatePart(Name = "PART_BarLabels", Type = typeof(Grid))]
-	[TemplatePart(Name = "PART_Line", Type = typeof(Grid))]
+	//[TemplatePart(Name = "PART_Content", Type = typeof(DockPanel))]
+	//[TemplatePart(Name = "PART_Title", Type = typeof(Label))]
+	//[TemplatePart(Name = "PART_Main", Type = typeof(Grid))]
+	//[TemplatePart(Name = "PART_Bars", Type = typeof(Grid))]
+	//[TemplatePart(Name = "PART_XAxis", Type = typeof(Grid))]
+	//[TemplatePart(Name = "PART_BarLabels", Type = typeof(Grid))]
+	//[TemplatePart(Name = "PART_Line", Type = typeof(Grid))]
 	[ContentProperty("Data")]
 	public class BarChart : AbstractFlexChart<DoubleSeries>, ISegmentContract, IBarTotalContract, IXAxisContract
 	{
@@ -168,9 +168,9 @@ namespace FlexCharts.Controls.Charts
 		#endregion
 
 		#region Fields
-		protected Grid _highlightGrid;
-		protected Grid _xAxisGrid;
-		protected Grid _bars;
+		protected Grid PART_highlight;
+		protected Grid PART_xAxis;
+		protected Grid PART_bars;
 		#endregion
 
 		#region Constructors
@@ -217,9 +217,9 @@ namespace FlexCharts.Controls.Charts
 		#region Overrided Methods
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-			_bars.Children.Clear();
-			_xAxisGrid.Children.Clear();
-			_highlightGrid.Children.Clear();
+			PART_bars.Children.Clear();
+			PART_xAxis.Children.Clear();
+			PART_highlight.Children.Clear();
 
 			if (Data.Count < 1)
 			{
@@ -229,7 +229,7 @@ namespace FlexCharts.Controls.Charts
 			var total = Data.MaxValue();
 
 			var context = new ProviderContext(Data.Count);
-			var barAvailableWidth = _bars.RenderSize.Width / Data.Count;
+			var barAvailableWidth = PART_bars.RenderSize.Width / Data.Count;
 			var barActiveWidth = barAvailableWidth * SegmentWidthPercentage;
 			var barLeftSpacing = (barAvailableWidth - barActiveWidth) / 2;
 			var barLabelSize = RenderingExtensions.EstimateLabelRenderSize(BarTotalFontFamily, BarTotalFontSize);
@@ -253,12 +253,12 @@ namespace FlexCharts.Controls.Charts
 				};
 				axisLabel.BindTextualPrimitive<XAxisPrimitive>(this);
 
-				_xAxisGrid.Children.Add(axisLabel);
+				PART_xAxis.Children.Add(axisLabel);
 				xtrace++;
 			}
 			var horizontalTrace = 0d;
-			var xAxisHeight = _xAxisGrid.ActualHeight;
-			var backHeight = _bars.RenderSize.Height - xAxisHeight;
+			var xAxisHeight = PART_xAxis.ActualHeight;
+			var backHeight = PART_bars.RenderSize.Height - xAxisHeight;
 			MaterialProvider.Reset(context);
 			foreach (var d in Data)
 			{
@@ -275,14 +275,14 @@ namespace FlexCharts.Controls.Charts
 				//backRectangle.MouseEnter += (s, e) => barMouseEnter(d);
 				//BindingOperations.SetBinding(backRectangle, Shape.FillProperty, new Binding("SegmentSpaceBackground") { Source = this });
 
-				_bars.Children.Add(backRectangle);
+				PART_bars.Children.Add(backRectangle);
 
-				
+
 				var verticalTrace = 0d;
 				var pathBuffer = new List<Shape>();
 
-				
-				var height = d.Value.Map(0, total, 0, _bars.RenderSize.Height - xAxisHeight - barLabelSize.Height);
+
+				var height = d.Value.Map(0, total, 0, PART_bars.RenderSize.Height - xAxisHeight - barLabelSize.Height);
 				var rectangle = new Rectangle
 				{
 					Width = barActiveWidth,
@@ -304,7 +304,7 @@ namespace FlexCharts.Controls.Charts
 				for (var x = pathBuffer.Count - 1; x >= 0; x--)
 				{
 					var path = pathBuffer[x];
-					_bars.Children.Add(path);
+					PART_bars.Children.Add(path);
 				}
 				var barLabel = new Label
 				{
@@ -320,140 +320,148 @@ namespace FlexCharts.Controls.Charts
 				};
 				barLabel.BindTextualPrimitive<BarTotalPrimitive>(this);
 				d.RenderedVisual = pathBuffer;
-				_bars.Children.Add(barLabel);
+				PART_bars.Children.Add(barLabel);
 				horizontalTrace += barAvailableWidth;
 			}
 			base.OnRender(drawingContext);
 		}
 
-		//private void barMouseEnter(CategoricalDataPointCategoricalDataPointDoubleList barinfo)
-		//{
-		//	_highlightGrid.Children.Clear();
-		//	var pathBuffer = barinfo.RenderedVisual.ShouldBeType<List<Shape>>();
-		//	var largestRectangle = pathBuffer.Last();
-		//	var sdd = new Path()
-		//	{
-		//		Data = largestRectangle.RenderedGeometry,
-		//		Stroke = Brushes.White,
-		//		StrokeThickness = 2,
-		//		VerticalAlignment = largestRectangle.VerticalAlignment,
-		//		HorizontalAlignment = largestRectangle.HorizontalAlignment,
-		//		Margin = largestRectangle.Margin
-		//	};
-
-		//	var tt = new ToolTipPath
-		//	{
-		//		IsHitTestVisible = false,
-		//		Height = 100,
-		//		Width = 180,
-		//		Fill = new SolidColorBrush(Color.FromRgb(255, 255, 255)) { Opacity = .7 },
-		//		ArrowDirection = ToolTipDirection.Left,
-		//		HorizontalAlignment = HorizontalAlignment.Left,
-		//		VerticalAlignment = VerticalAlignment.Bottom,
-		//		Margin = new Thickness(largestRectangle.Margin.Left + largestRectangle.Width + 10, 0, 0, largestRectangle.Height / 2)
-		//	};
-		//	BindingOperations.SetBinding(_highlightGrid, VisibilityProperty, new Binding("IsMouseOver") { Source = this, Converter = new BooleanToVisibilityConverter() });
-		//	if (tt.Margin.Left + tt.Width > _highlightGrid.ActualWidth)
-		//	{
-		//		tt.ArrowDirection = ToolTipDirection.Right;
-		//		tt.Margin = new Thickness(largestRectangle.Margin.Left - 10 - tt.Width, 0, 0, tt.Margin.Bottom);
-		//	}
-
-		//	_highlightGrid.Children.Add(sdd);
-		//	_highlightGrid.Children.Add(tt);
-		//}
-		//private void barMouseLeave(object s, MouseEventArgs e, CategoricalDataPointCategoricalDataPointDoubleList barinfo, CategoricalDataPointDouble subbarinfo)
-		//{
-		//	//subbarinfo.RenderedVisual.ShouldBeType<Rectangle>().Fill = Brushes.White;
-		//}
-		//protected override void OnMouseDown(MouseButtonEventArgs e)
-		//{
-		//	base.OnMouseDown(e);
-		//}
-
-		//private void pathMouseEnter(object s, MouseEventArgs MouseEventArgs)
-		//{
-		//	_highlightGrid.Children.Clear();
-		//	var customPath = s.ShouldBeType<CustomPath>();
-		//	CategoricalDataPointList barData;
-		//	if (!tryFindDataSet(customPath, out barData))
-		//		return;
-		//	var highlightPath = new Path
-		//	{
-		//		Data = barData.RenderedPathList.Last().Data.Clone(),
-		//		Stroke = FlatUI.White,
-		//		StrokeThickness = 2,
-		//		Margin = customPath.Margin
-		//	};
-		//	_highlightGrid.Children.Add(highlightPath);
-		//	var floatingBox = createFloatingBox(barData, customPath.Fill);
-		//	floatingBox.Margin = new Thickness(customPath.Margin.Left + 40, 0, 0, customPath.Margin.Bottom + 40);
-
-		//	//_highlightGrid.Children.Add(floatingBox);
-		//	//foreach (var path in barData.RenderedPathList)
-		//	//{
-		//	//	path.Fill = Material.Grey;
-		//	//}
-		//}
-
-		//private bool tryFindDataSet(CustomPath path, out CategoricalDataPointList data)
-		//{
-		//	foreach (var bar in Data)
-		//	{
-		//		foreach (var subBar in bar.Value)
-		//		{
-		//			if (Equals(subBar.RenderedPath, path))
-		//			{
-		//				data = bar;
-		//				return true;
-		//			}
-		//		}
-		//	}
-		//	data = default(CategoricalDataPointList);
-		//	return false;
-		//}
-		//private void barClick(object s, RoutedEventArgs e)
-		//{
-
-		//}
-
-
-		//private Grid createFloatingBox(CategoricalDataPointList barData, Brush border)
-		//{
-		//	var parentContainer = new Grid()
-		//	{
-		//		IsHitTestVisible = false,
-		//		Width = 150,
-		//		Height = 200,
-		//		HorizontalAlignment = HorizontalAlignment.Left,
-		//		VerticalAlignment = VerticalAlignment.Bottom,
-		//	};
-		//	var container = new WrapPanel
-		//	{
-		//		Orientation = Orientation.Vertical,
-		//	};
-		//	parentContainer.Children.Add(new Border()
-		//	{
-		//		Background = FlatUI.DarkGrayDark,
-		//		BorderBrush = border,
-		//		BorderThickness = new Thickness(2)
-		//	});
-		//	parentContainer.Children.Add(container);
-
-		//	foreach (var dataPoint in barData.Value)
-		//	{
-		//		container.Children.Add(new Label
-		//		{
-		//			FontSize = 16,
-		//			HorizontalContentAlignment = HorizontalAlignment.Center,
-		//			VerticalContentAlignment = VerticalAlignment.Center,
-		//			Content = $"{dataPoint.CategoryName} - {dataPoint.Value}",
-		//			Foreground = dataPoint.RenderedVisual.ShouldBeType<Shape>().Fill.ShouldBeType<SolidColorBrush>().Lighten(.3)
-		//		});
-		//	}
-
-		//	return parentContainer;
-		//}
-		#endregion
+		public override void OnApplyTemplate()
+		{
+			base.OnApplyTemplate();
+			PART_highlight = GetTemplateChild<Grid>(nameof(PART_highlight));
+			PART_xAxis = GetTemplateChild<Grid>(nameof(PART_xAxis));
+			PART_bars = GetTemplateChild<Grid>(nameof(PART_bars));
 	}
+
+	//private void barMouseEnter(CategoricalDataPointCategoricalDataPointDoubleList barinfo)
+	//{
+	//	_highlightGrid.Children.Clear();
+	//	var pathBuffer = barinfo.RenderedVisual.ShouldBeType<List<Shape>>();
+	//	var largestRectangle = pathBuffer.Last();
+	//	var sdd = new Path()
+	//	{
+	//		Data = largestRectangle.RenderedGeometry,
+	//		Stroke = Brushes.White,
+	//		StrokeThickness = 2,
+	//		VerticalAlignment = largestRectangle.VerticalAlignment,
+	//		HorizontalAlignment = largestRectangle.HorizontalAlignment,
+	//		Margin = largestRectangle.Margin
+	//	};
+
+	//	var tt = new ToolTipPath
+	//	{
+	//		IsHitTestVisible = false,
+	//		Height = 100,
+	//		Width = 180,
+	//		Fill = new SolidColorBrush(Color.FromRgb(255, 255, 255)) { Opacity = .7 },
+	//		ArrowDirection = ToolTipDirection.Left,
+	//		HorizontalAlignment = HorizontalAlignment.Left,
+	//		VerticalAlignment = VerticalAlignment.Bottom,
+	//		Margin = new Thickness(largestRectangle.Margin.Left + largestRectangle.Width + 10, 0, 0, largestRectangle.Height / 2)
+	//	};
+	//	BindingOperations.SetBinding(_highlightGrid, VisibilityProperty, new Binding("IsMouseOver") { Source = this, Converter = new BooleanToVisibilityConverter() });
+	//	if (tt.Margin.Left + tt.Width > _highlightGrid.ActualWidth)
+	//	{
+	//		tt.ArrowDirection = ToolTipDirection.Right;
+	//		tt.Margin = new Thickness(largestRectangle.Margin.Left - 10 - tt.Width, 0, 0, tt.Margin.Bottom);
+	//	}
+
+	//	_highlightGrid.Children.Add(sdd);
+	//	_highlightGrid.Children.Add(tt);
+	//}
+	//private void barMouseLeave(object s, MouseEventArgs e, CategoricalDataPointCategoricalDataPointDoubleList barinfo, CategoricalDataPointDouble subbarinfo)
+	//{
+	//	//subbarinfo.RenderedVisual.ShouldBeType<Rectangle>().Fill = Brushes.White;
+	//}
+	//protected override void OnMouseDown(MouseButtonEventArgs e)
+	//{
+	//	base.OnMouseDown(e);
+	//}
+
+	//private void pathMouseEnter(object s, MouseEventArgs MouseEventArgs)
+	//{
+	//	_highlightGrid.Children.Clear();
+	//	var customPath = s.ShouldBeType<CustomPath>();
+	//	CategoricalDataPointList barData;
+	//	if (!tryFindDataSet(customPath, out barData))
+	//		return;
+	//	var highlightPath = new Path
+	//	{
+	//		Data = barData.RenderedPathList.Last().Data.Clone(),
+	//		Stroke = FlatUI.White,
+	//		StrokeThickness = 2,
+	//		Margin = customPath.Margin
+	//	};
+	//	_highlightGrid.Children.Add(highlightPath);
+	//	var floatingBox = createFloatingBox(barData, customPath.Fill);
+	//	floatingBox.Margin = new Thickness(customPath.Margin.Left + 40, 0, 0, customPath.Margin.Bottom + 40);
+
+	//	//_highlightGrid.Children.Add(floatingBox);
+	//	//foreach (var path in barData.RenderedPathList)
+	//	//{
+	//	//	path.Fill = Material.Grey;
+	//	//}
+	//}
+
+	//private bool tryFindDataSet(CustomPath path, out CategoricalDataPointList data)
+	//{
+	//	foreach (var bar in Data)
+	//	{
+	//		foreach (var subBar in bar.Value)
+	//		{
+	//			if (Equals(subBar.RenderedPath, path))
+	//			{
+	//				data = bar;
+	//				return true;
+	//			}
+	//		}
+	//	}
+	//	data = default(CategoricalDataPointList);
+	//	return false;
+	//}
+	//private void barClick(object s, RoutedEventArgs e)
+	//{
+
+	//}
+
+
+	//private Grid createFloatingBox(CategoricalDataPointList barData, Brush border)
+	//{
+	//	var parentContainer = new Grid()
+	//	{
+	//		IsHitTestVisible = false,
+	//		Width = 150,
+	//		Height = 200,
+	//		HorizontalAlignment = HorizontalAlignment.Left,
+	//		VerticalAlignment = VerticalAlignment.Bottom,
+	//	};
+	//	var container = new WrapPanel
+	//	{
+	//		Orientation = Orientation.Vertical,
+	//	};
+	//	parentContainer.Children.Add(new Border()
+	//	{
+	//		Background = FlatUI.DarkGrayDark,
+	//		BorderBrush = border,
+	//		BorderThickness = new Thickness(2)
+	//	});
+	//	parentContainer.Children.Add(container);
+
+	//	foreach (var dataPoint in barData.Value)
+	//	{
+	//		container.Children.Add(new Label
+	//		{
+	//			FontSize = 16,
+	//			HorizontalContentAlignment = HorizontalAlignment.Center,
+	//			VerticalContentAlignment = VerticalAlignment.Center,
+	//			Content = $"{dataPoint.CategoryName} - {dataPoint.Value}",
+	//			Foreground = dataPoint.RenderedVisual.ShouldBeType<Shape>().Fill.ShouldBeType<SolidColorBrush>().Lighten(.3)
+	//		});
+	//	}
+
+	//	return parentContainer;
+	//}
+	#endregion
+}
 }

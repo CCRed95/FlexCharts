@@ -60,7 +60,9 @@
     <Compile Include="Controls\FileManager\DirectoryListItem.cs" />
     <Compile Include="Controls\FileManager\FileListItem.cs" />
     <Compile Include="Controls\FileManager\FileManager.cs" />
+    <Compile Include="Controls\FileManager\StringCollection.cs" />
     <Compile Include="Controls\FlexDocumentViewport.cs" />
+    <Compile Include="Controls\Popups\FavoritesPopup.cs" />
     <Compile Include="Controls\ScannerIO\HIDBarcodeScannerInput.cs" />
     <Compile Include="Controls\MaterialDimmer.cs" />
     <Compile Include="Controls\MaterialShell.cs" />
@@ -92,6 +94,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Material.ActionButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.ErrorPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.FavoritesPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

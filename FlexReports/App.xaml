@@ -7,6 +7,9 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.xaml"/>
       </ResourceDictionary.MergedDictionaries>
+			<StringCollection x:Key="favorites">
+				
+			</StringCollection>
     </ResourceDictionary>
   </Application.Resources>
 </Application>
