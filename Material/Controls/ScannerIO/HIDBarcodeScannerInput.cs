@@ -60,6 +60,7 @@ namespace Material.Controls.ScannerIO
 		}
 		#endregion
 
+		public bool AutoFocus { get; set; } = true;
 		#region Fields 
 		private bool isCommandInputCompleted;
 		#endregion
@@ -80,8 +81,12 @@ namespace Material.Controls.ScannerIO
 				 {
 					 Focusable = true;
 					 IsEnabled = true;
-					 Focus();
-					 Keyboard.Focus(this);
+					 if (AutoFocus)
+					 {
+						 Focus();
+						 Keyboard.Focus(this);
+					 }
+
 				 }));
 		}
 

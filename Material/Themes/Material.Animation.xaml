@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<SineEase x:Key="sineEaseIn" EasingMode="EaseIn"/>
+	<SineEase x:Key="sineEaseOut" EasingMode="EaseOut"/>
+	<SineEase x:Key="sineEaseInOut" EasingMode="EaseInOut"/>
+	
+	<CubicEase x:Key="cubicEaseIn" EasingMode="EaseIn"/>
+	<CubicEase x:Key="cubicEaseOut" EasingMode="EaseOut"/>
+	<CubicEase x:Key="cubicEaseInOut" EasingMode="EaseInOut"/>
+	
+	<QuinticEase x:Key="quinticEaseIn" EasingMode="EaseIn"/>
+	<QuinticEase x:Key="quinticEaseOut" EasingMode="EaseOut"/>
+	<QuinticEase x:Key="quinticEaseInOut" EasingMode="EaseInOut"/>
+	
+	<CircleEase x:Key="circleEaseIn" EasingMode="EaseIn"/>
+	<CircleEase x:Key="circleEaseOut" EasingMode="EaseOut"/>
+	<CircleEase x:Key="circleEaseInOut" EasingMode="EaseInOut"/>
+</ResourceDictionary>

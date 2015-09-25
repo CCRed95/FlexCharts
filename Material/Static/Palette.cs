@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media.Effects;
-using FlexCharts.Require;
-using Material.Properties;
 
 namespace Material.Static
 {
@@ -50,29 +41,3 @@ namespace Material.Static
 	}
 
 }
-//public static DropShadowEffect shadowDelta1 => ResourceProvider.Extract<DropShadowEffect>();
-		////palette[nameof(shadowDelta1)].RequireType<DropShadowEffect>();
-		//public static DropShadowEffect shadowDelta2 => palette[nameof(shadowDelta2)].RequireType<DropShadowEffect>();
-		//public static DropShadowEffect shadowDelta3 => palette[nameof(shadowDelta3)].RequireType<DropShadowEffect>();
-		//public static DropShadowEffect shadowDelta4 => palette[nameof(shadowDelta4)].RequireType<DropShadowEffect>();
-		//public static DropShadowEffect shadowDelta5 => palette[nameof(shadowDelta5)].RequireType<DropShadowEffect>();
-
-		//public static AccentedMaterialSet Red => palette[nameof(Red)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Pink => palette[nameof(Pink)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Purple => palette[nameof(Purple)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet DeepPurple => palette[nameof(DeepPurple)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Indigo => palette[nameof(Indigo)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Blue => palette[nameof(Blue)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet LightBlue => palette[nameof(LightBlue)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Cyan => palette[nameof(Cyan)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Teal => palette[nameof(Teal)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Green => palette[nameof(Green)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet LightGreen => palette[nameof(LightGreen)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Lime => palette[nameof(Lime)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Yellow => palette[nameof(Yellow)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Amber => palette[nameof(Amber)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet Orange => palette[nameof(Orange)].RequireType<AccentedMaterialSet>();
-		//public static AccentedMaterialSet DeepOrange => palette[nameof(DeepOrange)].RequireType<AccentedMaterialSet>();
-		//public static MaterialSet Brown => palette[nameof(Brown)].RequireType<MaterialSet>();
-		//public static MaterialSet Grey => palette[nameof(Grey)].RequireType<MaterialSet>();
-		//public static MaterialSet BlueGrey => palette[nameof(BlueGrey)].RequireType<MaterialSet>();

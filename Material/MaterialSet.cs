@@ -12,6 +12,8 @@ namespace Material
 {
 	public class MaterialSet : Freezable
 	{
+		public string SerializationKey { get; set; }
+
 		public static readonly DependencyProperty P050Property = DP.Register(
 			new Meta<MaterialSet, SolidColorBrush>(MaterialPalette.Grey050));
 

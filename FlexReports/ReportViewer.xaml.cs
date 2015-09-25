@@ -2,14 +2,17 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Animation;
+using FlexCharts.Collections;
 using FlexCharts.Documents;
 using FlexCharts.Extensions;
 using FlexCharts.Require;
+using FlexReports.Data;
 using Material;
 using Material.Controls.FileManager;
 using Material.Controls.Popups;
 using Material.Controls.Primitives;
 using Material.Controls.TabSelector;
+using Material.Static;
 
 namespace FlexReports
 {
@@ -22,9 +25,25 @@ namespace FlexReports
 		{
 			InitializeComponent();
 			resetUI();
-			Loaded += OnLoaded;
+			Width = AppSettings.Instance.WindowSize.Width;
+			Height = AppSettings.Instance.WindowSize.Height;
+			SizeChanged += onSizeChanged;
+			try
+			{
+				var theme = FlexEnum.FromName<RecommendedThemeSet>(AppSettings.Instance.Theme);
+				ThemePrimitive.SetTheme(this, theme.Value);
+			}
+			catch
+			{
+				AppSettings.Instance.Theme = "Cyan";
+			}
+
 		}
 
+		private void onSizeChanged(object s, SizeChangedEventArgs e)
+		{
+			AppSettings.Instance.WindowSize = e.NewSize;
+		}
 		private void resetUI()
 		{
 			LeftMenu.Width = 65;
@@ -37,12 +56,6 @@ namespace FlexReports
 			LeftPanelItems.Opacity = 0;
 		}
 
-		private static readonly DirectoryInfo rootDirectory = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\FlexDocuments");
-
-		private void OnLoaded(object s, RoutedEventArgs e)
-		{
-			LeftPanelItems.ActiveDirectory = rootDirectory;
-		}
 
 		private void toggleMenu(object s, RoutedEventArgs e)
 		{
@@ -54,7 +67,6 @@ namespace FlexReports
 			{
 				collapseMenu();
 			}
-
 		}
 
 		private void expandMenu()
@@ -101,24 +113,7 @@ namespace FlexReports
 		private void themeSelected(AccentedMaterialSet theme)
 		{
 			ThemePrimitive.SetTheme(this, theme);
-		}
-
-		private void viewDocumentCode(object s, RoutedEventArgs e)
-		{
-			//documentViewport.ViewCodeBehind();
-		}
-
-		private void insertDocumentComment(object s, RoutedEventArgs e)
-		{
-			if (!documentViewport.HasContent)
-			{
-				PopupSpace.Content = new MessagePopup
-				{
-					Title = "Cannot Add Comment",
-					Message = "Open a document first."
-				};
-			}
-
+			AppSettings.Instance.Theme = theme.SerializationKey;
 		}
 
 		private void OnRequestOpenFile(object s, RoutedEventArgs e)

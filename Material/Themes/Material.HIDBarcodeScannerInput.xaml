@@ -77,11 +77,6 @@
 							<ColumnDefinition />
 							<ColumnDefinition Width="{Binding ElementName=root, Path=ActualHeight}"/>
 						</Grid.ColumnDefinitions>
-						<!--<TextBox Name="textlabel" Grid.Column="1"  Text="{Binding Text}" Style="{StaticResource t14pButton}" 
-										 Foreground="{TemplateBinding Foreground}" Visibility="Hidden" Padding="0"/>-->
-						<!--<Label Name="formatdescriptionlabel" Grid.Column="1"  Content="{Binding InputValidator.FormatDescription}" 
-										 Style="{StaticResource t14pButton}" Foreground="{StaticResource mtGrey600}"
-										 FontWeight="Light" Padding="0"/>-->
 						<Viewbox>
 							<Path Style="{StaticResource drawablebarcode}" Fill="{StaticResource mtGrey800}"
 											RenderTransformOrigin=".5,.5">
@@ -142,10 +137,6 @@
 						<Trigger Property="IsReadOnly" Value="True">
 							<Setter Property="Foreground" Value="{StaticResource mtGrey800}"/>
 						</Trigger>
-						<!--<Trigger Property="HasCommand" Value="True">
-							<Setter TargetName="formatdescriptionlabel" Property="Visibility" Value="Hidden"/>
-							<Setter TargetName="textlabel" Property="Visibility" Value="Visible"/>
-						</Trigger>-->
 						<Trigger Property="IsInputValid" Value="PASSED">
 							<Setter Property="BorderBrush" TargetName="focusBorder" Value="{StaticResource mtGreenA700}"/>
 							<Setter Property="Foreground" Value="{StaticResource mtGreenA700}"/>

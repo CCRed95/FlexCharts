@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:Material.Converters;assembly=Material"
-
+        xmlns:data="clr-namespace:FlexReports.Data"
+				
         mc:Ignorable="d"
 				VisualFeedback.ClickFeedback="P300"									
-        Title="Report Viewer" Height="700" Width="1000">
+        Title="Report Viewer" Height="600" Width="1000"><!--ThemePrimitive.Theme="{Binding Source={x:Static data:AppSettings.Instance}, Path=Theme}"-->
 	<MaterialShell.Resources>
 		<!--<converters:FlexDocumentTabSelectorAdapter x:Key="fdtsa"/>-->
 	</MaterialShell.Resources>
@@ -34,7 +35,14 @@
 					<Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="64"
 								Background="{StaticResource mtGrey900}">
 						<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-							<Button Style="{StaticResource PathButtonDarkSurface}">
+              <Viewbox RenderTransformOrigin=".5,.5">
+                <Viewbox.RenderTransform>
+                  <ScaleTransform ScaleX="1.7" ScaleY="1.7"/>
+                </Viewbox.RenderTransform>
+                <Path Style="{StaticResource drawabledrag_vertical}" Fill="{StaticResource mtGrey100}"/>
+              </Viewbox>
+							
+              <!--<Button Style="{StaticResource PathButtonDarkSurface}">
 								<Path Style="{StaticResource drawablefind_in_page}"/>
 							</Button>
 							<Button Style="{StaticResource PathButtonDarkSurface}" Click="viewDocumentCode">
@@ -48,7 +56,7 @@
 							</Button>
 							<Button Style="{StaticResource PathButtonDarkSurface}">
 								<Path Style="{StaticResource drawableview_day}"/>
-							</Button>
+							</Button>-->
 						</StackPanel>
 					</Grid>
 				</Grid>

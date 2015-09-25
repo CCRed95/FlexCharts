@@ -11,7 +11,6 @@
   <converters:LargestValueConverter x:Key="lvc"/>
   <Style TargetType="tabSelector:TabSelector" BasedOn="{StaticResource t12pCaption}">
     <Setter Property="Background" Value="{Binding Source={StaticResource Grey}, Path=P300}" />
-    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="tabSelector:TabSelector">
@@ -22,10 +21,10 @@
 							<ScaleTransform x:Name="barScale" ScaleX="1" ScaleY="0"/>
 						</Border.LayoutTransform>
             <Grid>
-              <ItemsControl ItemsSource="{Binding Tabs}">
+              <ItemsControl ItemsSource="{TemplateBinding Tabs}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
-                    <UniformGrid Columns="{Binding Tabs.Count}"/>
+                    <UniformGrid Columns="{Binding Tabs.Count, RelativeSource={RelativeSource TemplatedParent}}"/>
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
@@ -34,7 +33,7 @@
             </Grid>
           </Border>
           <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding Tabs}" Value="{x:Null}">
+            <DataTrigger Binding="{Binding Tabs, RelativeSource={RelativeSource TemplatedParent}}" Value="{x:Null}">
               <DataTrigger.EnterActions>
                 <BeginStoryboard>
                   <Storyboard>
@@ -52,7 +51,7 @@
                 </BeginStoryboard>
               </DataTrigger.ExitActions>
             </DataTrigger>
-            <DataTrigger Binding="{Binding Tabs.Count}" Value="0">
+            <DataTrigger Binding="{Binding Tabs.Count, RelativeSource={RelativeSource TemplatedParent}}" Value="0">
               <Setter Property="Background" Value="Red"/>
             </DataTrigger>
           </ControlTemplate.Triggers>

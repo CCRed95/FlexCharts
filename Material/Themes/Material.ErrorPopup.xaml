@@ -8,9 +8,8 @@
     <ResourceDictionary Source="Material.Button.xaml"/>
 		<ResourceDictionary Source="Material.Drawables.xaml"/>
   </ResourceDictionary.MergedDictionaries>
-  <Style TargetType="popups:ErrorPopup">
-		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
-    <Setter Property="Width" Value="320"/>
+	<Style TargetType="popups:ErrorPopup">
+		<Setter Property="Width" Value="320"/>
     <Setter Property="Height" Value="180"/>
     <Setter Property="Background" Value="{StaticResource mtGrey50}"/>
     <Setter Property="Template">
@@ -27,12 +26,12 @@
 										<ColumnDefinition />
 										<ColumnDefinition Width="50"/>
 									</Grid.ColumnDefinitions>
-									<TextBlock Text="{Binding Title}" Foreground="Black" Padding="0 0 0 15" TextWrapping="Wrap" Style="{StaticResource _t18pLSubheadMed}"/>
+									<TextBlock Text="{TemplateBinding Title}" Foreground="Black" Padding="0 0 0 15" TextWrapping="Wrap" Style="{StaticResource _t18pLSubheadMed}"/>
 									<Viewbox Grid.Column="1">
                     <Path Style="{StaticResource drawableerror}" Fill="{StaticResource mtRedA700}"/>
 									</Viewbox>
 								</Grid>
-                <TextBlock Text="{Binding Message}" Foreground="{StaticResource mtGrey700}" Padding="0" TextWrapping="Wrap" Style="{StaticResource t15pSubhead}"/>
+                <TextBlock Text="{TemplateBinding Message}" Foreground="{StaticResource mtGrey700}" Padding="0" TextWrapping="Wrap" Style="{StaticResource t15pSubhead}"/>
               </StackPanel>
               <Grid VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Height="48" Margin="10 8">
                 <Button Content="OKAY" Name="PART_buttonok" Style="{StaticResource MaterialButton}" Height="36" HorizontalAlignment="Right"/>

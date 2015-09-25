@@ -12,8 +12,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Card">
-					<Border CornerRadius="2" 
-										Background="{TemplateBinding Background}">
+					<Border CornerRadius="2" Background="{TemplateBinding Background}">
 						<ContentPresenter/>
 					</Border>
 				</ControlTemplate>

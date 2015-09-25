@@ -2,13 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:primitives="clr-namespace:Material.Controls.Primitives">
   <ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Material.Animation.xaml"/>
     <ResourceDictionary Source="Material.Drawables.xaml"/>
     <ResourceDictionary Source="Material.Button.xaml"/>
     <ResourceDictionary Source="Material.Shadows.xaml"/>
   </ResourceDictionary.MergedDictionaries>
-  <CubicEase x:Key="cubicEaseIn" EasingMode="EaseIn"/>
-  <CubicEase x:Key="cubicEaseOut" EasingMode="EaseOut"/>
-  <CubicEase x:Key="cubicEaseInOut" EasingMode="EaseInOut"/>
   <Style TargetType="Button" x:Key="FloatingActionButton">
     <Setter Property="Width" Value="60"/>
     <Setter Property="Height" Value="60"/>
@@ -28,7 +26,6 @@
               </Viewbox>
             </Grid>
           </Grid>
-
           <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
               <Trigger.Setters>

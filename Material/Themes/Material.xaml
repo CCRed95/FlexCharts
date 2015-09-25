@@ -5,6 +5,7 @@
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.DefinedBrushes.xaml"/>
     <ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Palette.xaml"/>
     <ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Drawables.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Icon.xaml"/>
     <ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Shadows.xaml"/>
     <ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.DirectoryListItem.xaml"/>
     <ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FileListItem.xaml"/>
@@ -24,5 +25,7 @@
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.HIDBarcodeScannerInput.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ActionButton.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FavoritesPopup.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Checkbox.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ConfirmDeleteFilePopup.xaml"/>
   </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

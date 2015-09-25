@@ -1,12 +1,20 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:popups="clr-namespace:Material.Controls.Popups">
+                    xmlns:popups="clr-namespace:Material.Controls.Popups"
+                    xmlns:fileManager="clr-namespace:Material.Controls.FileManager">
   <ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="Material.Drawables.xaml"/>
-		<ResourceDictionary Source="Material.Shadows.xaml"/>
-	</ResourceDictionary.MergedDictionaries>
-  <Style TargetType="popups:FavoritesPopup">
-		<Setter Property="Effect" Value=""/>
+    <ResourceDictionary Source="Material.Drawables.xaml"/>
+    <ResourceDictionary Source="Material.DefinedBrushes.xaml"/>
+    <ResourceDictionary Source="Material.Shadows.xaml"/>
+    <ResourceDictionary Source="Material.Fonts.xaml"/>
+    <ResourceDictionary Source="Material.Button.xaml"/>
+    <ResourceDictionary Source="Material.ScrollViewer.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+	<Style TargetType="popups:FavoritesPopup">
+		<Setter Property="Effect" Value="{StaticResource shadowDelta4}"/>
+    <Setter Property="Width" Value="290"/>
+    <Setter Property="Height" Value="330"/>
+    <Setter Property="Background" Value="{StaticResource mtGrey50}"/>
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="popups:FavoritesPopup">
@@ -15,11 +23,27 @@
 						Effect="{TemplateBinding Effect}">
             <Grid>
               <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="56"/>
               </Grid.RowDefinitions>
-							
+              <Border BorderBrush="{StaticResource mtGrey300}" BorderThickness="0 0 0 1">
+                <TextBlock Text="Favorites" Foreground="Black" Padding="24 5" VerticalAlignment="Center" FontWeight="Medium" Style="{StaticResource _t16pSubheadMed}"/>
+              </Border>
+              <ScrollViewer Grid.Row="1" Style="{StaticResource FavsScrollViewer}" >
+                <ItemsControl ItemsSource="{TemplateBinding Favorites}">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                      <fileManager:DirectoryListItem FileSystemItem="{Binding Value}"/>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </ScrollViewer>
+              <Grid Grid.Row="2">
+                <Border BorderBrush="{StaticResource mtGrey300}" BorderThickness="0 1 0 0">
+                  <Button Content="CANCEL" Name="PART_buttoncancel" Style="{StaticResource MaterialButton}" Height="36" HorizontalAlignment="Right"/>
+                </Border>
+              </Grid>
             </Grid>
           </Border>
         </ControlTemplate>

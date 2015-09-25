@@ -3,20 +3,20 @@
                     xmlns:primitives="clr-namespace:Material.Controls.Primitives"
                     xmlns:converters="clr-namespace:Material.Converters"
                     xmlns:fileManager="clr-namespace:Material.Controls.FileManager">
-  <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="Material.Palette.xaml"/>
-    <ResourceDictionary Source="Material.Drawables.xaml"/>
-    <ResourceDictionary Source="Material.Fonts.xaml"/>
-    <ResourceDictionary Source="Material.Button.xaml"/>
-  </ResourceDictionary.MergedDictionaries>
-  <converters:LuminosityToBrushConverter x:Key="l2bc"/>
-  <Style TargetType="fileManager:FileListItem">
-    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Material.Converters.xaml"/>
+		<ResourceDictionary Source="Material.Palette.xaml"/>
+		<ResourceDictionary Source="Material.Drawables.xaml"/>
+		<ResourceDictionary Source="Material.Fonts.xaml"/>
+		<ResourceDictionary Source="Material.Button.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	<Style TargetType="fileManager:FileListItem">
     <Setter Property="Height" Value="60"/>
     <Setter Property="Background" Value="{StaticResource mtGrey100}"/>
     <Setter Property="BorderBrush" Value="{StaticResource mtGrey500}"/>
     <Setter Property="BorderThickness" Value="0 0 0 1"/>
-    <Setter Property="Template">
+    <Setter Property="ToolTip" Value="{Binding FileSystemItem.FullName, RelativeSource={RelativeSource Self}}"/>
+      <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type fileManager:FileListItem}">
           <Border Background="{TemplateBinding Background}"
@@ -26,21 +26,15 @@
               <Grid>
                 <Border x:Name="active" Opacity="0" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P050}"/>
                 <StackPanel Orientation="Horizontal" Margin="0 0 50 0">
-									<Viewbox>
-										<Path Style="{StaticResource drawablefile_outline}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
-									</Viewbox>
-                  <!--<Path Style="{StaticResource drawableinsert_drive_file}" Margin="15 9" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}">
-                    <Path.LayoutTransform>
-                      <ScaleTransform ScaleY="1.75" ScaleX="1.75" />
-                    </Path.LayoutTransform>
-                  </Path>-->
+                  <Viewbox>
+                    <Path Style="{StaticResource drawablefile_outline}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
+                  </Viewbox>
                   <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <Label Content="{Binding FileSystemItem.Name, FallbackValue='document.flex'}" Foreground="{StaticResource mtGrey800}" 
+                    <Label Content="{Binding FileSystemItem.Name, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey800}" 
 										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-                    <Label Content="{Binding Description}" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
+                    <Label Content="{Binding Description, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
 										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
                   </StackPanel>
-
                 </StackPanel>
                 <Button Name="menuButton"  Style="{StaticResource PathButton}" Width="50" HorizontalAlignment="Right" primitives:VisualFeedback.ClickFeedback="P200">
                   <Path Style="{StaticResource drawablemore_vert}" Fill="{StaticResource mtGrey900}"/>
@@ -48,9 +42,6 @@
               </Grid>
               <Grid x:Name="menu" IsHitTestVisible="False"  RenderTransformOrigin="1,.5" primitives:VisualFeedback.ClickFeedback="P200"
 													Background="{Binding Path=(primitives:ThemePrimitive.Theme).P700}" Opacity="0" >
-                <!--<Grid.RenderTransform>
-                  <ScaleTransform x:Name="menuScale" ScaleY="1" ScaleX="0"/>
-                </Grid.RenderTransform>-->
                 <UniformGrid Margin="50 0" Columns="4">
                   <Button Name="PART_delete" Style="{StaticResource PathButton}" Width="60">
                     <Path Style="{StaticResource drawabledelete}"/>
@@ -66,30 +57,11 @@
                   </Button>
                 </UniformGrid>
               </Grid>
-
-            </Grid>
-
-
-          </Border>
+            </Grid>          
+					</Border>
           <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
               <Setter Property="Opacity" Value="1" TargetName="active"/>
-              <!--<Trigger.EnterActions>
-                <BeginStoryboard>
-                  <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="active" Storyboard.TargetProperty="Opacity" 
-																		 To="1" Duration="0:0:.05" />
-                  </Storyboard>
-                </BeginStoryboard>
-              </Trigger.EnterActions>
-              <Trigger.ExitActions>
-                <BeginStoryboard>
-                  <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="active" Storyboard.TargetProperty="Opacity" 
-																		 To="0" Duration="0:0:.05" />
-                  </Storyboard>
-                </BeginStoryboard>
-              </Trigger.ExitActions>-->
             </Trigger>
 						<Trigger Property="IsContextMenuExpanded" Value="True">
 							<Setter Property="IsHitTestVisible" TargetName="menu" Value="True"/>
@@ -101,9 +73,6 @@
                     <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsContextMenuExpanded">
                       <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
                     </BooleanAnimationUsingKeyFrames>
-										<!--<BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible" Storyboard.TargetName="menu">
-                      <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
-                    </BooleanAnimationUsingKeyFrames>-->
                     <DoubleAnimation Storyboard.TargetName="menu" Storyboard.TargetProperty="Opacity" 
 																		 From="0" To="1" Duration="0:0:.15">
                       <DoubleAnimation.EasingFunction>

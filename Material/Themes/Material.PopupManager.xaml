@@ -9,7 +9,6 @@
   <system:Double x:Key="revealStartZoom">1.2</system:Double>
   <system:Double x:Key="collapseEndZoom">.8</system:Double>
 	<Style TargetType="controls:PopupManager">
-		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
 		<Setter Property="IsHitTestVisible" Value="False"/>
 		<Setter Property="Template">
 			<Setter.Value>
@@ -56,13 +55,6 @@
 												<SineEase EasingMode="EaseOut"/>
 											</DoubleAnimation.EasingFunction>
 										</DoubleAnimation>
-										<!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content">
-											<DiscreteObjectKeyFrame KeyTime="00:00:1.2" >
-												<DiscreteObjectKeyFrame.Value>
-													<Grid Background="PaleVioletRed"></Grid>
-												</DiscreteObjectKeyFrame.Value>
-											</DiscreteObjectKeyFrame>
-										</ObjectAnimationUsingKeyFrames>-->
 										<BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible">
 											<DiscreteBooleanKeyFrame KeyTime="{StaticResource transitionComplete}" Value="False"/>
 										</BooleanAnimationUsingKeyFrames>

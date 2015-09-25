@@ -1,0 +1,134 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:materialControls="clr-namespace:Material.Controls.Primitives">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Material.Converters.xaml"/>
+		<ResourceDictionary Source="Material.Drawables.xaml"/>
+		<ResourceDictionary Source="Material.DefinedBrushes.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	<Style x:Key="FocusVisual">
+		<Setter Property="Control.Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style TargetType="{x:Type CheckBox}">
+		<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border Background="{TemplateBinding Property=Background}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CheckStates">
+								<VisualState x:Name="Checked">
+									<Storyboard>
+										<DoubleAnimation To="1" Storyboard.TargetName="checkedicon" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+										<DoubleAnimation To="0" Storyboard.TargetName="uncheckedicon" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Unchecked">
+									<Storyboard>
+										<DoubleAnimation To="0" Storyboard.TargetName="checkedicon" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+										<DoubleAnimation To="1" Storyboard.TargetName="uncheckedicon" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Grid ClipToBounds="True">
+							<Grid>
+								<Ellipse Name="clickWave" Width="{TemplateBinding ActualHeight}" 
+													Height="{TemplateBinding ActualHeight}" 
+													RenderTransformOrigin=".5,.5">
+									<Ellipse.Fill>
+										<MultiBinding Converter="{StaticResource l2bc}">
+											<Binding Path="(materialControls:ThemePrimitive.Theme)"/>
+											<Binding Path="(materialControls:VisualFeedback.ClickFeedback)"/>
+										</MultiBinding>
+									</Ellipse.Fill>
+									<Ellipse.RenderTransform>
+										<ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
+									</Ellipse.RenderTransform>
+								</Ellipse>
+							</Grid>
+							<Viewbox Name="checkedicon"  RenderTransformOrigin=".5,.5">
+								<Viewbox.RenderTransform>
+									<ScaleTransform x:Name="checkediconScale" ScaleX="1" ScaleY="1"/>
+								</Viewbox.RenderTransform>
+ 								<Path Style="{StaticResource drawablecheckbox_marked_outline}" Fill="{TemplateBinding Foreground}"/>
+							</Viewbox>
+							<Viewbox Name="uncheckedicon" RenderTransformOrigin=".5,.5">
+								<Viewbox.RenderTransform>
+									<ScaleTransform x:Name="uncheckediconScale" ScaleX="1" ScaleY="1"/>
+								</Viewbox.RenderTransform>
+								<Path Style="{StaticResource drawablecheck_box_outline_blank}" Fill="{TemplateBinding Foreground}"/>
+							</Viewbox>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Trigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="checkediconScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1.15" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="checkediconScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1.15" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="uncheckediconScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1.15" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="uncheckediconScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1.15" Duration="0:0:.15" />
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="checkediconScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="checkediconScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="uncheckediconScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="uncheckediconScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1" Duration="0:0:.15" />
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.ExitActions>
+						</Trigger>
+						<EventTrigger RoutedEvent="Click">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleX" 
+																		 From="0" To="2.5" Duration="0:0:.3" />
+
+										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleY" 
+																		 From="0" To="2.5" Duration="0:0:.3" />
+
+										<DoubleAnimation Storyboard.TargetName="clickWave" Storyboard.TargetProperty="Opacity" 
+																		 From="1" To="0" Duration="0:0:.3" />
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

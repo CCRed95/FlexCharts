@@ -9,7 +9,6 @@
 	</ResourceDictionary.MergedDictionaries>
 	<BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
 	<Style x:Key="WindowButtonStyle" TargetType="{x:Type Button}">
-		<!--<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>-->
 		<Setter Property="Foreground" Value="{Binding Path=(materialControls:ThemePrimitive.Theme).P300}" />
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -44,10 +43,6 @@
 	</Style>
 
 	<Style TargetType="controls:MaterialShell">
-		<!--<Setter Property="Foreground" Value="{StaticResource mtTeal50}" />-->
-		<!--<Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>-->
-		<!--<Setter Property="FontFamily" Value="Roboto"/>-->
-		<!--<Setter Property="d:DataContext" Value="{d:DesignInstance materialControls:MaterialShell, IsDesignTimeCreatable=True}"/>-->
 		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
 		<Setter Property="ResizeMode" Value="CanResizeWithGrip" />
 		<Setter Property="UseLayoutRounding" Value="True" />
@@ -83,9 +78,6 @@
 												</Button.Content>
 											</Button>
 											<Grid Margin="1,0,1,0">
-												<!--<Button Style="{StaticResource PathButton}" x:Name="Restore" Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}" >
-													<Path Style="{StaticResource drawablerestore}"/>
-												</Button>-->
 												<Button x:Name="Restore" Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}" ToolTip="restore" Visibility="Collapsed" Style="{StaticResource WindowButtonStyle}">
                           <Button.Content>
                             <Grid Width="30" Height="28" UseLayoutRounding="True" RenderTransform="1,0,0,1,.5,.5">
@@ -112,9 +104,6 @@
 												</Button.Content>
 											</Button>
 										</StackPanel>
-										<!--<Label x:Name="WindowTitleTextBlock" Grid.Row="0" Content="{TemplateBinding Title}" HorizontalAlignment="Left" VerticalContentAlignment="Center"  
-												 Margin="10 0 0 0" Foreground="{TemplateBinding Foreground}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}"
-													 FontWeight="{TemplateBinding FontWeight}"/>-->
 										<Grid Grid.Row="2">
 											<Path x:Name="ResizeGrip" Visibility="Collapsed" Width="12" Height="12" Margin="1" HorizontalAlignment="Right"
                                         Stroke="{Binding Path=(materialControls:ThemePrimitive.Theme).P300}" StrokeThickness="1" Stretch="None" Data="F1 M1,10 L3,10 M5,10 L7,10 M9,10 L11,10 M2,9 L2,11 M6,9 L6,11 M10,9 L10,11 M5,6 L7,6 M9,6 L11,6 M6,5 L6,7 M10,5 L10,7 M9,2 L11,2 M10,1 L10,3" />
@@ -122,14 +111,11 @@
 									</Grid>
 								</AdornerDecorator>
 							</Border>
-							<!--<Border BorderBrush="{StaticResource mtBlue200}" BorderThickness="1" Visibility="{Binding IsActive, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource bool2VisibilityConverter}}" />-->
 							<Grid x:Name="ShellOverlayRoot" IsHitTestVisible="False">
 
 							</Grid>
 						</Grid>
 					</Border>
-
-
 					<ControlTemplate.Triggers>
 						<Trigger Property="WindowState" Value="Maximized">
 							<Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />

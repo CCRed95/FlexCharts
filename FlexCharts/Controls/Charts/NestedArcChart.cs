@@ -251,7 +251,7 @@ namespace FlexCharts.Controls.Charts
 		static NestedArcChart()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(NestedArcChart), new FrameworkPropertyMetadata(typeof(NestedArcChart)));
-			DataSorterProperty.OverrideMetadata(typeof (NestedArcChart),
+			DataSorterProperty.OverrideMetadata(typeof(NestedArcChart),
 				new FrameworkPropertyMetadata(new AscendingDataSorter()));
 			TitleProperty.OverrideMetadata(typeof(NestedArcChart), new FrameworkPropertyMetadata("Nested Arc Chart"));
 		}

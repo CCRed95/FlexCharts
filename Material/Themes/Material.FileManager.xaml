@@ -2,25 +2,38 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fileManager="clr-namespace:Material.Controls.FileManager"
                     xmlns:controls="clr-namespace:Material.Controls"
-                    xmlns:primitives="clr-namespace:Material.Controls.Primitives">
+                    xmlns:primitives="clr-namespace:Material.Controls.Primitives"
+                    xmlns:converters="clr-namespace:Material.Converters">
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="Material.Drawables.xaml"/>
     <ResourceDictionary Source="Material.Button.xaml"/>
     <ResourceDictionary Source="Material.Shadows.xaml"/>
     <ResourceDictionary Source="Material.ActionButton.xaml"/>
   </ResourceDictionary.MergedDictionaries>
-  <Style TargetType="{x:Type fileManager:FileManager}">
-    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
-    <Setter Property="Template">
+  <converters:RootTrimConverter x:Key="rtc"/>
+	<Style TargetType="{x:Type fileManager:FileManager}">
+		<Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type fileManager:FileManager}">
           <Grid>
             <Grid.RowDefinitions>
+              <RowDefinition Height="40"/>
               <RowDefinition/>
               <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <ScrollViewer>
-              <ItemsControl ItemsSource="{Binding FileList}">
+            <StackPanel Orientation="Horizontal" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P700}">
+              <Label Style="{StaticResource t12pCaption}" FontSize="11pt" FontWeight="Light">
+                <Label.Content>
+                  <MultiBinding Converter="{StaticResource rtc}">
+                    <Binding Path="ActiveDirectory.FullName" RelativeSource="{RelativeSource TemplatedParent}"/>
+                    <Binding Path="." RelativeSource="{RelativeSource Self}"/>
+                    <Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+                  </MultiBinding>
+                </Label.Content>
+              </Label>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" >
+              <ItemsControl ItemsSource="{Binding FileList, RelativeSource={RelativeSource TemplatedParent}}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
@@ -28,15 +41,16 @@
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
             </ScrollViewer>
-            <Grid>
-              <ToggleButton x:Name="PART_favoritetoggle" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsChecked="{Binding IsCurrentDirectoryFavorited, Mode=OneWay}"
+            <Grid Row="1" >
+              <ToggleButton x:Name="PART_favoritetoggle" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+														IsChecked="{Binding IsCurrentDirectoryFavorited, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
 											Style="{StaticResource FloatingActionToggleButton}"
 											Margin="0 0 30 20">
                 <Path Style="{StaticResource drawablestar}"/>
               </ToggleButton>
             </Grid>
-            <controls:PopupManager x:Name="PART_popupmanager" IsHitTestVisible="False"/>
-            <UniformGrid Grid.Row="1" Columns="5" Background="{StaticResource mtGrey900}">
+            <controls:PopupManager Grid.Row="1"  x:Name="PART_popupmanager" IsHitTestVisible="False"/>
+            <UniformGrid Grid.Row="2" Columns="5" Background="{StaticResource mtGrey900}">
               <Button Style="{StaticResource PathButton}" Name="PART_directoryup">
                 <Path Style="{StaticResource drawablereply}" RenderTransformOrigin=".5,.5">
                   <Path.RenderTransform>
@@ -56,8 +70,8 @@
               <Button Style="{StaticResource PathButton}" Name="PART_selectdisk">
                 <Path Style="{StaticResource drawableharddisk}"/>
               </Button>
-              <Button Style="{StaticResource PathButton}" Name="PART_settings">
-                <Path Style="{StaticResource drawablesettings}"/>
+              <Button Style="{StaticResource PathButton}" Name="PART_refresh">
+                <Path Style="{StaticResource drawablerefresh}"/>
               </Button>
             </UniformGrid>
           </Grid>

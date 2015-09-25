@@ -2,90 +2,79 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:m="clr-namespace:Material">
 
-	<!--<SolidColorBrush x:Key="mtGrey50" Color="#FAFAFA"/>
-	<SolidColorBrush x:Key="mtGrey100" Color="#F5F5F5"/>
-	<SolidColorBrush x:Key="mtGrey200" Color="#EEEEEE"/>
-	<SolidColorBrush x:Key="mtGrey300" Color="#E0E0E0"/>
-	<SolidColorBrush x:Key="mtGrey400" Color="#BDBDBD"/>
-	<SolidColorBrush x:Key="mtGrey500" Color="#9E9E9E"/>
-	<SolidColorBrush x:Key="mtGrey600" Color="#757575"/>
-	<SolidColorBrush x:Key="mtGrey700" Color="#616161"/>
-	<SolidColorBrush x:Key="mtGrey800" Color="#424242"/>
-	<SolidColorBrush x:Key="mtGrey900" Color="#212121"/>-->
-
-	<m:AccentedMaterialSet x:Key="Red" 
+	<m:AccentedMaterialSet x:Key="Red" SerializationKey="Red"
 												 P050="#FFEBEE" P100="#FFCDD2" P200="#EF9A9A" P300="#E57373" P400="#EF5350" P500="#F44336" P600="#E53935" 
 												 P700="#D32F2F" P800="#C62828" P900="#B71C1C" A100="#FF8A80" A200="#FF5252" A400="#FF1744" A700="#D50000"/>
 	
-	<m:AccentedMaterialSet x:Key="Pink"
+	<m:AccentedMaterialSet x:Key="Pink" SerializationKey="Pink" 
 												 P050="#FCE4EC" P100="#F8BBD0" P200="#F48FB1" P300="#F06292" P400="#EC407A" P500="#E91E63" P600="#D81B60" 
 												 P700="#C2185B" P800="#AD1457" P900="#880E4F" A100="#FF80AB" A200="#FF4081" A400="#F50057" A700="#C51162"/>
 
-	<m:AccentedMaterialSet x:Key="Purple"
+	<m:AccentedMaterialSet x:Key="Purple" SerializationKey="Purple"
 												 P050="#F3E5F5" P100="#E1BEE7" P200="#CE93D8" P300="#BA68C8" P400="#AB47BC" P500="#9C27B0" P600="#8E24AA" 
 												 P700="#7B1FA2" P800="#6A1B9A" P900="#4A148C" A100="#EA80FC" A200="#E040FB" A400="#D500F9" A700="#AA00FF"/>
 
-	<m:AccentedMaterialSet x:Key="DeepPurple"
+	<m:AccentedMaterialSet x:Key="DeepPurple" SerializationKey="DeepPurple"
 												 P050="#EDE7F6" P100="#D1C4E9" P200="#B39DDB" P300="#9575CD" P400="#7E57C2" P500="#673AB7" P600="#5E35B1" 
 												 P700="#512DA8" P800="#4527A0" P900="#311B92" A100="#B388FF" A200="#7C4DFF" A400="#651FFF" A700="#6200EA"/>
 
-	<m:AccentedMaterialSet x:Key="Indigo"
+	<m:AccentedMaterialSet x:Key="Indigo" SerializationKey="Indigo"
 												 P050="#E8EAF6" P100="#C5CAE9" P200="#9FA8DA" P300="#7986CB" P400="#5C6BC0" P500="#3F51B5" P600="#3949AB" 
 												 P700="#303F9F" P800="#283593" P900="#1A237E" A100="#8C9EFF" A200="#536DFE" A400="#3D5AFE" A700="#304FFE"/>
 
-	<m:AccentedMaterialSet x:Key="Blue"
+	<m:AccentedMaterialSet x:Key="Blue" SerializationKey="Blue"
 												 P050="#E3F2FD" P100="#BBDEFB" P200="#90CAF9" P300="#64B5F6" P400="#42A5F5" P500="#2196F3" P600="#1E88E5" 
 												 P700="#1976D2" P800="#1565C0" P900="#0D47A1" A100="#82B1FF" A200="#448AFF" A400="#2979FF" A700="#2962FF"/>
 
-	<m:AccentedMaterialSet x:Key="LightBlue"
+	<m:AccentedMaterialSet x:Key="LightBlue" SerializationKey="LightBlue"
 												 P050="#E1F5FE" P100="#B3E5FC" P200="#81D4FA" P300="#4FC3F7" P400="#29B6F6" P500="#03A9F4" P600="#039BE5" 
 												 P700="#0288D1" P800="#0277BD" P900="#01579B" A100="#80D8FF" A200="#40C4FF" A400="#00B0FF" A700="#0091EA"/>
 
-	<m:AccentedMaterialSet x:Key="Cyan"
+	<m:AccentedMaterialSet x:Key="Cyan" SerializationKey="Cyan"
 												 P050="#E0F7FA" P100="#B2EBF2" P200="#80DEEA" P300="#4DD0E1" P400="#26C6DA" P500="#00BCD4" P600="#00ACC1" 
 												 P700="#0097A7" P800="#00838F" P900="#006064" A100="#84FFFF" A200="#18FFFF" A400="#00E5FF" A700="#00B8D4"/>
 
-	<m:AccentedMaterialSet x:Key="Teal"
+	<m:AccentedMaterialSet x:Key="Teal" SerializationKey="Teal"
 												 P050="#E0F2F1" P100="#B2DFDB" P200="#80CBC4" P300="#4DB6AC" P400="#26A69A" P500="#009688" P600="#00897B" 
 												 P700="#00796B" P800="#00695C" P900="#004D40" A100="#A7FFEB" A200="#64FFDA" A400="#1DE9B6" A700="#00BFA5"/>
 
-	<m:AccentedMaterialSet x:Key="Green"
+	<m:AccentedMaterialSet x:Key="Green" SerializationKey="Green"
 												 P050="#E8F5E9" P100="#C8E6C9" P200="#A5D6A7" P300="#81C784" P400="#66BB6A" P500="#4CAF50" P600="#43A047" 
 												 P700="#388E3C" P800="#2E7D32" P900="#1B5E20" A100="#B9F6CA" A200="#69F0AE" A400="#00E676" A700="#00C853"/>
 
-	<m:AccentedMaterialSet x:Key="LightGreen"
+	<m:AccentedMaterialSet x:Key="LightGreen" SerializationKey="LightGreen"
 												 P050="#F1F8E9" P100="#DCEDC8" P200="#C5E1A5" P300="#AED581" P400="#9CCC65" P500="#8BC34A" P600="#7CB342" 
 												 P700="#689F38" P800="#558B2F" P900="#33691E" A100="#CCFF90" A200="#B2FF59" A400="#76FF03" A700="#64DD17"/>
 
-	<m:AccentedMaterialSet x:Key="Lime"
+	<m:AccentedMaterialSet x:Key="Lime" SerializationKey="Lime"
 												 P050="#F9FBE7" P100="#F0F4C3" P200="#E6EE9C" P300="#DCE775" P400="#D4E157" P500="#CDDC39" P600="#C0CA33" 
 												 P700="#AFB42B" P800="#9E9D24" P900="#827717" A100="#F4FF81" A200="#EEFF41" A400="#C6FF00" A700="#AEEA00"/>
 
-	<m:AccentedMaterialSet x:Key="Yellow"
+	<m:AccentedMaterialSet x:Key="Yellow" SerializationKey="Yellow"
 												 P050="#FFFDE7" P100="#FFF9C4" P200="#FFF59D" P300="#FFF176" P400="#FFEE58" P500="#FFEB3B" P600="#FDD835" 
 												 P700="#FBC02D" P800="#F9A825" P900="#F57F17" A100="#FFFF8D" A200="#FFFF00" A400="#FFEA00" A700="#FFD600"/>
 
-	<m:AccentedMaterialSet x:Key="Amber"
+	<m:AccentedMaterialSet x:Key="Amber" SerializationKey="Amber"
 												 P050="#FFF8E1" P100="#FFECB3" P200="#FFE082" P300="#FFD54F" P400="#FFCA28" P500="#FFC107" P600="#FFB300" 
 												 P700="#FFA000" P800="#FF8F00" P900="#FF6F00" A100="#FFE57F" A200="#FFD740" A400="#FFC400" A700="#FFAB00"/>
 	
-	<m:AccentedMaterialSet x:Key="Orange"
+	<m:AccentedMaterialSet x:Key="Orange" SerializationKey="Orange"
 												 P050="#FFF3E0" P100="#FFE0B2" P200="#FFCC80" P300="#FFB74D" P400="#FFA726" P500="#FF9800" P600="#FB8C00" 
 												 P700="#F57C00" P800="#EF6C00" P900="#E65100" A100="#FFD180" A200="#FFAB40" A400="#FF9100" A700="#FF6D00"/>
 
-	<m:AccentedMaterialSet x:Key="DeepOrange"
+	<m:AccentedMaterialSet x:Key="DeepOrange" SerializationKey="DeepOrange"
 												 P050="#FBE9E7" P100="#FFCCBC" P200="#FFAB91" P300="#FF8A65" P400="#FF7043" P500="#FF5722" P600="#F4511E" 
 												 P700="#E64A19" P800="#D84315" P900="#BF360C" A100="#FF9E80" A200="#FF6E40" A400="#FF3D00" A700="#DD2C00"/>
 
-	<m:MaterialSet x:Key="Brown"
+	<m:MaterialSet x:Key="Brown" SerializationKey="Brown"
 								 P050="#EFEBE9" P100="#D7CCC8" P200="#BCAAA4" P300="#A1887F" P400="#8D6E63" 
 								 P500="#795548" P600="#6D4C41" P700="#5D4037" P800="#4E342E" P900="#3E2723"/>
 
-	<m:MaterialSet x:Key="Grey"
+	<m:MaterialSet x:Key="Grey" SerializationKey="Grey"
 								 P050="#FAFAFA" P100="#F5F5F5" P200="#EEEEEE" P300="#E0E0E0" P400="#BDBDBD" 
 								 P500="#9E9E9E" P600="#757575" P700="#616161" P800="#424242" P900="#212121"/>
 
-	<m:MaterialSet x:Key="BlueGrey"
+	<m:MaterialSet x:Key="BlueGrey" SerializationKey="BlueGrey"
 								 P050="#ECEFF1" P100="#CFD8DC" P200="#B0BEC5" P300="#90A4AE" P400="#78909C" 
 								 P500="#607D8B" P600="#546E7A" P700="#455A64" P800="#37474F" P900="#263238"/>
 
