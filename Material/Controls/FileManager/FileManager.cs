@@ -32,7 +32,7 @@ namespace Material.Controls.FileManager
 		public static readonly DependencyProperty HasParentDirectoryProperty = HasParentDirectoryPropertyKey.DependencyProperty;
 		public bool HasParentDirectory
 		{
-			get { return (bool) GetValue(HasParentDirectoryProperty); }
+			get { return (bool)GetValue(HasParentDirectoryProperty); }
 			protected set { SetValue(HasParentDirectoryPropertyKey, value); }
 		}
 
@@ -100,8 +100,12 @@ namespace Material.Controls.FileManager
 			EventManager.RegisterClassHandler(typeof(FileManager), AbstractFileSystemListItem.DeleteFileEvent, new RoutedEventHandler(OnDeleteRequested));
 			EventManager.RegisterClassHandler(typeof(FileManager), ConfirmDeleteFilePopup.DeleteFileConfirmedEvent, new RoutedConfirmDeleteEventHandler(OnDeleteConfirmed));
 			EventManager.RegisterClassHandler(typeof(FileManager), DriveListItem.DriveSelectedEvent, new RoutedSelectDriveEventHandler(driveSelected));
+			EventManager.RegisterClassHandler(typeof(FileManager), FavoritesListItem.FavoriteSelectedEvent, new RoutedFavoriteSelectedEventHandler(favoriteSelected));
 			Loaded += (s, e) => refresh();
 		}
+
+
+
 		#endregion
 
 		#region Overriden Members
@@ -135,7 +139,7 @@ namespace Material.Controls.FileManager
 
 			FileList.Clear();
 			var nonHiddenDirectories = rootDirectory.GetDirectories().Select(f => f)
-                    .Where(f => (f.Attributes & FileAttributes.Hidden) == 0);
+										.Where(f => (f.Attributes & FileAttributes.Hidden) == 0);
 			foreach (var directory in nonHiddenDirectories)
 			{
 				if (directory.IsAccessible())
@@ -144,7 +148,7 @@ namespace Material.Controls.FileManager
 				}
 			}
 			var visibleFiles = rootDirectory.GetFiles("*.flex").Select(f => f)
-                    .Where(f => (f.Attributes & FileAttributes.Hidden) == 0);
+										.Where(f => (f.Attributes & FileAttributes.Hidden) == 0);
 			foreach (var file in visibleFiles)
 			{
 				if (file.IsAccessible())
@@ -163,10 +167,15 @@ namespace Material.Controls.FileManager
 			IsCurrentDirectoryFavorited = isfound;
 			HasParentDirectory = (ActiveDirectory.Parent != null && ActiveDirectory.Parent.Exists);
 		}
-		
+
 		private void driveSelected(object i, RoutedSelectDriveEventArgs e)
 		{
 			ActiveDirectory = e.SelectedDrive.RootDirectory;
+		}
+
+		private void favoriteSelected(object s, RoutedFavoriteSelectedEventArgs e)
+		{
+			ActiveDirectory = e.SelectedFavorite;
 		}
 
 		private void OnDeleteRequested(object s, RoutedEventArgs e)
@@ -212,8 +221,11 @@ namespace Material.Controls.FileManager
 
 		private void addToFavorites(object s, RoutedEventArgs e)
 		{
-			FileManagerSettings.Instance.Favorites.Add(ActiveDirectory.FullName);
-			IsCurrentDirectoryFavorited = true;
+			if (FileManagerSettings.Instance.Favorites.Contains(ActiveDirectory.FullName))
+			{
+				FileManagerSettings.Instance.Favorites.Add(ActiveDirectory.FullName);
+				IsCurrentDirectoryFavorited = true;
+			}
 		}
 
 		private void favoritesClicked(object s, RoutedEventArgs e)

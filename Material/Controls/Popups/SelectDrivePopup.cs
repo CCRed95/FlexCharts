@@ -4,9 +4,11 @@ using System.IO;
 using System.Management;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Helpers.EventHelpers;
 using Material.Controls.FileManager;
+using Material.Controls.Primitives;
 using Material.IO;
 
 namespace Material.Controls.Popups
@@ -55,7 +57,7 @@ namespace Material.Controls.Popups
 
 		private void driveSelected(object i, RoutedSelectDriveEventArgs e)
 		{
-			RaiseEvent(new RoutedEventArgs(PopupRequestCloseEvent));
+			 RaiseEvent(new RoutedEventArgs(PopupRequestCloseEvent));
 		}
 
 		public override void OnApplyTemplate()

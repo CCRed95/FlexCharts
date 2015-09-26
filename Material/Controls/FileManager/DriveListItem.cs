@@ -39,12 +39,19 @@ namespace Material.Controls.FileManager
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(DriveListItem), new FrameworkPropertyMetadata(typeof(DriveListItem)));
 		}
 		#region Overriden Members
-		protected override void OnMouseUp(MouseButtonEventArgs e)
+
+		protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
 		{
-			base.OnMouseUp(e);
+			base.OnMouseLeftButtonUp(e);
 			RaiseEvent(new RoutedSelectDriveEventArgs(Drive.RequireType<LocalDriveInfo>().Drive, DriveSelectedEvent));
-			
 		}
+
+		//protected override void OnMouseUp(MouseButtonEventArgs e)
+		//{
+		//	base.OnMouseUp(e);
+		//	RaiseEvent(new RoutedSelectDriveEventArgs(Drive.RequireType<LocalDriveInfo>().Drive, DriveSelectedEvent));
+			
+		//}
 		#endregion
 		//public override void OnApplyTemplate()
 		//{

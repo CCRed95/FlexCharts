@@ -63,6 +63,7 @@
     <Compile Include="Controls\FileManager\DirectoryListItem.cs" />
     <Compile Include="Controls\FileManager\DriveBinder.cs" />
     <Compile Include="Controls\FileManager\DriveListItem.cs" />
+    <Compile Include="Controls\FileManager\FavoritesListItem.cs" />
     <Compile Include="Controls\FileManager\FileListItem.cs" />
     <Compile Include="Controls\FileManager\FileManager.cs" />
     <Compile Include="Controls\FileManager\DirectoryCollection.cs" />
@@ -156,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.ErrorPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.FavoritesListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

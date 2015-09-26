@@ -3,4 +3,6 @@
                     xmlns:converters="clr-namespace:Material.Converters">
 	<converters:LuminosityToBrushConverter x:Key="l2bc"/>
 	<converters:LargestValueConverter x:Key="lvc"/>
+	<converters:ConditionalVisibilityConverter x:Key="cvc"/>
+	<converters:RootTrimConverter x:Key="rtc"/>
 </ResourceDictionary>

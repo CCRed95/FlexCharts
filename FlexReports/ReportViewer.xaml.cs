@@ -138,7 +138,6 @@ namespace FlexReports
 		{
 			var tab = e.OriginalSource.RequireType<TabSelectorItem>().DocumentTab;
 			documentViewport.Document.FocusTab(tab);
-			//tab.RequestViewTab();
 		}
 	}
 }

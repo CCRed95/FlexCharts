@@ -3,85 +3,85 @@
                     xmlns:fileManager="clr-namespace:Material.Controls.FileManager"
                     xmlns:primitives="clr-namespace:Material.Controls.Primitives"
                     xmlns:converters="clr-namespace:Material.Converters"
-                    xmlns:io="clr-namespace:System.IO;assembly=mscorlib">
-  <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="Material.Converters.xaml"/>
-    <ResourceDictionary Source="Material.Palette.xaml"/>
-    <ResourceDictionary Source="Material.Drawables.xaml"/>
-    <ResourceDictionary Source="Material.Fonts.xaml"/>
-    <ResourceDictionary Source="Material.Button.xaml"/>
-  </ResourceDictionary.MergedDictionaries>
-  <converters:ConditionalVisibilityConverter x:Key="cvc"/>
-  <converters:RootTrimConverter x:Key="rtc"/>
-  <Style TargetType="fileManager:DriveListItem">
-    <Setter Property="Height" Value="50"/>
-    <Setter Property="Background" Value="{StaticResource mtGrey100}"/>
-    <Setter Property="BorderBrush" Value="{StaticResource mtGrey500}"/>
-    <Setter Property="BorderThickness" Value="0 0 0 1"/>
-    <Setter Property="ToolTip" Value="{Binding Drive.Name, RelativeSource={RelativeSource Self}}"/>
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type fileManager:DriveListItem}">
-          <Border Background="{TemplateBinding Background}"
+                    xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
+                    xmlns:controls="clr-namespace:Material.Controls">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Material.Converters.xaml"/>
+		<ResourceDictionary Source="Material.Palette.xaml"/>
+		<ResourceDictionary Source="Material.Drawables.xaml"/>
+		<ResourceDictionary Source="Material.Fonts.xaml"/>
+		<ResourceDictionary Source="Material.Button.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	
+	<Style TargetType="fileManager:DriveListItem">
+		<Setter Property="Height" Value="50"/>
+		<Setter Property="Background" Value="{StaticResource mtGrey100}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource mtGrey500}"/>
+		<Setter Property="BorderThickness" Value="0 0 0 1"/>
+		<Setter Property="ToolTip" Value="{Binding Drive.Name, RelativeSource={RelativeSource Self}}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type fileManager:DriveListItem}">
+					<Border Background="{TemplateBinding Background}"
                  BorderBrush="{TemplateBinding BorderBrush}"
                  BorderThickness="{TemplateBinding BorderThickness}">
-            <Grid>
-              <Grid>
-                <Border x:Name="active" Opacity="0" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P050}"/>
-                <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
-                  <Grid Width="{TemplateBinding ActualHeight }"> 
-                    <Viewbox x:Name="cdromicon" Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
+						<Grid>
+							<Grid>
+								<Border x:Name="active" Opacity="0" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P050, RelativeSource={RelativeSource AncestorType=controls:MaterialShell, Mode=FindAncestor}}"/>
+								<StackPanel Orientation="Horizontal" Margin="0 0 10 0">
+									<Grid Width="{TemplateBinding ActualHeight }">
+										<Viewbox x:Name="cdromicon" Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
 									 	 Converter={StaticResource cvc}, ConverterParameter={x:Static io:DriveType.CDRom}}">
-                      <Path Style="{StaticResource drawablealbum}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
-                    </Viewbox>
-                    <Viewbox x:Name="fixeddiskicon" Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
+											<Path Style="{StaticResource drawablealbum}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700, RelativeSource={RelativeSource AncestorType=controls:MaterialShell, Mode=FindAncestor}}"/>
+										</Viewbox>
+										<Viewbox x:Name="fixeddiskicon" Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
 									 	 Converter={StaticResource cvc}, ConverterParameter={x:Static io:DriveType.Fixed}}">
-                      <Path Style="{StaticResource drawableharddisk}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
-                    </Viewbox>
-                    <Viewbox x:Name="networkdriveicon"  Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
+											<Path Style="{StaticResource drawableharddisk}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700, RelativeSource={RelativeSource AncestorType=controls:MaterialShell, Mode=FindAncestor}}"/>
+										</Viewbox>
+										<Viewbox x:Name="networkdriveicon"  Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
 									 	 Converter={StaticResource cvc}, ConverterParameter={x:Static io:DriveType.Network}}">
-                      <Path Style="{StaticResource drawableserver_network}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
-                    </Viewbox>
-                    <Viewbox x:Name="norootdirectoryicon"  Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
+											<Path Style="{StaticResource drawableserver_network}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700, RelativeSource={RelativeSource AncestorType=controls:MaterialShell, Mode=FindAncestor}}"/>
+										</Viewbox>
+										<Viewbox x:Name="norootdirectoryicon"  Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
 									 	 Converter={StaticResource cvc}, ConverterParameter={x:Static io:DriveType.NoRootDirectory}}">
-                      <Path Style="{StaticResource drawableserver_network}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
-                    </Viewbox>
-                    <Viewbox x:Name="ramicon" Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
+											<Path Style="{StaticResource drawableserver_network}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700, RelativeSource={RelativeSource AncestorType=controls:MaterialShell, Mode=FindAncestor}}"/>
+										</Viewbox>
+										<Viewbox x:Name="ramicon" Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
 									 	 Converter={StaticResource cvc}, ConverterParameter={x:Static io:DriveType.Ram}}">
-                      <Path Style="{StaticResource drawabledatabase}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
-                    </Viewbox>
-                    <Viewbox x:Name="removabledriveicon"  Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
+											<Path Style="{StaticResource drawabledatabase}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700, RelativeSource={RelativeSource AncestorType=controls:MaterialShell, Mode=FindAncestor}}"/>
+										</Viewbox>
+										<Viewbox x:Name="removabledriveicon"  Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
 									 	 Converter={StaticResource cvc}, ConverterParameter={x:Static io:DriveType.Removable}}">
-                      <Path Style="{StaticResource drawableusb}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
-                    </Viewbox>
-                    <Viewbox x:Name="unknownicon"  Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
+											<Path Style="{StaticResource drawableusb}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700, RelativeSource={RelativeSource AncestorType=controls:MaterialShell, Mode=FindAncestor}}"/>
+										</Viewbox>
+										<Viewbox x:Name="unknownicon"  Visibility="{Binding Drive.Drive.DriveType, RelativeSource={RelativeSource TemplatedParent},
 									 	 Converter={StaticResource cvc}, ConverterParameter={x:Static io:DriveType.Unknown}}">
-                      <Path Style="{StaticResource drawablequestion}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700}"/>
-                    </Viewbox>
-                  </Grid>
-                  <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Content="{Binding Drive.Name, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey800}" 
+											<Path Style="{StaticResource drawablequestion}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P700, RelativeSource={RelativeSource AncestorType=controls:MaterialShell, Mode=FindAncestor}}"/>
+										</Viewbox>
+									</Grid>
+									<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+										<Label Content="{Binding Drive.Name, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey800}" 
 										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-                    <Label Foreground="{StaticResource mtGrey600}" 
+										<Label Foreground="{StaticResource mtGrey600}" 
 													 FontStyle="Italic" FontWeight="Light" Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left" Margin="10 0">
-                      <MultiBinding Converter="{StaticResource rtc}" ConverterParameter="150">
-                        <Binding Path="Drive.ProviderName" RelativeSource="{RelativeSource TemplatedParent}"/>
-                        <Binding Path="." RelativeSource="{RelativeSource Self}"/>
-                        <Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
-                      </MultiBinding>
-                    </Label>
-                  </StackPanel>
-                </StackPanel>
-              </Grid>
-            </Grid>
-          </Border>
-          <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-              <Setter Property="Opacity" Value="1" TargetName="active"/>
-            </Trigger>
-          </ControlTemplate.Triggers>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
+											<MultiBinding Converter="{StaticResource rtc}" ConverterParameter="150">
+												<Binding Path="Drive.ProviderName" RelativeSource="{RelativeSource TemplatedParent}"/>
+												<Binding Path="." RelativeSource="{RelativeSource Self}"/>
+												<Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+											</MultiBinding>
+										</Label>
+									</StackPanel>
+								</StackPanel>
+							</Grid>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Opacity" Value="1" TargetName="active"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

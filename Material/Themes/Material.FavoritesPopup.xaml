@@ -11,9 +11,10 @@
     <ResourceDictionary Source="Material.ScrollViewer.xaml"/>
   </ResourceDictionary.MergedDictionaries>
 	<Style TargetType="popups:FavoritesPopup">
-		<Setter Property="Effect" Value="{StaticResource shadowDelta4}"/>
-    <Setter Property="Width" Value="290"/>
-    <Setter Property="Height" Value="330"/>
+<Setter Property="Effect" Value="{StaticResource shadowDelta4}"/>
+    <Setter Property="MaxWidth" Value="420"/>
+    <Setter Property="MaxHeight" Value="520"/>
+		<Setter Property="Margin" Value="40 80"/>
     <Setter Property="Background" Value="{StaticResource mtGrey50}"/>
     <Setter Property="Template">
       <Setter.Value>
@@ -34,7 +35,7 @@
                 <ItemsControl ItemsSource="{TemplateBinding Favorites}">
                   <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                      <fileManager:DirectoryListItem FileSystemItem="{Binding Value}"/>
+                      <fileManager:FavoritesListItem Directory="{Binding Value}"/>
                     </DataTemplate>
                   </ItemsControl.ItemTemplate>
                 </ItemsControl>
