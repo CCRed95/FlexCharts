@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -26,6 +27,14 @@ namespace Material.Controls.FileManager
 
 		public static readonly DependencyPropertyKey IsCurrentDirectoryFavoritedPropertyKey = DP.RegisterReadOnly(new Meta<FileManager, bool>());
 		public static readonly DependencyProperty IsCurrentDirectoryFavoritedProperty = IsCurrentDirectoryFavoritedPropertyKey.DependencyProperty;
+
+		public static readonly DependencyPropertyKey HasParentDirectoryPropertyKey = DP.RegisterReadOnly(new Meta<FileManager, bool>());
+		public static readonly DependencyProperty HasParentDirectoryProperty = HasParentDirectoryPropertyKey.DependencyProperty;
+		public bool HasParentDirectory
+		{
+			get { return (bool) GetValue(HasParentDirectoryProperty); }
+			protected set { SetValue(HasParentDirectoryPropertyKey, value); }
+		}
 
 		public DirectoryInfo ActiveDirectory
 		{
@@ -87,9 +96,11 @@ namespace Material.Controls.FileManager
 		public FileManager()
 		{
 			FileList = new ObservableCollection<AbstractFileManagerListItem>();
-			EventManager.RegisterClassHandler(typeof(FileManager), AbstractFileManagerListItem.SelectedEvent, new RoutedEventHandler(OnFileItemSelected));
-			EventManager.RegisterClassHandler(typeof(FileManager), AbstractFileManagerListItem.DeleteFileEvent, new RoutedEventHandler(OnDeleteRequested));
+			EventManager.RegisterClassHandler(typeof(FileManager), AbstractFileSystemListItem.SelectedEvent, new RoutedEventHandler(OnFileItemSelected));
+			EventManager.RegisterClassHandler(typeof(FileManager), AbstractFileSystemListItem.DeleteFileEvent, new RoutedEventHandler(OnDeleteRequested));
 			EventManager.RegisterClassHandler(typeof(FileManager), ConfirmDeleteFilePopup.DeleteFileConfirmedEvent, new RoutedConfirmDeleteEventHandler(OnDeleteConfirmed));
+			EventManager.RegisterClassHandler(typeof(FileManager), DriveListItem.DriveSelectedEvent, new RoutedSelectDriveEventHandler(driveSelected));
+			Loaded += (s, e) => refresh();
 		}
 		#endregion
 
@@ -110,7 +121,7 @@ namespace Material.Controls.FileManager
 			PART_refresh.Click += refreshClicked;
 			PART_selectdisk.Click += selectdiskClicked;
 			PART_favoritetoggle.Checked += addToFavorites;
-			PART_favoritetoggle.Unchecked += removeToFavorites;
+			PART_favoritetoggle.Unchecked += removeFromFavorites;
 		}
 		#endregion
 
@@ -123,15 +134,18 @@ namespace Material.Controls.FileManager
 				rootDirectory.Create();
 
 			FileList.Clear();
-
-			foreach (var directory in rootDirectory.GetDirectories())
+			var nonHiddenDirectories = rootDirectory.GetDirectories().Select(f => f)
+                    .Where(f => (f.Attributes & FileAttributes.Hidden) == 0);
+			foreach (var directory in nonHiddenDirectories)
 			{
 				if (directory.IsAccessible())
 				{
 					FileList.Add(new DirectoryListItem { FileSystemItem = directory });
 				}
 			}
-			foreach (var file in rootDirectory.GetFiles("*.flex"))
+			var visibleFiles = rootDirectory.GetFiles("*.flex").Select(f => f)
+                    .Where(f => (f.Attributes & FileAttributes.Hidden) == 0);
+			foreach (var file in visibleFiles)
 			{
 				if (file.IsAccessible())
 				{
@@ -147,6 +161,12 @@ namespace Material.Controls.FileManager
 				}
 			}
 			IsCurrentDirectoryFavorited = isfound;
+			HasParentDirectory = (ActiveDirectory.Parent != null && ActiveDirectory.Parent.Exists);
+		}
+		
+		private void driveSelected(object i, RoutedSelectDriveEventArgs e)
+		{
+			ActiveDirectory = e.SelectedDrive.RootDirectory;
 		}
 
 		private void OnDeleteRequested(object s, RoutedEventArgs e)
@@ -184,7 +204,7 @@ namespace Material.Controls.FileManager
 			}
 		}
 
-		private void removeToFavorites(object s, RoutedEventArgs e)
+		private void removeFromFavorites(object s, RoutedEventArgs e)
 		{
 			FileManagerSettings.Instance.Favorites.Remove(ActiveDirectory.FullName);
 			IsCurrentDirectoryFavorited = false;
@@ -203,7 +223,7 @@ namespace Material.Controls.FileManager
 
 		private void selectdiskClicked(object s, RoutedEventArgs e)
 		{
-			PART_popupmanager.Content = new MessagePopup { Title = "select drive" };
+			PART_popupmanager.Content = new SelectDrivePopup();
 		}
 
 		private void refreshClicked(object s, RoutedEventArgs e)

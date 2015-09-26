@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace Material.Controls.FileManager
 {
-	public class FileListItem : AbstractFileManagerListItem<FileInfo>
+	public class FileListItem : AbstractFileSystemListItem<FileInfo>
 	{
 		private Button PART_delete;
 

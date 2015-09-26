@@ -20,17 +20,22 @@ namespace Material.Converters
 
 			var targetControl = values[1].RequireType<Control>();
 			var relativeControl = values[2].RequireType<Control>();
-			if (!targetControl.IsLoaded)
-			{
-				targetControl.Loaded += (s, e) =>
-				{
-					//targetControl.Width = (double)Convert(values, targetType, parameter, culture);
-				};
-			}
+			var fallbackWidth = System.Convert.ToDouble(parameter);
+			
 			var ellipse = "...";
 			var ellipseSize = RenderingExtensions.EstimateLabelRenderSize(targetControl.FontFamily, targetControl.FontSize, ellipse);
 
 			var targetWidth = relativeControl.ActualWidth - ellipseSize.Width - 10;
+			if (!targetControl.IsLoaded || targetWidth < 1)
+			{
+				targetWidth = fallbackWidth;
+				//targetControl.MouseDown += (s, e) =>
+				//{
+				//	s.RequireType<ContentControl>().GetBindingExpression(ContentControl.ContentProperty)?.UpdateTarget();
+				//	//targetControl.Width = (double)Convert(values, targetType, parameter, culture);
+				//};
+			}
+
 			var renderSize = RenderingExtensions.EstimateLabelRenderSize(targetControl.FontFamily, targetControl.FontSize, renderstr);
 			if (renderSize.Width > targetWidth)
 			{

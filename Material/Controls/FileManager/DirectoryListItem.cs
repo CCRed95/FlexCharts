@@ -6,7 +6,7 @@ using FlexCharts.Helpers.EventHelpers;
 
 namespace Material.Controls.FileManager
 {
-	public class DirectoryListItem : AbstractFileManagerListItem<DirectoryInfo>
+	public class DirectoryListItem : AbstractFileSystemListItem<DirectoryInfo>
 	{
 		private Button PART_delete;
 

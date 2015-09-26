@@ -4,15 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:Material.Converters;assembly=Material"
-        xmlns:data="clr-namespace:FlexReports.Data"
-				
         mc:Ignorable="d"
 				VisualFeedback.ClickFeedback="P300"									
-        Title="Report Viewer" Height="600" Width="1000"><!--ThemePrimitive.Theme="{Binding Source={x:Static data:AppSettings.Instance}, Path=Theme}"-->
-	<MaterialShell.Resources>
-		<!--<converters:FlexDocumentTabSelectorAdapter x:Key="fdtsa"/>-->
-	</MaterialShell.Resources>
-	<Grid>
+        Title="Report Viewer" Height="600" Width="1000" MinHeight="500" MinWidth="800">
+  <Grid>
 		<DockPanel>
 			<DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" 
 									Width="64">

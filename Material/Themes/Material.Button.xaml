@@ -2,188 +2,214 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:primitives="clr-namespace:Material.Controls.Primitives"
                     xmlns:converters="clr-namespace:Material.Converters">
-	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="Material.Converters.xaml"/>
-		<ResourceDictionary Source="Material.Fonts.xaml"/>
-		<ResourceDictionary Source="Material.Palette.xaml"/>
-		<ResourceDictionary Source="Material.DefinedBrushes.xaml"/>
-	</ResourceDictionary.MergedDictionaries>
-	<Style x:Key="MaterialButton" TargetType="{x:Type Button}" BasedOn="{StaticResource t14pButton}">
-		<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="BorderThickness" Value="0" />
-		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
-		<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-		<Setter Property="Padding" Value="10 5"/>
-		<Setter Property="primitives:VisualFeedback.ClickFeedback" Value="P050"/>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type Button}">
-					<Border Background="{TemplateBinding Background}"
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="Material.Converters.xaml"/>
+    <ResourceDictionary Source="Material.Fonts.xaml"/>
+    <ResourceDictionary Source="Material.Palette.xaml"/>
+    <ResourceDictionary Source="Material.DefinedBrushes.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+  <Style x:Key="MaterialButton" TargetType="{x:Type Button}" BasedOn="{StaticResource t14pButton}">
+    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Padding" Value="10 5"/>
+    <Setter Property="primitives:VisualFeedback.ClickFeedback" Value="P050"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Background="{TemplateBinding Background}"
 									BorderBrush="{TemplateBinding BorderBrush}"
 									BorderThickness="{TemplateBinding BorderThickness}">
-						<Grid ClipToBounds="True"  >
-							<Grid>
-								<Ellipse Name="clickWave" RenderTransformOrigin=".5,.5"
+            <Grid ClipToBounds="True"  >
+              <Grid>
+                <Ellipse Name="clickWave" RenderTransformOrigin=".5,.5"
 												 VerticalAlignment="Center" HorizontalAlignment="Center">
-									<Ellipse.Fill>
-										<MultiBinding Converter="{StaticResource l2bc}">
-											<Binding Path="(primitives:ThemePrimitive.Theme)"/>
-											<Binding Path="(primitives:VisualFeedback.ClickFeedback)"/>
-										</MultiBinding>
-									</Ellipse.Fill>
-									<Ellipse.Width>
-										<MultiBinding Converter="{StaticResource lvc}">
-											<Binding Path="ActualWidth"/>
-											<Binding Path="ActualHeight"/>
-										</MultiBinding>
-									</Ellipse.Width>
-									<Ellipse.Height>
-										<MultiBinding Converter="{StaticResource lvc}">
-											<Binding Path="ActualWidth"/>
-											<Binding Path="ActualHeight"/>
-										</MultiBinding>
-									</Ellipse.Height>
-									<Ellipse.RenderTransform>
-										<ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
-									</Ellipse.RenderTransform>
-								</Ellipse>
-							</Grid>
+                  <Ellipse.Fill>
+                    <MultiBinding Converter="{StaticResource l2bc}">
+                      <Binding Path="(primitives:ThemePrimitive.Theme)"/>
+                      <Binding Path="(primitives:VisualFeedback.ClickFeedback)"/>
+                    </MultiBinding>
+                  </Ellipse.Fill>
+                  <Ellipse.Width>
+                    <MultiBinding Converter="{StaticResource lvc}">
+                      <Binding Path="ActualWidth"/>
+                      <Binding Path="ActualHeight"/>
+                    </MultiBinding>
+                  </Ellipse.Width>
+                  <Ellipse.Height>
+                    <MultiBinding Converter="{StaticResource lvc}">
+                      <Binding Path="ActualWidth"/>
+                      <Binding Path="ActualHeight"/>
+                    </MultiBinding>
+                  </Ellipse.Height>
+                  <Ellipse.RenderTransform>
+                    <ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
+                  </Ellipse.RenderTransform>
+                </Ellipse>
+              </Grid>
 
-							<ContentPresenter HorizontalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+              <ContentPresenter HorizontalAlignment="Center" Margin="{TemplateBinding Padding}"/>
 
-						</Grid>
-					</Border>
+            </Grid>
+          </Border>
 
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Setter Property="Foreground" Value="{Binding Path=(primitives:ThemePrimitive.Theme).P600}"/>
-						</Trigger>
-						<Trigger Property="IsEnabled" Value="False">
-							<Setter Property="Foreground" Value="{StaticResource mtGrey400}"/>
-						</Trigger>
-						<EventTrigger RoutedEvent="Click">
-							<EventTrigger.Actions>
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleX" 
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Foreground" Value="{Binding Path=(primitives:ThemePrimitive.Theme).P600}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Foreground" Value="{StaticResource mtGrey400}"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="Click">
+              <EventTrigger.Actions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleX" 
 																		 From="0" To="2.5" Duration="0:0:.3" />
 
-										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleY" 
+                    <DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleY" 
 																		 From="0" To="2.5" Duration="0:0:.3" />
 
-										<DoubleAnimation Storyboard.TargetName="clickWave" Storyboard.TargetProperty="Opacity" 
+                    <DoubleAnimation Storyboard.TargetName="clickWave" Storyboard.TargetProperty="Opacity" 
 																		 From="1" To="0" Duration="0:0:.3" />
-									</Storyboard>
-								</BeginStoryboard>
-							</EventTrigger.Actions>
-						</EventTrigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-	<Style x:Key="PathButton" TargetType="{x:Type Button}">
-		<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
-		<Setter Property="BorderThickness" Value="1"/>
-		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
-		<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-		<Setter Property="Padding" Value="1"/>
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type Button}">
-					<Border Background="{TemplateBinding Property=Background}">
-						<Grid ClipToBounds="True">
-							<Grid>
-								<Ellipse Name="clickWave" RenderTransformOrigin=".5,.5"
+                  </Storyboard>
+                </BeginStoryboard>
+              </EventTrigger.Actions>
+            </EventTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="PathButton" TargetType="{x:Type Button}">
+    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Padding" Value="1"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Background="{TemplateBinding Property=Background}">
+            <Grid ClipToBounds="True">
+              <Grid>
+                <Ellipse Name="clickWave" RenderTransformOrigin=".5,.5"
 												 VerticalAlignment="Center" HorizontalAlignment="Center">
-									<Ellipse.Fill>
-										<MultiBinding Converter="{StaticResource l2bc}">
-											<Binding Path="(primitives:ThemePrimitive.Theme)"/>
-											<Binding Path="(primitives:VisualFeedback.ClickFeedback)"/>
-										</MultiBinding>
-									</Ellipse.Fill>
-									<Ellipse.Width>
-										<MultiBinding Converter="{StaticResource lvc}">
-											<Binding Path="ActualWidth"/>
-											<Binding Path="ActualHeight"/>
-										</MultiBinding>
-									</Ellipse.Width>
-									<Ellipse.Height>
-										<MultiBinding Converter="{StaticResource lvc}">
-											<Binding Path="ActualWidth"/>
-											<Binding Path="ActualHeight"/>
-										</MultiBinding>
-									</Ellipse.Height>
-									<Ellipse.RenderTransform>
-										<ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
-									</Ellipse.RenderTransform>
-								</Ellipse>
-							</Grid>
+                  <Ellipse.Fill>
+                    <MultiBinding Converter="{StaticResource l2bc}">
+                      <Binding Path="(primitives:ThemePrimitive.Theme)"/>
+                      <Binding Path="(primitives:VisualFeedback.ClickFeedback)"/>
+                    </MultiBinding>
+                  </Ellipse.Fill>
+                  <Ellipse.Width>
+                    <MultiBinding Converter="{StaticResource lvc}">
+                      <Binding Path="ActualWidth"/>
+                      <Binding Path="ActualHeight"/>
+                    </MultiBinding>
+                  </Ellipse.Width>
+                  <Ellipse.Height>
+                    <MultiBinding Converter="{StaticResource lvc}">
+                      <Binding Path="ActualWidth"/>
+                      <Binding Path="ActualHeight"/>
+                    </MultiBinding>
+                  </Ellipse.Height>
+                  <Ellipse.RenderTransform>
+                    <ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
+                  </Ellipse.RenderTransform>
+                </Ellipse>
+              </Grid>
 
-							<Viewbox>
-								<ContentPresenter Name="icon" RenderTransformOrigin=".5,.5">
-									<ContentPresenter.RenderTransform>
-										<ScaleTransform x:Name="iconScale" ScaleX="1" ScaleY="1"/>
-									</ContentPresenter.RenderTransform>
-								</ContentPresenter>
-							</Viewbox>
+              <Viewbox>
+                <ContentPresenter Name="icon" RenderTransformOrigin=".5,.5">
+                  <ContentPresenter.RenderTransform>
+                    <ScaleTransform x:Name="iconScale" ScaleX="1" ScaleY="1"/>
+                  </ContentPresenter.RenderTransform>
+                </ContentPresenter>
+              </Viewbox>
 
-						</Grid>
-					</Border>
 
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Trigger.EnterActions>
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="iconScale" Storyboard.TargetProperty="ScaleX" 
+            </Grid>
+          </Border>
+
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Trigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="iconScale" Storyboard.TargetProperty="ScaleX" 
 																		 To="1.15" Duration="0:0:.15" />
 
-										<DoubleAnimation Storyboard.TargetName="iconScale" Storyboard.TargetProperty="ScaleY" 
+                    <DoubleAnimation Storyboard.TargetName="iconScale" Storyboard.TargetProperty="ScaleY" 
 																		 To="1.15" Duration="0:0:.15" />
-									</Storyboard>
-								</BeginStoryboard>
-							</Trigger.EnterActions>
-							<Trigger.ExitActions>
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="iconScale" Storyboard.TargetProperty="ScaleX" 
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.EnterActions>
+              <Trigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="iconScale" Storyboard.TargetProperty="ScaleX" 
 																		 To="1" Duration="0:0:.15" />
 
-										<DoubleAnimation Storyboard.TargetName="iconScale" Storyboard.TargetProperty="ScaleY" 
+                    <DoubleAnimation Storyboard.TargetName="iconScale" Storyboard.TargetProperty="ScaleY" 
 																		 To="1" Duration="0:0:.15" />
-									</Storyboard>
-								</BeginStoryboard>
-							</Trigger.ExitActions>
-						</Trigger>
-						<EventTrigger RoutedEvent="Click">
-							<EventTrigger.Actions>
-								<BeginStoryboard>
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleX" 
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+
+              <Trigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="icon" Storyboard.TargetProperty="Opacity" 
+																		 To="1" Duration="0:0:.15" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.EnterActions>
+              <Trigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="icon" Storyboard.TargetProperty="Opacity" 
+																		 To=".4" Duration="0:0:.15" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="IsHitTestVisible" Value="False"/>
+							<Setter TargetName="icon"  Property="Opacity" Value=".4"/>
+							
+            </Trigger>
+
+            <EventTrigger RoutedEvent="Click">
+              <EventTrigger.Actions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleX" 
 																		 From="0" To="2.5" Duration="0:0:.3" />
 
-										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleY" 
+                    <DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleY" 
 																		 From="0" To="2.5" Duration="0:0:.3" />
 
-										<DoubleAnimation Storyboard.TargetName="clickWave" Storyboard.TargetProperty="Opacity" 
+                    <DoubleAnimation Storyboard.TargetName="clickWave" Storyboard.TargetProperty="Opacity" 
 																		 From="1" To="0" Duration="0:0:.3" />
-									</Storyboard>
-								</BeginStoryboard>
-							</EventTrigger.Actions>
-						</EventTrigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-	<Style x:Key="PathButtonDarkSurface" TargetType="{x:Type Button}" BasedOn="{StaticResource PathButton}">
-		<Setter Property="primitives:VisualFeedback.ClickFeedback" Value="P600"/>
-		<Setter Property="primitives:ThemePrimitive.Theme" Value="{StaticResource Grey}"/>
-	</Style>
+                  </Storyboard>
+                </BeginStoryboard>
+              </EventTrigger.Actions>
+            </EventTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="PathButtonDarkSurface" TargetType="{x:Type Button}" BasedOn="{StaticResource PathButton}">
+    <Setter Property="primitives:VisualFeedback.ClickFeedback" Value="P600"/>
+    <Setter Property="primitives:ThemePrimitive.Theme" Value="{StaticResource Grey}"/>
+  </Style>
 
 </ResourceDictionary>

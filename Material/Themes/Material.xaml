@@ -27,5 +27,7 @@
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.FavoritesPopup.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Checkbox.xaml"/>
 		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ConfirmDeleteFilePopup.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.SelectDrive.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.DriveListItem.xaml"/>
   </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

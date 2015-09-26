@@ -15,18 +15,18 @@ namespace Material.Controls.Popups
 	public class RoutedConfirmDeleteEventArgs : RoutedEventArgs
 	{
 		public bool DontAskAgain { get; }
-		public AbstractFileManagerListItem FileListItem { get; }
-		public RoutedConfirmDeleteEventArgs(bool dontAskAgain, AbstractFileManagerListItem fileListItem)
+		public AbstractFileSystemListItem FileListItem { get; }
+		public RoutedConfirmDeleteEventArgs(bool dontAskAgain, AbstractFileSystemListItem fileListItem)
 		{
 			DontAskAgain = dontAskAgain;
 			FileListItem = fileListItem;
 		}
-		public RoutedConfirmDeleteEventArgs(bool dontAskAgain, AbstractFileManagerListItem fileListItem, RoutedEvent routedEvent) : base(routedEvent)
+		public RoutedConfirmDeleteEventArgs(bool dontAskAgain, AbstractFileSystemListItem fileListItem, RoutedEvent routedEvent) : base(routedEvent)
 		{
 			DontAskAgain = dontAskAgain;
 			FileListItem = fileListItem;
 		}
-		public RoutedConfirmDeleteEventArgs(bool dontAskAgain, AbstractFileManagerListItem fileListItem, RoutedEvent routedEvent, object source) : base(routedEvent, source)
+		public RoutedConfirmDeleteEventArgs(bool dontAskAgain, AbstractFileSystemListItem fileListItem, RoutedEvent routedEvent, object source) : base(routedEvent, source)
 		{
 			DontAskAgain = dontAskAgain;
 			FileListItem = fileListItem;
@@ -35,10 +35,10 @@ namespace Material.Controls.Popups
 	public class ConfirmDeleteFilePopup : PopupBase
 	{
 		public static readonly DependencyProperty FileListItemProperty = DP.Register(
-			new Meta<ConfirmDeleteFilePopup, AbstractFileManagerListItem>());
-		public AbstractFileManagerListItem FileListItem
+			new Meta<ConfirmDeleteFilePopup, AbstractFileSystemListItem>());
+		public AbstractFileSystemListItem FileListItem
 		{
-			get { return (AbstractFileManagerListItem)GetValue(FileListItemProperty); }
+			get { return (AbstractFileSystemListItem)GetValue(FileListItemProperty); }
 			set { SetValue(FileListItemProperty, value); }
 		}
 
@@ -59,7 +59,7 @@ namespace Material.Controls.Popups
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(ConfirmDeleteFilePopup), new FrameworkPropertyMetadata(typeof(ConfirmDeleteFilePopup)));
 		}
 
-		public ConfirmDeleteFilePopup(AbstractFileManagerListItem fileListItem)
+		public ConfirmDeleteFilePopup(AbstractFileSystemListItem fileListItem)
 		{
 			FileListItem = fileListItem;
 		}

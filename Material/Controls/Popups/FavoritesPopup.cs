@@ -8,6 +8,7 @@ using Material.Controls.FileManager;
 
 namespace Material.Controls.Popups
 {
+	//TODO needs cusotm listitempresenter control!! dont use directorylistitem
 	public class FavoritesPopup : PopupBase
 	{
 		public static readonly DependencyProperty FavoritesProperty = DP.Register(

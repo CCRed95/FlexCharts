@@ -12,6 +12,7 @@ using Material.Controls.FileManager;
 using Material.Controls.Popups;
 using Material.Controls.Primitives;
 using Material.Controls.TabSelector;
+using Material.IO;
 using Material.Static;
 
 namespace FlexReports
@@ -37,8 +38,8 @@ namespace FlexReports
 			{
 				AppSettings.Instance.Theme = "Cyan";
 			}
-
 		}
+
 
 		private void onSizeChanged(object s, SizeChangedEventArgs e)
 		{

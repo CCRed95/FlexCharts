@@ -40,6 +40,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,16 +58,21 @@
     <Compile Include="AccentedMaterialSet.cs" />
     <Compile Include="Controls\Card.cs" />
     <Compile Include="Controls\FileManager\AbstractFileManagerListItem.cs" />
+    <Compile Include="Controls\FileManager\AbstractFileSystemListItem.cs" />
     <Compile Include="Controls\FileManager\DirectoryBinder.cs" />
     <Compile Include="Controls\FileManager\DirectoryListItem.cs" />
+    <Compile Include="Controls\FileManager\DriveBinder.cs" />
+    <Compile Include="Controls\FileManager\DriveListItem.cs" />
     <Compile Include="Controls\FileManager\FileListItem.cs" />
     <Compile Include="Controls\FileManager\FileManager.cs" />
     <Compile Include="Controls\FileManager\DirectoryCollection.cs" />
     <Compile Include="Controls\FileManager\FileManagerSettings.cs" />
     <Compile Include="Controls\FlexDocumentViewport.cs" />
     <Compile Include="Controls\Icon.cs" />
+    <Compile Include="Controls\Popups\Ambient\AmbientPopupManager.cs" />
     <Compile Include="Controls\Popups\ConfirmDeleteFilePopup.cs" />
     <Compile Include="Controls\Popups\FavoritesPopup.cs" />
+    <Compile Include="Controls\Popups\SelectDrivePopup.cs" />
     <Compile Include="Controls\ScannerIO\HIDBarcodeScannerInput.cs" />
     <Compile Include="Controls\MaterialDimmer.cs" />
     <Compile Include="Controls\MaterialShell.cs" />
@@ -85,10 +91,15 @@
     <Compile Include="Controls\TabSelector\TabSelector.cs" />
     <Compile Include="Controls\TabSelector\TabSelectorItem.cs" />
     <Compile Include="Converters\BrushToRadialGradientBrushConverter.cs" />
+    <Compile Include="Converters\ConditionalVisibilityConverter.cs" />
     <Compile Include="Converters\FlexDocumentTabSelectorAdapter.cs" />
     <Compile Include="Converters\LargestValueConverter.cs" />
     <Compile Include="Converters\LuminosityToRadialBrushConverter.cs" />
     <Compile Include="Converters\RootTrimConverter.cs" />
+    <Compile Include="IO\IWMIDriveInfo.cs" />
+    <Compile Include="IO\LocalDriveInfo.cs" />
+    <Compile Include="IO\NetworkDriveInfo.cs" />
+    <Compile Include="IO\WMIDriveInfo.cs" />
     <Compile Include="Static\Palette.cs" />
     <Compile Include="Static\RecommendedThemeSet.cs" />
     <Compile Include="Static\ResourceProvider.cs" />
@@ -137,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.Drawables.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.DriveListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -189,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.ScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.SelectDrive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

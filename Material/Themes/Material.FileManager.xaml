@@ -24,10 +24,11 @@
             <StackPanel Orientation="Horizontal" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P700}">
               <Label Style="{StaticResource t12pCaption}" FontSize="11pt" FontWeight="Light">
                 <Label.Content>
-                  <MultiBinding Converter="{StaticResource rtc}">
+                  <MultiBinding Converter="{StaticResource rtc}" ConverterParameter="300">
                     <Binding Path="ActiveDirectory.FullName" RelativeSource="{RelativeSource TemplatedParent}"/>
                     <Binding Path="." RelativeSource="{RelativeSource Self}"/>
                     <Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+										
                   </MultiBinding>
                 </Label.Content>
               </Label>
@@ -51,7 +52,8 @@
             </Grid>
             <controls:PopupManager Grid.Row="1"  x:Name="PART_popupmanager" IsHitTestVisible="False"/>
             <UniformGrid Grid.Row="2" Columns="5" Background="{StaticResource mtGrey900}">
-              <Button Style="{StaticResource PathButton}" Name="PART_directoryup">
+              <Button Style="{StaticResource PathButton}" Name="PART_directoryup"
+											IsEnabled="{Binding HasParentDirectory, RelativeSource={RelativeSource TemplatedParent}}">
                 <Path Style="{StaticResource drawablereply}" RenderTransformOrigin=".5,.5">
                   <Path.RenderTransform>
                     <TransformGroup>
@@ -70,7 +72,8 @@
               <Button Style="{StaticResource PathButton}" Name="PART_selectdisk">
                 <Path Style="{StaticResource drawableharddisk}"/>
               </Button>
-              <Button Style="{StaticResource PathButton}" Name="PART_refresh">
+              <Button Style="{StaticResource PathButton}" Name="PART_refresh" 
+											>
                 <Path Style="{StaticResource drawablerefresh}"/>
               </Button>
             </UniformGrid>
