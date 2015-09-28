@@ -3,6 +3,9 @@
 										xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
   <Color x:Key="MaterialDesignShadow">#AA000000</Color>
+	
+	<DropShadowEffect x:Key="shadowDelta1Light" BlurRadius="3" ShadowDepth=".7" Direction="270" Color="{StaticResource MaterialDesignShadow}" Opacity=".42" po:Freeze="True" />
+	
 	<!--Source: ButchersBoy's material design toolkit-->
   <DropShadowEffect x:Key="shadowDelta1" BlurRadius="5" ShadowDepth="1" Direction="270" Color="{StaticResource MaterialDesignShadow}" Opacity=".42" po:Freeze="True" />
   <DropShadowEffect x:Key="shadowDelta2" BlurRadius="8" ShadowDepth="1.5" Direction="270" Color="{StaticResource MaterialDesignShadow}" Opacity=".42" po:Freeze="True" />

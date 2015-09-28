@@ -8,11 +8,12 @@
 		<ResourceDictionary Source="Material.Drawables.xaml"/>
 		<ResourceDictionary Source="Material.Fonts.xaml"/>
 		<ResourceDictionary Source="Material.Button.xaml"/>
+		<ResourceDictionary Source="Material.Shadows.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 	<Style TargetType="fileManager:DirectoryListItem">
-		<Setter Property="Height" Value="60"/>
+		<Setter Property="Height" Value="40"/>
 		<Setter Property="Background" Value="{StaticResource mtGrey100}"/>
-		<Setter Property="BorderBrush" Value="{StaticResource mtGrey500}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource mtGrey300}"/>
 		<Setter Property="BorderThickness" Value="0 0 0 1"/>
 		<Setter Property="Template">
 			<Setter.Value>
@@ -25,13 +26,14 @@
 								<Border x:Name="active" Opacity="0" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P050}"/>
 								<StackPanel Orientation="Horizontal" Margin="0 0 50 0">
 									<Viewbox>
-										<Path Style="{StaticResource drawablefolder_outline}" Fill="{StaticResource mtGrey700}"/>
+										<Path Style="{StaticResource drawablefolder}" Fill="{StaticResource mtYellow700}"  Effect="{StaticResource shadowDelta1Light}" 
+													Stroke="{StaticResource mtYellow900}" StrokeThickness=".3"/>
 									</Viewbox>
 									<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-										<Label Content="{Binding FileSystemItem.Name, FallbackValue='archive folder', RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey800}" 
+										<Label Content="{Binding FileSystemItem.Name, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey900}" 
 										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-										<Label Content="{Binding Description, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
-										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
+										<!--<Label Content="{Binding Description, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
+										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>-->
 									</StackPanel>
 								</StackPanel>
 								<Button Name="menuButton"  Style="{StaticResource PathButton}" Width="50" HorizontalAlignment="Right" primitives:VisualFeedback.ClickFeedback="P200">

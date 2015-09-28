@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
@@ -103,9 +104,6 @@ namespace Material.Controls.FileManager
 			EventManager.RegisterClassHandler(typeof(FileManager), FavoritesListItem.FavoriteSelectedEvent, new RoutedFavoriteSelectedEventHandler(favoriteSelected));
 			Loaded += (s, e) => refresh();
 		}
-
-
-
 		#endregion
 
 		#region Overriden Members
@@ -180,7 +178,7 @@ namespace Material.Controls.FileManager
 
 		private void OnDeleteRequested(object s, RoutedEventArgs e)
 		{
-			var fsi = e.OriginalSource.RequireType<FileListItem>();
+			var fsi = e.OriginalSource.RequireType<AbstractFileSystemListItem>();
 			if (FileManagerSettings.Instance.ConfirmDelete)
 			{
 				PART_popupmanager.Content = new ConfirmDeleteFilePopup(fsi);
@@ -188,7 +186,7 @@ namespace Material.Controls.FileManager
 			else
 			{
 				FileList.Remove(fsi);
-				fsi.FileSystemItemBase.Delete();
+				//fsi.FileSystemItemBase.Delete();
 			}
 		}
 
@@ -196,7 +194,7 @@ namespace Material.Controls.FileManager
 		{
 			FileManagerSettings.Instance.ConfirmDelete = !e.DontAskAgain;
 			FileList.Remove(e.FileListItem);
-			e.FileListItem.FileSystemItemBase.Delete();
+			//e.FileListItem.FileSystemItemBase.Delete();
 		}
 
 		private void OnFileItemSelected(object s, RoutedEventArgs e)
@@ -221,7 +219,7 @@ namespace Material.Controls.FileManager
 
 		private void addToFavorites(object s, RoutedEventArgs e)
 		{
-			if (FileManagerSettings.Instance.Favorites.Contains(ActiveDirectory.FullName))
+			if (!FileManagerSettings.Instance.Favorites.Contains(ActiveDirectory.FullName))
 			{
 				FileManagerSettings.Instance.Favorites.Add(ActiveDirectory.FullName);
 				IsCurrentDirectoryFavorited = true;
@@ -230,7 +228,7 @@ namespace Material.Controls.FileManager
 
 		private void favoritesClicked(object s, RoutedEventArgs e)
 		{
-			PART_popupmanager.Content = new FavoritesPopup(new DirectoryCollection(FileManagerSettings.Instance.Favorites));
+			PART_popupmanager.Content = new FavoritesPopup(FileManagerSettings.Instance.Favorites.ToDirectoryBinders());
 		}
 
 		private void selectdiskClicked(object s, RoutedEventArgs e)
@@ -253,5 +251,17 @@ namespace Material.Controls.FileManager
 			ActiveDirectory = ActiveDirectory.Parent;
 		}
 		#endregion
+	}
+	public static class CollectionExtensions
+	{
+		public static IEnumerable<DirectoryBinder> ToDirectoryBinders(this IEnumerable<string> s)
+		{
+			var directories = new Collection<DirectoryBinder>();
+			foreach (var i in s)
+			{
+				directories.Add(new DirectoryBinder(new DirectoryInfo(i)));
+			}
+			return directories;
+		}
 	}
 }

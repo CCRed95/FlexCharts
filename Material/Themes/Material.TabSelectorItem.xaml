@@ -24,6 +24,7 @@
     <Setter Property="primitives:VisualFeedback.ClickFeedback" Value="P200"/>
     <Setter Property="Template">
       <Setter.Value>
+				
         <ControlTemplate TargetType="tabSelector:TabSelectorItem">
           <Border Background="{TemplateBinding Background}"
 									BorderBrush="{TemplateBinding BorderBrush}"

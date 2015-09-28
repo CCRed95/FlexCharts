@@ -7,6 +7,7 @@ using System.Windows.Media;
 using FlexCharts.Controls.Core;
 using FlexCharts.Helpers.DependencyHelpers;
 using FlexCharts.Extensions;
+using FlexCharts.Helpers.EventHelpers;
 
 namespace FlexCharts.Documents
 {
@@ -28,7 +29,13 @@ namespace FlexCharts.Documents
 			get { return (ObservableCollection<FlexDocumentTab>) GetValue(TabsProperty); }
 			set { SetValue(TabsProperty, value); }
 		}
+		public static readonly RoutedEvent DocumentTabVisualChangedEvent = EM.Register<FlexDocument, RoutedEventHandler>(EM.BUBBLE);
 
+		public event RoutedEventHandler DocumentTabVisualChanged
+		{
+			add { AddHandler(DocumentTabVisualChangedEvent, value); }
+			remove { RemoveHandler(DocumentTabVisualChangedEvent, value); }
+		}
 		static FlexDocument()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(typeof (FlexDocument), new FrameworkPropertyMetadata(typeof (FlexDocument)));
@@ -70,6 +77,7 @@ namespace FlexCharts.Documents
 
 			PART_document.Children.Clear();
 			PART_document.Children.Add(t);
+			RaiseEvent(new RoutedEventArgs(DocumentTabVisualChangedEvent, t));
 			//t.animate(OpacityProperty, 300, 1, from:0, skewms:100);
 		}
 

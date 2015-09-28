@@ -8,6 +8,7 @@ using FlexCharts.Helpers.EventHelpers;
 
 namespace Material.Controls.FileManager
 {
+	//TODO spacer item?
 	public abstract class AbstractFileManagerListItem : FlexControl
 	{
 		

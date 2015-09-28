@@ -5,6 +5,7 @@
   <system:Double x:Key="fdvcollapseEndZoom">.65</system:Double>
   <Duration x:Key="fdvtransition">0:0:.3</Duration>
 	<Style TargetType="materialControls:FlexDocumentViewport">
+		<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>
 		<Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type materialControls:FlexDocumentViewport}">
@@ -12,12 +13,12 @@
             <Viewbox  Name="PART_root" RenderTransformOrigin=".5, 0">
               <Viewbox.RenderTransform>
                 <TransformGroup>
-                  <TranslateTransform X="0" Y="{TemplateBinding VerticalScrollOffset}"/>
-                  <ScaleTransform ScaleX="{TemplateBinding ZoomOffset}" ScaleY="{TemplateBinding ZoomOffset}"/>
+                  <TranslateTransform X="0" Y="{Binding VerticalScrollOffset}"/>
+                  <ScaleTransform ScaleX="{Binding ZoomOffset}" ScaleY="{Binding ZoomOffset}"/>
                 </TransformGroup>
               </Viewbox.RenderTransform>
               <Grid>
-                <FlexContentControl Content="{TemplateBinding Document}" x:Name="fcc" Opacity="0" RenderTransformOrigin=".5,.5">
+                <FlexContentControl Content="{Binding Document}" x:Name="fcc" Opacity="0" RenderTransformOrigin=".5,.5">
                   <FlexContentControl.RenderTransform>
                     <ScaleTransform x:Name="popupScale" ScaleX="{StaticResource fdvcollapseEndZoom}" ScaleY="{StaticResource fdvcollapseEndZoom}"/>
                   </FlexContentControl.RenderTransform>

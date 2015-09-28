@@ -11,9 +11,9 @@
 		<ResourceDictionary Source="Material.Button.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 	<Style TargetType="fileManager:FileListItem">
-    <Setter Property="Height" Value="60"/>
+    <Setter Property="Height" Value="40"/>
     <Setter Property="Background" Value="{StaticResource mtGrey100}"/>
-    <Setter Property="BorderBrush" Value="{StaticResource mtGrey500}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource mtGrey300}"/>
     <Setter Property="BorderThickness" Value="0 0 0 1"/>
     <Setter Property="ToolTip" Value="{Binding FileSystemItem.FullName, RelativeSource={RelativeSource Self}}"/>
       <Setter Property="Template">
@@ -32,8 +32,8 @@
                   <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                     <Label Content="{Binding FileSystemItem.Name, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey800}" 
 										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-                    <Label Content="{Binding Description, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
-										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
+                    <!--<Label Content="{Binding Description, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
+										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>-->
                   </StackPanel>
                 </StackPanel>
                 <Button Name="menuButton"  Style="{StaticResource PathButton}" Width="50" HorizontalAlignment="Right" primitives:VisualFeedback.ClickFeedback="P200">

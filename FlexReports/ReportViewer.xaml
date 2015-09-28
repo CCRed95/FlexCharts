@@ -7,11 +7,11 @@
         mc:Ignorable="d"
 				VisualFeedback.ClickFeedback="P300"									
         Title="Report Viewer" Height="600" Width="1000" MinHeight="500" MinWidth="800">
-  <Grid>
+	<Grid>
 		<DockPanel>
-			<DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" 
-									Width="64">
-				<Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtPink500}}" TextElement.Foreground="{StaticResource mtGrey50}">
+			<DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" Width="64">
+				<Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtPink500}}" 
+							TextElement.Foreground="{StaticResource mtGrey50}" Panel.ZIndex="110" Effect="{StaticResource shadowDelta2}">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition/>
 						<ColumnDefinition Width="64"/>
@@ -19,10 +19,11 @@
 					<Grid Name="LeftTitleBar" Opacity="1">
 						<Label Content="Open Report" Style="{StaticResource t20pTitle}" FontSize="18pt"  Padding="30 0" HorizontalAlignment="Center"/>
 					</Grid>
-					<Border Grid.Column="1">
+					<Grid Grid.Column="1">
 						<ToggleButton Name="MenuToggle" Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 0" 
-											HorizontalAlignment="Center" Click="toggleMenu"/>
-					</Border>
+											HorizontalAlignment="Center" Click="toggleMenu" Panel.ZIndex="115" />
+						<!--<Rectangle Fill="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtPink500}}" HorizontalAlignment="Right" Width="10" Height="40" Panel.ZIndex="600" ></Rectangle>-->
+					</Grid>
 				</Grid>
 				<Grid DockPanel.Dock="Bottom">
 					<FileManager VisualFeedback.ClickFeedback="P050"	
@@ -30,28 +31,12 @@
 					<Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="64"
 								Background="{StaticResource mtGrey900}">
 						<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-              <Viewbox RenderTransformOrigin=".5,.5">
-                <Viewbox.RenderTransform>
-                  <ScaleTransform ScaleX="1.7" ScaleY="1.7"/>
-                </Viewbox.RenderTransform>
-                <Path Style="{StaticResource drawabledrag_vertical}" Fill="{StaticResource mtGrey100}"/>
-              </Viewbox>
-							
-              <!--<Button Style="{StaticResource PathButtonDarkSurface}">
-								<Path Style="{StaticResource drawablefind_in_page}"/>
-							</Button>
-							<Button Style="{StaticResource PathButtonDarkSurface}" Click="viewDocumentCode">
-								<Path Style="{StaticResource drawablecode}"/>
-							</Button>
-							<Button Style="{StaticResource PathButtonDarkSurface}" Click="insertDocumentComment">
-								<Path Style="{StaticResource drawableinsert_comment}"/>
-							</Button>
-							<Button Style="{StaticResource PathButtonDarkSurface}">
-								<Path Style="{StaticResource drawableview_carousel}"/>
-							</Button>
-							<Button Style="{StaticResource PathButtonDarkSurface}">
-								<Path Style="{StaticResource drawableview_day}"/>
-							</Button>-->
+							<Viewbox RenderTransformOrigin=".5,.5">
+								<Viewbox.RenderTransform>
+									<ScaleTransform ScaleX="1.7" ScaleY="1.7"/>
+								</Viewbox.RenderTransform>
+								<Path Style="{StaticResource drawabledrag_vertical}" Fill="{StaticResource mtGrey100}"/>
+							</Viewbox>
 						</StackPanel>
 					</Grid>
 				</Grid>
@@ -59,7 +44,7 @@
 			<Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
 				<StackPanel Orientation="Vertical">
 					<Grid Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtPink500}}" 
-								TextElement.Foreground="{StaticResource mtGrey50}">
+								TextElement.Foreground="{StaticResource mtGrey50}" Effect="{StaticResource shadowDelta3}" Panel.ZIndex="100">
 						<Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
 							 Padding="30 0" HorizontalContentAlignment="Left" />
 						<StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
@@ -73,24 +58,18 @@
 						</StackPanel>
 					</Grid>
 					<DockPanel>
-						<Grid Height="44" DockPanel.Dock="Top">
+						<Grid Height="44" DockPanel.Dock="Top" Panel.ZIndex="70">
 							<!--Effect="{StaticResource shadowDelta2}" >-->
-							<TabSelector x:Name="documentTabSelector" TabSelected="OnTabSelected"
-																			 Tabs="{Binding ElementName=documentViewport, Path=Document, Converter={converters:FlexDocumentTabSelectorAdapter}}"/>
 
+							<TabSelector x:Name="documentTabSelector" TabSelected="OnTabSelected"
+																			 Tabs="{Binding ElementName=documentViewport, Path=Document, Converter={converters:FlexDocumentTabSelectorAdapter}}"
+													 Effect="{StaticResource shadowDelta3}"/>
+							<!--<Border Effect="{StaticResource shadowDelta5}" Height="20" Background="Transparent"  VerticalAlignment="Top" ></Border>-->
 						</Grid>
-						<Grid ClipToBounds="True" DockPanel.Dock="Bottom">
-							<FlexDocumentViewport x:Name="documentViewport">
+						<Grid ClipToBounds="True" DockPanel.Dock="Bottom" Panel.ZIndex="50">
+							<FlexDocumentViewport x:Name="documentViewport" >
 
 							</FlexDocumentViewport>
-							<!--<ParetoChart DataSorter="{x:Static Sorters.Ascending}"></ParetoChart>-->
-							<!--<Grid Width="270" Height="400" Background="{StaticResource mtGrey900}">
-								<Grid Margin="3 10" Background="{StaticResource mtGrey50}">
-
-
-								</Grid>
-
-							</Grid>-->
 						</Grid>
 					</DockPanel>
 
@@ -98,7 +77,6 @@
 				</StackPanel>
 				<Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
 			</Grid>
-
 		</DockPanel>
 		<PopupManager x:Name="PopupSpace"/>
 		<Grid>

@@ -61,12 +61,32 @@ namespace FlexReports.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon bar_icon_square {
+            get {
+                object obj = ResourceManager.GetObject("bar_icon_square", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap FlexVIEX_Logo_t {
             get {
                 object obj = ResourceManager.GetObject("FlexVIEX_Logo_t", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon graph_icon_square {
+            get {
+                object obj = ResourceManager.GetObject("graph_icon_square", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

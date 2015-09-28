@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
@@ -41,7 +42,7 @@ namespace Material.Controls.Popups
 				new FrameworkPropertyMetadata(typeof(FavoritesPopup)));
 		}
 
-		public FavoritesPopup(DirectoryCollection s)
+		public FavoritesPopup(IEnumerable<DirectoryBinder> s)
 		{
 			Favorites = new ObservableCollection<DirectoryBinder>(s);
 			EventManager.RegisterClassHandler(typeof(FavoritesPopup), FavoritesListItem.FavoriteSelectedEvent, new RoutedFavoriteSelectedEventHandler(favoritesSelected));

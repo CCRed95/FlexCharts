@@ -25,15 +25,20 @@ namespace Material.IO
 			return sb.ToString().TrimEnd();
 		}
 
-		private const string spacer = "    ";
+		private const string spacer = "";
 		public static string GetProviderName(DriveInfo drive)
 		{
-			if (drive.DriveType == DriveType.CDRom)
-				return $"{spacer}CD Drive";
-			if (drive.DriveType == DriveType.Fixed || drive.DriveType == DriveType.Removable)
-				return spacer + drive.VolumeLabel;
-			if (drive.DriveType == DriveType.Network)
-				return GetUNCPath(drive);
+			switch (drive.DriveType)
+			{
+				case DriveType.CDRom:
+					return $"{spacer}CD Drive";
+				case DriveType.Removable:
+					return spacer + drive.VolumeLabel;
+				case DriveType.Network:
+					return GetUNCPath(drive);
+				case DriveType.Fixed:
+					return string.IsNullOrEmpty(drive.VolumeLabel) ? "Local Drive" : drive.VolumeLabel;
+			}
 			return spacer + drive.DriveType;
 		}
 

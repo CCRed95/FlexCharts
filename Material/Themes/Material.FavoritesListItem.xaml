@@ -1,9 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fileManager="clr-namespace:Material.Controls.FileManager"
-                    xmlns:primitives="clr-namespace:Material.Controls.Primitives"
-                    xmlns:controls="clr-namespace:Material.Controls"
-                    xmlns:io="clr-namespace:System.IO;assembly=mscorlib">
+                    xmlns:primitives="clr-namespace:Material.Controls.Primitives">
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="Material.Converters.xaml"/>
 		<ResourceDictionary Source="Material.Palette.xaml"/>
@@ -27,18 +25,15 @@
 							<Border x:Name="active" Opacity="0" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P050}"/>
 							<StackPanel Orientation="Horizontal" Margin="0 0 50 0">
 								<Viewbox>
-									<Path Style="{StaticResource drawablefolder}" Fill="{StaticResource mtYellowA700}"/>
+									<Path Style="{StaticResource drawablefolder}" Fill="{StaticResource mtYellow900}"/>
 								</Viewbox>
-								<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-									<Label Content="{Binding Directory.Name, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey800}" 
+								<StackPanel Orientation="Vertical">
+									<Label Content="{Binding Directory.Name, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey900}" 
 										 Style="{StaticResource t13pBody1}" Padding="0" HorizontalContentAlignment="Left"/>
-									<Label Content="{Binding Directory.FullName, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey600}" FontStyle="Italic" FontWeight="Light"
+									<Label Content="{Binding Directory.FullName, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{StaticResource mtGrey700}" FontStyle="Italic" FontWeight="Light"
 										 Style="{StaticResource t12pCaption}" Padding="0" HorizontalContentAlignment="Left"/>
 								</StackPanel>
 							</StackPanel>
-							<!--<Button Name="removebutton" Style="{StaticResource PathButton}" Width="50" HorizontalAlignment="Right" primitives:VisualFeedback.ClickFeedback="P200">
-								<Path Style="{StaticResource drawablemore_vert}" Fill="{StaticResource mtGrey900}"/>
-							</Button>-->
 						</Grid>
 					</Border>
 				</ControlTemplate>

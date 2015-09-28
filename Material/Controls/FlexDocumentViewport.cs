@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using FlexCharts.Controls.Core;
 using FlexCharts.Documents;
@@ -12,37 +11,47 @@ using FlexCharts.Extensions;
 
 namespace Material.Controls
 {
-	[TemplatePart(Name = "PART_root", Type = typeof(Viewbox))]
+	[TemplatePart(Name = "PART_root", Type = typeof (Viewbox))]
 	public class FlexDocumentViewport : FlexControl
 	{
+		#region Constants
 		public const double zoomMin = 0.4;
 		public const double zoomMax = 2.0;
 
-		public const double defaultZoomOffset = 0.9;
+		public const double defaultZoomOffset = 0.75;
 		public const double defaultVerticalScrollOffset = 25;
+		#endregion
 
-		public static readonly RoutedEvent DocumentAddedEvent = EM.Register<FlexDocumentViewport, RoutedEventHandler>(EM.BUBBLE);
-		public event RoutedEventHandler DocumentAdded
-		{
-			add { AddHandler(DocumentAddedEvent, value); }
-			remove { RemoveHandler(DocumentAddedEvent, value); }
-		}
-		public static readonly DependencyProperty ZoomOffsetProperty = DP.Register(
-			new Meta<FlexDocumentViewport, double>(defaultZoomOffset));
-		public double ZoomOffset
-		{
-			get { return (double)GetValue(ZoomOffsetProperty); }
-			set { SetValue(ZoomOffsetProperty, value); }
-		}
-		public static readonly DependencyProperty VerticalScrollOffsetProperty = DP.Register(
-			new Meta<FlexDocumentViewport, double>(defaultVerticalScrollOffset));
-		public double VerticalScrollOffset
-		{
-			get { return (double)GetValue(VerticalScrollOffsetProperty); }
-			set { SetValue(VerticalScrollOffsetProperty, value); }
-		}
+		#region Dependency Properties
+
 		public static readonly DependencyProperty DocumentProperty = DP.Register(
 			new Meta<FlexDocumentViewport, FlexDocument>(null, DocumentChanged));
+
+		public static readonly DependencyProperty ZoomOffsetProperty = DP.Register(
+			new Meta<FlexDocumentViewport, double>(defaultZoomOffset));
+
+		public static readonly DependencyProperty VerticalScrollOffsetProperty = DP.Register(
+			new Meta<FlexDocumentViewport, double>(defaultVerticalScrollOffset));
+
+		public FlexDocument Document
+		{
+			get { return (FlexDocument) GetValue(DocumentProperty); }
+			set { SetValue(DocumentProperty, value); }
+		}
+		public double ZoomOffset
+		{
+			get { return (double) GetValue(ZoomOffsetProperty); }
+			set { SetValue(ZoomOffsetProperty, value); }
+		}
+		public double VerticalScrollOffset
+		{
+			get { return (double) GetValue(VerticalScrollOffsetProperty); }
+			set { SetValue(VerticalScrollOffsetProperty, value); }
+		}
+
+		#endregion
+
+		#region Dependency Callbacks
 
 		private static void DocumentChanged(FlexDocumentViewport i, DPChangedEventArgs<FlexDocument> e)
 		{
@@ -53,33 +62,58 @@ namespace Material.Controls
 			i.RaiseEvent(new RoutedEventArgs(DocumentAddedEvent));
 		}
 
+		#endregion
 
-		public FlexDocument Document
+		#region Routed Events
+
+		public static readonly RoutedEvent DocumentAddedEvent =
+			EM.Register<FlexDocumentViewport, RoutedEventHandler>(EM.BUBBLE);
+		public event RoutedEventHandler DocumentAdded
 		{
-			get { return (FlexDocument)GetValue(DocumentProperty); }
-			set { SetValue(DocumentProperty, value); }
+			add { AddHandler(DocumentAddedEvent, value); }
+			remove { RemoveHandler(DocumentAddedEvent, value); }
 		}
+
+		#endregion
+
+		#region Properties
+		public bool HasContent => Document != null;
+		#endregion
+
+		#region Fields
+
 		private Viewbox PART_root;
 		private double? lastTarget;
 		private double? lastZoomTarget;
 
-		public FlexDocumentViewport()
-		{
-			EventManager.RegisterClassHandler(typeof(FlexDocumentViewport), FlexContentControl.ContentChangedEvent,
-				new RoutedEventHandler(OnContentChanged));
-		}
+		#endregion
 
-		private void OnContentChanged(object s, RoutedEventArgs e)
-		{
-
-		}
-
+		#region Constructors
 		static FlexDocumentViewport()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(FlexDocumentViewport),
-				new FrameworkPropertyMetadata(typeof(FlexDocumentViewport)));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof (FlexDocumentViewport),
+				new FrameworkPropertyMetadata(typeof (FlexDocumentViewport)));
 
 		}
+
+		public FlexDocumentViewport()
+		{
+			EventManager.RegisterClassHandler(typeof (FlexDocumentViewport), FlexContentControl.ContentChangedEvent,
+				new RoutedEventHandler(OnContentChanged));
+			EventManager.RegisterClassHandler(typeof (FlexDocumentViewport), FlexDocument.DocumentTabVisualChangedEvent,
+				new RoutedEventHandler(OnDocumentTabVisualChanged));
+		}
+
+		private void OnDocumentTabVisualChanged(object s, RoutedEventArgs e)
+		{
+			this.unregisterAnimation(VerticalScrollOffsetProperty);
+			this.unregisterAnimation(ZoomOffsetProperty);
+			VerticalScrollOffset = defaultVerticalScrollOffset;
+			ZoomOffset = defaultZoomOffset;
+		}
+		#endregion
+
+		#region Overriden Members
 
 		protected override void OnMouseWheel(MouseWheelEventArgs e)
 		{
@@ -95,7 +129,7 @@ namespace Material.Controls
 				{
 					lastZoomTarget = possibleTarget;
 					//PART_root.RenderTransformOrigin = getActualRenderingOrigin();
-					BeginAnimation(ZoomOffsetProperty,new DoubleAnimation(lastZoomTarget
+					BeginAnimation(ZoomOffsetProperty, new DoubleAnimation(lastZoomTarget
 						.GetValueOrDefault(defaultZoomOffset), new Duration(TimeSpan.FromMilliseconds(150))));
 				}
 			}
@@ -107,7 +141,8 @@ namespace Material.Controls
 				}
 				lastTarget = lastTarget + (e.Delta / 2.0);
 				BeginAnimation(VerticalScrollOffsetProperty,
-					new DoubleAnimation(lastTarget.GetValueOrDefault(defaultVerticalScrollOffset), new Duration(TimeSpan.FromMilliseconds(150))));
+					new DoubleAnimation(lastTarget.GetValueOrDefault(defaultVerticalScrollOffset),
+						new Duration(TimeSpan.FromMilliseconds(150))));
 			}
 		}
 
@@ -117,20 +152,13 @@ namespace Material.Controls
 			PART_root = GetTemplateChild<Viewbox>(nameof(PART_root));
 		}
 
-		public void ViewCodeBehind()
+		#endregion
+
+		#region Methods
+		private void OnContentChanged(object s, RoutedEventArgs e)
 		{
-			if (Document == null)
-				return;
-			Document.RenderTransformOrigin = new Point(.5, .5);
-			var rt = new ScaleTransform(1, 1, .5, .5);
-			Document.RenderTransform = rt;
-			rt.BeginAnimation(ScaleTransform.ScaleXProperty,
-				new DoubleAnimation(-1, new Duration(TimeSpan.FromMilliseconds(500)))
-				{ EasingFunction = new CircleEase { EasingMode = EasingMode.EaseInOut } });
-
+			
 		}
-
-		public bool HasContent => Document != null;
 
 		//private Point getActualRenderingOrigin()
 		//{
@@ -141,5 +169,7 @@ namespace Material.Controls
 		//	var topScale = 1 - midScale;
 		//	return new Point(.5, topScale);
 		//}
+
+		#endregion
 	}
 }

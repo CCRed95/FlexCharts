@@ -4,82 +4,96 @@
                     xmlns:controls="clr-namespace:Material.Controls"
                     xmlns:primitives="clr-namespace:Material.Controls.Primitives"
                     xmlns:converters="clr-namespace:Material.Converters">
-  <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="Material.Drawables.xaml"/>
-    <ResourceDictionary Source="Material.Button.xaml"/>
-    <ResourceDictionary Source="Material.Shadows.xaml"/>
-    <ResourceDictionary Source="Material.ActionButton.xaml"/>
-  </ResourceDictionary.MergedDictionaries>
-  <converters:RootTrimConverter x:Key="rtc"/>
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Material.Drawables.xaml"/>
+		<ResourceDictionary Source="Material.Button.xaml"/>
+		<ResourceDictionary Source="Material.Shadows.xaml"/>
+		<ResourceDictionary Source="Material.ActionButton.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	<converters:RootTrimConverter x:Key="rtc"/>
 	<Style TargetType="{x:Type fileManager:FileManager}">
 		<Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type fileManager:FileManager}">
-          <Grid>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="40"/>
-              <RowDefinition/>
-              <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P700}">
-              <Label Style="{StaticResource t12pCaption}" FontSize="11pt" FontWeight="Light">
-                <Label.Content>
-                  <MultiBinding Converter="{StaticResource rtc}" ConverterParameter="300">
-                    <Binding Path="ActiveDirectory.FullName" RelativeSource="{RelativeSource TemplatedParent}"/>
-                    <Binding Path="." RelativeSource="{RelativeSource Self}"/>
-                    <Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
-										
-                  </MultiBinding>
-                </Label.Content>
-              </Label>
-            </StackPanel>
-            <ScrollViewer Grid.Row="1" >
-              <ItemsControl ItemsSource="{Binding FileList, RelativeSource={RelativeSource TemplatedParent}}">
-                <ItemsControl.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"/>
-                  </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-              </ItemsControl>
-            </ScrollViewer>
-            <Grid Row="1" >
-              <ToggleButton x:Name="PART_favoritetoggle" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type fileManager:FileManager}">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="40"/>
+							<RowDefinition/>
+							<RowDefinition Height="40"/>
+						</Grid.RowDefinitions>
+						<StackPanel Orientation="Horizontal" Background="{Binding Path=(primitives:ThemePrimitive.Theme).P700}" Panel.ZIndex="60" Effect="{StaticResource shadowDelta3}">
+							<Label Style="{StaticResource t12pCaption}" FontSize="11pt" FontWeight="Light">
+								<Label.Content>
+									<MultiBinding Converter="{StaticResource rtc}" ConverterParameter="300">
+										<Binding Path="ActiveDirectory.FullName" RelativeSource="{RelativeSource TemplatedParent}"/>
+										<Binding Path="." RelativeSource="{RelativeSource Self}"/>
+										<Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+									</MultiBinding>
+								</Label.Content>
+							</Label>
+						</StackPanel>
+						<ScrollViewer Grid.Row="1" Panel.ZIndex="50">
+							<ItemsControl ItemsSource="{Binding FileList, RelativeSource={RelativeSource TemplatedParent}}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<StackPanel Orientation="Vertical"/>
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+							</ItemsControl>
+						</ScrollViewer>
+						<Grid Row="1"  Panel.ZIndex="100">
+							<ToggleButton x:Name="PART_favoritetoggle" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
 														IsChecked="{Binding IsCurrentDirectoryFavorited, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
 											Style="{StaticResource FloatingActionToggleButton}"
 											Margin="0 0 30 20">
-                <Path Style="{StaticResource drawablestar}"/>
-              </ToggleButton>
-            </Grid>
-            <controls:PopupManager Grid.Row="1"  x:Name="PART_popupmanager" IsHitTestVisible="False"/>
-            <UniformGrid Grid.Row="2" Columns="5" Background="{StaticResource mtGrey900}">
-              <Button Style="{StaticResource PathButton}" Name="PART_directoryup"
+								<Path Style="{StaticResource drawablestar}"/>
+							</ToggleButton>
+							<!--<UniformGrid Rows="4" Background="{StaticResource mtGrey800}" Height="200" Width="55" Margin="10" 
+													 VerticalAlignment="Bottom" Effect="{StaticResource shadowDelta3}" Panel.ZIndex="100">
+								<Button Style="{StaticResource PathButton}" Name="PART_a">
+									<Path Style="{StaticResource drawableview_carousel}"/>
+								</Button>
+								<Button Style="{StaticResource PathButton}" Name="PART_b">
+									<Path Style="{StaticResource drawableview_array}"/>
+								</Button>
+								<Button Style="{StaticResource PathButton}" Name="PART_c">
+									<Path Style="{StaticResource drawableview_column}" Fill="{Binding Path=(primitives:ThemePrimitive.Theme).P500}"/>
+								</Button>
+								<Button Style="{StaticResource PathButton}" Name="PART_d">
+									<Path Style="{StaticResource drawableview_list}"/>
+								</Button>
+							</UniformGrid>-->
+						</Grid>
+
+						<controls:PopupManager Grid.Row="1" x:Name="PART_popupmanager" IsHitTestVisible="False"  Panel.ZIndex="120"/>
+						<UniformGrid Grid.Row="2" Columns="5" Background="{StaticResource mtGrey900}">
+							<Button Style="{StaticResource PathButton}" Name="PART_directoryup"
 											IsEnabled="{Binding HasParentDirectory, RelativeSource={RelativeSource TemplatedParent}}">
-                <Path Style="{StaticResource drawablereply}" RenderTransformOrigin=".5,.5">
-                  <Path.RenderTransform>
-                    <TransformGroup>
-                      <RotateTransform Angle="90"/>
-                      <ScaleTransform ScaleX="-1"/>
-                    </TransformGroup>
-                  </Path.RenderTransform>
-                </Path>
-              </Button>
-              <Button Style="{StaticResource PathButton}" Name="PART_home">
-                <Path Style="{StaticResource drawablehome}"/>
-              </Button>
-              <Button Style="{StaticResource PathButton}" Name="PART_favorites">
-                <Path Style="{StaticResource drawablestar}"/>
-              </Button>
-              <Button Style="{StaticResource PathButton}" Name="PART_selectdisk">
-                <Path Style="{StaticResource drawableharddisk}"/>
-              </Button>
-              <Button Style="{StaticResource PathButton}" Name="PART_refresh" 
-											>
-                <Path Style="{StaticResource drawablerefresh}"/>
-              </Button>
-            </UniformGrid>
-          </Grid>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
+								<Path Style="{StaticResource drawablereply}" RenderTransformOrigin=".5,.5">
+									<Path.RenderTransform>
+										<TransformGroup>
+											<RotateTransform Angle="90"/>
+											<ScaleTransform ScaleX="-1"/>
+										</TransformGroup>
+									</Path.RenderTransform>
+								</Path>
+							</Button>
+							<Button Style="{StaticResource PathButton}" Name="PART_home">
+								<Path Style="{StaticResource drawablehome}"/>
+							</Button>
+							<Button Style="{StaticResource PathButton}" Name="PART_favorites">
+								<Path Style="{StaticResource drawablestar}"/>
+							</Button>
+							<Button Style="{StaticResource PathButton}" Name="PART_selectdisk">
+								<Path Style="{StaticResource drawableharddisk}"/>
+							</Button>
+							<Button Style="{StaticResource PathButton}" Name="PART_refresh">
+								<Path Style="{StaticResource drawablerefresh}"/>
+							</Button>
+						</UniformGrid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

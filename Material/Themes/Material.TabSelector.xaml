@@ -11,6 +11,7 @@
   <converters:LargestValueConverter x:Key="lvc"/>
   <Style TargetType="tabSelector:TabSelector" BasedOn="{StaticResource t12pCaption}">
     <Setter Property="Background" Value="{Binding Source={StaticResource Grey}, Path=P300}" />
+		<!--<Setter Property="Visibility" Value="Collapsed"/>-->
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="tabSelector:TabSelector">
@@ -18,13 +19,13 @@
 									BorderBrush="{TemplateBinding BorderBrush}"
 									BorderThickness="{TemplateBinding BorderThickness}">
 						<Border.LayoutTransform>
-							<ScaleTransform x:Name="barScale" ScaleX="1" ScaleY="0"/>
+							<ScaleTransform x:Name="barScale" ScaleX="1" ScaleY="1"/>
 						</Border.LayoutTransform>
             <Grid>
-              <ItemsControl ItemsSource="{TemplateBinding Tabs}">
+              <ItemsControl ItemsSource="{Binding Tabs, RelativeSource={RelativeSource TemplatedParent}}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
-                    <UniformGrid Columns="{Binding Tabs.Count, RelativeSource={RelativeSource TemplatedParent}}"/>
+                    <UniformGrid Columns="{Binding Path=Tabs.Count, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=tabSelector:TabSelector}}"/>
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
@@ -33,8 +34,10 @@
             </Grid>
           </Border>
           <ControlTemplate.Triggers>
+						
             <DataTrigger Binding="{Binding Tabs, RelativeSource={RelativeSource TemplatedParent}}" Value="{x:Null}">
-              <DataTrigger.EnterActions>
+							<!--<Setter Property="Visibility" Value="Collapsed"/>-->
+              <!--<DataTrigger.EnterActions>
                 <BeginStoryboard>
                   <Storyboard>
                     <DoubleAnimation Storyboard.TargetName="barScale" Storyboard.TargetProperty="ScaleY" 
@@ -49,7 +52,7 @@
 																		 To="1" Duration="0:0:.3" />
                   </Storyboard>
                 </BeginStoryboard>
-              </DataTrigger.ExitActions>
+              </DataTrigger.ExitActions>-->
             </DataTrigger>
             <DataTrigger Binding="{Binding Tabs.Count, RelativeSource={RelativeSource TemplatedParent}}" Value="0">
               <Setter Property="Background" Value="Red"/>

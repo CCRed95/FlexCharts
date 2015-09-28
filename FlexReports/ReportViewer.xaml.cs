@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media.Animation;
 using FlexCharts.Collections;
@@ -22,9 +23,14 @@ namespace FlexReports
 	/// </summary>
 	public partial class ReportViewer
 	{
+		//public static DirectoryInfo DataStorageDirectory =
+		//	new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\FlexVIEW\UserConfig\" +
+		//		System.Reflection.Assembly.GetExecutingAssembly().FullName);
+
 		public ReportViewer()
 		{
 			InitializeComponent();
+
 			resetUI();
 			Width = AppSettings.Instance.WindowSize.Width;
 			Height = AppSettings.Instance.WindowSize.Height;
@@ -38,12 +44,26 @@ namespace FlexReports
 			{
 				AppSettings.Instance.Theme = "Cyan";
 			}
+			foreach (var arg in from arg in Environment.GetCommandLineArgs()
+													let fi = new FileInfo(arg) where fi.Exists
+													where string.Equals(fi.Extension, ".FLEX", 
+													StringComparison.CurrentCultureIgnoreCase)
+													select arg)
+			{
+				Loaded += (Sender, Args) =>
+				{
+					OpenDocument(arg);
+				};
+			}
 		}
 
 
 		private void onSizeChanged(object s, SizeChangedEventArgs e)
 		{
-			AppSettings.Instance.WindowSize = e.NewSize;
+			if (WindowState == WindowState.Normal)
+			{
+				AppSettings.Instance.WindowSize = e.NewSize;
+			}
 		}
 		private void resetUI()
 		{
@@ -119,10 +139,16 @@ namespace FlexReports
 
 		private void OnRequestOpenFile(object s, RoutedEventArgs e)
 		{
+
+			var fileInfo = e.OriginalSource.RequireType<FileListItem>().FileSystemItem;
+			OpenDocument(fileInfo.FullName);
+		}
+
+		private void OpenDocument(string path)
+		{
 			try
 			{
-				var fileInfo = e.OriginalSource.RequireType<FileListItem>().FileSystemItem;
-				var parsedDocument = FlexDocumentReader.ParseDocument(fileInfo.FullName);
+				var parsedDocument = FlexDocumentReader.ParseDocument(path);
 				documentViewport.Document = parsedDocument;
 				MenuToggle.IsChecked = false;
 				quickCollapseMenu();

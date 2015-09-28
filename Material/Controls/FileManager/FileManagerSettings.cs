@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-
+using FlexCharts.Extensions;
 namespace Material.Controls.FileManager
 {
 	[Serializable]
 	public class FileManagerSettings
 	{
-		public static string fileOut = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\FileManagerSettings.bin";
-
 		private static FileManagerSettings instance;
-		private FileManagerSettings() { }
 		public static FileManagerSettings Instance => instance ?? (instance = LoadFromBinaryStream());
-		
+		public static DirectoryInfo DataStorageDirectory =
+			new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\FlexVIEW\UserConfig\" +
+				System.Reflection.Assembly.GetEntryAssembly() .GetName().Name);
+
+		public static FileInfo DataStorageFile = new FileInfo(DataStorageDirectory.FullName + @"\FileManagerSettings.bin");
+
+		private FileManagerSettings() { }
+
 		private string lastDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 		public string LastDirectory
 		{
@@ -66,19 +70,27 @@ namespace Material.Controls.FileManager
 		public void SaveToBinaryStream()
 		{
 			IFormatter formatter = new BinaryFormatter();
-			Stream stream = new FileStream(fileOut, FileMode.Create, FileAccess.Write, FileShare.None);
+			if (!DataStorageDirectory.Exists) DataStorageDirectory.Create();
+			Stream stream = new FileStream(DataStorageFile.FullName, FileMode.Create, FileAccess.Write, FileShare.None);
 			formatter.Serialize(stream, this);
 			stream.Close();
 		}
-		public static FileManagerSettings LoadFromBinaryStream()
+		private static FileManagerSettings LoadFromBinaryStream()
 		{
-			if (!File.Exists(fileOut))
+			if (!DataStorageFile.Exists)
 				return new FileManagerSettings();
-			IFormatter formatter = new BinaryFormatter();
-			Stream stream = new FileStream(fileOut, FileMode.Open, FileAccess.Read, FileShare.Read);
-			var obj = (FileManagerSettings)formatter.Deserialize(stream);
-			stream.Close();
-			return obj;
+			try
+			{
+				IFormatter formatter = new BinaryFormatter();
+				Stream stream = new FileStream(DataStorageFile.FullName, FileMode.Open, FileAccess.Read, FileShare.Read);
+				var obj = (FileManagerSettings)formatter.Deserialize(stream);
+				stream.Close();
+				return obj;
+			}
+			catch
+			{
+				return new FileManagerSettings();
+			}
 		}
 	}
 }
