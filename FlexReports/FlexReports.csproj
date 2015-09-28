@@ -124,6 +124,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="SampleReports\SampleReport.flex" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
