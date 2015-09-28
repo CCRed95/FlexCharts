@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexCharts", "FlexCharts\FlexCharts.csproj", "{53B04142-3FA5-4D7E-989E-EFAFF6B92631}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryTracking", "InventoryTracking\InventoryTracking.csproj", "{1F60004E-059E-47C5-B1BA-33ABFF08F395}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingRecord", "ShippingRecord\ShippingRecord.csproj", "{78E4A0A3-B156-4579-B349-EC9F5515F3BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerInspector", "ControllerInspector\ControllerInspector.csproj", "{45F7796C-A7B9-4C13-AA18-76BAF4437953}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{78E4A0A3-B156-4579-B349-EC9F5515F3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78E4A0A3-B156-4579-B349-EC9F5515F3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78E4A0A3-B156-4579-B349-EC9F5515F3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45F7796C-A7B9-4C13-AA18-76BAF4437953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F7796C-A7B9-4C13-AA18-76BAF4437953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F7796C-A7B9-4C13-AA18-76BAF4437953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F7796C-A7B9-4C13-AA18-76BAF4437953}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
