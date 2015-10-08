@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlexCharts.Data.Sorting
 {
-	public class EmptyDataSorter<T> : AbstractDataSorter<T>
+	public class EmptyDataSorter<T> : DataSorter<T>
 	{
 		public override T Sort(T dataSet) => dataSet;
 	}

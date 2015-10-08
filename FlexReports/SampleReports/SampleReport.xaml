@@ -1,0 +1,827 @@
+﻿<FlexDocument Width="1275" MinHeight="1650"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					Background="{Theme Paper}">
+	<FlexDocument.Resources>
+		<Style x:Key="baseFlexChartStyle"  TargetType="AbstractFlexChart">
+			<Setter Property="Margin" Value="30"/>
+			<Setter Property="Foreground" Value="{Theme Body}"/>
+			<Setter Property="MaterialProvider" Value="{Theme MaterialProviderMain}"/>
+			<Setter Property="FontSize" Value="32"/>
+			<Setter Property="SegmentPrimitive.SegmentSpaceBackground" Value="{Theme SegmentSpaceBackground}"/>
+			<Setter Property="BarTotalPrimitive.BarTotalForeground" Value="{Theme BarTotalForeground}"/>
+			<Setter Property="XAxisPrimitive.XAxisForeground" Value="{Theme XAxisForeground}"/>
+			<Setter Property="YAxisPrimitive.YAxisForeground" Value="{Theme YAxisForeground}"/>
+			<Setter Property="LinePrimitive.LineStroke" Value="{Theme LineStroke}"/>
+			<Setter Property="DotPrimitive.DotFill" Value="{Theme DotFill}"/>
+			<Setter Property="DotPrimitive.DotStroke" Value="{Theme DotStroke}"/>
+		</Style>
+		<Style TargetType="HorizontalBarChart" BasedOn="{StaticResource baseFlexChartStyle}">
+			<Setter Property="DataSorter" Value="{x:Static Sorters.Descending}"/>
+			<Setter Property="BarTotalForeground" Value="{Theme BarTotalForeground}"/>
+
+		</Style>
+		<Style TargetType="StackedBarChart" BasedOn="{StaticResource baseFlexChartStyle}">
+			<Setter Property="MaterialProvider" Value="{Theme MaterialProviderMain}"/>
+
+		</Style>
+		<Style TargetType="NestedArcChart" BasedOn="{StaticResource baseFlexChartStyle}">
+
+		</Style>
+		<Style TargetType="ParetoChart" BasedOn="{StaticResource baseFlexChartStyle}">
+			<Setter Property="LineStrokeThickness" Value="3"/>
+			<Setter Property="DotRadius" Value="9"/>
+			<Setter Property="DotStrokeThickness" Value="2"/>
+			<Setter Property="SegmentWidthPercentage" Value=".3"/>
+			<Setter Property="BarTotalFontWeight" Value="Light"/>
+			<Setter Property="BarTotalFontStyle" Value="Normal"/>
+			<Setter Property="BarTotalFontSize" Value="18"/>
+			<Setter Property="XAxisFontWeight" Value="Normal"/>
+			<Setter Property="XAxisFontStyle" Value="Italic"/>
+			<Setter Property="XAxisFontSize" Value="20"/>
+		</Style>
+		<Style TargetType="BarChart" BasedOn="{StaticResource baseFlexChartStyle}">
+			<Setter Property="DataSorter" Value="{x:Static Sorters.Ascending}"/>
+		</Style>
+		<Style TargetType="Card" BasedOn="{StaticResource {x:Type Card}}" x:Key="listCard">
+			<Setter Property="Margin" Value="10 7"/>
+			<Setter Property="Height" Value="50"/>
+			<!--<Setter Property="Effect" Value="{StaticResource shadowDelta2}"/>-->
+			<Setter Property ="Background" Value="{ConditionalMaterialProvider P800, {x:Static Palette.Grey}}"/>
+		</Style>
+		<Style TargetType="FlexDocumentTab">
+			<Setter Property="Background" Value="{Theme Paper}"/>
+		</Style>
+		<Style TargetType="TabItem">
+			<Setter Property="HeaderTemplate">
+				<Setter.Value>
+					<DataTemplate>
+						<Label Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Foreground="Black"
+										 Padding="10 5" Margin="0" Style="{StaticResource t24pHeadline}"/>
+					</DataTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</FlexDocument.Resources>
+
+	<FlexDocumentTab Title="Test">
+		<Grid ThemePrimitive.Theme="{StaticResource Blue}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="90"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="250"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<DockPanel Grid.ColumnSpan="2" Margin="0 10" Panel.ZIndex="100" Effect="{StaticResource shadowDelta3}">
+				<Border Height="7" DockPanel.Dock="Top" Background="{StaticResource mtBlue600}"/>
+				<Label Content="VALVE AUTOMATION LINE" Style="{StaticResource t24pHeadline}" Background="{StaticResource mtBlue800}"
+						 FontWeight="Normal" HorizontalContentAlignment="Left" Padding="20 0 0 0"/>
+			</DockPanel>
+			<Grid RowSpan="2" Margin="10 0 0 0" Background="{ConditionalMaterialProvider P600, {x:Static Palette.Grey}}"
+									Panel.ZIndex="90" Effect="{StaticResource shadowDelta2}">
+			</Grid>
+			<Grid Row="1" Margin="10 0 0 0" Panel.ZIndex="100">
+				<StackPanel  Orientation="Vertical" Margin="0 5">
+					<Card Style="{StaticResource listCard}" Height="300">
+
+					</Card>
+					<Card Style="{StaticResource listCard}" Height="200">
+
+					</Card>
+					<Card Style="{StaticResource listCard}" Height="200">
+
+					</Card>
+				</StackPanel>
+
+			</Grid>
+			<StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Panel.ZIndex="0">
+				<DockPanel Height="160" Margin="10 0">
+					<Label Content="SYSTEM PERFORMANCE" DockPanel.Dock="Top" Style="{StaticResource t24pHeadline}"
+							 BorderBrush="{ConditionalMaterialProvider P600, {x:Static Palette.Blue}}" BorderThickness="0 0 0 2" Padding="10" Foreground="{Theme Body}"/>
+					<UniformGrid Columns="8">
+						<NumericIndicator Title="OEE" Label="%" Value="61.1"/>
+						<NumericIndicator Title="THROUGHPUT" Label="UNITS" Value="3039"/>
+						<NumericIndicator Title="REJECTS" Label="SA" Value="1641"/>
+						<NumericIndicator Title="YIELD" Label="%" Value="58.3"/>
+						<NumericIndicator Title="UPTIME" Label="MINS" Value="509"/>
+						<NumericIndicator Title="AVG CYCLE RATE" Label="CPM" Value="5.7"/>
+						<NumericIndicator Title="SCRAP RATE" Label="%" Value="17.5"/>
+						<NumericIndicator Title="ROLLED YIELD" Label="%" Value="62.7"/>
+					</UniformGrid>
+				</DockPanel>
+				<DockPanel Height="160" Margin="10 0">
+					<Label Content="DIAL K PERFORMANCE" DockPanel.Dock="Top" Style="{StaticResource t24pHeadline}"
+							 BorderBrush="{ConditionalMaterialProvider P600, {x:Static Palette.Grey}}" BorderThickness="0 0 0 2" Padding="10" Foreground="{Theme Body}"/>
+					<UniformGrid Columns="8">
+						<NumericIndicator Title="OEE" Label="%" Value="55.1"/>
+						<NumericIndicator Title="COMPLETED" Label="UNITS" Value="3039"/>
+						<NumericIndicator Title="REJECTS" Label="UNITS" Value="170"/>
+						<NumericIndicator Title="YIELD" Label="%" Value="94.7"/>
+						<NumericIndicator Title="UPTIME" Label="MINS" Value="308"/>
+						<NumericIndicator Title="IDLE TIME" Label="MINS" Value="0"/>
+						<NumericIndicator Title="BLOCKED TIME" Label="MINS" Value="19"/>
+						<NumericIndicator Title="STARVED TIME" Label="MINS" Value="206"/>
+					</UniformGrid>
+				</DockPanel>
+			</StackPanel>
+		</Grid>
+
+	</FlexDocumentTab>
+	<FlexDocumentTab Title="Production Overview">
+		<FlexDocumentTab.Resources>
+			<Style TargetType="Label" x:Key="lpheader" BasedOn="{StaticResource t12pCaption}">
+				<Setter Property="Foreground" Value="{StaticResource mtBlue300}"/>
+				<Setter Property="FontWeight" Value="Light"/>
+				<Setter Property="Padding" Value="5 10"/>
+			</Style>
+			<Style TargetType="Label" x:Key="lpitemcn" BasedOn="{StaticResource t12pCaption}">
+				<Setter Property="Foreground" Value="{StaticResource mtGrey300}"/>
+				<Setter Property="FontWeight" Value="Light"/>
+				<Setter Property="HorizontalContentAlignment" Value="Left"/>
+				<Setter Property="Padding" Value="15 3 3 3"/>
+			</Style>
+			<Style TargetType="Label" x:Key="lpitemval" BasedOn="{StaticResource t12pCaption}">
+				<Setter Property="Foreground" Value="{StaticResource mtGreen400}"/>
+				<Setter Property="FontWeight" Value="Normal"/>
+				<Setter Property="HorizontalContentAlignment" Value="Right"/>
+				<Setter Property="Padding" Value="3 3 15 3"/>
+			</Style>
+			<Style TargetType="Label" x:Key="mpcn" BasedOn="{StaticResource t12pCaption}">
+				<Setter Property="Foreground" Value="{StaticResource mtGrey700}"/>
+				<Setter Property="FontWeight" Value="Heavy"/>
+				<Setter Property="Padding" Value="0"/>
+				<Setter Property="DockPanel.Dock" Value="Top"/>
+			</Style>
+			<Style TargetType="Label" x:Key="mpvalue" BasedOn="{StaticResource t24pHeadline}">
+				<Setter Property="Foreground" Value="{StaticResource mtGrey100}"/>
+				<Setter Property="FontWeight" Value="Light"/>
+				<Setter Property="Padding" Value="0"/>
+			</Style>
+			<Style TargetType="DockPanel" x:Key="mpv">
+				<Setter Property="Width" Value="130"/>
+				<Setter Property="Height" Value="70"/>
+			</Style>
+		</FlexDocumentTab.Resources>
+		<Grid Background="{Theme Paper}">
+			<StackPanel Width="220" Background="{StaticResource mtGrey900}" HorizontalAlignment="Left" Margin="10 0 0 0">
+				<Border Height="98"/>
+				<Label Content="REPORT DURATION" Style="{StaticResource lpheader}"/>
+				<StackPanel>
+					<DockPanel>
+						<Label Style="{StaticResource lpitemcn}" Content="RUN DATE"/>
+						<Label Style="{StaticResource lpitemval}" Content="Sep 22 2015"/>
+					</DockPanel>
+					<DockPanel>
+						<Label Style="{StaticResource lpitemcn}" Content="SHIFT"/>
+						<Label Style="{StaticResource lpitemval}" Content="1"/>
+					</DockPanel>
+					<DockPanel>
+						<Label Style="{StaticResource lpitemcn}" Content="START TIME"/>
+						<Label Style="{StaticResource lpitemval}" Content="07:00"/>
+					</DockPanel>
+					<DockPanel>
+						<Label Style="{StaticResource lpitemcn}" Content="END TIME"/>
+						<Label Style="{StaticResource lpitemval}" Content="15:30"/>
+					</DockPanel>
+					<DockPanel>
+						<Label Style="{StaticResource lpitemcn}" Content="DURATION"/>
+						<Label Style="{StaticResource lpitemval}" Content="7 Hrs 58 Mins"/>
+					</DockPanel>
+				</StackPanel>
+				<Label Content="HEAD COUNT" Style="{StaticResource lpheader}"/>
+				<StackPanel>
+					<DockPanel>
+						<Label Style="{StaticResource lpitemcn}" Content="LINE OPERATORS"/>
+						<Label Style="{StaticResource lpitemval}" Content="14"/>
+					</DockPanel>
+					<DockPanel>
+						<Label Style="{StaticResource lpitemcn}" Content="AUTOMATION TECHS"/>
+						<Label Style="{StaticResource lpitemval}" Content="3"/>
+					</DockPanel>
+					<DockPanel>
+						<Label Style="{StaticResource lpitemcn}" Content="ENGINEERS"/>
+						<Label Style="{StaticResource lpitemval}" Content="2"/>
+					</DockPanel>
+				</StackPanel>
+				<Label Content="FINANCIALS" Style="{StaticResource lpheader}"/>
+				<DockPanel Margin="0 10 0 0">
+					<Label Content="SALEABLE PRODUCT" Style="{StaticResource mpcn}" Foreground="{StaticResource mtGrey500}"/>
+					<Label Content="$0.00" Style="{StaticResource mpvalue}" Foreground="{StaticResource mtGreen400}"/>
+				</DockPanel>
+				<DockPanel Margin="0 20 0 0">
+					<Label Content="COST OF REJECTS" Style="{StaticResource mpcn}" Foreground="{StaticResource mtGrey500}"/>
+					<Label Content="$0.00" Style="{StaticResource mpvalue}" Foreground="{StaticResource mtRed400}"/>
+				</DockPanel>
+			</StackPanel>
+			<DockPanel Height="80" VerticalAlignment="Top" Margin="0 8 0 0">
+				<Border Height="7" DockPanel.Dock="Top" Background="{StaticResource mtBlue600}"/>
+				<Label Content="VALVE AUTOMATION LINE" Style="{StaticResource t24pHeadline}" Background="{StaticResource mtBlue800}"
+						 Foreground="White" FontWeight="Light" HorizontalContentAlignment="Left" Padding="20 0 0 0"/>
+			</DockPanel>
+			<StackPanel Margin="240 100 10 10" Orientation="Vertical">
+				<Label Content="SYSTEM PERFORMANCE" Style="{StaticResource t24pHeadline}" BorderThickness="0 0 0 2"
+						 BorderBrush="{StaticResource mtBlue600}"/>
+				<StackPanel VerticalAlignment="Top" Orientation="Horizontal" Margin="0 10">
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="OEE" Style="{StaticResource mpcn}"/>
+						<Label Content="0.0" Style="{StaticResource mpvalue}"/>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="THROUGHPUT" Style="{StaticResource mpcn}"/>
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="1,821" Style="{StaticResource mpvalue}"/>
+							<Label Content="UNITS" Style="{StaticResource _t10pSubCaption}" Padding="3"/>
+						</StackPanel>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="AVG CYCLE RATE" Style="{StaticResource mpcn}"/>
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="3.8" Style="{StaticResource mpvalue}"/>
+							<Label Content="CPM" Style="{StaticResource _t10pSubCaption}" Padding="3"/>
+						</StackPanel>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="UPTIME" Style="{StaticResource mpcn}"/>
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="421.00" Style="{StaticResource mpvalue}"/>
+							<Label Content="mins" Style="{StaticResource _t10pSubCaption}" Padding="3"/>
+						</StackPanel>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="REJECTS" Style="{StaticResource mpcn}"/>
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="895" Style="{StaticResource mpvalue}"/>
+							<Label Content="SA" Style="{StaticResource _t10pSubCaption}" Padding="3"/>
+						</StackPanel>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="SCRAP RATE" Style="{StaticResource mpcn}"/>
+						<Label Content="0.00%" Style="{StaticResource mpvalue}"/>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="YIELD" Style="{StaticResource mpcn}"/>
+						<Label Content="0.00%" Style="{StaticResource mpvalue}"/>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="ROLLED YIELD" Style="{StaticResource mpcn}"/>
+						<Label Content="0.00%" Style="{StaticResource mpvalue}"/>
+					</DockPanel>
+				</StackPanel>
+				<Label Content="DIAL K PERFORMANCE" Style="{StaticResource t24pHeadline}" BorderThickness="0 0 0 2" BorderBrush="{StaticResource mtGreen400}"/>
+				<StackPanel VerticalAlignment="Top" Orientation="Horizontal" Margin="0 10" HorizontalAlignment="Center">
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="GOOD PARTS" Style="{StaticResource mpcn}"/>
+						<Label Content="1821" Style="{StaticResource mpvalue}"/>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="REJECTS" Style="{StaticResource mpcn}"/>
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="174" Style="{StaticResource mpvalue}"/>
+							<Label Content="UNITS" Style="{StaticResource _t10pSubCaption}" Padding="3"/>
+						</StackPanel>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="YIELD" Style="{StaticResource mpcn}"/>
+						<Label Content="91.3%" Style="{StaticResource mpvalue}"/>
+					</DockPanel>
+					<DockPanel Style="{StaticResource mpv}">
+						<Label Content="UPTIME" Style="{StaticResource mpcn}"/>
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="450.00" Style="{StaticResource mpvalue}"/>
+							<Label Content="mins" Style="{StaticResource _t10pSubCaption}" Padding="3"/>
+						</StackPanel>
+					</DockPanel>
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+	</FlexDocumentTab>
+	<FlexDocumentTab Title="Dial Summary">
+		<StackPanel Margin="30" Orientation="Vertical" >
+			<PerformanceDataTilePresenter HorizontalAlignment="Center">
+				<PerformanceData Title="TEST" GoodParts="123" RejectParts="1129" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial M" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial B" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial C" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial D" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial E" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial G" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial R" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial H" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial I" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial J" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial P" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial Q" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+				<PerformanceData Title="Dial K" GoodParts="3490" RejectParts="19" Yield="99.5" OEE="63.5" Uptime="334"/>
+			</PerformanceDataTilePresenter>
+		</StackPanel>
+	</FlexDocumentTab>
+	<FlexDocumentTab Title="Completed vs. Rejects">
+		<StackPanel Margin="30" Orientation="Vertical" >
+			<Grid Height="600">
+				<StackedBarChart Title="Reject Breakdown" MaterialProvider="{x:Static AlternatingMaterialProvider.AltGP}">
+					<CategoricalDoubleSeries CategoryName="A1">
+						<CategoricalDouble CategoryName="Good Parts" Value="2057" />
+						<CategoricalDouble CategoryName="Rejects" Value="37" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="M1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1993" />
+						<CategoricalDouble CategoryName="Rejects" Value="81" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="B1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1871" />
+						<CategoricalDouble CategoryName="Rejects" Value="212" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="C1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1995" />
+						<CategoricalDouble CategoryName="Rejects" Value="23" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="D1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1928" />
+						<CategoricalDouble CategoryName="Rejects" Value="100" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="E1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1405" />
+						<CategoricalDouble CategoryName="Rejects" Value="6" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="G1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1399" />
+						<CategoricalDouble CategoryName="Rejects" Value="0" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="R1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1409" />
+						<CategoricalDouble CategoryName="Rejects" Value="1" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="H1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1889" />
+						<CategoricalDouble CategoryName="Rejects" Value="31" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="I1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1979" />
+						<CategoricalDouble CategoryName="Rejects" Value="46" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="J1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1874" />
+						<CategoricalDouble CategoryName="Rejects" Value="9" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="P1">
+						<CategoricalDouble CategoryName="Good Parts" Value="2009" />
+						<CategoricalDouble CategoryName="Rejects" Value="175" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="Q1">
+						<CategoricalDouble CategoryName="Good Parts" Value="2003" />
+						<CategoricalDouble CategoryName="Rejects" Value="0" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="K1">
+						<CategoricalDouble CategoryName="Good Parts" Value="1821" />
+						<CategoricalDouble CategoryName="Rejects" Value="174" />
+					</CategoricalDoubleSeries>
+				</StackedBarChart>
+			</Grid>
+		</StackPanel>
+	</FlexDocumentTab>
+	<FlexDocumentTab Title="Dial K Rejects">
+		<StackPanel Margin="30" Orientation="Vertical" >
+			<Grid Height="600">
+				<ParetoChart Title="Dial K Rejects" DataFilter="{x:Static LiteralDataFilter.DialKCategoryFilter}">
+					<CategoricalDouble CategoryName="HALLSENS_PUSHTEST_LT" Value="25" />
+					<CategoricalDouble CategoryName="HALLSENS_PUSHTEST_RT" Value="5" />
+					<CategoricalDouble CategoryName="HAPTIC_L" Value="4" />
+					<CategoricalDouble CategoryName="JOYSTICK_POSTSCAN" Value="9" />
+					<CategoricalDouble CategoryName="JOYSTICK_PRESCAN" Value="6" />
+					<CategoricalDouble CategoryName="KEY_SCAN_RESULT" Value="50" />
+					<CategoricalDouble CategoryName="TP_FIRST_TOUCH_L" Value="18" />
+					<CategoricalDouble CategoryName="TP_FIRST_TOUCH_R" Value="9" />
+					<CategoricalDouble CategoryName="TP_SCAN" Value="4" />
+				</ParetoChart>
+			</Grid>
+		</StackPanel>
+	</FlexDocumentTab>
+	<FlexDocumentTab Title="Rejects by Station">
+		<StackPanel Margin="30" Orientation="Vertical" >
+			<Grid Height="600">
+				<StackedBarChart Title="Rejects by Station">
+					<CategoricalDoubleSeries CategoryName="A1">
+						<CategoricalDouble CategoryName="P9" Value="2" />
+						<CategoricalDouble CategoryName="P15" Value="17" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="M1">
+						<CategoricalDouble CategoryName="P3" Value="3" />
+						<CategoricalDouble CategoryName="P4" Value="1" />
+						<CategoricalDouble CategoryName="P5" Value="2" />
+						<CategoricalDouble CategoryName="P8" Value="32" />
+						<CategoricalDouble CategoryName="P9" Value="32" />
+						<CategoricalDouble CategoryName="P10" Value="2" />
+						<CategoricalDouble CategoryName="P12" Value="6" />
+						<CategoricalDouble CategoryName="P13" Value="51" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="B1">
+						<CategoricalDouble CategoryName="P3" Value="1" />
+						<CategoricalDouble CategoryName="P4" Value="74" />
+						<CategoricalDouble CategoryName="P5" Value="2" />
+						<CategoricalDouble CategoryName="P6" Value="31" />
+						<CategoricalDouble CategoryName="P12" Value="1" />
+						<CategoricalDouble CategoryName="P14" Value="69" />
+						<CategoricalDouble CategoryName="P15" Value="173" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="C1">
+						<CategoricalDouble CategoryName="P3" Value="13" />
+						<CategoricalDouble CategoryName="P5" Value="4" />
+						<CategoricalDouble CategoryName="P9" Value="2" />
+						<CategoricalDouble CategoryName="P15" Value="133" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="D1">
+						<CategoricalDouble CategoryName="P4" Value="71" />
+						<CategoricalDouble CategoryName="P7" Value="22" />
+						<CategoricalDouble CategoryName="P14" Value="27" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="E1">
+						<CategoricalDouble CategoryName="P9" Value="186" />
+						<CategoricalDouble CategoryName="P14" Value="3" />
+						<CategoricalDouble CategoryName="P15" Value="4" />
+						<CategoricalDouble CategoryName="P16" Value="9" />
+					</CategoricalDoubleSeries>
+					<!--<CategoricalDoubleSeries CategoryName="G1">
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="R1">
+					</CategoricalDoubleSeries>-->
+					<CategoricalDoubleSeries CategoryName="H1">
+						<CategoricalDouble CategoryName="P6" Value="14" />
+						<CategoricalDouble CategoryName="P8" Value="74" />
+						<CategoricalDouble CategoryName="P12" Value="59" />
+						<CategoricalDouble CategoryName="P14" Value="7" />
+						<CategoricalDouble CategoryName="P16" Value="2" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="I1">
+						<CategoricalDouble CategoryName="P6" Value="1" />
+						<CategoricalDouble CategoryName="P8" Value="139" />
+						<CategoricalDouble CategoryName="P12" Value="1" />
+						<CategoricalDouble CategoryName="P15" Value="6" />
+						<CategoricalDouble CategoryName="P16" Value="16" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="J1">
+						<CategoricalDouble CategoryName="P6" Value="2" />
+						<CategoricalDouble CategoryName="P9" Value="34" />
+						<CategoricalDouble CategoryName="P11" Value="1" />
+						<CategoricalDouble CategoryName="P13" Value="4" />
+					</CategoricalDoubleSeries>
+					<CategoricalDoubleSeries CategoryName="P1">
+						<CategoricalDouble CategoryName="P1" Value="25" />
+						<CategoricalDouble CategoryName="P2" Value="113" />
+					</CategoricalDoubleSeries>
+					<!--<CategoricalDoubleSeries CategoryName="Q1">
+					</CategoricalDoubleSeries>-->
+					<CategoricalDoubleSeries CategoryName="K1">
+						<CategoricalDouble CategoryName="P6" Value="41" />
+						<CategoricalDouble CategoryName="P8" Value="77" />
+						<CategoricalDouble CategoryName="P10" Value="24" />
+						<CategoricalDouble CategoryName="P12" Value="13" />
+						<CategoricalDouble CategoryName="P16" Value="15" />
+					</CategoricalDoubleSeries>
+				</StackedBarChart>
+			</Grid>
+		</StackPanel>
+	</FlexDocumentTab>
+	<FlexDocumentTab Title="Dial Uptime">
+		<StackPanel Margin="30" Orientation="Vertical" >
+			<Grid Height="600">
+				<BarChart Title="Dial Uptime (Minutes)">
+					<CategoricalDouble CategoryName="A1" Value="199" />
+					<CategoricalDouble CategoryName="B1" Value="206" />
+					<CategoricalDouble CategoryName="C1" Value="215" />
+					<CategoricalDouble CategoryName="D1" Value="200" />
+					<CategoricalDouble CategoryName="E1" Value="140" />
+					<CategoricalDouble CategoryName="G1" Value="143" />
+					<CategoricalDouble CategoryName="H1" Value="197" />
+					<CategoricalDouble CategoryName="I1" Value="188" />
+					<CategoricalDouble CategoryName="J1" Value="191" />
+					<CategoricalDouble CategoryName="K1" Value="213" />
+					<CategoricalDouble CategoryName="M1" Value="204" />
+					<CategoricalDouble CategoryName="P1" Value="228" />
+					<CategoricalDouble CategoryName="Q1" Value="151" />
+					<CategoricalDouble CategoryName="R1" Value="56" />
+					<CategoricalDouble CategoryName="S1" Value="130" />
+				</BarChart>
+			</Grid>
+			<Grid Height="600">
+				<NestedArcChart Title="Dial Uptime (Minutes)"
+										ValueForeground="P300" ValueFontWeight="Medium"
+										SegmentSpaceBackground="->White000,0.05"
+										SecondaryValueForeground="->Grey400"
+										SecondaryValueFontWeight="Light"
+										SecondaryValueFontStyle="Italic">
+					<CategoricalDouble CategoryName="A1" Value="334" />
+					<CategoricalDouble CategoryName="M1" Value="344" />
+					<CategoricalDouble CategoryName="B1" Value="377" />
+					<CategoricalDouble CategoryName="C1" Value="409" />
+					<CategoricalDouble CategoryName="D1" Value="378" />
+					<CategoricalDouble CategoryName="E1" Value="329" />
+					<CategoricalDouble CategoryName="G1" Value="358" />
+					<CategoricalDouble CategoryName="R1" Value="185" />
+					<CategoricalDouble CategoryName="H1" Value="378" />
+					<CategoricalDouble CategoryName="I1" Value="341" />
+					<CategoricalDouble CategoryName="J1" Value="328" />
+					<CategoricalDouble CategoryName="P1" Value="364" />
+					<CategoricalDouble CategoryName="Q1" Value="218" />
+					<CategoricalDouble CategoryName="K1" Value="308" />
+					<CategoricalDouble CategoryName="S1" Value="315" />
+				</NestedArcChart>
+			</Grid>
+		</StackPanel>
+	</FlexDocumentTab>
+	<FlexDocumentTab Title="System OEE">
+		<StackPanel Margin="30" Orientation="Vertical">
+			<Grid Height="600">
+				<BarChart Title="Dial and System OEE">
+					<CategoricalDouble CategoryName="A" Value="44.43" />
+					<CategoricalDouble CategoryName="B" Value="40.34" />
+					<CategoricalDouble CategoryName="C" Value="43.56" />
+					<CategoricalDouble CategoryName="D" Value="41.97" />
+					<CategoricalDouble CategoryName="E" Value="30.29" />
+					<CategoricalDouble CategoryName="G" Value="30.20" />
+					<CategoricalDouble CategoryName="H" Value="41.10" />
+					<CategoricalDouble CategoryName="I" Value="42.81" />
+					<CategoricalDouble CategoryName="J" Value="40.45" />
+					<CategoricalDouble CategoryName="K" Value="39.48" />
+					<CategoricalDouble CategoryName="M" Value="43.02" />
+					<CategoricalDouble CategoryName="P" Value="43.58" />
+					<CategoricalDouble CategoryName="Q" Value="43.30" />
+					<CategoricalDouble CategoryName="R" Value="30.52" />
+					<CategoricalDouble CategoryName="SYS" Value="0.00" DataSorter.SortBehavior="ForceLast"/>
+				</BarChart>
+			</Grid>
+		</StackPanel>
+	</FlexDocumentTab>
+	<FlexDocumentTab Title="Line Faults"
+									 HorizontalBarChart.CommonYAxisWidth="350"
+									 HorizontalBarChart.CommonFixedRangeMax="21"
+									 HorizontalBarChart.CommonFixedRowHeight="40">
+		<StackPanel Margin="30" Orientation="Vertical">
+			<HorizontalBarChart Title="Top 15 Rejects">
+				<CategoricalDouble CategoryName="E - FAULT:MountMain-Failed To Clear Buffer Dial (Remove Remaining Parts)" Value="7" />
+				<CategoricalDouble CategoryName="E - FAULT:PinFeeder-Bowl Feed Time Out" Value="6" />
+				<CategoricalDouble CategoryName="E - FAULT:SpringFeeder-Left Hand Spring Low Level" Value="6" />
+				<CategoricalDouble CategoryName="E - FAULT:SpringFeeder-Right Hand Spring Low Level" Value="6" />
+				<CategoricalDouble CategoryName="G - FAULT:BmpMain-Failed to confirm place part" Value="8" />
+				<CategoricalDouble CategoryName="H - FAULT:FPCToPCAMain-Failed to pick PCA from Slide" Value="12" />
+				<CategoricalDouble CategoryName="H - FAULT:FPCToPCARobot-Robot Did Not Turn Off Complete Handshakes" Value="11" />
+				<CategoricalDouble CategoryName="J - FAULT:LabelRobot-Controller Level Error" Value="10" />
+				<CategoricalDouble CategoryName="J - FAULT:TopOnloadPalletShuttle-Lift did not raise" Value="8" />
+				<CategoricalDouble CategoryName="K - FAULT:OnloadFlipper-Vertical Slide Failed To Lower" Value="10" />
+				<CategoricalDouble CategoryName="M - FAULT:LHMountFeeder-Part Not Present At Escapement" Value="6" />
+				<CategoricalDouble CategoryName="M - FAULT:MountRobot-Controller Level Error" Value="9" />
+				<CategoricalDouble CategoryName="M - FAULT:OffloadVerifyMain-Part Sensed in INBOARD PCA Pocket" Value="21" />
+				<CategoricalDouble CategoryName="P - FAULT:RFTester1-Unexpected Part Data" Value="6" />
+				<CategoricalDouble CategoryName="P - FAULT:RFTester3-Too Many Consecutive Bad Parts" Value="10" />
+			</HorizontalBarChart>
+			<Grid Visibility="{Binding (ThemePrimitive.DocumentTheme).IsPrinterFriendly, 
+							Converter={ConditionalExpressionVisibilityConverter}, ConverterParameter='false'}">
+				<TabControl TabStripPlacement="Top" Background="Transparent">
+					<TabItem Header="A">
+						<HorizontalBarChart	Title="Assembly Line Faults for Dial 100">
+							<HorizontalBarChart.DataFilter>
+								<SubstringDataFilter StartIndex="10"/>
+							</HorizontalBarChart.DataFilter>
+							<CategoricalDouble CategoryName="A - FAULT:FRScan-Too Many Bad Parts Detected" Value="1" />
+							<CategoricalDouble CategoryName="A - FAULT:OffloadPalletShuttle-Failed To Confirm Pallet On Entry" Value="2" />
+							<CategoricalDouble CategoryName="A - FAULT:PCA Main-Failed To Confirm Place Left (Remove Part)" Value="2" />
+							<CategoricalDouble CategoryName="A - FAULT:PCA Main-Vision Test Failed 3 In A Row" Value="4" />
+							<CategoricalDouble CategoryName="A - FAULT:PSA1 Main-Failed To Apply PSA After 3 Attemps" Value="1" />
+							<CategoricalDouble CategoryName="A - FAULT:PSA1 Robot-Controller Level Error" Value="1" />
+							<CategoricalDouble CategoryName="A - FAULT:PSA1 Robot-Robot Application Did Not Start" Value="1" />
+							<CategoricalDouble CategoryName="A - FAULT:PSA1 Tape Dispenser-Unit Faulted Or Not In Run Mode" Value="1" />
+							<CategoricalDouble CategoryName="A - FAULT:PSA2 Robot-Robot Application Did Not Start" Value="1" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="M">
+						<HorizontalBarChart Title="Assembly Line Faults for Dial 105">
+							<CategoricalDouble CategoryName="M - FAULT:CvrBufferDial-VFD Not In Ready (Faults Not Cleared)" Value="5" />
+							<CategoricalDouble CategoryName="M - FAULT:CvrMain-Failed To Clear Buffer Dial (Remove Remaining Parts)" Value="2" />
+							<CategoricalDouble CategoryName="M - FAULT:CvrMain-Part Missing From Left Nest" Value="1" />
+							<CategoricalDouble CategoryName="M - FAULT:CvrMain-Part Missing From Right Nest" Value="2" />
+							<CategoricalDouble CategoryName="M - FAULT:CvrMain-Part Missing From Robot Gripper" Value="2" />
+							<CategoricalDouble CategoryName="M - FAULT:CvrMain-Unexpected Part In Left Nest" Value="2" />
+							<CategoricalDouble CategoryName="M - FAULT:CvrMain-Vision Test Failed Too Many Times In A Row" Value="4" />
+							<CategoricalDouble CategoryName="M - FAULT:CvrTrayLoader-(No message defined)" Value="1" />
+							<CategoricalDouble CategoryName="M - FAULT:LHMountFeeder-Escapement Slide Failed To Extend" Value="1" />
+							<CategoricalDouble CategoryName="M - FAULT:LHMountFeeder-Escapement Slide Failed To Extend" Value="2" />
+							<CategoricalDouble CategoryName="M - FAULT:LHMountFeeder-Part Not Present At Escapement" Value="6" />
+							<CategoricalDouble CategoryName="M - FAULT:LHMountFeeder-Part Present Sensor Failed To Transition" Value="4" />
+							<CategoricalDouble CategoryName="M - FAULT:MountMain-Failed To Place Left Part" Value="5" />
+							<CategoricalDouble CategoryName="M - FAULT:MountRobot-Controller Level Error" Value="9" />
+							<CategoricalDouble CategoryName="M - FAULT:OffloadRobot-Controller Level Error" Value="1" />
+							<CategoricalDouble CategoryName="M - FAULT:OffloadVerifyMain-Part Sensed in INBOARD PCA Pocket" Value="21" />
+							<CategoricalDouble CategoryName="M - FAULT:OffloadVerifyMain-Part Sensed in LEFT Pocket" Value="1" />
+							<CategoricalDouble CategoryName="M - FAULT:PCAMain-Robot Failed To Place Part To Nest" Value="2" />
+							<CategoricalDouble CategoryName="M - FAULT:PCAPalletPusher-Palletshuttle Handshake Not Clear" Value="1" />
+							<CategoricalDouble CategoryName="M - FAULT:PCARobot-Controller Level Error" Value="1" />
+							<CategoricalDouble CategoryName="M - FAULT:PSA1 Tape Dispenser-Failed To Present New Product" Value="2" />
+							<CategoricalDouble CategoryName="M - FAULT:PSA1 Tape Dispenser-Unit Faulted Or Not In Run Mode" Value="1" />
+							<CategoricalDouble CategoryName="M - FAULT:RHMountFeeder-Escapement Slide Failed To Extend" Value="1" />
+							<CategoricalDouble CategoryName="M - FAULT:RHMountFeeder-Part Not Present At Escapement" Value="1" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="B">
+						<HorizontalBarChart Title="Assembly Line Faults for Dial 110">
+							<CategoricalDouble CategoryName="B - FAULT:Cam4InterfaceInpectAlign-Failed To Receive INIT Reply" Value="1" />
+							<CategoricalDouble CategoryName="B - FAULT:ContinuityMain-3 Left Bad Parts In A Row" Value="1" />
+							<CategoricalDouble CategoryName="B - FAULT:ContinuityMain-3 Right Bad Parts In A Row" Value="3" />
+							<CategoricalDouble CategoryName="B - FAULT:FPC_LftSlide-Failed To Hold (Crowd) FPC" Value="1" />
+							<CategoricalDouble CategoryName="B - FAULT:FPC_RgtSlide-Failed To Confirm FPC Present At Slide (Remove)" Value="1" />
+							<CategoricalDouble CategoryName="B - FAULT:FPCPrepareRobot-Controller Level Error" Value="4" />
+							<CategoricalDouble CategoryName="B - FAULT:FPCTapeDisp-Unit Faulted Or Not In Run Mode" Value="1" />
+							<CategoricalDouble CategoryName="B - FAULT:InsertRobotServer-Socket Connection Is Not Open" Value="1" />
+							<CategoricalDouble CategoryName="B - FAULT:OffloadMain-Robot Failed To Pick Part From Nest" Value="6" />
+							<CategoricalDouble CategoryName="B - FAULT:RgtPasteServo-(No message defined)" Value="1" />
+							<CategoricalDouble CategoryName="B - FAULT:TrkPadsMain-Part Missing From Robot Gripper" Value="1" />
+							<CategoricalDouble CategoryName="B - FAULT:TrkPadsMain-Robot Failed To Pick PCA From Pallet" Value="1" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="C">
+						<HorizontalBarChart	Title="Assembly Line Faults for Dial 120">
+							<CategoricalDouble CategoryName="C - FAULT:ABXYOrientScan-Failed To Move To End And Complete Test" Value="1" />
+							<CategoricalDouble CategoryName="C - FAULT:Emergency Stop" Value="1" />
+							<CategoricalDouble CategoryName="C - FAULT:SprFlapBufferDial-VFD Not In Ready (Check Tray Handler)" Value="2" />
+							<CategoricalDouble CategoryName="C - FAULT:SprFlapMain-Part Missing From Robot Gripper" Value="2" />
+							<CategoricalDouble CategoryName="C - FAULT:SprFlapRobot-Controller Level Error" Value="2" />
+							<CategoricalDouble CategoryName="C - FAULT:SprFlapTrayLoader-Robot Heartbeat Lost" Value="1" />
+							<CategoricalDouble CategoryName="C - FAULT:SysBufferDial-VFD Not In Ready (Check Tray Handler)" Value="2" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="D">
+						<HorizontalBarChart	Title="Assembly Line Faults for Dial 130">
+							<CategoricalDouble CategoryName="D - FAULT:DialMain-Work Position 16 Lost ClearToIndex Permissive While Dial Indexing" Value="2" />
+							<CategoricalDouble CategoryName="D - FAULT:Guard Door Relay Tripped" Value="1" />
+							<CategoricalDouble CategoryName="D - FAULT:MembraneFeeder-Both Feeders Empty Or Faulted" Value="5" />
+							<CategoricalDouble CategoryName="D - FAULT:MembraneMain-Holder Failed To Lower" Value="1" />
+							<CategoricalDouble CategoryName="D - FAULT:OffloadPalletPusher-Pallet Pusher Did Not Extend" Value="1" />
+							<CategoricalDouble CategoryName="D - FAULT:OffloadPalletShuttle-Lift Failed To Raise" Value="2" />
+							<CategoricalDouble CategoryName="D - FAULT:OffloadRobot-Controller Level Error" Value="1" />
+							<CategoricalDouble CategoryName="D - FAULT:OffloadRobot-Robot Heartbeat Not Responding" Value="1" />
+							<CategoricalDouble CategoryName="D - FAULT:Screw12Feeder-Failed To Escape Screw To Tube 1" Value="3" />
+							<CategoricalDouble CategoryName="D - FAULT:TrkpadsMain-Fail To Pick Right Part. Please Manually Reject Parts" Value="2" />
+							<CategoricalDouble CategoryName="D - FAULT:TrkPadsPalletShuttle-Failed To Confirm Pallet On Entry" Value="1" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="E">
+						<HorizontalBarChart	Title="Assembly Line Faults for Dial 140">
+							<CategoricalDouble CategoryName="E - FAULT:CapMain-Part In Right Nest not detected after place" Value="1" />
+							<CategoricalDouble CategoryName="E - FAULT:LHPinInsertion-Failed To Extend Tooling" Value="1" />
+							<CategoricalDouble CategoryName="E - FAULT:MountMain-Failed To Clear Buffer Dial (Remove Remaining Parts)" Value="7" />
+							<CategoricalDouble CategoryName="E - FAULT:MountMain-Failed To Place Left " Value="2" />
+							<CategoricalDouble CategoryName="E - FAULT:MountMain-Failed To Place Right" Value="3" />
+							<CategoricalDouble CategoryName="E - FAULT:MountMain-Unexpected Part In Left Nest" Value="2" />
+							<CategoricalDouble CategoryName="E - FAULT:MountMain-Unexpected Part In Right Nest" Value="1" />
+							<CategoricalDouble CategoryName="E - FAULT:OffloadMain-Missing Part In Right Nest" Value="1" />
+							<CategoricalDouble CategoryName="E - FAULT:OffloadMain-Robot Failed To Place In Pallet" Value="1" />
+							<CategoricalDouble CategoryName="E - FAULT:PinFeeder-Bowl Feed Time Out" Value="6" />
+							<CategoricalDouble CategoryName="E - FAULT:PinFeeder-Left Pin Insertion Handshake Timeout" Value="2" />
+							<CategoricalDouble CategoryName="E - FAULT:PinFeeder-Right Shuttle Failed To Extend" Value="1" />
+							<CategoricalDouble CategoryName="E - FAULT:RHTriggerTestPC-(No message defined)" Value="2" />
+							<CategoricalDouble CategoryName="E - FAULT:SpringFeeder-Failed To Feed Left Trigger Spring In Escapement" Value="1" />
+							<CategoricalDouble CategoryName="E - FAULT:SpringFeeder-Failed To Feed Right Trigger Spring In Escapement" Value="2" />
+							<CategoricalDouble CategoryName="E - FAULT:SpringFeeder-Left Hand Spring Low Level" Value="6" />
+							<CategoricalDouble CategoryName="E - FAULT:SpringFeeder-Right Hand Spring Low Level" Value="6" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="G">
+						<HorizontalBarChart	Title="Assembly Line Faults for Dial 160">
+							<CategoricalDouble CategoryName="G - FAULT:BmpBufferDial-VFD Not In Ready (Check Tray Handler)" Value="2" />
+							<CategoricalDouble CategoryName="G - FAULT:BmpMain-Failed to confirm place part" Value="8" />
+							<CategoricalDouble CategoryName="G - FAULT:OffloadPalletShuttle-Lift Failed To Lower" Value="2" />
+							<CategoricalDouble CategoryName="G - FAULT:PCAMain-Failed to confirm part place" Value="2" />
+							<CategoricalDouble CategoryName="G - FAULT:TrgMain-(No message defined)" Value="2" />
+							<CategoricalDouble CategoryName="G - FAULT:TrgMain-Left Trigger Failed to be Detected After Robot Placed" Value="2" />
+							<CategoricalDouble CategoryName="G - FAULT:TrgMain-Right Trigger Failed to be Detected After Robot Placed" Value="4" />
+							<CategoricalDouble CategoryName="G - FAULT:TrgPalletShuttle-Failed To Confirm Pallet On Entry" Value="1" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="H">
+						<HorizontalBarChart	Title="Assembly Line Faults for Dial 170">
+							<CategoricalDouble CategoryName="H - FAULT:Emergency Stop" Value="1" />
+							<CategoricalDouble CategoryName="H - FAULT:FPCToPCAMain-Failed to pick PCA from Slide" Value="12" />
+							<CategoricalDouble CategoryName="H - FAULT:FPCToPCAMain-FPC Insert Vision check failed 3 times in succession" Value="2" />
+							<CategoricalDouble CategoryName="H - FAULT:FPCToPCAMain-Missing Part In Robot Gripper" Value="2" />
+							<CategoricalDouble CategoryName="H - FAULT:FPCToPCARobot-Robot Did Not Turn Off Complete Handshakes" Value="11" />
+							<CategoricalDouble CategoryName="H - FAULT:OffloadMain-Part Missing From Nest" Value="2" />
+							<CategoricalDouble CategoryName="H - FAULT:PCAPalletShuttle-Unexpected Pallet At Exit" Value="1" />
+							<CategoricalDouble CategoryName="H - FAULT:PCAPalletShuttle-Unexpected Pallet At Shuttle Entry" Value="2" />
+							<CategoricalDouble CategoryName="H - FAULT:Screw1Driver-Failed To Extend Bit" Value="2" />
+							<CategoricalDouble CategoryName="H - FAULT:Screw1Main-Holder Failed To Extend" Value="2" />
+							<CategoricalDouble CategoryName="H - FAULT:TopMain-Part Not Sensed After Placing In Nest" Value="1" />
+							<CategoricalDouble CategoryName="H - FAULT:TopMain-Part Not Sensed After Placing In Nest" Value="2" />
+							<CategoricalDouble CategoryName="H - FAULT:TopPalletShuttle-Failed To Detect Pallet At Exit" Value="2" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="I">
+						<HorizontalBarChart Title="Assembly Line Faults for Dial 180">
+							<CategoricalDouble CategoryName="I - FAULT:CaseBufferDial-Dial Not In Position After Index" Value="2" />
+							<CategoricalDouble CategoryName="I - FAULT:CaseBufferDial-VFD Not In Ready (Check Tray Handler)" Value="2" />
+							<CategoricalDouble CategoryName="I - FAULT:CaseMain-Part missing from robot vacuum" Value="1" />
+							<CategoricalDouble CategoryName="I - FAULT:CaseMain-Remove case from robot and update status" Value="1" />
+							<CategoricalDouble CategoryName="I - FAULT:CaseRobot-Controller Level Error" Value="1" />
+							<CategoricalDouble CategoryName="I - FAULT:LatchMain-Unexpected Part In Dial Nest" Value="1" />
+							<CategoricalDouble CategoryName="I - FAULT:LatchMain-Unexpected Part In Nest" Value="2" />
+							<CategoricalDouble CategoryName="I - FAULT:LatchRobot-Controller Level Error" Value="1" />
+							<CategoricalDouble CategoryName="I - FAULT:LatchSprFeeder-Failed To Feed 3 Times In A Row" Value="4" />
+							<CategoricalDouble CategoryName="I - FAULT:LHLvrSprFeeder-Both Feeders Empty Or Faulted" Value="5" />
+							<CategoricalDouble CategoryName="I - FAULT:OffloadFlipper-Part Not Sensed In Gripper(Remove Part)" Value="1" />
+							<CategoricalDouble CategoryName="I - FAULT:OffloadFlipper-Vertical Slide Failed To Lower" Value="2" />
+							<CategoricalDouble CategoryName="I - FAULT:OffloadMain-Part Missing From Dial" Value="3" />
+							<CategoricalDouble CategoryName="I - FAULT:OffloadMain-Robot Failed To Pick" Value="2" />
+							<CategoricalDouble CategoryName="I - FAULT:OffloadRobot-Controller Level Error" Value="1" />
+							<CategoricalDouble CategoryName="I - FAULT:RHLvrPNP-Part Not Sensed At Dial Load Position After Placing" Value="1" />
+							<CategoricalDouble CategoryName="I - FAULT:RHLvrSprFeeder-Both Feeders Empty Or Faulted" Value="4" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="J">
+						<HorizontalBarChart	Title="Assembly Line Faults for Dial 190">
+							<CategoricalDouble CategoryName="J - FAULT:BotOnloadPalletPusher-Pallet Pusher Did Not Extend" Value="1" />
+							<CategoricalDouble CategoryName="J - FAULT:DongleMain-Unexpected Dongle Sensed In Dial Nest" Value="3" />
+							<CategoricalDouble CategoryName="J - FAULT:Label Main-Remove rejected labels" Value="5" />
+							<CategoricalDouble CategoryName="J - FAULT:LabelPrinter-Failed To Print Label" Value="4" />
+							<CategoricalDouble CategoryName="J - FAULT:LabelRobot-Controller Level Error" Value="10" />
+							<CategoricalDouble CategoryName="J - FAULT:OffloadPalletShuttle-Unexpected Part On Pallet At Prestop" Value="3" />
+							<CategoricalDouble CategoryName="J - FAULT:Screw12Feeder-Failed To Escape Screw To Tube 1 - Feeder Low" Value="1" />
+							<CategoricalDouble CategoryName="J - FAULT:TopOnloadMain-Unexpected Part Present In Dial Nest" Value="1" />
+							<CategoricalDouble CategoryName="J - FAULT:TopOnloadPalletShuttle-Lift did not raise" Value="8" />
+							<CategoricalDouble CategoryName="J - FAULT:TopOnloadPalletShuttle-Pallet did not arrive" Value="1" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="K">
+						<HorizontalBarChart Title="Assembly Line Faults for Dial 206">
+							<CategoricalDouble CategoryName="K - FAULT:Main-Dial Position Recovery Complete - Full Init Required" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:OffloadPalletShuttle-Missing Pallet At Shuttle Exit" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:OnloadFlipper-Vaccum Sensor Not On And/Or Gripper Failed To Close On Part" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:OnloadFlipper-Vertical Slide Failed To Lower" Value="10" />
+							<CategoricalDouble CategoryName="K - FAULT:OnloadMain-Dongle Not Sensed After Placing In Nest (Manually Load Parts To N" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:OnloadPalletShuttle-Failed To Confirm Pallet On Entry" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:OnloadPalletShuttle-Failed To Detect Pallet At Exit" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:OnloadPalletShuttle-Lift Failed To Raise" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:OnloadPalletShuttle-Shuttle Failed To Extend" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:PLC Changed From Program To Run" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:Test1Main-Test PC Failed To Respond" Value="1" />
+							<CategoricalDouble CategoryName="K - FAULT:Test2Robot-Controller Level Error" Value="1" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="P">
+						<HorizontalBarChart Title="Assembly Line Faults for Dial 200">
+							<CategoricalDouble CategoryName="P - FAULT:JPBufferStop1-Stop Failed To Retract" Value="1" />
+							<CategoricalDouble CategoryName="P - FAULT:RFPNP1-Head2 Dongle Gripper Out Of Position For Picking" Value="2" />
+							<CategoricalDouble CategoryName="P - FAULT:RFPNP1-Head2 Failed To Achieve Vacuum" Value="2" />
+							<CategoricalDouble CategoryName="P - FAULT:RFPNP1-Head2 Failed To Pick Parts" Value="4" />
+							<CategoricalDouble CategoryName="P - FAULT:RFPNP1-Too Many Consecutive Rejected Parts" Value="2" />
+							<CategoricalDouble CategoryName="P - FAULT:RFPNP1-Unexpected Head2 Part Present" Value="2" />
+							<CategoricalDouble CategoryName="P - FAULT:RFPNP2-Head2 Failed To Pick Parts" Value="1" />
+							<CategoricalDouble CategoryName="P - FAULT:RFPNP2-Too Many Consecutive Rejected Parts" Value="1" />
+							<CategoricalDouble CategoryName="P - FAULT:RFPNP2-Unexpected Head2 Part Present" Value="4" />
+							<CategoricalDouble CategoryName="P - FAULT:RFTester1-Unexpected Part Data" Value="6" />
+							<CategoricalDouble CategoryName="P - FAULT:RFTester3-Too Many Consecutive Bad Parts" Value="10" />
+							<CategoricalDouble CategoryName="P - FAULT:RFTester3-Unexpected Part Data" Value="1" />
+							<CategoricalDouble CategoryName="P - FAULT:RFTester4-Too Many Consecutive Bad Parts" Value="2" />
+							<CategoricalDouble CategoryName="P - FAULT:RFWorkstops-Missing Dongle In Downstream" Value="2" />
+							<CategoricalDouble CategoryName="P - FAULT:RFWorkstops-Unexpected Dongle In Downstream" Value="1" />
+							<CategoricalDouble CategoryName="P - FAULT:RFWorkstops-Unexpected Pallet Combination - Both Stops Must Have Same Pallet" Value="3" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="Q">
+						<HorizontalBarChart Title="Assembly Line Faults for Dial 204">
+							<CategoricalDouble CategoryName="Q - FAULT:BatDoorBufferDial-VFD Not In Ready (Check Tray Handler)" Value="1" />
+							<CategoricalDouble CategoryName="Q - FAULT:BatDoorMain-Robot Failed To Pick" Value="2" />
+						</HorizontalBarChart>
+					</TabItem>
+					<TabItem Header="R">
+						<HorizontalBarChart	Title="Assembly Line Faults for Dial 165">
+							<CategoricalDouble CategoryName="R - FAULT:GRBufferStop1-Stop Failed To Retract" Value="1" />
+							<CategoricalDouble CategoryName="R - FAULT:ThumbMain-Manually Reject Thumbstick/Part Not Sensed After Place" Value="5" />
+							<CategoricalDouble CategoryName="R - FAULT:WorkStop1-Part Not Sensed On Pallet" Value="2" />
+							<CategoricalDouble CategoryName="R - FAULT:WorkStop1-Unexpected Thumbstick" Value="3" />
+						</HorizontalBarChart>
+					</TabItem>
+				</TabControl>
+			</Grid>
+		</StackPanel>
+	</FlexDocumentTab>
+</FlexDocument>
+
+
+<!--<Grid>
+TODO staticresource ITEMS NOT ITEMSOURCE binding! 
+				<ItemsControl ItemsSource="{StaticResource LineFaultsDataSource}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate DataType="GraphData">
+							<Grid Height="1000">
+								<HorizontalBarChart Title="{Binding Path=Title, Mode=TwoWay}" 
+																		Data="{Binding Path=Data, Mode=TwoWay}"/>
+							</Grid>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Orientation="Vertical"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
+
+			</Grid>-->

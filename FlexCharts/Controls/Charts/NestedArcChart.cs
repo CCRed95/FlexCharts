@@ -367,33 +367,40 @@ namespace FlexCharts.Controls.Charts
 
 		protected override void OnRender(DrawingContext drawingContext)
 		{
+			//TODO potential rendering loop.
+			if (FilteredData.Count < 1)
+			{
+				FilteredData = DataFilter.Filter(DataSorter.Sort(Data));
+				base.OnRender(drawingContext);
+				return;
+			}
 			visualContext = new NestedArcChartVisualContext();
 
 			PART_segments.Children.Clear();
 			PART_inactivesegments.Children.Clear();
 			PART_categorylabels.Children.Clear();
 
-			var context = new ProviderContext(Data.Count);
+			var context = new ProviderContext(FilteredData.Count);
 			MaterialProvider.Reset(context);
 
 			var fullArcDiameter = PART_main.RenderSize.Height - TopRingPadding;
 			var fullArcWidth = fullArcDiameter - BottomRingPadding;
-			var subArcAvailableWidth = fullArcWidth / Data.Count;
+			var subArcAvailableWidth = fullArcWidth / FilteredData.Count;
 			var subArcActualWidth = subArcAvailableWidth * SegmentWidthPercentage;
 			var subRingOffset = (subArcAvailableWidth - subArcActualWidth) / 2;
 
 			var fullRadius = PART_main.RenderSize.Width / 2;
 			var centerPoint = new Point(0, fullRadius);
 
-			if (Data.Count < 1)
+			if (FilteredData.Count < 1)
 			{
 				base.OnRender(drawingContext);
 				return;
 			}
 
-			var max = Data.MaxValue();
+			var max = FilteredData.MaxValue();
 			var trace = 0;
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var categoryVisualContext = new NestedArcCategoryVisualContext();
 				var materialSet = MaterialProvider.ProvideNext(context);
@@ -429,9 +436,9 @@ namespace FlexCharts.Controls.Charts
 			}
 			var ltrace = 0;
 
-			for (var x = Data.Count - 1; x >= 0; x--)
+			for (var x = FilteredData.Count - 1; x >= 0; x--)
 			{
-				var d = Data[x];
+				var d = FilteredData[x];
 				var currentCategoryVisualContext = visualContext.CategoryVisuals[x];
 				var shape = (Shape)d.RenderedVisual;//.ShouldBeCastable<Shape>();
 				var renderedFill = (SolidColorBrush)shape.Fill;//.ShouldBeType<SolidColorBrush>();

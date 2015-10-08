@@ -321,9 +321,9 @@ namespace FlexCharts.Controls.Charts
 		}
 		private void focusLargestDataPoint()
 		{
-			if (Data.Count < 1) return;
-			CategoricalDouble[] maxrsp = { Data[0] };
-			foreach (var d in Data.Where(d =>
+			if (FilteredData.Count < 1) return;
+			CategoricalDouble[] maxrsp = { FilteredData[0] };
+			foreach (var d in FilteredData.Where(d =>
 			d.RenderedVisual.RequireType<ArcPath>().ArcAngle > maxrsp[0].RenderedVisual.RequireType<ArcPath>().ArcAngle))
 			{
 				maxrsp[0] = d;
@@ -416,7 +416,7 @@ namespace FlexCharts.Controls.Charts
 			PART_focusedsegmentlabel.Foreground = SecondaryValueForeground.GetMaterial(FallbackMaterialSet);
 			PART_segments.Children.Clear();
 
-			var context = new ProviderContext(Data.Count);
+			var context = new ProviderContext(FilteredData.Count);
 			MaterialProvider.Reset(context);
 
 			var radius = (PART_segments.RenderSize.Smallest() * CircleScale) / 2;
@@ -424,7 +424,7 @@ namespace FlexCharts.Controls.Charts
 			var total = Data.SumValue();
 			var angleTrace = 0d;
 			var actualRingWidth = radius * RingWidthPercentage;
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var materialSet = MaterialProvider.ProvideNext(context);
 				var degrees = (d.Value / total) * 360;
@@ -452,7 +452,7 @@ namespace FlexCharts.Controls.Charts
 
 			var targetAngularOffset = FocusedSegment.RequireType<ArcPath>().CalculateAngularOffset();
 			MaterialProvider.Reset(context);
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var materialSet = MaterialProvider.ProvideNext(context);
 

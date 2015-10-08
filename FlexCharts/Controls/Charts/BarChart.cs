@@ -194,7 +194,7 @@ namespace FlexCharts.Controls.Charts
 		private void animateBarReveal()
 		{
 			var animationOffset = 0;
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var renderedShapeList = (List<Shape>)d.RenderedVisual;
 				foreach (var i in renderedShapeList)
@@ -221,21 +221,21 @@ namespace FlexCharts.Controls.Charts
 			PART_xAxis.Children.Clear();
 			PART_highlight.Children.Clear();
 
-			if (Data.Count < 1)
+			if (FilteredData.Count < 1)
 			{
 				base.OnRender(drawingContext);
 				return;
 			}
-			var total = Data.MaxValue();
+			var total = FilteredData.MaxValue();
 
-			var context = new ProviderContext(Data.Count);
-			var barAvailableWidth = PART_bars.RenderSize.Width / Data.Count;
+			var context = new ProviderContext(FilteredData.Count);
+			var barAvailableWidth = PART_bars.RenderSize.Width / FilteredData.Count;
 			var barActiveWidth = barAvailableWidth * SegmentWidthPercentage;
 			var barLeftSpacing = (barAvailableWidth - barActiveWidth) / 2;
 			var barLabelSize = RenderingExtensions.EstimateLabelRenderSize(BarTotalFontFamily, BarTotalFontSize);
 			MaterialProvider.Reset(context);
 			var xtrace = 0;
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var materialSet = MaterialProvider.ProvideNext(context);
 				var axisLabel = new Label
@@ -260,7 +260,7 @@ namespace FlexCharts.Controls.Charts
 			var xAxisHeight = PART_xAxis.ActualHeight;
 			var backHeight = PART_bars.RenderSize.Height - xAxisHeight;
 			MaterialProvider.Reset(context);
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var materialSet = MaterialProvider.ProvideNext(context);
 				var backRectangle = new Rectangle

@@ -38,6 +38,7 @@ namespace FlexReports.Data
 				SaveToBinaryStream();
 			}
 		}
+		
 		public void SaveToBinaryStream()
 		{
 			IFormatter formatter = new BinaryFormatter();

@@ -4,89 +4,97 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:Material.Converters;assembly=Material"
+        xmlns:flexReports="clr-namespace:FlexReports"
         mc:Ignorable="d"
 				VisualFeedback.ClickFeedback="P300"									
         Title="Report Viewer" Height="600" Width="1000" MinHeight="500" MinWidth="800">
-	<Grid>
-		<DockPanel>
-			<DockPanel Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" Width="64">
-				<Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtPink500}}" 
-							TextElement.Foreground="{StaticResource mtGrey50}" Panel.ZIndex="110" Effect="{StaticResource shadowDelta2}">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition/>
-						<ColumnDefinition Width="64"/>
-					</Grid.ColumnDefinitions>
-					<Grid Name="LeftTitleBar" Opacity="1">
-						<Label Content="Open Report" Style="{StaticResource t20pTitle}" FontSize="18pt"  Padding="30 0" HorizontalAlignment="Center"/>
-					</Grid>
-					<Grid Grid.Column="1">
-						<ToggleButton Name="MenuToggle" Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 0" 
+  <Grid>
+    <PopupManager x:Name="PopupSpace" Panel.ZIndex="200"/>
+		<DockPanel Panel.ZIndex="10">
+      <DockPanel  Panel.ZIndex="10" Name="LeftMenu" DockPanel.Dock="Left" Background="{StaticResource mtGrey100}" Width="64">
+        <Grid DockPanel.Dock="Top" Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtBlue500}}" 
+							TextElement.Foreground="{StaticResource mtGrey50}" Panel.ZIndex="110" ><!--Effect="{StaticResource shadowDelta2}"-->
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="64"/>
+          </Grid.ColumnDefinitions>
+          <Grid Name="LeftTitleBar" Opacity="1">
+            <Label Content="Open Report" Style="{StaticResource t20pTitle}" FontSize="18pt"  Padding="30 0" HorizontalAlignment="Center"/>
+          </Grid>
+          <Grid Grid.Column="1">
+            <ToggleButton Name="MenuToggle" Style="{StaticResource MaterialMenuArrowToggleButton}" Margin="0 0" 
 											HorizontalAlignment="Center" Click="toggleMenu" Panel.ZIndex="115" />
-						<!--<Rectangle Fill="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtPink500}}" HorizontalAlignment="Right" Width="10" Height="40" Panel.ZIndex="600" ></Rectangle>-->
-					</Grid>
-				</Grid>
-				<Grid DockPanel.Dock="Bottom">
-					<FileManager VisualFeedback.ClickFeedback="P050"	
+          </Grid>
+        </Grid>
+        <Grid DockPanel.Dock="Bottom">
+          <FileManager VisualFeedback.ClickFeedback="P050"	
 											x:Name="LeftPanelItems" RequestOpenFile="OnRequestOpenFile"/>
-					<Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="64"
+          <Grid Name="LeftIconMenu" HorizontalAlignment="Right" Width="64"
 								Background="{StaticResource mtGrey900}">
-						<StackPanel Orientation="Vertical" VerticalAlignment="Center">
-							<Viewbox RenderTransformOrigin=".5,.5">
-								<Viewbox.RenderTransform>
-									<ScaleTransform ScaleX="1.7" ScaleY="1.7"/>
-								</Viewbox.RenderTransform>
-								<Path Style="{StaticResource drawabledrag_vertical}" Fill="{StaticResource mtGrey100}"/>
-							</Viewbox>
-						</StackPanel>
-					</Grid>
-				</Grid>
-			</DockPanel>
-			<Grid DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
-				<StackPanel Orientation="Vertical">
-					<Grid Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtPink500}}" 
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+              <Viewbox RenderTransformOrigin=".5,.5">
+                <Viewbox.RenderTransform>
+                  <ScaleTransform ScaleX="1.7" ScaleY="1.7"/>
+                </Viewbox.RenderTransform>
+                <Path Style="{StaticResource drawabledrag_vertical}" Fill="{StaticResource mtGrey100}"/>
+              </Viewbox>
+            </StackPanel>
+          </Grid>
+        </Grid>
+      </DockPanel>
+      <Grid  Panel.ZIndex="5" DockPanel.Dock="Right" Background="{StaticResource mtGrey50}">
+        <DockPanel >
+          <Grid DockPanel.Dock="Top"  Height="64" Background="{Binding Path=(ThemePrimitive.Theme).P500, FallbackValue={StaticResource mtBlue500}}" 
 								TextElement.Foreground="{StaticResource mtGrey50}" Effect="{StaticResource shadowDelta3}" Panel.ZIndex="100">
-						<Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
-							 Padding="30 0" HorizontalContentAlignment="Left" />
+            <Label Content="Report Viewer" Style="{StaticResource t20pTitle}" FontSize="18pt"  HorizontalAlignment="Left"
+							 Padding="30 0" HorizontalContentAlignment="Left" Visibility="{Binding (ThemePrimitive.DocumentTheme).IsPrinterFriendly, 
+							Converter={ConditionalExpressionVisibilityConverter}, ConverterParameter='true'}"/>
+						
 						<StackPanel Name="AppToolbar" HorizontalAlignment="Right" Orientation="Horizontal">
-							<Image Width="200" Source="Resources/FlexVIEX_Logo_t.png"></Image>
-							<Button Style="{StaticResource PathButton}" Click="SelectTheme">
-								<Path Style="{StaticResource drawablecolor_lens}"/>
-							</Button>
-							<Button Style="{StaticResource PathButton}">
-								<Path Style="{StaticResource drawablemore_vert}"/>
-							</Button>
-						</StackPanel>
-					</Grid>
-					<DockPanel>
-						<Grid Height="44" DockPanel.Dock="Top" Panel.ZIndex="70">
-							<!--Effect="{StaticResource shadowDelta2}" >-->
-
-							<TabSelector x:Name="documentTabSelector" TabSelected="OnTabSelected"
+							<Grid Width="300" Height="50" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="{Binding HasContent, ElementName=documentViewport, 
+									Converter={ConditionalExpressionVisibilityConverter}, ConverterParameter='true'}">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="50"/>
+                  <ColumnDefinition />
+									<!--<ColumnDefinition Width="50"/>-->
+								</Grid.ColumnDefinitions>
+                <Label Content="{Binding ElementName=slider, Path=Value, Converter={StaticResource d2pc}}" Style="{StaticResource t15pSubhead}" Padding="5"/>
+								<Slider Grid.Column="1" x:Name="slider" Style="{StaticResource MaterialDesignSlider}" Orientation="Horizontal" Minimum=".3" Maximum=".95" 
+											 Margin="20 10" VerticalAlignment="Center"/>
+							</Grid>
+              <Image Width="200" Source="Resources/FlexVIEX_Logo_t.png"/>
+              <Button Style="{StaticResource PathButton}" Click="RefreshDocument">
+                <Path Style="{StaticResource drawablerefresh}"/>
+              </Button>
+              <Button Style="{StaticResource PathButton}" Click="SelectTheme">
+                <Path Style="{StaticResource drawablecolor_lens}"/>
+              </Button>
+              <ToggleButton Style="{StaticResource MaterialNightDayToggle}" IsChecked="True" Unchecked="ApplyLightTheme" Checked="ApplyDarkTheme">
+                <Path Style="{StaticResource drawableprint}"/>
+              </ToggleButton>
+              <Button Style="{StaticResource PathButton}" Click="PrinterFriendly">
+                <Path Style="{StaticResource drawableprint}"/>
+              </Button>
+            </StackPanel>
+          </Grid>
+          <Grid DockPanel.Dock="Bottom">
+            <DockPanel>
+              <Grid Height="44" DockPanel.Dock="Top" Panel.ZIndex="70">
+                <TabSelector x:Name="documentTabSelector" TabSelected="OnTabSelected"
 																			 Tabs="{Binding ElementName=documentViewport, Path=Document, Converter={converters:FlexDocumentTabSelectorAdapter}}"
 													 Effect="{StaticResource shadowDelta3}"/>
-							<!--<Border Effect="{StaticResource shadowDelta5}" Height="20" Background="Transparent"  VerticalAlignment="Top" ></Border>-->
-						</Grid>
-						<Grid ClipToBounds="True" DockPanel.Dock="Bottom" Panel.ZIndex="50">
-							<FlexDocumentViewport x:Name="documentViewport" >
+                <!--<Border Effect="{StaticResource shadowDelta5}" Height="20" Background="Transparent"  VerticalAlignment="Top" ></Border>-->
+              </Grid>
+              <Grid ClipToBounds="True" DockPanel.Dock="Bottom" Panel.ZIndex="50">
+                <FlexDocumentViewport x:Name="documentViewport" ZoomOffset="{Binding ElementName=slider, Path=Value, Mode=TwoWay}" >
 
-							</FlexDocumentViewport>
-						</Grid>
-					</DockPanel>
-
-
-				</StackPanel>
-				<Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
-			</Grid>
-		</DockPanel>
-		<PopupManager x:Name="PopupSpace"/>
-		<Grid>
-
-			<!--<StackPanel Orientation="Vertical"  Width="200" Height="150" Background="{Binding Source={StaticResource Yellow}, Path=P200}"
-						Effect="{StaticResource shadowDelta3}">
-				<Label Content="Annotation" Foreground="Black" VerticalAlignment="Top"/>
-				<TextBlock Text="Here is some stuff written on an annotation" Margin="12"></TextBlock>
-			</StackPanel>-->
-
-		</Grid>
+                </FlexDocumentViewport>
+							</Grid>
+            </DockPanel>
+          </Grid>
+        </DockPanel>
+        <Border Background="Black" Name="Dimmer" Opacity="0" IsHitTestVisible="False"/>
+      </Grid>
+    </DockPanel>
 	</Grid>
 </MaterialShell>

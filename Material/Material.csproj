@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,7 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccentedMaterialSet.cs" />
+    <Compile Include="Animation\HierarchicalAnimation.cs" />
     <Compile Include="Controls\Card.cs" />
+    <Compile Include="Controls\CircularLoadingIndicator.cs" />
     <Compile Include="Controls\FileManager\AbstractFileManagerListItem.cs" />
     <Compile Include="Controls\FileManager\AbstractFileSystemListItem.cs" />
     <Compile Include="Controls\FileManager\DirectoryBinder.cs" />
@@ -66,14 +69,19 @@
     <Compile Include="Controls\FileManager\FavoritesListItem.cs" />
     <Compile Include="Controls\FileManager\FileListItem.cs" />
     <Compile Include="Controls\FileManager\FileManager.cs" />
-    <Compile Include="Controls\FileManager\DirectoryCollection.cs" />
     <Compile Include="Controls\FileManager\FileManagerSettings.cs" />
     <Compile Include="Controls\FlexDocumentViewport.cs" />
+    <Compile Include="Controls\FlexDocumentViewportSettings.cs" />
     <Compile Include="Controls\Icon.cs" />
+    <Compile Include="Controls\Indicators\NumericIndicator.cs" />
+    <Compile Include="Controls\Indicators\PerformanceData.cs" />
+    <Compile Include="Controls\Indicators\PerformanceDataCard.cs" />
+    <Compile Include="Controls\Indicators\PerformanceDataTilePresenter.cs" />
     <Compile Include="Controls\Popups\Ambient\AmbientPopupManager.cs" />
     <Compile Include="Controls\Popups\ConfirmDeleteFilePopup.cs" />
     <Compile Include="Controls\Popups\FavoritesPopup.cs" />
     <Compile Include="Controls\Popups\SelectDrivePopup.cs" />
+    <Compile Include="Controls\RoutedDocumentLoadErrorEventArgs.cs" />
     <Compile Include="Controls\ScannerIO\HIDBarcodeScannerInput.cs" />
     <Compile Include="Controls\MaterialDimmer.cs" />
     <Compile Include="Controls\MaterialShell.cs" />
@@ -91,16 +99,25 @@
     <Compile Include="Controls\ScannerIO\Validation\ValidatorResult.cs" />
     <Compile Include="Controls\TabSelector\TabSelector.cs" />
     <Compile Include="Controls\TabSelector\TabSelectorItem.cs" />
+    <Compile Include="Controls\XMLTextEditor.cs" />
+    <Compile Include="Controls\ZoomSlider.cs" />
     <Compile Include="Converters\BrushToRadialGradientBrushConverter.cs" />
+    <Compile Include="Converters\ConditionalMaterialInverter.cs" />
     <Compile Include="Converters\ConditionalVisibilityConverter.cs" />
+    <Compile Include="Converters\DoubleToPercentageConverter.cs" />
     <Compile Include="Converters\FlexDocumentTabSelectorAdapter.cs" />
     <Compile Include="Converters\LargestValueConverter.cs" />
     <Compile Include="Converters\LuminosityToRadialBrushConverter.cs" />
     <Compile Include="Converters\RootTrimConverter.cs" />
+    <Compile Include="DocumentTheme.cs" />
     <Compile Include="IO\IWMIDriveInfo.cs" />
     <Compile Include="IO\LocalDriveInfo.cs" />
     <Compile Include="IO\NetworkDriveInfo.cs" />
     <Compile Include="IO\WMIDriveInfo.cs" />
+    <Compile Include="Converters\ConditionalExplicitMaterialInverter.cs" />
+    <Compile Include="Static\ConditionalMaterialProviderExtension.cs" />
+    <Compile Include="Static\ThemeExtension.cs" />
+    <Compile Include="Static\DocumentThemes.cs" />
     <Compile Include="Static\Palette.cs" />
     <Compile Include="Static\RecommendedThemeSet.cs" />
     <Compile Include="Static\ResourceProvider.cs" />
@@ -132,6 +149,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.CircularLoadingIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.ConfirmDeleteFilePopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.DirectoryListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.DocumentTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,7 +225,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.NumericIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.Palette.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.PerformanceDataCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.PerformanceDataTilePresenter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,6 +261,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Material.Slider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.TabSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -237,6 +278,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Material.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.XMLTextEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material.ZoomSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

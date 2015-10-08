@@ -236,7 +236,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ScrollViewer}">
-					<Grid>
+					<Grid Background="{TemplateBinding Background}">
 						<Grid.ColumnDefinitions>
 
 							<ColumnDefinition/>

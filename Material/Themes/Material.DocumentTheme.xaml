@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="clr-namespace:Material">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Material.Drawables.xaml"/>
+		<ResourceDictionary Source="Material.DefinedBrushes.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	<!--fafafa-->
+	<m:DocumentTheme x:Key="LightDocumentTheme" Background="White" Paper="{StaticResource mtGrey100}" Body="#DD000000"
+										BodyLight="#89000000" TooltipBackground="#757575" MaterialProviderMain="{x:Static GradientMaterialProvider.CoolColors}"
+									  SegmentSpaceBackground="->Black000,0.05" SecondaryValueForeground="->Grey800" BarTotalForeground="->Grey800"
+									  XAxisForeground="P700" YAxisForeground="P700" LineStroke="->Grey600" DotStroke="->Grey600" DotFill="P400" IsPrinterFriendly="false" 
+									 ViewportBackground="{StaticResource mtGrey400}" CardBackground="{StaticResource mtGrey50}" CardBorderBrush="{StaticResource mtGrey200}"
+									 LuminosityInversion="False"> <!--CardContainerBackground="{StaticResource mtGrey300}">-->
+	</m:DocumentTheme>
+	<m:DocumentTheme x:Key="PrinterFriendlyDocumentTheme" Background="White" Paper="#fafafa" Body="#DD000000"
+										BodyLight="#89000000" TooltipBackground="#757575" MaterialProviderMain="{x:Static GradientMaterialProvider.CoolColors}"
+									  SegmentSpaceBackground="->Black000,0.05" SecondaryValueForeground="->Grey800" BarTotalForeground="->Grey800"
+									  XAxisForeground="P700" YAxisForeground="P700" LineStroke="->Grey600" DotStroke="->Grey600" DotFill="P400" IsPrinterFriendly="true" 
+									 ViewportBackground="{StaticResource mtGrey400}" CardBackground="{StaticResource mtGrey100}" CardBorderBrush="{StaticResource mtGrey200}"
+									 LuminosityInversion="False"> <!--CardContainerBackground="{StaticResource mtGrey50}">-->
+	</m:DocumentTheme>
+<!--<SolidColorBrush x:Key="DarkPaper" Color=>1c1f20</SolidColorBrush>-->
+	<m:DocumentTheme x:Key="DarkDocumentTheme" Background="Black" Paper="#1c1f20" Body="#DDFFFFFF"
+										BodyLight="#89FFFFFF" TooltipBackground="#eeeeee" MaterialProviderMain="{x:Static GradientMaterialProvider.MaterialHLbB}" 
+										SegmentSpaceBackground="->White000,0.05" SecondaryValueForeground="P400" BarTotalForeground="->Grey200"
+									  XAxisForeground="P200" YAxisForeground="P200" LineStroke="->Grey100" DotStroke="->Grey100" DotFill="P600" IsPrinterFriendly="false" 
+									 ViewportBackground="{StaticResource mtGrey100}" CardBackground="#232626" CardBorderBrush="{StaticResource mtGrey800}"
+									 LuminosityInversion="True"> <!--CardContainerBackground="#252829">-->
+	</m:DocumentTheme>
+
+</ResourceDictionary>

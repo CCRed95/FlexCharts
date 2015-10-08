@@ -21,7 +21,16 @@ namespace Material.Controls.FileManager
 	{
 		#region Dependency Properties
 		public static readonly DependencyProperty ActiveDirectoryProperty = DP.Register(
-			new Meta<FileManager, DirectoryInfo>(new DirectoryInfo(FileManagerSettings.Instance.LastDirectory), ActiveDirectoryChanged));
+			new Meta<FileManager, DirectoryInfo>(new DirectoryInfo(FileManagerSettings.Instance.LastDirectory), ActiveDirectoryChanged, ActiveDirectoryCoerce));
+
+		private static DirectoryInfo ActiveDirectoryCoerce(FileManager i, DirectoryInfo val)
+		{
+			if (val.Exists && val.IsAccessible())
+			{
+				return val;
+			}
+			return new DirectoryInfo(FileManagerSettings.Instance.HomeDirectory);
+		}
 
 		public static readonly DependencyProperty FileListProperty = DP.Register(
 			new Meta<FileManager, ObservableCollection<AbstractFileManagerListItem>>());
@@ -145,8 +154,9 @@ namespace Material.Controls.FileManager
 					FileList.Add(new DirectoryListItem { FileSystemItem = directory });
 				}
 			}
-			var visibleFiles = rootDirectory.GetFiles("*.flex").Select(f => f)
-										.Where(f => (f.Attributes & FileAttributes.Hidden) == 0);
+			var visibleFiles = rootDirectory.GetFiles()
+				.Where(s => s.Extension == ".flex" || s.Extension == ".xaml")
+				.Select(f => f).Where(f => (f.Attributes & FileAttributes.Hidden) == 0);
 			foreach (var file in visibleFiles)
 			{
 				if (file.IsAccessible())

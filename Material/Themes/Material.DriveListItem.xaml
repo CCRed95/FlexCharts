@@ -12,7 +12,6 @@
 		<ResourceDictionary Source="Material.Fonts.xaml"/>
 		<ResourceDictionary Source="Material.Button.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
-	
 	<Style TargetType="fileManager:DriveListItem">
 		<Setter Property="Height" Value="50"/>
 		<Setter Property="Background" Value="{StaticResource mtGrey100}"/>

@@ -58,6 +58,13 @@ namespace Material.Controls.ScannerIO
 			add { AddHandler(ValidScannerInputEvent, value); }
 			remove { RemoveHandler(ValidScannerInputEvent, value); }
 		}
+		public static readonly RoutedEvent InvalidScannerInputEvent = EM.Register<HIDBarcodeScannerInput, RoutedBarcodeInputEventHandler>(EM.BUBBLE);
+
+		public event RoutedBarcodeInputEventHandler InvalidScannerInput
+		{
+			add { AddHandler(InvalidScannerInputEvent, value); }
+			remove { RemoveHandler(InvalidScannerInputEvent, value); }
+		}
 		#endregion
 
 		public bool AutoFocus { get; set; } = true;
@@ -112,6 +119,10 @@ namespace Material.Controls.ScannerIO
 			if (IsInputValid == ValidatorResult.PASSED)
 			{
 				RaiseEvent(new RoutedBarcodeInputEventArgs(s, ValidScannerInputEvent));
+			}
+			else
+			{
+				RaiseEvent(new RoutedBarcodeInputEventArgs(s, InvalidScannerInputEvent));
 			}
 		}
 	}

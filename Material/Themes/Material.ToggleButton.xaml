@@ -341,4 +341,240 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	<Style x:Key="MaterialLockUnlockToggle" TargetType="{x:Type ToggleButton}">
+		<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<!--<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>-->
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border Background="{TemplateBinding Property=Background}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CheckStates">
+								<VisualState x:Name="Checked">
+									<Storyboard>
+										<DoubleAnimation To="1" Storyboard.TargetName="lockopenicon" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+										<DoubleAnimation To="0" Storyboard.TargetName="lockicon" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Unchecked">
+									<Storyboard>
+										<DoubleAnimation To="0" Storyboard.TargetName="lockopenicon" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+										<DoubleAnimation To="1" Storyboard.TargetName="lockicon" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Grid ClipToBounds="True">
+							<Grid>
+								<Ellipse Name="clickWave" Width="{TemplateBinding ActualHeight}" 
+													Height="{TemplateBinding ActualHeight}" 
+													RenderTransformOrigin=".5,.5">
+									<Ellipse.Fill>
+										<MultiBinding Converter="{StaticResource l2bc}">
+											<Binding Path="(materialControls:ThemePrimitive.Theme)"/>
+											<Binding Path="(materialControls:VisualFeedback.ClickFeedback)"/>
+										</MultiBinding>
+									</Ellipse.Fill>
+									<Ellipse.RenderTransform>
+										<ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
+									</Ellipse.RenderTransform>
+								</Ellipse>
+							</Grid>
+							<Viewbox Name="lockopenicon"  RenderTransformOrigin=".5,.5">
+								<Viewbox.RenderTransform>
+									<ScaleTransform x:Name="lockopeniconScale" ScaleX="1" ScaleY="1"/>
+								</Viewbox.RenderTransform>
+								<Path Style="{StaticResource drawablelock_open}"/>
+							</Viewbox>
+							<Viewbox Name="lockicon"  RenderTransformOrigin=".5,.5">
+								<Viewbox.RenderTransform>
+									<ScaleTransform x:Name="lockiconScale" ScaleX="1" ScaleY="1"/>
+								</Viewbox.RenderTransform>
+								<Path Style="{StaticResource drawablelock}"/>
+							</Viewbox>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<!--<Setter Property="Effect" Value="{StaticResource MaterialDesignShadowDepth4}" TargetName="icon"/>-->
+							<Trigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="lockopeniconScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1.15" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="lockopeniconScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1.15" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="lockiconScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1.15" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="lockiconScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1.15" Duration="0:0:.15" />
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="lockopeniconScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="lockopeniconScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="lockiconScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="lockiconScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1" Duration="0:0:.15" />
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.ExitActions>
+						</Trigger>
+						<EventTrigger RoutedEvent="Click">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleX" 
+																		 From="0" To="2.5" Duration="0:0:.3" />
+
+										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleY" 
+																		 From="0" To="2.5" Duration="0:0:.3" />
+
+										<DoubleAnimation Storyboard.TargetName="clickWave" Storyboard.TargetProperty="Opacity" 
+																		 From="1" To="0" Duration="0:0:.3" />
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="MaterialNightDayToggle" TargetType="{x:Type ToggleButton}">
+		<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"/>
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<!--<Setter Property="DataContext" Value="{Binding RelativeSource={RelativeSource Self}}"/>-->
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border Background="{TemplateBinding Property=Background}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CheckStates">
+								<VisualState x:Name="Checked">
+									<Storyboard>
+										<DoubleAnimation To="1" Storyboard.TargetName="day" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+										<DoubleAnimation To="0" Storyboard.TargetName="night" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Unchecked">
+									<Storyboard>
+										<DoubleAnimation To="0" Storyboard.TargetName="day" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+										<DoubleAnimation To="1" Storyboard.TargetName="night" Storyboard.TargetProperty="Opacity" Duration="0:0:.15"/>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Grid ClipToBounds="True">
+							<Grid>
+								<Ellipse Name="clickWave" Width="{TemplateBinding ActualHeight}" 
+													Height="{TemplateBinding ActualHeight}" 
+													RenderTransformOrigin=".5,.5">
+									<Ellipse.Fill>
+										<MultiBinding Converter="{StaticResource l2bc}">
+											<Binding Path="(materialControls:ThemePrimitive.Theme)"/>
+											<Binding Path="(materialControls:VisualFeedback.ClickFeedback)"/>
+										</MultiBinding>
+									</Ellipse.Fill>
+									<Ellipse.RenderTransform>
+										<ScaleTransform x:Name="clickWaveScale" ScaleX="0" ScaleY="0"/>
+									</Ellipse.RenderTransform>
+								</Ellipse>
+							</Grid>
+							<Viewbox Name="day"  RenderTransformOrigin=".5,.5">
+								<Viewbox.RenderTransform>
+									<ScaleTransform x:Name="dayScale" ScaleX="1" ScaleY="1"/>
+								</Viewbox.RenderTransform>
+								<Path Style="{StaticResource drawablebrightness_3}"/>
+							</Viewbox>
+							<Viewbox Name="night"  RenderTransformOrigin=".5,.5">
+								<Viewbox.RenderTransform>
+									<ScaleTransform x:Name="nightScale" ScaleX="1" ScaleY="1"/>
+								</Viewbox.RenderTransform>
+								<Path Style="{StaticResource drawablebrightness_5}"/>
+							</Viewbox>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<!--<Setter Property="Effect" Value="{StaticResource MaterialDesignShadowDepth4}" TargetName="icon"/>-->
+							<Trigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="dayScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1.15" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="dayScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1.15" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="nightScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1.15" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="nightScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1.15" Duration="0:0:.15" />
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="dayScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="dayScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="nightScale" Storyboard.TargetProperty="ScaleX" 
+																		 To="1" Duration="0:0:.15" />
+
+										<DoubleAnimation Storyboard.TargetName="nightScale" Storyboard.TargetProperty="ScaleY" 
+																		 To="1" Duration="0:0:.15" />
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.ExitActions>
+						</Trigger>
+						<EventTrigger RoutedEvent="Click">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleX" 
+																		 From="0" To="2.5" Duration="0:0:.3" />
+
+										<DoubleAnimation Storyboard.TargetName="clickWaveScale" Storyboard.TargetProperty="ScaleY" 
+																		 From="0" To="2.5" Duration="0:0:.3" />
+
+										<DoubleAnimation Storyboard.TargetName="clickWave" Storyboard.TargetProperty="Opacity" 
+																		 From="1" To="0" Duration="0:0:.3" />
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

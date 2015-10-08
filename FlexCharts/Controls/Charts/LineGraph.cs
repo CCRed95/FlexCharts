@@ -135,7 +135,7 @@ namespace FlexCharts.Controls.Charts
 
 		private void onLoad(object s, RoutedEventArgs e)
 		{
-			if (Data?.Count > 0)
+			if (FilteredData?.Count > 0)
 			{
 				BeginRevealAnimation();
 			}
@@ -244,7 +244,7 @@ namespace FlexCharts.Controls.Charts
 
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-			if (Data.Count < 1)
+			if (FilteredData.Count < 1)
 			{
 				base.OnRender(drawingContext);
 				return;
@@ -257,14 +257,14 @@ namespace FlexCharts.Controls.Charts
 			_xAxisGrid.Children.Clear();
 			//_highlightGrid.Children.Clear();
 
-			var max = Data.MaxValue();
+			var max = FilteredData.MaxValue();
 
-			var context = new ProviderContext(Data.Count);
-			var barAvailableWidth = (_bars.RenderSize.Width) / Data.Count;
+			var context = new ProviderContext(FilteredData.Count);
+			var barAvailableWidth = (_bars.RenderSize.Width) / FilteredData.Count;
 			MaterialProvider.Reset(context);
 
 			MaterialProvider.Reset(context);
-			var total = Data.SumValue();
+			var total = FilteredData.SumValue();
 			var availableLineGraphSize = new Size(_bars.ActualWidth - (DotRadius * 2),
 				_bars.ActualHeight - (DotRadius * 2));
 			var startX = (barAvailableWidth / 2) - DotRadius;
@@ -280,7 +280,7 @@ namespace FlexCharts.Controls.Charts
 			MaterialProvider.Reset(context);
 
 			var isFirstPoint = true;
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var material = MaterialProvider.ProvideNext(context);
 				var nextPoint = new Point(startX + (barAvailableWidth * pttrace), verticalpttrace + 0);

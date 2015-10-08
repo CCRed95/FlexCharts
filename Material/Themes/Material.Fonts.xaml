@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <FontFamily x:Key="Roboto"></FontFamily>
+  <FontFamily x:Key="DefaultFont">pack://application:,,,/Material;component/Resources/Roboto/#Roboto</FontFamily>
   <Style TargetType="FrameworkElement">
     <Setter Property="Control.Foreground" Value="White"/>
     <Setter Property="Control.HorizontalContentAlignment" Value="Center"/>
     <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
-    <Setter Property="Control.FontFamily" Value="Roboto"/>
+    <Setter Property="Control.FontFamily" Value="{StaticResource DefaultFont}"/>
     <Setter Property="Control.FontSize" Value="14pt"/>
   </Style>
   <Style TargetType="Label" BasedOn="{StaticResource {x:Type FrameworkElement}}">

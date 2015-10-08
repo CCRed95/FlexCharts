@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Material.Controls">
+  <Style TargetType="controls:CircularLoadingIndicator">
+    <Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:CircularLoadingIndicator">
+					<Grid>
+            <Border Height="5" Width="{TemplateBinding Width}" Background="Orange" RenderTransformOrigin=".5,.5">
+							<Border.RenderTransform>
+								<RotateTransform x:Name="rotation" Angle="0"/>
+							</Border.RenderTransform>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="Loaded">
+							<BeginStoryboard>
+								<Storyboard>
+									<DoubleAnimation Storyboard.TargetName="rotation" ></DoubleAnimation>
+								</Storyboard>
+							</BeginStoryboard>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+</ResourceDictionary>

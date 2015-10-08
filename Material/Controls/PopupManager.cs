@@ -34,7 +34,11 @@ namespace Material.Controls
 
 		}
 
-		public static void LocalOnPopupRequestClose(object i, RoutedEventArgs e)
+		public void ClearPopups()
+		{
+			Content?.RequireType<PopupBase>().RequestClose();
+		}
+		private static void LocalOnPopupRequestClose(object i, RoutedEventArgs e)
 		{
 			var popupManager = i.RequireType<PopupManager>();
 			popupManager.Content = null;

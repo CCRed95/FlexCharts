@@ -81,10 +81,11 @@ namespace FlexCharts.Documents
 			//t.animate(OpacityProperty, 300, 1, from:0, skewms:100);
 		}
 
-		private void onCompleted(object s, EventArgs e)
-		{
-			PART_document.Children.RemoveAt(0);
-		}
+		
+		//private void onCompleted(object s, EventArgs e)
+		//{
+		//	PART_document.Children.RemoveAt(0);
+		//}
 
 		//private void OnTabViewChangeRequested(object s, RoutedEventArgs e)
 		//{

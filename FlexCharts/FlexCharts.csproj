@@ -76,6 +76,7 @@
     <Compile Include="Controls\Charts\PieChart.cs" />
     <Compile Include="Controls\Core\FlexContentControl.cs" />
     <Compile Include="Controls\Core\FlexControl.cs" />
+    <Compile Include="Controls\Core\TextRenderingStrategy.cs" />
     <Compile Include="Controls\Primitives\BarTotalPrimitive.cs" />
     <Compile Include="Controls\Primitives\CircularPrimitive.cs" />
     <Compile Include="Controls\Primitives\DotPrimitive.cs" />
@@ -105,7 +106,9 @@
     <Compile Include="Data\Filtering\AbstractDataFilter.cs" />
     <Compile Include="Data\Filtering\EmptyDataFilter.cs" />
     <Compile Include="Data\Filtering\LiteralDataFilter.cs" />
-    <Compile Include="Data\Sorting\AbstractDataSorter.cs" />
+    <Compile Include="Data\Filtering\SubstringDataFilter.cs" />
+    <Compile Include="Data\ObservableDoubleSeriesCollection.cs" />
+    <Compile Include="Data\Sorting\DataSorter.cs" />
     <Compile Include="Data\Sorting\AscendingDataSorter.cs" />
     <Compile Include="Data\Sorting\DescendingDataSorter.cs" />
     <Compile Include="Data\Sorting\EmptyDataSorter.cs" />

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -6,7 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using FlexCharts.Animation;
 using FlexCharts.Controls.Contracts;
 using FlexCharts.Controls.Core;
 using FlexCharts.Controls.Primitives;
@@ -27,6 +30,62 @@ namespace FlexCharts.Controls.Charts
 	[ContentProperty("Data")]
 	public class HorizontalBarChart : AbstractFlexChart<DoubleSeries>, ISegmentContract, IBarTotalContract, IYAxisContract
 	{
+		public static readonly DependencyProperty CommonYAxisWidthProperty =
+			DP.Attach<double>(typeof(HorizontalBarChart), new FrameworkPropertyMetadata(0.0, INH | FXR));
+
+		public static double GetCommonYAxisWidth(DependencyObject i) => i.Get<double>(CommonYAxisWidthProperty);
+		public static void SetCommonYAxisWidth(DependencyObject i, double v) => i.Set(CommonYAxisWidthProperty, v);
+
+		public double CommonYAxisWidth
+		{
+			get { return (double)GetValue(CommonYAxisWidthProperty); }
+			set { SetValue(CommonYAxisWidthProperty, value); }
+		}
+
+
+		public static readonly DependencyProperty CommonFixedRangeMaxProperty =
+			DP.Attach<double>(typeof(HorizontalBarChart), new FrameworkPropertyMetadata(0.0, INH | FXR));
+
+		public static double GetCommonFixedRangeMax(DependencyObject i) => i.Get<double>(CommonFixedRangeMaxProperty);
+		public static void SetCommonFixedRangeMax(DependencyObject i, double v) => i.Set(CommonFixedRangeMaxProperty, v);
+
+		public double CommonFixedRangeMax
+		{
+			get { return (double)GetValue(CommonFixedRangeMaxProperty); }
+			set { SetValue(CommonFixedRangeMaxProperty, value); }
+		}
+
+
+		public static readonly DependencyProperty CommonFixedRowHeightProperty =
+			DP.Attach<double>(typeof(HorizontalBarChart), new FrameworkPropertyMetadata(0.0, INH | FXR));
+
+		public static double GetCommonFixedRowHeight(DependencyObject i) => i.Get<double>(CommonFixedRowHeightProperty);
+		public static void SetCommonFixedRowHeight(DependencyObject i, double v) => i.Set(CommonFixedRowHeightProperty, v);
+
+		public double CommonFixedRowHeight
+		{
+			get { return (double)GetValue(CommonFixedRowHeightProperty); }
+			set { SetValue(CommonFixedRowHeightProperty, value); }
+		}
+
+		public static readonly DependencyProperty TextRenderingStrategyProperty =
+			DP.Attach<TextOverflowRenderingStrategy>(typeof(HorizontalBarChart), new FrameworkPropertyMetadata(new FixedIndexTrimRenderingStrategy(), INH | FXR));
+
+		public static TextOverflowRenderingStrategy GetTextRenderingStrategy(DependencyObject i) => i.Get<TextOverflowRenderingStrategy>(TextRenderingStrategyProperty);
+		public static void SetTextRenderingStrategy(DependencyObject i, TextOverflowRenderingStrategy v) => i.Set(TextRenderingStrategyProperty, v);
+
+		public TextOverflowRenderingStrategy TextRenderingStrategy
+		{
+			get { return (TextOverflowRenderingStrategy)GetValue(TextRenderingStrategyProperty); }
+			set { SetValue(TextRenderingStrategyProperty, value); }
+		}
+		public static readonly DependencyProperty YAxisPaddingProperty = DP.Register(
+			new Meta<HorizontalBarChart, Thickness>(new Thickness(30, 5, 30, 5)));
+		public Thickness YAxisPadding
+		{
+			get { return (Thickness)GetValue(YAxisPaddingProperty); }
+			set { SetValue(YAxisPaddingProperty, value); }
+		}
 		#region Dependency Properties
 		#region			BarTotalContract
 		public static readonly DependencyProperty BarTotalFontFamilyProperty = DP.Add(BarTotalPrimitive.BarTotalFontFamilyProperty,
@@ -193,10 +252,10 @@ namespace FlexCharts.Controls.Charts
 		}
 		public HorizontalBarChart()
 		{
-			
+
 			//BindingOperations.SetBinding(_YAxisGrid, UniformGrid.RowsProperty, new Binding("Data.Count") {Source = this});
 			//BindingOperations.SetBinding(_bars, UniformGrid.RowsProperty, new Binding("Data.Count") {Source = this});
-			
+
 			Loaded += onLoad;
 		}
 		#endregion
@@ -204,29 +263,23 @@ namespace FlexCharts.Controls.Charts
 		#region Methods
 		private void onLoad(object s, RoutedEventArgs e)
 		{
-			animateBarReveal();
+			//BeginRevealAnimation();
 		}
 
-		private void animateBarReveal()
+		public void BeginRevealAnimation()
 		{
-			//var animationOffset = 0;
-			//foreach (var d in Data)
-			//{
-			//	var renderedShapeList = (List<Shape>)d.RenderedVisual;
-			//	foreach (var i in renderedShapeList)
-			//	{
-			//		var renderedShape = (Shape)i;//.ShouldBeCastable<Shape>();
-			//		renderedShape.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty,
-			//			new DoubleAnimation(0, 1, new Duration(TimeSpan.FromMilliseconds(600 + (animationOffset / 2))))
-			//			{
-			//				BeginTime = TimeSpan.FromMilliseconds(animationOffset),
-			//				AccelerationRatio = AnimationParameters.AccelerationRatio,
-			//				DecelerationRatio = AnimationParameters.DecelerationRatio,
-			//			});
-
-			//	}
-			//	animationOffset += 20;
-			//}
+			var animationOffset = 0;
+			foreach (var category in visualContext.BarVisuals)
+			{
+				category.ActiveBar.BeginAnimation(WidthProperty,
+					new DoubleAnimation(400, new Duration(TimeSpan.FromMilliseconds(600 + (animationOffset / 3))))
+					{
+						BeginTime = TimeSpan.FromMilliseconds(animationOffset),
+						AccelerationRatio = AnimationParameters.AccelerationRatio,
+						DecelerationRatio = AnimationParameters.DecelerationRatio,
+					});
+				animationOffset += 25;
+			}
 		}
 		#endregion
 
@@ -245,41 +298,54 @@ namespace FlexCharts.Controls.Charts
 		{
 			visualContext = new HorizontalBarChartVisualContext();
 
-			PART_bars.Rows = Data.Count;
-			PART_yaxis.Rows = Data.Count;
+			PART_bars.Rows = FilteredData.Count;
+			PART_yaxis.Rows = FilteredData.Count;
 
 			PART_bars.Children.Clear();
 			PART_yaxis.Children.Clear();
 
-			if (Data.Count < 1)
+			if (FilteredData.Count < 1)
 			{
 				base.OnRender(drawingContext);
 				return;
 			}
+			var effeectiveTargetRenderingMax = CommonFixedRangeMax > 0 ? CommonFixedRangeMax : FilteredData.MaxValue();
 
-			var total = Data.MaxValue();
-
-			var context = new ProviderContext(Data.Count);
+			var context = new ProviderContext(FilteredData.Count);
 			MaterialProvider.Reset(context);
+			double YAxisRenderingWidth;
+			if (CommonYAxisWidth <= 0)
+			{
+				var maxYAxisTextLength = FilteredData.Select(d => RenderingExtensions.EstimateLabelRenderSize(
+					YAxisFontFamily, YAxisFontSize, d.CategoryName))
+					.Select(renderSize => renderSize.Width).Concat(new[] { 0.0 }).Max();
+				YAxisRenderingWidth = maxYAxisTextLength;
+			}
+			else
+			{
+				YAxisRenderingWidth = CommonYAxisWidth;
+			}
+			PART_yaxis.Width = YAxisRenderingWidth;
 
-			var maxYAxisTextLength = Data.Select(d => RenderingExtensions.EstimateLabelRenderSize(
-				YAxisFontFamily, YAxisFontSize, d.CategoryName))
-				.Select(renderSize => renderSize.Width).Concat(new[] {0.0}).Max();
-
-			PART_yaxis.Width = maxYAxisTextLength;
-
-			var maxValueTextLength = Data.Select(d => RenderingExtensions.EstimateLabelRenderSize(
-				BarTotalFontFamily, BarTotalFontSize, d.Value.ToString(CultureInfo.InvariantCulture)))
-				.Select(renderSize => renderSize.Width).Concat(new[] {0.0}).Max();
-
-			var totalAvailableVerticalSpace = PART_bars.ActualHeight / Data.Count;
+			var maxValueTextLength = FilteredData.Select(d => RenderingExtensions.EstimateLabelRenderSize(
+					BarTotalFontFamily, BarTotalFontSize, new Thickness(10, 5, 10, 5), d.Value.ToString(CultureInfo.InvariantCulture)))
+					.Select(renderSize => renderSize.Width).Concat(new[] { 0.0 }).Max();
+			var totalAvailableVerticalSpace = 0.0;
+			if (CommonFixedRowHeight > 0)
+			{
+				totalAvailableVerticalSpace = CommonFixedRowHeight;
+			}
+			else
+			{
+				totalAvailableVerticalSpace = PART_bars.ActualHeight / FilteredData.Count;
+			}
 			var totalAvailableHorizontalExpanse = PART_bars.ActualWidth;
 			var totalAvailableHorizontalSpace = totalAvailableHorizontalExpanse - maxValueTextLength;
 			var actualBarHeight = totalAvailableVerticalSpace * SegmentWidthPercentage;
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var barContext = new HorizontalBarChartSegmentVisualContext();
-				var barWidth = d.Value.Map(0, total, 0, totalAvailableHorizontalSpace);
+				var barWidth = d.Value.Map(0, effeectiveTargetRenderingMax, 0, totalAvailableHorizontalSpace);
 				var materialSet = MaterialProvider.ProvideNext(context);
 
 				var barGrid = new Grid();
@@ -311,8 +377,9 @@ namespace FlexCharts.Controls.Charts
 					HorizontalContentAlignment = HorizontalAlignment.Center,
 					VerticalContentAlignment = VerticalAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Left,
-					VerticalAlignment = VerticalAlignment.Top,
+					//VerticalAlignment = VerticalAlignment.Center ,
 					Width = maxValueTextLength,
+					Padding = new Thickness(10, 5, 10, 5),
 					Foreground = BarTotalForeground.GetMaterial(materialSet),
 					Margin = new Thickness(barWidth, 0, 0, 0),
 				};
@@ -324,21 +391,24 @@ namespace FlexCharts.Controls.Charts
 
 				var yaxisLabel = new Label
 				{
-					Content = d.CategoryName,
+					Content = TextRenderingStrategy.ProvideText(d.CategoryName, YAxisRenderingWidth, YAxisFontFamily, YAxisFontSize, YAxisPadding),
 					IsHitTestVisible = false,
-					HorizontalContentAlignment = HorizontalAlignment.Center,
+					HorizontalContentAlignment = HorizontalAlignment.Left,
 					VerticalContentAlignment = VerticalAlignment.Center,
-					HorizontalAlignment = HorizontalAlignment.Left,
-					VerticalAlignment = VerticalAlignment.Top,
-					Width = maxYAxisTextLength,
+					ToolTip = d.CategoryName,
+					//HorizontalAlignment = HorizontalAlignment.Left,
+					//VerticalAlignment = VerticalAlignment.Center,
+					Width = YAxisRenderingWidth,
 					Foreground = YAxisForeground.GetMaterial(materialSet),
 					Margin = new Thickness(0, 0, 0, 0),
+					Padding = YAxisPadding
 				};
 				yaxisLabel.BindTextualPrimitive<YAxisPrimitive>(this);
 				PART_yaxis.Children.Add(yaxisLabel);
 
 				visualContext.BarVisuals.Add(barContext);
 			}
+			base.OnRender(drawingContext);
 		}
 		#endregion
 	}

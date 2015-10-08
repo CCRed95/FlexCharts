@@ -171,7 +171,7 @@ namespace FlexCharts.Controls.Charts
 		{
 			_segments.Children.Clear();
 
-			var angle = Data.Map(0, 100, 0, 360);
+			var angle = FilteredData.Map(0, 100, 0, 360);
 
 			var radius = (_segments.RenderSize.Smallest() * CircleScale) / 2;
 			var segmentWidth = radius * SegmentWidthPercentage;
@@ -179,7 +179,7 @@ namespace FlexCharts.Controls.Charts
 			{
 				DataContext = this
 			};
-			var activePath = new ArcPath(angle, AngleOffset, segmentWidth, CircleScale, radius, _segments.RenderSize, Data)
+			var activePath = new ArcPath(angle, AngleOffset, segmentWidth, CircleScale, radius, _segments.RenderSize, FilteredData)
 			{
 				DataContext = this
 			};

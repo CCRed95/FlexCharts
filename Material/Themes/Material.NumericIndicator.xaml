@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:indicators="clr-namespace:Material.Controls.Indicators"
+                    xmlns:static="clr-namespace:Material.Static">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="Material.Fonts.xaml"/>
+    <ResourceDictionary Source="Material.DefinedBrushes.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+  <Style TargetType="indicators:NumericIndicator">
+    <Setter Property="Width" Value="140"/>
+    <Setter Property="Height" Value="70"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="indicators:NumericIndicator">
+          <DockPanel>
+            <Label Content="{TemplateBinding Title}" Style="{StaticResource t12pCaption}" Foreground="{StaticResource mtGrey600}" 
+									 FontWeight="Medium" DockPanel.Dock="Top" Padding="0" FontSize="11pt"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+              <Label Content="{TemplateBinding Value}" Style="{StaticResource t24pHeadline}" Foreground="{static:Theme Body}" 
+										 FontWeight="Light" Padding="3"/>
+              <Label Content="{TemplateBinding Label}" Style="{StaticResource _t10pSubCaption}" Foreground="{static:Theme BodyLight}" Padding="3"/>
+            </StackPanel>
+          </DockPanel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

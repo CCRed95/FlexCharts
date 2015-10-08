@@ -296,7 +296,7 @@ namespace FlexCharts.Controls.Charts
 
 		private void onLoad(object s, RoutedEventArgs e)
 		{
-			if (Data?.Count > 0)
+			if (FilteredData?.Count > 0)
 			{
 				BeginRevealAnimation();
 			}
@@ -348,7 +348,7 @@ namespace FlexCharts.Controls.Charts
 
 		// TODO find a better way to ensure render() call corresponds with animation and bar rendering states, defaults, etc.
 		// TODO if bars are shoinwg -> first collapse, then render pass, then reveal animation
-		public override void OnDataChanged(DPChangedEventArgs<DoubleSeries> e)
+		public override void OnDataFiltered(DPChangedEventArgs<DoubleSeries> e)
 		{
 			var oldValueValid = IsValidGraphData(e.OldValue);
 			var newValueValid = IsValidGraphData(e.NewValue);
@@ -390,7 +390,7 @@ namespace FlexCharts.Controls.Charts
 				}
 			}
 
-			base.OnDataChanged(e);
+			base.OnDataFiltered(e);
 		}
 
 		protected static bool IsValidGraphData(object dataPointList)
@@ -416,8 +416,10 @@ namespace FlexCharts.Controls.Charts
 		}
 		protected override void OnRender(DrawingContext drawingContext)
 		{
-			if (Data.Count < 1)
+			//TODO potential rendering loop.
+			if (FilteredData.Count < 1)
 			{
+				FilteredData = DataFilter.Filter(DataSorter.Sort(Data));
 				base.OnRender(drawingContext);
 				return;
 			}
@@ -429,10 +431,10 @@ namespace FlexCharts.Controls.Charts
 			PART_xaxis.Children.Clear();
 			//_highlightGrid.Children.Clear();
 
-			var max = Data.MaxValue();
+			var max = FilteredData.MaxValue();
 
-			var context = new ProviderContext(Data.Count);
-			var barAvailableWidth = (PART_bars.RenderSize.Width) / Data.Count;
+			var context = new ProviderContext(FilteredData.Count);
+			var barAvailableWidth = (PART_bars.RenderSize.Width) / FilteredData.Count;
 			var barActiveWidth = barAvailableWidth * SegmentWidthPercentage;
 			var barLeftSpacing = (barAvailableWidth - barActiveWidth) / 2;
 			var barLabelSize = RenderingExtensions.EstimateLabelRenderSize(BarTotalFontFamily, BarTotalFontSize);
@@ -442,7 +444,7 @@ namespace FlexCharts.Controls.Charts
 			#region X-Axis Label Generation
 
 			var xtrace = 0;
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var material = MaterialProvider.ProvideNext(context);
 				var categoryVisualContext = new ParetoChartCategoryVisualContext();
@@ -474,7 +476,7 @@ namespace FlexCharts.Controls.Charts
 			var xAxisHeight = barLabelSize.Height; //_xAxisGrid.ActualHeight;
 			var backHeight = PART_bars.RenderSize.Height - xAxisHeight;
 			var trace = 0;
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var currentCategoryVisualContext = visualContext.CategoryVisuals[trace];
 				currentCategoryVisualContext.CategoryDataPoint = d;
@@ -556,7 +558,7 @@ namespace FlexCharts.Controls.Charts
 				horizontalTrace += barAvailableWidth;
 				trace++;
 			}
-			var total = Data.SumValue();
+			var total = FilteredData.SumValue();
 			var availableLineGraphSize = new Size(PART_bars.ActualWidth - (DotRadius * 2),
 				PART_bars.ActualHeight - (DotRadius * 2) - xAxisHeight);
 			var startX = (barAvailableWidth / 2) - DotRadius;
@@ -572,7 +574,7 @@ namespace FlexCharts.Controls.Charts
 			MaterialProvider.Reset(context);
 
 			var isFirstPoint = true;
-			foreach (var d in Data)
+			foreach (var d in FilteredData)
 			{
 				var material = MaterialProvider.ProvideNext(context);
 				var currentCategoryVisualContext = visualContext.CategoryVisuals[pttrace];

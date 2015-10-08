@@ -14,6 +14,11 @@ namespace Material.Controls.Popups
 			remove { RemoveHandler(PopupRequestCloseEvent, value); }
 		}
 
+		public void RequestClose()
+		{
+			RaiseEvent(new RoutedEventArgs(PopupRequestCloseEvent));
+		}
+
 		public PopupBase()
 		{
 			Loaded += (s, e) => Focus();

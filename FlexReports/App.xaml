@@ -7,9 +7,6 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.xaml"/>
       </ResourceDictionary.MergedDictionaries>
-			<!--<DirectoryCollection x:Key="favorites">
-				<DirectoryBinder Value=""></DirectoryBinder>
-			</DirectoryCollection>-->
     </ResourceDictionary>
   </Application.Resources>
 </Application>

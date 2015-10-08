@@ -6,13 +6,16 @@
 		<ResourceDictionary Source="Material.DefinedBrushes.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 	<Style TargetType="controls:Card">
-		<Setter Property="Effect" Value="{StaticResource shadowDelta3}"/>
+		<Setter Property="Effect" Value="{StaticResource shadowDelta2}"/>
 		<Setter Property="Background" Value="{StaticResource mtGrey50}"/>
-		<Setter Property="Margin" Value="5"/>
+		<!--<Setter Property="BorderThickness" Value="3"/>-->
+		<Setter Property="Margin" Value="10"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:Card">
-					<Border CornerRadius="2" Background="{TemplateBinding Background}">
+					<Border CornerRadius="2" Background="{TemplateBinding Background}" 
+									BorderThickness="{TemplateBinding BorderThickness}"
+									BorderBrush="{TemplateBinding BorderBrush}">
 						<ContentPresenter/>
 					</Border>
 				</ControlTemplate>
